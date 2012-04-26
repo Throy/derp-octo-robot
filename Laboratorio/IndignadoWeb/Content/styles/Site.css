@@ -1,0 +1,352 @@
+﻿/*----------------------------------------------------------
+The base color for this template is #5c87b2. If you'd like
+to use a different color start by replacing all instances of
+#5c87b2 with your new color.
+----------------------------------------------------------*/
+html{
+	font-family: arial, sans-serif;
+}
+
+body{
+    background: no-repeat url(../images/fondo.png) 0 0;
+    background-color: #f9f9f4;
+    background-repeat: repeat;
+	margin: 0;
+	padding: 0;
+	font-size:12px;
+	font-weight:normal;
+    text-align: center;
+    overflow-y:scroll;
+}
+
+a, a:visited {
+	text-decoration:none;
+	cursor:pointer;
+        color:#3c6dc6;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+#error {
+    color: #e70f0f;
+    font-family: arial,sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    padding-left: 2px;
+    position: relative;
+}
+
+p {
+	margin: 0px;
+	padding: 0px;
+}
+
+/* HEADINGS   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1
+{
+    font-size: 2em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+h2
+{
+    padding: 0 0 10px 0;
+}
+h3
+{
+    font-size: 1.2em;
+}
+h4
+{
+    font-size: 1.1em;
+}
+h5, h6
+{
+    font-size: 1em;
+}
+
+/* this rule styles <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0;
+}
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+ul {
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+}
+
+
+/* Pagina */
+
+#Kontainer {
+    z-index:0;
+    margin:0 auto;
+    position: relative;
+    margin-top:36px;
+    width:996px;
+    overflow:visible;
+    height: auto;
+    text-align: left;
+    margin-bottom: 15px;
+
+}
+
+#Footer {
+    text-align:right;
+    width:996px;
+    margin:0 auto;
+    font-size:12px;
+    color:#505050;
+    float:left;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border-top: 1px solid #d3cebd;
+}
+
+#header {    
+    position:relative;
+    z-index:2;
+    height:154px;
+}
+
+#logo {
+    /*background: url('../images/logo-box.png') bottom left no-repeat;*/
+    position:relative;
+    background-color: #fff;
+	position:relative;
+	float:left;
+	margin:0;
+    padding:0;
+    border: 1px solid #5561d3;
+    border-top: 1px solid #a8a8a8;    
+    width: 177px;
+    z-index:2;
+    box-shadow: 1px 1px 1px #aaa;
+    -moz-box-shadow: 1px 1px 1px #AAAAAA;
+}
+
+#logo a, #logo a:visited {
+	float:left;
+	width: 170px;
+	height: 145px;
+    margin: 2px 3px 5px 3px; 
+}
+
+#loginblock {
+    float:right;
+    margin-top: 25px;
+}
+
+#Content {
+    background-color: #fff;
+    box-shadow: 0 1px 2px #aaa;
+    -moz-box-shadow: 0 1px 2px #AAAAAA;
+    border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    margin:0;
+    text-align:left;
+    color:#3e3d37;
+    font-size:13px;
+    margin-right:0px;
+    margin-left:1px;
+    padding-left:0px;
+    width:810px;
+    text-align:justify;
+    height: auto;
+    padding-bottom: 30px;
+    z-index:1;
+    min-height: 400px;
+    float:right;
+}
+
+#Lateral {
+    float:left;
+    width:177px;
+}
+
+#ContentLateral {
+    background-color: #fff;
+    box-shadow: 0 1px 2px #aaa;
+    -moz-box-shadow: 0 1px 2px #AAAAAA;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    margin:0;
+    text-align:left;
+    color:#3e3d37;
+    font-size:13px;
+    margin-right:0px;
+    margin-left:1px;
+    padding-left:0px;
+    width:177px;
+    text-align:justify;
+    height: auto;
+    padding-bottom: 30px;
+    z-index:1;
+    min-height: 100px;
+    float:left;
+    margin-top:10px;
+}
+
+.menufecha{
+	float:right;
+	margin:10px 10px 0 10px;
+	font-size:12px;	
+	height:34px;
+	line-height:17px;
+}
+
+.menuend{
+    float:right;
+    height:32px;
+    border-right: 1px solid #a8a8a8;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+
+table 
+{
+  border: solid 1px #e8eef4;
+  border-collapse: collapse;
+}
+
+table td 
+{
+  padding: 5px;   
+  border: solid 1px #e8eef4;
+}
+
+table th
+{
+  padding: 6px 5px;
+  text-align: left;
+  background-color: #e8eef4; 
+  border: solid 1px #e8eef4;   
+}
+
+/* MISC  
+----------------------------------------------------------*/
+.clear
+{
+    clear: both;
+}
+
+.error
+{
+    color:Red;
+}
+
+#menucontainer
+{
+    margin-top:40px;
+}
+
+div#title
+{
+    display:block;
+    float:left;
+    text-align:left;
+}
+
+#logindisplay
+{
+    font-size:1.1em;
+    display:block;
+    text-align:right;
+    margin:10px;
+    color:White;
+}
+
+#logindisplay a:link
+{
+    color: white;
+    text-decoration: underline;
+}
+
+#logindisplay a:visited
+{
+    color: white;
+    text-decoration: underline;
+}
+
+#logindisplay a:hover
+{
+    color: white;
+    text-decoration: none;
+}
+
+#content-box 
+{
+    float:left;
+    padding:10px;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.display-label,
+.editor-label,
+.display-field,
+.editor-field
+{
+    margin: 0.5em 0;
+}
+
+.text-box
+{
+    width: 30em;
+}
+
+.text-box.multi-line
+{
+    height: 6.5em;
+}
+
+.tri-state
+{
+    width: 6em;
+}

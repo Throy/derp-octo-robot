@@ -1,0 +1,7 @@
+C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\Laboratorio\bin\Laboratorio.dll
+C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\Laboratorio\bin\Laboratorio.pdb
+C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\Laboratorio\bin\EntityFramework.dll
+C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\Laboratorio\bin\EntityFramework.xml
+C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\Laboratorio\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\Laboratorio\obj\Debug\Laboratorio.dll
+C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\Laboratorio\obj\Debug\Laboratorio.pdb
