@@ -5,3 +5,10 @@ C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\IndignadoWeb\bin\EntityFram
 C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\IndignadoWeb\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.dll
 C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.pdb
+C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoWeb\bin\IndignadoWeb.dll
+C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoWeb\bin\IndignadoWeb.pdb
+C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoWeb\bin\EntityFramework.dll
+C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoWeb\bin\EntityFramework.xml
+C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.dll
+C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.pdb

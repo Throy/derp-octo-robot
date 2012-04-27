@@ -44,7 +44,7 @@
     padding-top:5px;
     height:auto;
     margin-left:-1px;
-    border: 1px solid #5561d3;
+    border: 1px solid #f4b200;
     -moz-box-shadow: -1px 1px 1px #ccc;
     -webkit-box-shadow: 0 1px 5px #ccc;
     box-shadow: 0 1px 5px #ccc;
@@ -67,7 +67,7 @@
 #menu ul li:hover .menubtn a {
     cursor:pointer;
     text-decoration:none;
-    color:#314fa7;
+    background-color: #f7f7f6;
     background-position: 0 32px;
 }
 
@@ -94,7 +94,7 @@
 
 .menuitm a:hover {
     cursor:pointer;
-    background: #7467c0;
+    background: #5d5747;
     text-decoration:none;
     color:#fff;
 }
