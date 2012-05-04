@@ -106,12 +106,60 @@ namespace IndignadoWeb.MeetingsServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTMeetingsCol", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer")]
+    [System.SerializableAttribute()]
+    public partial class DTMeetingsCol : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.MeetingsServiceReference.DTMeeting[] itemsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.MeetingsServiceReference.DTMeeting[] items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
+                    this.itemsField = value;
+                    this.RaisePropertyChanged("items");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MeetingsServiceReference.IMeetingsService")]
     public interface IMeetingsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/getMeeting", ReplyAction="http://tempuri.org/IMeetingsService/getMeetingResponse")]
         IndignadoWeb.MeetingsServiceReference.DTMeeting getMeeting();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/getMeetingsList", ReplyAction="http://tempuri.org/IMeetingsService/getMeetingsListResponse")]
+        IndignadoWeb.MeetingsServiceReference.DTMeetingsCol getMeetingsList();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -143,6 +191,10 @@ namespace IndignadoWeb.MeetingsServiceReference {
         
         public IndignadoWeb.MeetingsServiceReference.DTMeeting getMeeting() {
             return base.Channel.getMeeting();
+        }
+        
+        public IndignadoWeb.MeetingsServiceReference.DTMeetingsCol getMeetingsList() {
+            return base.Channel.getMeetingsList();
         }
     }
 }

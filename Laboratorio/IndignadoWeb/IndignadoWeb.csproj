@@ -124,6 +124,9 @@
     <None Include="Service References\MeetingsServiceReference\IndignadoWeb.MeetingsServiceReference.DTMeeting.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\MeetingsServiceReference\IndignadoWeb.MeetingsServiceReference.DTMeetingsCol.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\MeetingsServiceReference\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -177,6 +180,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\MeetingDetails.cshtml" />
+    <Content Include="Views\Home\MeetingsList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTMeeting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
