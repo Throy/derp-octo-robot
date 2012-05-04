@@ -61,11 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LinqDataContext\IndignadoDB.designer.cs" />
-    <Compile Include="LinqDataContext\IndignadoDB1.designer.cs">
+    <Compile Include="LinqDataContext\LinqDataContext.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IndignadoDB.dbml</DependentUpon>
+      <DependentUpon>LinqDataContext.dbml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -91,13 +90,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="LinqDataContext\IndignadoDB.dbml">
+    <None Include="LinqDataContext\LinqDataContext.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>IndignadoDB1.designer.cs</LastGenOutput>
+      <LastGenOutput>LinqDataContext.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="LinqDataContext\IndignadoDB.dbml.layout">
-      <DependentUpon>IndignadoDB.dbml</DependentUpon>
+    <None Include="LinqDataContext\LinqDataContext.dbml.layout">
+      <DependentUpon>LinqDataContext.dbml</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

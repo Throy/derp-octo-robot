@@ -33,3 +33,10 @@ C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\I
 C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoWeb\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.dll
 C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.pdb
+C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoWeb\bin\IndignadoWeb.dll
+C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoWeb\bin\IndignadoWeb.pdb
+C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoWeb\bin\EntityFramework.dll
+C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoWeb\bin\EntityFramework.xml
+C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.dll
+C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.pdb

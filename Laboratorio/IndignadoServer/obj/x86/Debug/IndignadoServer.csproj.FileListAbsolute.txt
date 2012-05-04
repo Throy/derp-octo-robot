@@ -25,3 +25,6 @@ C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\I
 C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe.config
 C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.exe
 C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.pdb
+C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe
+C:\Users\Andres\Documents\Desktop\Facu\Computacion\Programaciones\TSI 1\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.pdb

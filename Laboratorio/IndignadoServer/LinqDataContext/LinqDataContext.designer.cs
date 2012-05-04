@@ -23,7 +23,7 @@ namespace IndignadoServer.LinqDataContext
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="IndignadoDB")]
-	public partial class IndignadoDBDataContext : System.Data.Linq.DataContext
+	public partial class LinqDataContextDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -44,31 +44,31 @@ namespace IndignadoServer.LinqDataContext
     partial void DeleteUsuario(Usuario instance);
     #endregion
 		
-		public IndignadoDBDataContext() : 
+		public LinqDataContextDataContext() : 
 				base(global::IndignadoServer.Properties.Settings.Default.IndignadoDBConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public IndignadoDBDataContext(string connection) : 
+		public LinqDataContextDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public IndignadoDBDataContext(System.Data.IDbConnection connection) : 
+		public LinqDataContextDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public IndignadoDBDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public LinqDataContextDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public IndignadoDBDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public LinqDataContextDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -919,7 +919,7 @@ namespace IndignadoServer.LinqDataContext
 		
 		private int _id;
 		
-		private int _idMovimiento;
+		private System.Nullable<int> _idMovimiento;
 		
 		private string _nombre;
 		
@@ -945,7 +945,7 @@ namespace IndignadoServer.LinqDataContext
     partial void OnCreated();
     partial void OnidChanging(int value);
     partial void OnidChanged();
-    partial void OnidMovimientoChanging(int value);
+    partial void OnidMovimientoChanging(System.Nullable<int> value);
     partial void OnidMovimientoChanged();
     partial void OnnombreChanging(string value);
     partial void OnnombreChanged();
@@ -991,8 +991,8 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMovimiento", DbType="Int NOT NULL")]
-		public int idMovimiento
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMovimiento", DbType="Int")]
+		public System.Nullable<int> idMovimiento
 		{
 			get
 			{
