@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.ServiceModel;
+using IndignadoWeb.MeetingsServiceReference;
 
 namespace IndignadoWeb.Controllers
 {
@@ -44,11 +45,13 @@ namespace IndignadoWeb.Controllers
             MeetingsServiceReference.IMeetingsService serv;
             serv = scf.CreateChannel();
 
-            ViewBag.Message = serv.getMeeting();
+            //ViewBag.Message = serv.getMeeting();
+            DTMeeting meeting = serv.getMeeting();
 
             (serv as ICommunicationObject).Close();
 
-            return View();
+            //return View (;
+            return View (meeting);
         }
     }
 }

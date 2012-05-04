@@ -1,13 +1,20 @@
-﻿@{
+﻿<!-- model -->
+@model IndignadoWeb.MeetingsServiceReference.DTMeeting
+
+<!-- page title -->
+@{
     ViewBag.Title = "Indignado Framework - Meeting details";
 }
 
-<h2>Meeting details - @ViewBag.Message.name</h2>
+<!-- page content -->
+
+<h2>Meeting details - @Html.DisplayFor(m => m.id)</h2>
+
 
 <p>
-     Internal ID: @ViewBag.Message.id
+     Internal ID: @Html.DisplayFor(m => m.id)
      <br />
-     Description: @ViewBag.Message.description
+     Description: @Html.DisplayFor(m => m.description)
      <br />
-     Min quorum: @ViewBag.Message.minQuorum
+     Min quorum: @Html.DisplayFor(m => m.minQuorum)
 </p>
