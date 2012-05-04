@@ -7,3 +7,12 @@ C:\Users\Xeral\Desktop\fing\tsi\git\tsi1\Laboratorio\IndignadoServer\obj\x86\Deb
 C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe.config
 C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.exe
 C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.pdb
+C:\Users\Nachito\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe.config
+C:\Users\Nachito\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.exe
+C:\Users\Nachito\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.pdb
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe.config
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.exe
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.pdb
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.pdb

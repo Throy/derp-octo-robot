@@ -11,24 +11,43 @@ namespace IndignadoWeb.Controllers
     {
         public ActionResult Index()
         {
-            ChannelFactory<ServiceReference1.ITestService> scf;
-            scf = new ChannelFactory<ServiceReference1.ITestService>(
+            ChannelFactory<TestServiceReference.ITestService> scf;
+            scf = new ChannelFactory<TestServiceReference.ITestService>(
                         new BasicHttpBinding(),
-                        "http://localhost:8732/IndignadoServer/TestService/");
+                        "http://localhost:8730/IndignadoServer/TestService/");
 
 
-            ServiceReference1.ITestService s;
-            s = scf.CreateChannel();
+            TestServiceReference.ITestService serv;
+            serv = scf.CreateChannel();
 
-            ViewBag.Message = s.Ping("Pancho");
+            ViewBag.Message = serv.Ping("Pancho");
 
-            (s as ICommunicationObject).Close();
+            (serv as ICommunicationObject).Close();
 
             return View();
         }
 
         public ActionResult About()
         {
+            return View();
+        }
+
+        // shows a meeting.
+        public ActionResult MeetingDetails()
+        {
+            ChannelFactory<MeetingsServiceReference.IMeetingsService> scf;
+            scf = new ChannelFactory<MeetingsServiceReference.IMeetingsService>(
+                        new BasicHttpBinding(),
+                        "http://localhost:8730/IndignadoServer/MeetingsService/");
+
+
+            MeetingsServiceReference.IMeetingsService serv;
+            serv = scf.CreateChannel();
+
+            ViewBag.Message = serv.getMeeting();
+
+            (serv as ICommunicationObject).Close();
+
             return View();
         }
     }

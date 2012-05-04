@@ -12,3 +12,17 @@ C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoWeb\bin
 C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.dll
 C:\Users\Xeral\Desktop\fing\tsi\git\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.pdb
+C:\Users\Nachito\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\bin\IndignadoWeb.dll
+C:\Users\Nachito\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\bin\IndignadoWeb.pdb
+C:\Users\Nachito\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\bin\EntityFramework.dll
+C:\Users\Nachito\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\bin\EntityFramework.xml
+C:\Users\Nachito\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Nachito\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.dll
+C:\Users\Nachito\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.pdb
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\bin\IndignadoWeb.dll
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\bin\IndignadoWeb.pdb
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\bin\EntityFramework.dll
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\bin\EntityFramework.xml
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.dll
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\derp-octo-robot\Laboratorio\IndignadoWeb\obj\Debug\IndignadoWeb.pdb
