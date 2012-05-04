@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using IndignadoServer.LinqDataContext;
 using System.ServiceModel;
 
 namespace IndignadoServer
@@ -13,7 +13,7 @@ namespace IndignadoServer
         {
             ServiceHost _svcHostTest = null;
             ServiceHost _svcHostMeetings = null;
-
+            
             try
             {
                 Console.WriteLine("Starting Expense Host ...");

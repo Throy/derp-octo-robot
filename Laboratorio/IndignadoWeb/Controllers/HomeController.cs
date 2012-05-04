@@ -36,6 +36,7 @@ namespace IndignadoWeb.Controllers
         // shows a meeting.
         public ActionResult MeetingDetails()
         {
+            // open service
             ChannelFactory<MeetingsServiceReference.IMeetingsService> scf;
             scf = new ChannelFactory<MeetingsServiceReference.IMeetingsService>(
                         new BasicHttpBinding(),
@@ -45,13 +46,37 @@ namespace IndignadoWeb.Controllers
             MeetingsServiceReference.IMeetingsService serv;
             serv = scf.CreateChannel();
 
-            //ViewBag.Message = serv.getMeeting();
+            // get meeting
             DTMeeting meeting = serv.getMeeting();
 
+            // close service
             (serv as ICommunicationObject).Close();
 
-            //return View (;
+            // send the meeting to the model.
             return View (meeting);
+        }
+
+        // shows all meetings.
+        public ActionResult MeetingsList()
+        {
+            // open service
+            ChannelFactory<MeetingsServiceReference.IMeetingsService> scf;
+            scf = new ChannelFactory<MeetingsServiceReference.IMeetingsService>(
+                        new BasicHttpBinding(),
+                        "http://localhost:8730/IndignadoServer/MeetingsService/");
+
+
+            MeetingsServiceReference.IMeetingsService serv;
+            serv = scf.CreateChannel();
+
+            // get all meetings
+            DTMeetingsCol meetings = serv.getMeetingsList();
+
+            // close service
+            (serv as ICommunicationObject).Close();
+
+            // send the meetings to the model.
+            return View (meetings);
         }
     }
 }

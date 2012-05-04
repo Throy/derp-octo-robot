@@ -1,0 +1,13 @@
+﻿<!-- model -->
+@model IndignadoWeb.MeetingsServiceReference.DTMeeting
+           
+<div>
+     <h3>@Html.DisplayFor(m => m.name)</h3>
+     <br />
+     Internal ID: @Html.DisplayFor(m => m.id)
+     <br />
+     Description: @Html.DisplayFor(m => m.description)
+     <br />
+     Min quorum: @Html.DisplayFor(m => m.minQuorum)
+     <br />
+</div>

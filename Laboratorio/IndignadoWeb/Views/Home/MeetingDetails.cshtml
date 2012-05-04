@@ -8,13 +8,9 @@
 
 <!-- page content -->
 
-<h2>Meeting details - @Html.DisplayFor(m => m.id)</h2>
+<h2>Meeting details - @Html.DisplayFor(m => m.name)</h2>
 
 
 <p>
-     Internal ID: @Html.DisplayFor(m => m.id)
-     <br />
-     Description: @Html.DisplayFor(m => m.description)
-     <br />
-     Min quorum: @Html.DisplayFor(m => m.minQuorum)
+    @Html.DisplayFor(m => m)
 </p>
