@@ -61,7 +61,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Movement.cs" />
     <Compile Include="Classes\Meeting.cs" />
     <Compile Include="Classes\Persistence.cs" />
     <Compile Include="LinqDataContext\LinqDataContext.designer.cs">

@@ -15,10 +15,10 @@
         <classShapeMoniker Id="7c8d74f8-8306-444f-9350-45c88e15e415" />
       </nodes>
     </associationConnector>
-    <classShape Id="69867ed7-12bb-4b7d-8068-d9d8f238d98f" absoluteBounds="1, 0.5, 2, 2.9247054036458331">
+    <classShape Id="69867ed7-12bb-4b7d-8068-d9d8f238d98f" absoluteBounds="1, 0.5, 2, 3.1170068359375">
       <DataClassMoniker Name="/LinqDataContextDataContext/Movimiento" />
       <nestedChildShapes>
-        <elementListCompartment Id="57b276b7-2f23-4071-957b-a7b81a44f08e" absoluteBounds="1.0149999999999997, 0.96, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="57b276b7-2f23-4071-957b-a7b81a44f08e" absoluteBounds="1.0149999999999997, 0.96, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="b0d4b58f-5dd4-4a63-bbdf-2f25ce262319" absoluteBounds="3.375, 3.875, 2, 1.3862939453125">
@@ -33,7 +33,7 @@
         <elementListCompartment Id="3d850302-3600-44f3-9ca5-fadcd2409dd9" absoluteBounds="4.265, 1.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.8125 : 3.35740397135417); (4.8125 : 3.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.8125 : 3.35740397135417); (4.8125 : 3.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/LinqDataContextDataContext/Usuario/Usuario_UsuarioFacebook" />
       <nodes>
         <classShapeMoniker Id="ca246dfb-80ef-439f-9497-524dc58c0967" />

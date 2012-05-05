@@ -21,7 +21,7 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="geoUbicacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="latitud" Storage="_geoUbicacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="logo" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="plantillaEstilo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="maxMarcasInadecuadasRecursoX" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -29,6 +29,7 @@
       <Column Name="maxRecursosPopularesN" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="maxUltimosRecursosM" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="habilitado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="longitud" Type="System.String" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.UsuarioFacebook" Member="UsuarioFacebooks">

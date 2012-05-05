@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using IndignadoServer.Classes;
+using IndignadoServer.LinqDataContext;
 
 namespace IndignadoServer.Services
 {
@@ -13,17 +14,14 @@ namespace IndignadoServer.Services
     public class SysAdminService : ISysAdminService
     {
 
-        // creates a movement
+        
         public void createMovement (DTMovement dtMovement)
         {
-            // get movements collection
-            Collection<Movement> movementsCol = Persistence.getInstance().getMovements();
-
-            // set new id (berreta)
-            dtMovement.id = Persistence.getInstance().getMovements().Count;
-
-            // add the new movement to the collection
-            movementsCol.Add (DTToClass.MovementToDT (dtMovement));
+            LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
+            Movimiento nuevo = DTToClass.MovementToDT(dtMovement);
+            nuevo.id = indignadoContext.Movimientos.Count();
+            indignadoContext.Movimientos.InsertOnSubmit(nuevo);
+            indignadoContext.SubmitChanges();
         }
 
         public void setMovement(){}
@@ -32,17 +30,15 @@ namespace IndignadoServer.Services
         // returns all movements
         public DTMovementsCol getMovementsList()
         {
-            // get movements collection
-            Collection<Movement> movementsCol = Persistence.getInstance().getMovements();
-
             // create new movements datatype collection
             DTMovementsCol dtMovementsCol = new DTMovementsCol();
-
-            // add movements datatypes to the collection
             dtMovementsCol.items = new Collection<DTMovement>();
-            foreach (Movement movement in movementsCol)
+
+            LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
+
+            foreach (Movimiento movement in indignadoContext.Movimientos)
             {
-                dtMovementsCol.items.Add (ClassToDT.MovementToDT (movement));
+                dtMovementsCol.items.Add (ClassToDT.MovementToDT(movement));
             }
 
             // return the collection

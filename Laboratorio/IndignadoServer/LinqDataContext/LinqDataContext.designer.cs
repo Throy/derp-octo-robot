@@ -486,6 +486,8 @@ namespace IndignadoServer.LinqDataContext
 		
 		private bool _habilitado;
 		
+		private string _longitud;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -496,8 +498,8 @@ namespace IndignadoServer.LinqDataContext
     partial void OnnombreChanged();
     partial void OndescripcionChanging(string value);
     partial void OndescripcionChanged();
-    partial void OngeoUbicacionChanging(string value);
-    partial void OngeoUbicacionChanged();
+    partial void OnlatitudChanging(string value);
+    partial void OnlatitudChanged();
     partial void OnlogoChanging(System.Data.Linq.Binary value);
     partial void OnlogoChanged();
     partial void OnplantillaEstiloChanging(int value);
@@ -512,6 +514,8 @@ namespace IndignadoServer.LinqDataContext
     partial void OnmaxUltimosRecursosMChanged();
     partial void OnhabilitadoChanging(bool value);
     partial void OnhabilitadoChanged();
+    partial void OnlongitudChanging(string value);
+    partial void OnlongitudChanged();
     #endregion
 		
 		public Movimiento()
@@ -580,7 +584,7 @@ namespace IndignadoServer.LinqDataContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_geoUbicacion", DbType="VarChar(50)")]
-		public string geoUbicacion
+		public string latitud
 		{
 			get
 			{
@@ -590,11 +594,11 @@ namespace IndignadoServer.LinqDataContext
 			{
 				if ((this._geoUbicacion != value))
 				{
-					this.OngeoUbicacionChanging(value);
+					this.OnlatitudChanging(value);
 					this.SendPropertyChanging();
 					this._geoUbicacion = value;
-					this.SendPropertyChanged("geoUbicacion");
-					this.OngeoUbicacionChanged();
+					this.SendPropertyChanged("latitud");
+					this.OnlatitudChanged();
 				}
 			}
 		}
@@ -735,6 +739,26 @@ namespace IndignadoServer.LinqDataContext
 					this._habilitado = value;
 					this.SendPropertyChanged("habilitado");
 					this.OnhabilitadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", CanBeNull=false)]
+		public string longitud
+		{
+			get
+			{
+				return this._longitud;
+			}
+			set
+			{
+				if ((this._longitud != value))
+				{
+					this.OnlongitudChanging(value);
+					this.SendPropertyChanging();
+					this._longitud = value;
+					this.SendPropertyChanged("longitud");
+					this.OnlongitudChanged();
 				}
 			}
 		}

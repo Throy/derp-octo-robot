@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using IndignadoServer.LinqDataContext;
 using IndignadoServer.Classes;
 
 namespace IndignadoServer.Services
@@ -52,10 +53,10 @@ namespace IndignadoServer.Services
         public String description { get; set; }
 
         [DataMember]
-        public double locationLati { get; set; }
+        public string locationLati { get; set; }
 
         [DataMember]
-        public double locationLong { get; set; }
+        public string locationLong { get; set; }
 
         [DataMember]
         public String adminNick { get; set; }
@@ -93,17 +94,14 @@ namespace IndignadoServer.Services
             return dtMeeting;
         }
 
-        public static DTMovement MovementToDT(Movement movement)
+        public static DTMovement MovementToDT(Movimiento movement)
         {
             DTMovement dtMovement = new DTMovement();
             dtMovement.id = movement.id;
-            dtMovement.name = movement.name;
-            dtMovement.description = movement.description;
-            dtMovement.locationLati = movement.locationLati;
-            dtMovement.locationLong = movement.locationLong;
-            dtMovement.adminNick = movement.adminNick;
-            dtMovement.adminPassword = movement.adminPassword;
-            dtMovement.adminMail = movement.adminMail;
+            dtMovement.name = movement.nombre;
+            dtMovement.description = movement.descripcion;
+            dtMovement.locationLati = movement.latitud;
+            dtMovement.locationLong = movement.longitud;
             return dtMovement;
         }
     }
@@ -122,17 +120,13 @@ namespace IndignadoServer.Services
             return meeting;
         }
 
-        public static Movement MovementToDT(DTMovement dtMovement)
+        public static Movimiento MovementToDT(DTMovement dtMovement)
         {
-            Movement movement = new Movement();
-            movement.id = dtMovement.id;
-            movement.name = dtMovement.name;
-            movement.description = dtMovement.description;
-            movement.locationLati = dtMovement.locationLati;
-            movement.locationLong = dtMovement.locationLong;
-            movement.adminNick = dtMovement.adminNick;
-            movement.adminPassword = dtMovement.adminPassword;
-            movement.adminMail = dtMovement.adminMail;
+            Movimiento movement = new Movimiento();
+            movement.nombre = dtMovement.name;
+            movement.descripcion = dtMovement.description;
+            movement.latitud = dtMovement.locationLati;
+            movement.longitud = dtMovement.locationLong;
             return movement;
         }
     }
