@@ -18,21 +18,26 @@
     <div id="menu">
         <ul>
             <li class="outer"><span class="menubtn">@Html.ActionLink("Home", "Index", "Home")</span></li>
-            <li class="outer"><span class="menubtn"><a>Eventos</a></span>
+
+            <!-- meetings -->
+            <li class="outer"><span class="menubtn"><a>Meetings</a></span>
                 <ul>
-                    <li class="menuitm"><a href="/perfil?accion=1">Nueva convocatoria</a></li>
-                    <li class="menuitm">@Html.ActionLink("Lista de convocatorias", "MeetingsList", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("Detalles de convocatoria", "MeetingDetails", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("Create meeting", "MeetingCreate", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("Meetings list", "MeetingsList", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("Meeting details", "MeetingDetails", "Home")</li>
                     <li class="menuitm"><a href="/perfil?accion=3">Ver mapa</a></li>
                 </ul>
             </li>
-            <li class="outer"><span class="menubtn"><a>Recursos</a></span>
+            
+            <!-- system admin -->
+            <li class="outer"><span class="menubtn"><a>SysAdmin</a></span>
                 <ul>
-                    <li class="menuitm"><a href="/partidos?ult=1">Subir recurso</a></li>
-                    <li class="menuitm"><a href="/partidos">Ver populares</a></li>
-                    <li class="menuitm"><a href="/partidos">Ver ultimos</a></li>                          
+                    <li class="menuitm">@Html.ActionLink("Create movement", "MovementCreate", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("Movements list", "MovementsList", "Home")</li>          
                 </ul>
             </li>
+            
+            <!-- about -->
             <li class="outer"><span class="menubtn">@Html.ActionLink("About", "About", "Home")</span></li>
         </ul>                
         <span class="menufecha">

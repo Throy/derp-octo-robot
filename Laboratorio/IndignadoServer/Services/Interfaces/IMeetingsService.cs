@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-namespace IndignadoServer
+namespace IndignadoServer.Services
 {
     // IMeetingsService defines all the services of the Meetings subsystem.
 
@@ -14,40 +14,27 @@ namespace IndignadoServer
     public interface IMeetingsService
     {
         // returns a meeting
+        /*
         [OperationContract]
         DTMeeting getMeeting();
+         * */
+
+        // returns a meeting
+        [OperationContract]
+        DTMeeting getMeeting (int index);
+
+        // adds a meeting
+        /*
+        [OperationContract]
+        void addEmptyMeeting();
+         * */
+
+        // creates a meeting
+        [OperationContract]
+        void createMeeting (DTMeeting dtMeeting);
 
         // returns all meetings
         [OperationContract]
         DTMeetingsCol getMeetingsList();
-    }
-
-    // *********
-    // datatypes
-    // *********
-
-    // Meeting datatype
-    [DataContract]
-    public class DTMeeting
-    {
-        [DataMember]
-        public int id { get; set; }
-
-        [DataMember]
-        public String name { get; set; }
-
-        [DataMember]
-        public String description { get; set; }
-
-        [DataMember]
-        public int minQuorum { get; set; }
-    }
-
-    // Meetings datatype
-    [DataContract]
-    public class DTMeetingsCol
-    {
-        [DataMember]
-        public Collection<DTMeeting> items  { get; set; }
     }
 }

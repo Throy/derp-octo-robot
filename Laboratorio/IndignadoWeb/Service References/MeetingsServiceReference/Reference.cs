@@ -15,7 +15,7 @@ namespace IndignadoWeb.MeetingsServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DTMeeting", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTMeeting", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
     [System.SerializableAttribute()]
     public partial class DTMeeting : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -108,7 +108,7 @@ namespace IndignadoWeb.MeetingsServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DTMeetingsCol", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTMeetingsCol", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
     [System.SerializableAttribute()]
     public partial class DTMeetingsCol : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -156,7 +156,13 @@ namespace IndignadoWeb.MeetingsServiceReference {
     public interface IMeetingsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/getMeeting", ReplyAction="http://tempuri.org/IMeetingsService/getMeetingResponse")]
-        IndignadoWeb.MeetingsServiceReference.DTMeeting getMeeting();
+        IndignadoWeb.MeetingsServiceReference.DTMeeting getMeeting(int index);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/addEmptyMeeting", ReplyAction="http://tempuri.org/IMeetingsService/addEmptyMeetingResponse")]
+        void addEmptyMeeting();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/createMeeting", ReplyAction="http://tempuri.org/IMeetingsService/createMeetingResponse")]
+        void createMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/getMeetingsList", ReplyAction="http://tempuri.org/IMeetingsService/getMeetingsListResponse")]
         IndignadoWeb.MeetingsServiceReference.DTMeetingsCol getMeetingsList();
@@ -189,8 +195,16 @@ namespace IndignadoWeb.MeetingsServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public IndignadoWeb.MeetingsServiceReference.DTMeeting getMeeting() {
-            return base.Channel.getMeeting();
+        public IndignadoWeb.MeetingsServiceReference.DTMeeting getMeeting(int index) {
+            return base.Channel.getMeeting(index);
+        }
+        
+        public void addEmptyMeeting() {
+            base.Channel.addEmptyMeeting();
+        }
+        
+        public void createMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting) {
+            base.Channel.createMeeting(dtMeeting);
         }
         
         public IndignadoWeb.MeetingsServiceReference.DTMeetingsCol getMeetingsList() {

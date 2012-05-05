@@ -4,7 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8730/IndignadoServer/MeetingsService/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8730/IndignadoServer/MeetingsService/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8730/IndignadoServer/MeetingsService/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/IndignadoServer" />
+      <xsd:import schemaLocation="http://localhost:8730/IndignadoServer/MeetingsService/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IMeetingsService_getMeeting_InputMessage">
@@ -12,6 +12,18 @@
   </wsdl:message>
   <wsdl:message name="IMeetingsService_getMeeting_OutputMessage">
     <wsdl:part name="parameters" element="tns:getMeetingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMeetingsService_addEmptyMeeting_InputMessage">
+    <wsdl:part name="parameters" element="tns:addEmptyMeeting" />
+  </wsdl:message>
+  <wsdl:message name="IMeetingsService_addEmptyMeeting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addEmptyMeetingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMeetingsService_createMeeting_InputMessage">
+    <wsdl:part name="parameters" element="tns:createMeeting" />
+  </wsdl:message>
+  <wsdl:message name="IMeetingsService_createMeeting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:createMeetingResponse" />
   </wsdl:message>
   <wsdl:message name="IMeetingsService_getMeetingsList_InputMessage">
     <wsdl:part name="parameters" element="tns:getMeetingsList" />
@@ -24,6 +36,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/getMeeting" message="tns:IMeetingsService_getMeeting_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/getMeetingResponse" message="tns:IMeetingsService_getMeeting_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="addEmptyMeeting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/addEmptyMeeting" message="tns:IMeetingsService_addEmptyMeeting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/addEmptyMeetingResponse" message="tns:IMeetingsService_addEmptyMeeting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="createMeeting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/createMeeting" message="tns:IMeetingsService_createMeeting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/createMeetingResponse" message="tns:IMeetingsService_createMeeting_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="getMeetingsList">
       <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/getMeetingsList" message="tns:IMeetingsService_getMeetingsList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/getMeetingsListResponse" message="tns:IMeetingsService_getMeetingsList_OutputMessage" />
@@ -33,6 +53,24 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="getMeeting">
       <soap:operation soapAction="http://tempuri.org/IMeetingsService/getMeeting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addEmptyMeeting">
+      <soap:operation soapAction="http://tempuri.org/IMeetingsService/addEmptyMeeting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createMeeting">
+      <soap:operation soapAction="http://tempuri.org/IMeetingsService/createMeeting" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

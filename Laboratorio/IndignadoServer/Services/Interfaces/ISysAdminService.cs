@@ -7,15 +7,21 @@ using System.Text;
 
 namespace IndignadoServer.Services
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ISysAdminService" in both code and config file together.
+    // ISysAdminService defines all the services of the SysAdmin subsystem.
+
     [ServiceContract]
     public interface ISysAdminService
     {
+        // creates a meeting
         [OperationContract]
-        void createMovement();
+        void createMovement (DTMovement dtMovement);
 
         [OperationContract]
         void setMovement();
+        
+        // returns all movements
+        [OperationContract]
+        DTMovementsCol getMovementsList();
 
         [OperationContract]
         void enableMovement();
