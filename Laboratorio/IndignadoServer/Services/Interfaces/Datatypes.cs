@@ -30,7 +30,7 @@ namespace IndignadoServer.Services
         public int minQuorum { get; set; }
     }
 
-    // Meeting COllection datatype
+    // Meeting Collection datatype
     [DataContract]
     public class DTMeetingsCol
     {
@@ -38,10 +38,49 @@ namespace IndignadoServer.Services
         public Collection<DTMeeting> items { get; set; }
     }
 
+    // Movement datatype
+    [DataContract]
+    public class DTMovement
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public String name { get; set; }
+
+        [DataMember]
+        public String description { get; set; }
+
+        [DataMember]
+        public double locationLati { get; set; }
+
+        [DataMember]
+        public double locationLong { get; set; }
+
+        [DataMember]
+        public String adminNick { get; set; }
+
+        [DataMember]
+        public String adminPassword { get; set; }
+
+        [DataMember]
+        public String adminMail { get; set; }
+    }
+
+    // Movement Collection datatype
+    [DataContract]
+    public class DTMovementsCol
+    {
+        [DataMember]
+        public Collection<DTMovement> items { get; set; }
+    }
+
     // **********
     // conversors
     // **********
-    
+
+    // converts classes to datatypes
+
     public class ClassToDT
     {
         public static DTMeeting MeetingToDT (Meeting meeting)
@@ -53,7 +92,23 @@ namespace IndignadoServer.Services
             dtMeeting.minQuorum = meeting.minQuorum;
             return dtMeeting;
         }
+
+        public static DTMovement MovementToDT(Movement movement)
+        {
+            DTMovement dtMovement = new DTMovement();
+            dtMovement.id = movement.id;
+            dtMovement.name = movement.name;
+            dtMovement.description = movement.description;
+            dtMovement.locationLati = movement.locationLati;
+            dtMovement.locationLong = movement.locationLong;
+            dtMovement.adminNick = movement.adminNick;
+            dtMovement.adminPassword = movement.adminPassword;
+            dtMovement.adminMail = movement.adminMail;
+            return dtMovement;
+        }
     }
+
+    // converts datatypes to classes
 
     public class DTToClass
     {
@@ -65,6 +120,20 @@ namespace IndignadoServer.Services
             meeting.description = dtMeeting.description;
             meeting.minQuorum = dtMeeting.minQuorum;
             return meeting;
+        }
+
+        public static Movement MovementToDT(DTMovement dtMovement)
+        {
+            Movement movement = new Movement();
+            movement.id = dtMovement.id;
+            movement.name = dtMovement.name;
+            movement.description = dtMovement.description;
+            movement.locationLati = dtMovement.locationLati;
+            movement.locationLong = dtMovement.locationLong;
+            movement.adminNick = dtMovement.adminNick;
+            movement.adminPassword = dtMovement.adminPassword;
+            movement.adminMail = dtMovement.adminMail;
+            return movement;
         }
     }
 

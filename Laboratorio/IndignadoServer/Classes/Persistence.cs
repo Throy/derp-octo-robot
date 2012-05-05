@@ -16,13 +16,16 @@ namespace IndignadoServer.Classes
         // *********
         // atributes
         // *********
-        
+
         private Collection<Meeting> meetings;
+
+        private Collection<Movement> movements;
 
         // private constructor
         private Persistence()
         {
             meetings = new Collection<Meeting>();
+            movements = new Collection<Movement>();
         }
 
         // public getter
@@ -39,8 +42,14 @@ namespace IndignadoServer.Classes
         // methods
         // *******
 
+
         public Collection<Meeting> getMeetings() {
             return meetings;
+        }
+
+        public Collection<Movement> getMovements()
+        {
+            return movements;
         }
 
 
@@ -49,6 +58,7 @@ namespace IndignadoServer.Classes
         // ***************
 
         // creates a new meeting
+        /*
         public Meeting newMeeting (int index)
         {
             Meeting newMeeting = new Meeting();
@@ -58,5 +68,6 @@ namespace IndignadoServer.Classes
             newMeeting.minQuorum = index * 6;
             return newMeeting;
         }
+         * */
     }
 }

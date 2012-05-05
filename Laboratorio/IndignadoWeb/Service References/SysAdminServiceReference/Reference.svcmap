@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="68242da0-7d66-4853-8418-d0de0a4de95a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8730/IndignadoServer/SysAdminService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="1d43b799-361e-44f7-be09-d94420662b6d" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SysAdminService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="e24f1022-4703-4d1e-9396-e3fb7601dd15" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SysAdminService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="2f71a8e4-eaa2-4b8f-9450-71b54716fb6a" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SysAdminService/mex" />
+    <MetadataFile FileName="IndignadoServer.Services.xsd" MetadataType="Schema" ID="d78f4e4e-33ec-41c2-875f-f08966ca85e5" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SysAdminService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

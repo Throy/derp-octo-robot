@@ -14,15 +14,20 @@ namespace IndignadoServer
         {
             ServiceHost _svcHostTest = null;
             ServiceHost _svcHostMeetings = null;
+            ServiceHost _svcHostSysAdmin = null;
             
             try
             {
                 Console.WriteLine("Starting Expense Host ...");
 
-                // load service hosts
+                // open service hosts
                 _svcHostTest = LoadTestService();
                 _svcHostMeetings = LoadMeetingsService();
+                _svcHostSysAdmin = LoadSysAdminService();
 
+                // work!
+                
+                // wait for key to exit system
                 Console.WriteLine("\n Indignado Server started. Press any key to exit.\n\n");
                 Console.Read();
             }
@@ -42,6 +47,10 @@ namespace IndignadoServer
                 if (_svcHostMeetings != null)
                 {
                     _svcHostMeetings.Close();
+                }
+                if (_svcHostSysAdmin != null)
+                {
+                    _svcHostSysAdmin.Close();
                 }
             }
         }
@@ -76,7 +85,7 @@ namespace IndignadoServer
             ServiceHost svcHost = null;
             try
             {
-                Console.Write("Loading Test Service ... ");
+                Console.Write("Loading MeetingsService ... ");
 
                 // Create Service Host.
                 svcHost = new ServiceHost(typeof(MeetingsService));
@@ -94,5 +103,29 @@ namespace IndignadoServer
             return svcHost;
         }
 
+
+        // load sysadmin service
+        private static ServiceHost LoadSysAdminService()
+        {
+            ServiceHost svcHost = null;
+            try
+            {
+                Console.Write("Loading SysAdminService ... ");
+
+                // Create Service Host.
+                svcHost = new ServiceHost(typeof(SysAdminService));
+                svcHost.Open();
+
+                Console.WriteLine("Done!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\nError at loading SysAdminService. ");
+                Console.WriteLine("Exception : " + ex.Message);
+                throw ex;
+            }
+
+            return svcHost;
+        }
     }
 }

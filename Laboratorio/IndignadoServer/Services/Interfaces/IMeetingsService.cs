@@ -24,8 +24,10 @@ namespace IndignadoServer.Services
         DTMeeting getMeeting (int index);
 
         // adds a meeting
+        /*
         [OperationContract]
         void addEmptyMeeting();
+         * */
 
         // creates a meeting
         [OperationContract]

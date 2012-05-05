@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.ServiceModel;
 using IndignadoWeb.MeetingsServiceReference;
+using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.Models;
 
 namespace IndignadoWeb.Controllers
@@ -124,6 +125,81 @@ namespace IndignadoWeb.Controllers
 
             // If we got this far, something failed, redisplay form
             return View (model);
+        }
+
+
+
+        // shows all movements.
+        public ActionResult MovementsList()
+        {
+            // open service
+            ChannelFactory<SysAdminServiceReference.ISysAdminService> scf;
+            scf = new ChannelFactory<SysAdminServiceReference.ISysAdminService>(
+                        new BasicHttpBinding(),
+                        "http://localhost:8730/IndignadoServer/SysAdminService/");
+
+
+            SysAdminServiceReference.ISysAdminService serv;
+            serv = scf.CreateChannel();
+
+            // get all movements
+            DTMovementsCol movements = serv.getMovementsList();
+
+            // close service
+            (serv as ICommunicationObject).Close();
+
+            // send the movements to the model.
+            return View(movements);
+        }
+
+        // create movement.
+        public ActionResult MovementCreate()
+        {
+            return View();
+        }
+
+        // create movement.
+        [HttpPost]
+        public ActionResult MovementCreate (CreateMovementModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // open service
+                ChannelFactory<SysAdminServiceReference.ISysAdminService> scf;
+                scf = new ChannelFactory<SysAdminServiceReference.ISysAdminService>(
+                            new BasicHttpBinding(),
+                            "http://localhost:8730/IndignadoServer/SysAdminService/");
+
+
+                SysAdminServiceReference.ISysAdminService serv;
+                serv = scf.CreateChannel();
+
+                // create new movement
+                //serv.addEmptyMovement();
+
+                DTMovement dtMovement = new DTMovement();
+                dtMovement.id = -1;
+                dtMovement.name = model.name;
+                dtMovement.description = model.description;
+                dtMovement.locationLati = model.locationLati;
+                dtMovement.locationLong = model.locationLong;
+                dtMovement.adminNick = model.adminNick;
+                dtMovement.adminPassword = model.adminPassword;
+                dtMovement.adminMail = model.adminMail;
+                serv.createMovement(dtMovement);
+
+                // get all movements
+                DTMovementsCol movements = serv.getMovementsList();
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the movements to the model.
+                return View("MovementsList", movements);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
     }
 }

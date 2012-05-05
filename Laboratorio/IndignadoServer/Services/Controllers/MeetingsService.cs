@@ -57,12 +57,14 @@ namespace IndignadoServer.Services
         }
 
         // adds a meeting (berreta)
+        /*
         public void addEmptyMeeting()
         {
             Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
             Meeting newMeeting = Persistence.getInstance().newMeeting (Persistence.getInstance().getMeetings().Count);
             meetingsCol.Add (newMeeting);
         }
+         * */
 
         // creates a meeting
         public void createMeeting (DTMeeting dtMeeting)
