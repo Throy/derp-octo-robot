@@ -14,11 +14,11 @@ namespace IndignadoServer.Controllers
     class SessionController
     {
         private static SessionController _instance;
-        private Dictionary<int, UserOnlineInfo> _usersOnline;
+        private Dictionary<String, UserOnlineInfo> _usersOnline;
 
         public SessionController()
         {
-            _usersOnline = new Dictionary<int, UserOnlineInfo>();
+            _usersOnline = new Dictionary<String, UserOnlineInfo>();
         }
 
         public static SessionController Instance
@@ -66,20 +66,23 @@ namespace IndignadoServer.Controllers
 
             SecurityToken token = new BinarySecretSecurityToken(key);
 
-            _usersOnline[user.id] = new UserOnlineInfo(user.id, idMovimiento, token.Id);
+
+            _usersOnline[token.Id] = new UserOnlineInfo(user.id, user.apodo, user.privilegio, idMovimiento, token.Id);
 
             return token.Id;
         }
 
         public bool ValidateToken(int idMovmiento, String token)
         {
-            foreach (KeyValuePair<int, UserOnlineInfo> entry in _usersOnline)
-            {
-                if (entry.Value.Token == token && entry.Value.IdMovimiento == idMovmiento)
-                    return true;
-            }
+            if (_usersOnline[token] == null)
+                return false;
+            
+            return _usersOnline[token].IdMovimiento == idMovmiento;
+        }
 
-            return false;
+        public UserOnlineInfo GetUserInfo(String token)
+        {
+            return _usersOnline[token];
         }
     }
 }

@@ -12,32 +12,32 @@ namespace IndignadoWeb.Controllers
     {
         public ActionResult Index()
         {
+            var binding = new WSHttpBinding();
+            binding.Security.Mode = SecurityMode.Message;
+            binding.Security.Message.ClientCredentialType = MessageCredentialType.UserName;
+
+            ChannelFactory<TestServiceReference.ITestService> scf;
+            scf = new ChannelFactory<TestServiceReference.ITestService>(
+                        binding,
+                        "http://localhost:8730/IndignadoServer/TestService/");
+
+
+            scf.Credentials.UserName.UserName = "0"; // idMovimiento
+            scf.Credentials.UserName.Password = (HttpContext.Session["token"] == null) ? "Guest" : HttpContext.Session["token"].ToString();
+
+            TestServiceReference.ITestService serv;
+            serv = scf.CreateChannel();
+
             if (HttpContext.Session["token"] != null)
-            {
-                var binding = new WSHttpBinding();
-                binding.Security.Mode = SecurityMode.Message;
-                binding.Security.Message.ClientCredentialType = MessageCredentialType.UserName;
-
-                ChannelFactory<TestServiceReference.ITestService> scf;
-                scf = new ChannelFactory<TestServiceReference.ITestService>(
-                            binding,
-                            "http://localhost:8730/IndignadoServer/TestService/");
-
-
-                scf.Credentials.UserName.UserName = "0"; // idMovimiento
-                scf.Credentials.UserName.Password = (HttpContext.Session["token"] == null) ? "invalid" : HttpContext.Session["token"].ToString();
-
-                TestServiceReference.ITestService serv;
-                serv = scf.CreateChannel();
-
-                ViewBag.Message = serv.Ping("Pancho");
-
-                (serv as ICommunicationObject).Close();
+            {   
+                ViewBag.Message = serv.PingUsers("Pancho");
             }
             else
             {
-                ViewBag.Message = "Hola desconocido!";
+                ViewBag.Message = serv.PingPublic("DonNadie");
             }
+            
+            (serv as ICommunicationObject).Close();
 
             return View();
         }

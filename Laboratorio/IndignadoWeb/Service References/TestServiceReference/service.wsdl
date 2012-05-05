@@ -105,7 +105,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_ITestService_Ping_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_ITestService_PingPublic_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -124,7 +124,121 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_ITestService_Ping_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_ITestService_PingPublic_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ITestService_PingUsers_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ITestService_PingUsers_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ITestService_PingMovAdmin_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ITestService_PingMovAdmin_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ITestService_PingSysAdmin_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ITestService_PingSysAdmin_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -149,29 +263,92 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ITestService_Ping_InputMessage">
-    <wsdl:part name="parameters" element="tns:Ping" />
+  <wsdl:message name="ITestService_PingPublic_InputMessage">
+    <wsdl:part name="parameters" element="tns:PingPublic" />
   </wsdl:message>
-  <wsdl:message name="ITestService_Ping_OutputMessage">
-    <wsdl:part name="parameters" element="tns:PingResponse" />
+  <wsdl:message name="ITestService_PingPublic_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingPublicResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_PingUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:PingUsers" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_PingUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_PingMovAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:PingMovAdmin" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_PingMovAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingMovAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_PingSysAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:PingSysAdmin" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_PingSysAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingSysAdminResponse" />
   </wsdl:message>
   <wsdl:portType name="ITestService">
-    <wsdl:operation name="Ping">
-      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/Ping" message="tns:ITestService_Ping_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/PingResponse" message="tns:ITestService_Ping_OutputMessage" />
+    <wsdl:operation name="PingPublic">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/PingPublic" message="tns:ITestService_PingPublic_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/PingPublicResponse" message="tns:ITestService_PingPublic_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PingUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/PingUsers" message="tns:ITestService_PingUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/PingUsersResponse" message="tns:ITestService_PingUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PingMovAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/PingMovAdmin" message="tns:ITestService_PingMovAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/PingMovAdminResponse" message="tns:ITestService_PingMovAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PingSysAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/PingSysAdmin" message="tns:ITestService_PingSysAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/PingSysAdminResponse" message="tns:ITestService_PingSysAdmin_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_ITestService" type="tns:ITestService">
     <wsp:PolicyReference URI="#WSHttpBinding_ITestService_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="Ping">
-      <soap12:operation soapAction="http://tempuri.org/ITestService/Ping" style="document" />
+    <wsdl:operation name="PingPublic">
+      <soap12:operation soapAction="http://tempuri.org/ITestService/PingPublic" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_ITestService_Ping_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_ITestService_PingPublic_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_ITestService_Ping_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_ITestService_PingPublic_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PingUsers">
+      <soap12:operation soapAction="http://tempuri.org/ITestService/PingUsers" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_ITestService_PingUsers_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_ITestService_PingUsers_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PingMovAdmin">
+      <soap12:operation soapAction="http://tempuri.org/ITestService/PingMovAdmin" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_ITestService_PingMovAdmin_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_ITestService_PingMovAdmin_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PingSysAdmin">
+      <soap12:operation soapAction="http://tempuri.org/ITestService/PingSysAdmin" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_ITestService_PingSysAdmin_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_ITestService_PingSysAdmin_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

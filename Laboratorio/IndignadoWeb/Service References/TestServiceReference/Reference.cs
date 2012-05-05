@@ -15,8 +15,17 @@ namespace IndignadoWeb.TestServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TestServiceReference.ITestService")]
     public interface ITestService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/Ping", ReplyAction="http://tempuri.org/ITestService/PingResponse")]
-        string Ping(string name);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/PingPublic", ReplyAction="http://tempuri.org/ITestService/PingPublicResponse")]
+        string PingPublic(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/PingUsers", ReplyAction="http://tempuri.org/ITestService/PingUsersResponse")]
+        string PingUsers(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/PingMovAdmin", ReplyAction="http://tempuri.org/ITestService/PingMovAdminResponse")]
+        string PingMovAdmin(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/PingSysAdmin", ReplyAction="http://tempuri.org/ITestService/PingSysAdminResponse")]
+        string PingSysAdmin(string name);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -46,8 +55,20 @@ namespace IndignadoWeb.TestServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public string Ping(string name) {
-            return base.Channel.Ping(name);
+        public string PingPublic(string name) {
+            return base.Channel.PingPublic(name);
+        }
+        
+        public string PingUsers(string name) {
+            return base.Channel.PingUsers(name);
+        }
+        
+        public string PingMovAdmin(string name) {
+            return base.Channel.PingMovAdmin(name);
+        }
+        
+        public string PingSysAdmin(string name) {
+            return base.Channel.PingSysAdmin(name);
         }
     }
 }

@@ -62,7 +62,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CustomAuthorizationPolicy.cs" />
+    <Compile Include="Classes\CustomSecurityTokenAuthenticator.cs" />
+    <Compile Include="Classes\CustomSecurityTokenManager.cs" />
+    <Compile Include="Classes\CustomServiceAuthorizationManager.cs" />
+    <Compile Include="Classes\CustomServiceCredentials.cs" />
     <Compile Include="Classes\CustomUserNameValidator.cs" />
+    <Compile Include="Classes\Roles.cs" />
     <Compile Include="Classes\UserOnlineInfo.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="LinqDataContext\LinqDataContext.designer.cs">

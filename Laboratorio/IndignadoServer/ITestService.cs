@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Security.Permissions;
 
 namespace IndignadoServer
 {
@@ -12,6 +13,15 @@ namespace IndignadoServer
     public interface ITestService
     {
         [OperationContract]
-        string Ping(string name);
+        string PingPublic(string name);
+
+        [OperationContract]
+        string PingUsers(string name);
+
+        [OperationContract]
+        string PingMovAdmin(string name);
+
+        [OperationContract]
+        string PingSysAdmin(string name);
     }
 }
