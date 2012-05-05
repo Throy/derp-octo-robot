@@ -5,8 +5,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using IndignadoServer.Classes;
 
-namespace IndignadoServer
+namespace IndignadoServer.Services
 {
     // MeetingsService implements all the services of the Meetings subsystem.
 
@@ -19,12 +20,28 @@ namespace IndignadoServer
         // returns a meeting
         public DTMeeting getMeeting()
         {
-            return getMeeting (1);
+            Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
+            if (meetingsCol.Count >= 1)
+            {
+                return ClassToDT.MeetingToDT(meetingsCol [0]);
+            }
+            else {
+                return null;
+            }
+        }
+
+        // adds a meeting
+        public void addEmptyMeeting()
+        {
+            Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
+            Meeting newMeeting = Persistence.getInstance().newMeeting (Persistence.getInstance().getMeetings().Count);
+            meetingsCol.Add (newMeeting);
         }
 
         // returns all meetings
         public DTMeetingsCol getMeetingsList()
         {
+            /*
             DTMeetingsCol newMeetings = new DTMeetingsCol();
             newMeetings.items = new Collection<DTMeeting>();
 
@@ -35,6 +52,17 @@ namespace IndignadoServer
             newMeetings.items.Add (newMeeting2);
 
             return newMeetings;
+             * */
+
+
+            Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
+            DTMeetingsCol dtMeetingsCol = new DTMeetingsCol();
+            dtMeetingsCol.items = new Collection<DTMeeting>();
+            foreach (Meeting meeting in meetingsCol)
+            {
+                dtMeetingsCol.items.Add (ClassToDT.MeetingToDT (meeting));
+            }
+            return dtMeetingsCol;
         }
 
         // ***************

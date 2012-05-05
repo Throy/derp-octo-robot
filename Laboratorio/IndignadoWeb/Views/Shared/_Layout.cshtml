@@ -20,7 +20,7 @@
             <li class="outer"><span class="menubtn">@Html.ActionLink("Home", "Index", "Home")</span></li>
             <li class="outer"><span class="menubtn"><a>Eventos</a></span>
                 <ul>
-                    <li class="menuitm"><a href="/perfil?accion=1">Nueva convocatoria</a></li>
+                    <li class="menuitm">@Html.ActionLink("Nueva convocatoria", "CreateMeeting", "Home")</li>
                     <li class="menuitm">@Html.ActionLink("Lista de convocatorias", "MeetingsList", "Home")</li>
                     <li class="menuitm">@Html.ActionLink("Detalles de convocatoria", "MeetingDetails", "Home")</li>
                     <li class="menuitm"><a href="/perfil?accion=3">Ver mapa</a></li>

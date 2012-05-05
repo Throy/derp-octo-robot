@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IndignadoServer.LinqDataContext;
 using System.ServiceModel;
+using IndignadoServer.LinqDataContext;
+using IndignadoServer.Services;
 
 namespace IndignadoServer
 {
