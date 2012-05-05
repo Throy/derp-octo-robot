@@ -29,6 +29,9 @@ namespace IndignadoWeb.MeetingsServiceReference {
         private int idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idMovementField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int minQuorumField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -66,6 +69,19 @@ namespace IndignadoWeb.MeetingsServiceReference {
                 if ((this.idField.Equals(value) != true)) {
                     this.idField = value;
                     this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idMovement {
+            get {
+                return this.idMovementField;
+            }
+            set {
+                if ((this.idMovementField.Equals(value) != true)) {
+                    this.idMovementField = value;
+                    this.RaisePropertyChanged("idMovement");
                 }
             }
         }
@@ -158,9 +174,6 @@ namespace IndignadoWeb.MeetingsServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/getMeeting", ReplyAction="http://tempuri.org/IMeetingsService/getMeetingResponse")]
         IndignadoWeb.MeetingsServiceReference.DTMeeting getMeeting(int index);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/addEmptyMeeting", ReplyAction="http://tempuri.org/IMeetingsService/addEmptyMeetingResponse")]
-        void addEmptyMeeting();
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/createMeeting", ReplyAction="http://tempuri.org/IMeetingsService/createMeetingResponse")]
         void createMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting);
         
@@ -197,10 +210,6 @@ namespace IndignadoWeb.MeetingsServiceReference {
         
         public IndignadoWeb.MeetingsServiceReference.DTMeeting getMeeting(int index) {
             return base.Channel.getMeeting(index);
-        }
-        
-        public void addEmptyMeeting() {
-            base.Channel.addEmptyMeeting();
         }
         
         public void createMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting) {

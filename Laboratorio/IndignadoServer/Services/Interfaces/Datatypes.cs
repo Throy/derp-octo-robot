@@ -21,6 +21,9 @@ namespace IndignadoServer.Services
         public int id { get; set; }
 
         [DataMember]
+        public int idMovement { get; set; }
+
+        [DataMember]
         public String name { get; set; }
 
         [DataMember]
@@ -87,6 +90,7 @@ namespace IndignadoServer.Services
         {
             DTMeeting dtMeeting = new DTMeeting();
             dtMeeting.id = meeting.id;
+            dtMeeting.idMovement = meeting.idMovimiento;
             dtMeeting.name = meeting.titulo;
             dtMeeting.description = meeting.descripcion;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
@@ -113,6 +117,7 @@ namespace IndignadoServer.Services
         {
             Convocatoria meeting = new Convocatoria();
             meeting.id = dtMeeting.id;
+            meeting.idMovimiento = dtMeeting.idMovement;
             meeting.titulo = dtMeeting.name;
             meeting.descripcion = dtMeeting.description;
             meeting.minQuorum = dtMeeting.minQuorum;

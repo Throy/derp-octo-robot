@@ -20,13 +20,13 @@ namespace IndignadoServer.Services
         // returns a meeting
         public DTMeeting getMeeting (int index)
         {
-            // get meetings collection
+            // get meeting from database
             DTMeeting dataMeeting = new DTMeeting();
             LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
             try
             {
-                Convocatoria convocatoria = indignadoContext.Convocatorias.Single(x => x.id == index);
-                dataMeeting = ClassToDT.MeetingToDT(convocatoria);
+                Convocatoria convocatoria = indignadoContext.Convocatorias.Single (x => x.id == index);
+                dataMeeting = ClassToDT.MeetingToDT (convocatoria);
             }
             catch { 
                     dataMeeting = null;
@@ -39,8 +39,13 @@ namespace IndignadoServer.Services
         // creates a meeting
         public void createMeeting (DTMeeting dtMeeting)
         {
+            // create meeting and add it to the database
             LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
+
+            // set internal and foreign ids (berreta)
             dtMeeting.id = indignadoContext.Convocatorias.Count();
+            dtMeeting.idMovement = 666;
+
             indignadoContext.Convocatorias.InsertOnSubmit(DTToClass.MeetingToDT(dtMeeting));
             indignadoContext.SubmitChanges();
         }
@@ -55,9 +60,14 @@ namespace IndignadoServer.Services
             
             LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
             
+            // only get meetings from this movement.
+            int idMovement = 0;
             foreach (Convocatoria meeting in indignadoContext.Convocatorias)
             {
-                dtMeetingsCol.items.Add(ClassToDT.MeetingToDT(meeting));
+                if (meeting.idMovimiento == idMovement)
+                {
+                    dtMeetingsCol.items.Add (ClassToDT.MeetingToDT (meeting));
+                }
             }
 
             // return the collection
