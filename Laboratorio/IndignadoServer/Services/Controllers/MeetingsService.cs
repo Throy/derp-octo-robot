@@ -61,7 +61,7 @@ namespace IndignadoServer.Services
             LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
             
             // only get meetings from this movement.
-            int idMovement = 0;
+            int idMovement = 666;
             foreach (Convocatoria meeting in indignadoContext.Convocatorias)
             {
                 if (meeting.idMovimiento == idMovement)

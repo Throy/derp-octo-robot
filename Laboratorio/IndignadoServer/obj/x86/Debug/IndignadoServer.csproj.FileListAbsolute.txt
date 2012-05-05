@@ -1,6 +1,1 @@
 C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe.config
-C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe
-C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.pdb
-C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.exe
-C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.pdb
