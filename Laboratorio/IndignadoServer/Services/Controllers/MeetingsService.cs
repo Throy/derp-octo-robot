@@ -5,8 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using IndignadoServer.Classes;
-
+using IndignadoServer.LinqDataContext;
 namespace IndignadoServer.Services
 {
     // MeetingsService implements all the services of the Meetings subsystem.
@@ -17,96 +16,48 @@ namespace IndignadoServer.Services
         // service methods
         // ***************
 
-        // returns a meeting
-        /*
-        public DTMeeting getMeeting()
-        {
-            // get meetings collection
-            Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
-
-            // get the first meeting of the collection
-            if (meetingsCol.Count > 0)
-            {
-                return ClassToDT.MeetingToDT(meetingsCol [0]);
-            }
-
-            // meeting not found
-            else {
-                return null;
-            }
-        }
-         * */
 
         // returns a meeting
         public DTMeeting getMeeting (int index)
         {
             // get meetings collection
-            Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
-
-            // get the asked meeting of the collection
-            if (meetingsCol.Count > index)
+            DTMeeting dataMeeting = new DTMeeting();
+            LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
+            try
             {
-                return ClassToDT.MeetingToDT(meetingsCol[index]);
+                Convocatoria convocatoria = indignadoContext.Convocatorias.Single(x => x.id == index);
+                dataMeeting = ClassToDT.MeetingToDT(convocatoria);
             }
-
-            // meeting not found
-            else
-            {
-                return null;
+            catch { 
+                    dataMeeting = null;
             }
+            return dataMeeting;
         }
 
-        // adds a meeting (berreta)
-        /*
-        public void addEmptyMeeting()
-        {
-            Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
-            Meeting newMeeting = Persistence.getInstance().newMeeting (Persistence.getInstance().getMeetings().Count);
-            meetingsCol.Add (newMeeting);
-        }
-         * */
+        
 
         // creates a meeting
         public void createMeeting (DTMeeting dtMeeting)
         {
-            // get meetings collection
-            Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
-
-            // set new id (berreta)
-            dtMeeting.id = Persistence.getInstance().getMeetings().Count;
-
-            // add the new meeting to the collection
-            meetingsCol.Add (DTToClass.MeetingToDT (dtMeeting));
+            LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
+            dtMeeting.id = indignadoContext.Convocatorias.Count();
+            indignadoContext.Convocatorias.InsertOnSubmit(DTToClass.MeetingToDT(dtMeeting));
+            indignadoContext.SubmitChanges();
         }
 
         // returns all meetings
         public DTMeetingsCol getMeetingsList()
         {
-            /* berreta
-            DTMeetingsCol newMeetings = new DTMeetingsCol();
-            newMeetings.items = new Collection<DTMeeting>();
-
-            DTMeeting newMeeting1 = getMeeting (1);
-            newMeetings.items.Add (newMeeting1);
-
-            DTMeeting newMeeting2 = getMeeting (2);
-            newMeetings.items.Add (newMeeting2);
-
-            return newMeetings;
-             * */
-
-
-            // get meetings collection
-            Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
-
+            
             // create new meetings datatype collection
             DTMeetingsCol dtMeetingsCol = new DTMeetingsCol();
-
-            // add meetings datatypes to the collection
             dtMeetingsCol.items = new Collection<DTMeeting>();
-            foreach (Meeting meeting in meetingsCol)
+            
+            LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
+            
+            foreach (Convocatoria meeting in indignadoContext.Convocatorias)
             {
-                dtMeetingsCol.items.Add (ClassToDT.MeetingToDT (meeting));
+                dtMeetingsCol.items.Add(ClassToDT.MeetingToDT(meeting));
             }
 
             // return the collection

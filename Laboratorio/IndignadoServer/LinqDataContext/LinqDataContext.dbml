@@ -12,8 +12,6 @@
       <Column Name="fin" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="logo" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="minQuorum" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Convocatoria_Convocatoria" Member="Convocatoria2" ThisKey="id" OtherKey="id" Type="Convocatoria" Cardinality="One" />
-      <Association Name="Convocatoria_Convocatoria" Member="Convocatoria1" ThisKey="id" OtherKey="id" Type="Convocatoria" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Movimiento" Member="Movimientos">

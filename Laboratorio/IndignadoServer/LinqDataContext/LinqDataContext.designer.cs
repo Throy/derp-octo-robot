@@ -133,10 +133,6 @@ namespace IndignadoServer.LinqDataContext
 		
 		private System.Nullable<int> _minQuorum;
 		
-		private EntityRef<Convocatoria> _Convocatoria2;
-		
-		private EntityRef<Convocatoria> _Convocatoria1;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -165,8 +161,6 @@ namespace IndignadoServer.LinqDataContext
 		
 		public Convocatoria()
 		{
-			this._Convocatoria2 = default(EntityRef<Convocatoria>);
-			this._Convocatoria1 = default(EntityRef<Convocatoria>);
 			OnCreated();
 		}
 		
@@ -181,10 +175,6 @@ namespace IndignadoServer.LinqDataContext
 			{
 				if ((this._id != value))
 				{
-					if (this._Convocatoria1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnidChanging(value);
 					this.SendPropertyChanging();
 					this._id = value;
@@ -370,69 +360,6 @@ namespace IndignadoServer.LinqDataContext
 					this._minQuorum = value;
 					this.SendPropertyChanged("minQuorum");
 					this.OnminQuorumChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convocatoria_Convocatoria", Storage="_Convocatoria2", ThisKey="id", OtherKey="id", IsUnique=true, IsForeignKey=false)]
-		public Convocatoria Convocatoria2
-		{
-			get
-			{
-				return this._Convocatoria2.Entity;
-			}
-			set
-			{
-				Convocatoria previousValue = this._Convocatoria2.Entity;
-				if (((previousValue != value) 
-							|| (this._Convocatoria2.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Convocatoria2.Entity = null;
-						previousValue.Convocatoria1 = null;
-					}
-					this._Convocatoria2.Entity = value;
-					if ((value != null))
-					{
-						value.Convocatoria1 = this;
-					}
-					this.SendPropertyChanged("Convocatoria2");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convocatoria_Convocatoria", Storage="_Convocatoria1", ThisKey="id", OtherKey="id", IsForeignKey=true)]
-		public Convocatoria Convocatoria1
-		{
-			get
-			{
-				return this._Convocatoria1.Entity;
-			}
-			set
-			{
-				Convocatoria previousValue = this._Convocatoria1.Entity;
-				if (((previousValue != value) 
-							|| (this._Convocatoria1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Convocatoria1.Entity = null;
-						previousValue.Convocatoria2 = null;
-					}
-					this._Convocatoria1.Entity = value;
-					if ((value != null))
-					{
-						value.Convocatoria2 = this;
-						this._id = value.id;
-					}
-					else
-					{
-						this._id = default(int);
-					}
-					this.SendPropertyChanged("Convocatoria1");
 				}
 			}
 		}

@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using IndignadoServer.LinqDataContext;
-using IndignadoServer.Classes;
 
 namespace IndignadoServer.Services
 {
@@ -84,13 +83,13 @@ namespace IndignadoServer.Services
 
     public class ClassToDT
     {
-        public static DTMeeting MeetingToDT (Meeting meeting)
+        public static DTMeeting MeetingToDT (Convocatoria meeting)
         {
             DTMeeting dtMeeting = new DTMeeting();
             dtMeeting.id = meeting.id;
-            dtMeeting.name = meeting.name;
-            dtMeeting.description = meeting.description;
-            dtMeeting.minQuorum = meeting.minQuorum;
+            dtMeeting.name = meeting.titulo;
+            dtMeeting.description = meeting.descripcion;
+            dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
             return dtMeeting;
         }
 
@@ -110,12 +109,12 @@ namespace IndignadoServer.Services
 
     public class DTToClass
     {
-        public static Meeting MeetingToDT (DTMeeting dtMeeting)
+        public static Convocatoria MeetingToDT (DTMeeting dtMeeting)
         {
-            Meeting meeting = new Meeting();
+            Convocatoria meeting = new Convocatoria();
             meeting.id = dtMeeting.id;
-            meeting.name = dtMeeting.name;
-            meeting.description = dtMeeting.description;
+            meeting.titulo = dtMeeting.name;
+            meeting.descripcion = dtMeeting.description;
             meeting.minQuorum = dtMeeting.minQuorum;
             return meeting;
         }

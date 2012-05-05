@@ -8,13 +8,6 @@
         <elementListCompartment Id="5de784be-992a-40e3-aeab-3f0f67239927" absoluteBounds="6.765, 2.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.45923076923077 : 4.48240397135417); (7.45923076923077 : 4.73240397135417); (8.05461538461539 : 4.73240397135417); (8.05461538461539 : 4.48240397135417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqDataContextDataContext/Convocatoria/Convocatoria_Convocatoria" />
-      <nodes>
-        <classShapeMoniker Id="7c8d74f8-8306-444f-9350-45c88e15e415" />
-        <classShapeMoniker Id="7c8d74f8-8306-444f-9350-45c88e15e415" />
-      </nodes>
-    </associationConnector>
     <classShape Id="69867ed7-12bb-4b7d-8068-d9d8f238d98f" absoluteBounds="1, 0.5, 2, 3.1170068359375">
       <DataClassMoniker Name="/LinqDataContextDataContext/Movimiento" />
       <nestedChildShapes>
