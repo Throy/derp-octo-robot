@@ -76,6 +76,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\SessionServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\TestServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -137,6 +142,13 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\MeetingsServiceReference\MeetingsService.wsdl" />
+    <None Include="Service References\SessionServiceReference\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SessionServiceReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SessionServiceReference\SessionService.wsdl" />
     <None Include="Service References\TestServiceReference\configuration91.svcinfo" />
     <None Include="Service References\TestServiceReference\configuration.svcinfo" />
     <None Include="Service References\TestServiceReference\Reference.svcmap">
@@ -147,6 +159,13 @@
     <None Include="Service References\MeetingsServiceReference\configuration91.svcinfo" />
     <None Include="Service References\MeetingsServiceReference\configuration.svcinfo" />
     <None Include="Service References\MeetingsServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SessionServiceReference\item.disco" />
+    <None Include="Service References\SessionServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\SessionServiceReference\configuration.svcinfo" />
+    <None Include="Service References\SessionServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -194,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\MeetingsServiceReference\" />
+    <WCFMetadataStorage Include="Service References\SessionServiceReference\" />
     <WCFMetadataStorage Include="Service References\TestServiceReference\" />
   </ItemGroup>
   <ItemGroup>

@@ -52,6 +52,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
@@ -61,6 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CustomUserNameValidator.cs" />
+    <Compile Include="Classes\UserOnlineInfo.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="LinqDataContext\LinqDataContext.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,6 +79,7 @@
     <Compile Include="Services\Controllers\MeetingsService.cs" />
     <Compile Include="Services\Controllers\MovAdmin.cs" />
     <Compile Include="Services\Controllers\ResorceService.cs" />
+    <Compile Include="Services\Controllers\SessionService.cs" />
     <Compile Include="Services\Controllers\SysAdminService.cs" />
     <Compile Include="Services\Controllers\UsersService.cs" />
     <Compile Include="ITestService.cs" />
@@ -84,6 +89,7 @@
     <Compile Include="Services\Interfaces\IMeetingsService.cs" />
     <Compile Include="Services\Interfaces\IMovAdmin.cs" />
     <Compile Include="Services\Interfaces\IResorceService.cs" />
+    <Compile Include="Services\Interfaces\ISessionService.cs" />
     <Compile Include="Services\Interfaces\ISysAdminService.cs" />
     <Compile Include="Services\Interfaces\IUsersService.cs" />
     <Compile Include="TestService.cs" />
@@ -128,10 +134,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\" />
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>

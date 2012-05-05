@@ -1,0 +1,85 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ServiceModel;
+using System.Security.Cryptography;
+using System.IdentityModel.Tokens;
+using System.ServiceModel.Security.Tokens;
+using IndignadoServer.LinqDataContext;
+using System.Data.Linq.Mapping;
+
+namespace IndignadoServer.Controllers
+{
+    class SessionController
+    {
+        private static SessionController _instance;
+        private Dictionary<int, UserOnlineInfo> _usersOnline;
+
+        public SessionController()
+        {
+            _usersOnline = new Dictionary<int, UserOnlineInfo>();
+        }
+
+        public static SessionController Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new SessionController();
+                return _instance;
+            }
+        }
+
+        public String Login(int idMovimiento, String userName, String password)
+        {
+            if (null == userName || null == password)
+            {
+                throw new ArgumentNullException();
+            }
+
+            // calculo el hash del password
+            HashAlgorithm sha = new SHA1CryptoServiceProvider();
+            byte[] passwordHash = sha.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
+
+            // busco el usuario en la base de datos
+            var db = new LinqDataContextDataContext();
+            var query = from u in db.Usuarios
+                       where u.idMovimiento == idMovimiento && 
+                             u.apodo == userName &&
+                             u.contraseña == passwordHash
+                       select u;
+
+            if (query.Count() == 0)
+            {
+                // si no lo encontro
+                throw new FaultException("Unknown Username or Incorrect Password");
+            }
+            
+            var user = query.SingleOrDefault();
+
+            // Create an array to store the key bytes keysize=1024
+            byte[] key = new byte[1024 / 8];
+            // Create some random bytes
+            RNGCryptoServiceProvider random = new RNGCryptoServiceProvider();
+            random.GetNonZeroBytes(key);
+
+            SecurityToken token = new BinarySecretSecurityToken(key);
+
+            _usersOnline[user.id] = new UserOnlineInfo(user.id, idMovimiento, token.Id);
+
+            return token.Id;
+        }
+
+        public bool ValidateToken(int idMovmiento, String token)
+        {
+            foreach (KeyValuePair<int, UserOnlineInfo> entry in _usersOnline)
+            {
+                if (entry.Value.Token == token && entry.Value.IdMovimiento == idMovmiento)
+                    return true;
+            }
+
+            return false;
+        }
+    }
+}

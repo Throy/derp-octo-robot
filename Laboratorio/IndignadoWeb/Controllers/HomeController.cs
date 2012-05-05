@@ -12,18 +12,32 @@ namespace IndignadoWeb.Controllers
     {
         public ActionResult Index()
         {
-            ChannelFactory<TestServiceReference.ITestService> scf;
-            scf = new ChannelFactory<TestServiceReference.ITestService>(
-                        new BasicHttpBinding(),
-                        "http://localhost:8730/IndignadoServer/TestService/");
+            if (HttpContext.Session["token"] != null)
+            {
+                var binding = new WSHttpBinding();
+                binding.Security.Mode = SecurityMode.Message;
+                binding.Security.Message.ClientCredentialType = MessageCredentialType.UserName;
+
+                ChannelFactory<TestServiceReference.ITestService> scf;
+                scf = new ChannelFactory<TestServiceReference.ITestService>(
+                            binding,
+                            "http://localhost:8730/IndignadoServer/TestService/");
 
 
-            TestServiceReference.ITestService serv;
-            serv = scf.CreateChannel();
+                scf.Credentials.UserName.UserName = "0"; // idMovimiento
+                scf.Credentials.UserName.Password = (HttpContext.Session["token"] == null) ? "invalid" : HttpContext.Session["token"].ToString();
 
-            ViewBag.Message = serv.Ping("Pancho");
+                TestServiceReference.ITestService serv;
+                serv = scf.CreateChannel();
 
-            (serv as ICommunicationObject).Close();
+                ViewBag.Message = serv.Ping("Pancho");
+
+                (serv as ICommunicationObject).Close();
+            }
+            else
+            {
+                ViewBag.Message = "Hola desconocido!";
+            }
 
             return View();
         }

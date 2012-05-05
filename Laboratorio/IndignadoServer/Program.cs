@@ -13,12 +13,14 @@ namespace IndignadoServer
         {
             ServiceHost _svcHostTest = null;
             ServiceHost _svcHostMeetings = null;
+            ServiceHost _svcHostSession = null;
             
             try
             {
                 Console.WriteLine("Starting Expense Host ...");
 
                 // load service hosts
+                _svcHostSession = LoadSessionService();
                 _svcHostTest = LoadTestService();
                 _svcHostMeetings = LoadMeetingsService();
 
@@ -34,6 +36,10 @@ namespace IndignadoServer
             finally
             {
                 // close service hosts
+                if (_svcHostSession != null)
+                {
+                    _svcHostSession.Close();
+                }
                 if (_svcHostTest != null)
                 {
                     _svcHostTest.Close();
@@ -43,6 +49,29 @@ namespace IndignadoServer
                     _svcHostMeetings.Close();
                 }
             }
+        }
+
+        private static ServiceHost LoadSessionService()
+        {
+            ServiceHost svcHost = null;
+            try
+            {
+                Console.Write("Loading Session Service ... ");
+
+                // Create Service Host.
+                svcHost = new ServiceHost(typeof(SessionService));
+                svcHost.Open();
+
+                Console.WriteLine("Done!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\nError at loading SessionService. ");
+                Console.WriteLine("Exception : " + ex.Message);
+                throw ex;
+            }
+
+            return svcHost;
         }
 
         // load test service
@@ -75,7 +104,7 @@ namespace IndignadoServer
             ServiceHost svcHost = null;
             try
             {
-                Console.Write("Loading Test Service ... ");
+                Console.Write("Loading Meetings Service ... ");
 
                 // Create Service Host.
                 svcHost = new ServiceHost(typeof(MeetingsService));

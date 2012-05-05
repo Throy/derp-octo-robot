@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using IndignadoWeb.Models;
+using System.ServiceModel;
 
 namespace IndignadoWeb.Controllers
 {
@@ -28,8 +29,36 @@ namespace IndignadoWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                var binding = new WSHttpBinding();
+                binding.Security.Mode = SecurityMode.Message;
+                binding.Security.Message.ClientCredentialType = MessageCredentialType.None;
+
+                ChannelFactory<SessionServiceReference.ISessionService> scf;
+                scf = new ChannelFactory<SessionServiceReference.ISessionService>(
+                            binding,
+                            "http://localhost:8730/IndignadoServer/SessionService/");
+
+
+                SessionServiceReference.ISessionService session;
+                session = scf.CreateChannel();
+
+                bool success = true;
+                String token = "";
+                int idMovimiento = 0;
+                try
                 {
+                    token = session.Login(idMovimiento, model.UserName, model.Password);
+                }
+                catch (FaultException e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                    success = false;
+                }
+
+                if (success)
+                {
+                    HttpContext.Session.Add("token", token);
+
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
@@ -40,10 +69,6 @@ namespace IndignadoWeb.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 }
             }
 
@@ -57,6 +82,8 @@ namespace IndignadoWeb.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
+
+            HttpContext.Session.Remove("token");
 
             return RedirectToAction("Index", "Home");
         }

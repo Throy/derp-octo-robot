@@ -36,22 +36,22 @@
       <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="idFacebook" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Usuario_UsuarioFacebook" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Usuario1_UsuarioFacebook" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Usuarios" Member="Usuarios">
     <Type Name="Usuario">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="idMovimiento" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="apodo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="mail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="contraseña" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="contraseña" Type="System.Data.Linq.Binary" DbType="VarBinary(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="geoUbicacion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="fechaRegistro" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="banned" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="privilegio" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Usuario_UsuarioFacebook" Member="UsuarioFacebooks" ThisKey="id" OtherKey="idUsuario" Type="UsuarioFacebook" />
+      <Column Name="privilegio" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Association Name="Usuario1_UsuarioFacebook" Member="UsuarioFacebooks" ThisKey="id" OtherKey="idUsuario" Type="UsuarioFacebook" />
     </Type>
   </Table>
 </Database>
