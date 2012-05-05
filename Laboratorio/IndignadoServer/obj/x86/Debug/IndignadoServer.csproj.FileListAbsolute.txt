@@ -1,1 +1,6 @@
 C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe.config
+C:\TSI\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe.config
+C:\TSI\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.exe
+C:\TSI\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.pdb
+C:\TSI\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe
+C:\TSI\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.pdb

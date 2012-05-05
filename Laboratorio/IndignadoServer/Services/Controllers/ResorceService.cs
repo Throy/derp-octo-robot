@@ -8,7 +8,7 @@ using System.Text;
 namespace IndignadoServer.Services
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ResorceService" in both code and config file together.
-    public class ResorceService : IResorceService
+    public class ResourceService : IResourceService
     {
         public void DoWork()
         {
