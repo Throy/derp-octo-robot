@@ -211,6 +211,7 @@
     <Content Include="Views\Home\MovementCreate.cshtml" />
     <Content Include="Views\Home\MovementsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMovement.cshtml" />
+    <Content Include="Views\Home\MeetingsMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

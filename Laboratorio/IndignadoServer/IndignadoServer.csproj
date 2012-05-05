@@ -71,19 +71,19 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Services\Controllers\ChatsService.cs" />
-    <Compile Include="Services\Controllers\MeetingsService.cs" />
-    <Compile Include="Services\Controllers\MovAdmin.cs" />
-    <Compile Include="Services\Controllers\ResorceService.cs" />
-    <Compile Include="Services\Controllers\SysAdminService.cs" />
-    <Compile Include="Services\Controllers\UsersService.cs" />
     <Compile Include="ITestService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Implementations\ChatsService.cs" />
+    <Compile Include="Services\Implementations\MeetingsService.cs" />
+    <Compile Include="Services\Implementations\MovAdminService.cs" />
+    <Compile Include="Services\Implementations\ResorceService.cs" />
+    <Compile Include="Services\Implementations\SysAdminService.cs" />
+    <Compile Include="Services\Implementations\UsersService.cs" />
     <Compile Include="Services\Interfaces\Datatypes.cs" />
     <Compile Include="Services\Interfaces\IChatsService.cs" />
     <Compile Include="Services\Interfaces\IMeetingsService.cs" />
-    <Compile Include="Services\Interfaces\IMovAdmin.cs" />
+    <Compile Include="Services\Interfaces\IMovAdminService.cs" />
     <Compile Include="Services\Interfaces\IResorceService.cs" />
     <Compile Include="Services\Interfaces\ISysAdminService.cs" />
     <Compile Include="Services\Interfaces\IUsersService.cs" />

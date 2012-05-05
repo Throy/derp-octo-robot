@@ -55,10 +55,10 @@ namespace IndignadoServer.Services
         public String description { get; set; }
 
         [DataMember]
-        public string locationLati { get; set; }
+        public double locationLati { get; set; }
 
         [DataMember]
-        public string locationLong { get; set; }
+        public double locationLong { get; set; }
 
         [DataMember]
         public String adminNick { get; set; }
@@ -103,8 +103,8 @@ namespace IndignadoServer.Services
             dtMovement.id = movement.id;
             dtMovement.name = movement.nombre;
             dtMovement.description = movement.descripcion;
-            dtMovement.locationLati = movement.latitud;
-            dtMovement.locationLong = movement.longitud;
+            dtMovement.locationLati = Double.Parse (movement.latitud);
+            dtMovement.locationLong = Double.Parse (movement.longitud);
             return dtMovement;
         }
     }
@@ -129,8 +129,8 @@ namespace IndignadoServer.Services
             Movimiento movement = new Movimiento();
             movement.nombre = dtMovement.name;
             movement.descripcion = dtMovement.description;
-            movement.latitud = dtMovement.locationLati;
-            movement.longitud = dtMovement.locationLong;
+            movement.latitud = dtMovement.locationLati.ToString();
+            movement.longitud = dtMovement.locationLong.ToString();
             return movement;
         }
     }

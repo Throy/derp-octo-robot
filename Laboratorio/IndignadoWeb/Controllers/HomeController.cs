@@ -129,7 +129,7 @@ namespace IndignadoWeb.Controllers
 
 
 
-        // shows all movements.
+        // shows all movements in a list.
         public ActionResult MovementsList()
         {
             // open service
@@ -150,6 +150,12 @@ namespace IndignadoWeb.Controllers
 
             // send the movements to the model.
             return View(movements);
+        }
+
+        // shows all movements in a map.
+        public ActionResult MeetingsMap()
+        {
+            return View();
         }
 
         // create movement.
