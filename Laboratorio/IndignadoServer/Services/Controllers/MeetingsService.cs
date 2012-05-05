@@ -18,19 +18,45 @@ namespace IndignadoServer.Services
         // ***************
 
         // returns a meeting
+        /*
         public DTMeeting getMeeting()
         {
+            // get meetings collection
             Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
-            if (meetingsCol.Count >= 1)
+
+            // get the first meeting of the collection
+            if (meetingsCol.Count > 0)
             {
                 return ClassToDT.MeetingToDT(meetingsCol [0]);
             }
+
+            // meeting not found
             else {
                 return null;
             }
         }
+         * */
 
-        // adds a meeting
+        // returns a meeting
+        public DTMeeting getMeeting (int index)
+        {
+            // get meetings collection
+            Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
+
+            // get the asked meeting of the collection
+            if (meetingsCol.Count > index)
+            {
+                return ClassToDT.MeetingToDT(meetingsCol[index]);
+            }
+
+            // meeting not found
+            else
+            {
+                return null;
+            }
+        }
+
+        // adds a meeting (berreta)
         public void addEmptyMeeting()
         {
             Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
@@ -38,10 +64,23 @@ namespace IndignadoServer.Services
             meetingsCol.Add (newMeeting);
         }
 
+        // creates a meeting
+        public void createMeeting (DTMeeting dtMeeting)
+        {
+            // get meetings collection
+            Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
+
+            // set new id (berreta)
+            dtMeeting.id = Persistence.getInstance().getMeetings().Count;
+
+            // add the new meeting to the collection
+            meetingsCol.Add (DTToClass.MeetingToDT (dtMeeting));
+        }
+
         // returns all meetings
         public DTMeetingsCol getMeetingsList()
         {
-            /*
+            /* berreta
             DTMeetingsCol newMeetings = new DTMeetingsCol();
             newMeetings.items = new Collection<DTMeeting>();
 
@@ -55,29 +94,21 @@ namespace IndignadoServer.Services
              * */
 
 
+            // get meetings collection
             Collection<Meeting> meetingsCol = Persistence.getInstance().getMeetings();
+
+            // create new meetings datatype collection
             DTMeetingsCol dtMeetingsCol = new DTMeetingsCol();
+
+            // add meetings datatypes to the collection
             dtMeetingsCol.items = new Collection<DTMeeting>();
             foreach (Meeting meeting in meetingsCol)
             {
                 dtMeetingsCol.items.Add (ClassToDT.MeetingToDT (meeting));
             }
+
+            // return the collection
             return dtMeetingsCol;
-        }
-
-        // ***************
-        // private methods
-        // ***************
-
-        // returns a meeting
-        private DTMeeting getMeeting(int index)
-        {
-            DTMeeting newMeeting = new DTMeeting();
-            newMeeting.id = index;
-            newMeeting.name = "Proteste ahora " + index + index;
-            newMeeting.description = "Es hora de protestar. No hay que esperar";
-            newMeeting.minQuorum = index * 6;
-            return newMeeting;
         }
     }
 }

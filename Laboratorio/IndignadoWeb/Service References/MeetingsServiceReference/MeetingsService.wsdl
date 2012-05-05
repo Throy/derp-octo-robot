@@ -19,6 +19,12 @@
   <wsdl:message name="IMeetingsService_addEmptyMeeting_OutputMessage">
     <wsdl:part name="parameters" element="tns:addEmptyMeetingResponse" />
   </wsdl:message>
+  <wsdl:message name="IMeetingsService_createMeeting_InputMessage">
+    <wsdl:part name="parameters" element="tns:createMeeting" />
+  </wsdl:message>
+  <wsdl:message name="IMeetingsService_createMeeting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:createMeetingResponse" />
+  </wsdl:message>
   <wsdl:message name="IMeetingsService_getMeetingsList_InputMessage">
     <wsdl:part name="parameters" element="tns:getMeetingsList" />
   </wsdl:message>
@@ -33,6 +39,10 @@
     <wsdl:operation name="addEmptyMeeting">
       <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/addEmptyMeeting" message="tns:IMeetingsService_addEmptyMeeting_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/addEmptyMeetingResponse" message="tns:IMeetingsService_addEmptyMeeting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="createMeeting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/createMeeting" message="tns:IMeetingsService_createMeeting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/createMeetingResponse" message="tns:IMeetingsService_createMeeting_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getMeetingsList">
       <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/getMeetingsList" message="tns:IMeetingsService_getMeetingsList_InputMessage" />
@@ -52,6 +62,15 @@
     </wsdl:operation>
     <wsdl:operation name="addEmptyMeeting">
       <soap:operation soapAction="http://tempuri.org/IMeetingsService/addEmptyMeeting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createMeeting">
+      <soap:operation soapAction="http://tempuri.org/IMeetingsService/createMeeting" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

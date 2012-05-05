@@ -3,7 +3,9 @@
   <xs:import schemaLocation="http://localhost:8730/IndignadoServer/MeetingsService/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" />
   <xs:element name="getMeeting">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="index" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="getMeetingResponse">
@@ -23,6 +25,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="createMeeting">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtMeeting" nillable="true" type="q2:DTMeeting" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="createMeetingResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="getMeetingsList">
     <xs:complexType>
       <xs:sequence />
@@ -31,7 +45,7 @@
   <xs:element name="getMeetingsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getMeetingsListResult" nillable="true" type="q2:DTMeetingsCol" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getMeetingsListResult" nillable="true" type="q3:DTMeetingsCol" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

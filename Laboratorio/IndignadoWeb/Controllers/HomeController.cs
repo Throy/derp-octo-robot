@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.ServiceModel;
 using IndignadoWeb.MeetingsServiceReference;
+using IndignadoWeb.Models;
 
 namespace IndignadoWeb.Controllers
 {
@@ -47,13 +48,13 @@ namespace IndignadoWeb.Controllers
             serv = scf.CreateChannel();
 
             // get meeting
-            DTMeeting meeting = serv.getMeeting();
+            DTMeeting meeting = serv.getMeeting(0);
 
             // close service
             (serv as ICommunicationObject).Close();
 
             // send the meeting to the model.
-            return View (meeting);
+            return View(meeting);
         }
 
         // shows all meetings.
@@ -76,33 +77,53 @@ namespace IndignadoWeb.Controllers
             (serv as ICommunicationObject).Close();
 
             // send the meetings to the model.
-            return View (meetings);
+            return View(meetings);
         }
 
-        // shows all meetings.
-        public ActionResult CreateMeeting()
+        // create meeting.
+        public ActionResult MeetingCreate()
         {
-            // open service
-            ChannelFactory<MeetingsServiceReference.IMeetingsService> scf;
-            scf = new ChannelFactory<MeetingsServiceReference.IMeetingsService>(
-                        new BasicHttpBinding(),
-                        "http://localhost:8730/IndignadoServer/MeetingsService/");
+            return View();
+        }
+
+        // create meeting.
+        [HttpPost]
+        public ActionResult MeetingCreate (CreateMeetingModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // open service
+                ChannelFactory<MeetingsServiceReference.IMeetingsService> scf;
+                scf = new ChannelFactory<MeetingsServiceReference.IMeetingsService>(
+                            new BasicHttpBinding(),
+                            "http://localhost:8730/IndignadoServer/MeetingsService/");
 
 
-            MeetingsServiceReference.IMeetingsService serv;
-            serv = scf.CreateChannel();
+                MeetingsServiceReference.IMeetingsService serv;
+                serv = scf.CreateChannel();
 
-            // create new meeting
-            serv.addEmptyMeeting();
+                // create new meeting
+                //serv.addEmptyMeeting();
 
-            // get all meetings
-            DTMeetingsCol meetings = serv.getMeetingsList();
+                DTMeeting dtMeeting = new DTMeeting();
+                dtMeeting.id = -1;
+                dtMeeting.name = model.name;
+                dtMeeting.description = model.description;
+                dtMeeting.minQuorum = model.minQuorum;
+                serv.createMeeting(dtMeeting);
 
-            // close service
-            (serv as ICommunicationObject).Close();
+                // get all meetings
+                DTMeetingsCol meetings = serv.getMeetingsList();
 
-            // send the meetings to the model.
-            return View("MeetingsList", meetings);
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the meetings to the model.
+                return View ("MeetingsList", meetings);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View (model);
         }
     }
 }

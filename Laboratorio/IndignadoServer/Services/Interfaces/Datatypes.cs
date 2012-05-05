@@ -30,7 +30,7 @@ namespace IndignadoServer.Services
         public int minQuorum { get; set; }
     }
 
-    // Meetings datatype
+    // Meeting COllection datatype
     [DataContract]
     public class DTMeetingsCol
     {
@@ -52,6 +52,19 @@ namespace IndignadoServer.Services
             dtMeeting.description = meeting.description;
             dtMeeting.minQuorum = meeting.minQuorum;
             return dtMeeting;
+        }
+    }
+
+    public class DTToClass
+    {
+        public static Meeting MeetingToDT (DTMeeting dtMeeting)
+        {
+            Meeting meeting = new Meeting();
+            meeting.id = dtMeeting.id;
+            meeting.name = dtMeeting.name;
+            meeting.description = dtMeeting.description;
+            meeting.minQuorum = dtMeeting.minQuorum;
+            return meeting;
         }
     }
 

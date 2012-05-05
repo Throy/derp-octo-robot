@@ -70,6 +70,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\MeetingsModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\MeetingsServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -182,6 +183,7 @@
     <Content Include="Views\Home\MeetingDetails.cshtml" />
     <Content Include="Views\Home\MeetingsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMeeting.cshtml" />
+    <Content Include="Views\Home\MeetingCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
