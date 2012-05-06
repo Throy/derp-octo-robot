@@ -51,22 +51,6 @@ namespace IndignadoServer
             { 
                 return false; 
             } 
-   
-            /*// Get the current identity 
-            IIdentity currentIdentity = 
-                identities.Find( 
-                    identityMatch => 
-                    identityMatch is GenericIdentity 
-                    && String.Equals(identityMatch.Name, UserName, StringComparison.OrdinalIgnoreCase)); 
-   
-            // Check if an identity was found 
-            if (currentIdentity == null) 
-            { 
-                return false; 
-            }*/
-
-
-            //Password == "guest";
 
             GenericIdentity newIdentity;
             String[] roles = new string[] { };

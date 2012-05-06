@@ -44,19 +44,21 @@ namespace IndignadoServer.Controllers
 
             // busco el usuario en la base de datos
             var db = new LinqDataContextDataContext();
+            var user = db.Usuarios.SingleOrDefault(u => u.idMovimiento == idMovimiento &&
+                                          u.apodo == userName &&
+                                          u.contraseña == passwordHash);
+            /*
             var query = from u in db.Usuarios
-                       where u.idMovimiento == idMovimiento && 
-                             u.apodo == userName &&
-                             u.contraseña == passwordHash
-                       select u;
-
-            if (query.Count() == 0)
+                        where u.idMovimiento == idMovimiento && 
+                              u.apodo == userName &&
+                              u.contraseña == passwordHash
+                        select u;
+            */
+            if (user == null)
             {
                 // si no lo encontro
                 throw new FaultException("Unknown Username or Incorrect Password");
             }
-            
-            var user = query.SingleOrDefault();
 
             // Create an array to store the key bytes keysize=1024
             byte[] key = new byte[1024 / 8];

@@ -10,7 +10,7 @@ namespace IndignadoWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(String movimiento)
         {
             var binding = new WSHttpBinding();
             binding.Security.Mode = SecurityMode.Message;
@@ -34,12 +34,14 @@ namespace IndignadoWeb.Controllers
             }
             else
             {
-                ViewBag.Message = serv.PingPublic("DonNadie");
+                ViewBag.Message = serv.PingUsers("DonNadie");
             }
             
             (serv as ICommunicationObject).Close();
 
-            return View();
+            ViewBag.Movimiento = movimiento;
+
+            return View("Index", "~/Views/Shared/_Layout2.cshtml");
         }
 
         public ActionResult About()

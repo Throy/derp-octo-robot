@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using IndignadoWeb.Common;
 
 namespace IndignadoWeb
 {
@@ -21,11 +22,17 @@ namespace IndignadoWeb
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.Add("DomainRoute", new DomainRoute(
+                       "{movimiento}.indignado.local",     // Domain with parameters 
+                       "{controller}/{action}/{id}",    // URL with parameters 
+                       new { movimiento = "default", controller = "Home", action = "Index", id = "" }  // Parameter defaults 
+                    ));
+            /*
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
+            );*/
 
         }
 
