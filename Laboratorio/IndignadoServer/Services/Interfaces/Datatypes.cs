@@ -30,6 +30,12 @@ namespace IndignadoServer.Services
         public String description { get; set; }
 
         [DataMember]
+        public double locationLati { get; set; }
+
+        [DataMember]
+        public double locationLong { get; set; }
+
+        [DataMember]
         public int minQuorum { get; set; }
     }
 
@@ -93,6 +99,10 @@ namespace IndignadoServer.Services
             dtMeeting.idMovement = meeting.idMovimiento;
             dtMeeting.name = meeting.titulo;
             dtMeeting.description = meeting.descripcion;
+            // *** ARREGLAR las coordenadas de la base de datos. ***
+            Random random = new Random();
+            dtMeeting.locationLati = Double.Parse(meeting.geoUbicacion) + random.NextDouble();
+            dtMeeting.locationLong = Double.Parse(meeting.geoUbicacion) + random.NextDouble();
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
             return dtMeeting;
         }
@@ -103,8 +113,8 @@ namespace IndignadoServer.Services
             dtMovement.id = movement.id;
             dtMovement.name = movement.nombre;
             dtMovement.description = movement.descripcion;
-            dtMovement.locationLati = Double.Parse (movement.latitud);
-            dtMovement.locationLong = Double.Parse (movement.longitud);
+            dtMovement.locationLati = Double.Parse(movement.latitud);
+            dtMovement.locationLong = Double.Parse(movement.longitud);
             return dtMovement;
         }
     }
@@ -113,18 +123,21 @@ namespace IndignadoServer.Services
 
     public class DTToClass
     {
-        public static Convocatoria MeetingToDT (DTMeeting dtMeeting)
+        public static Convocatoria DTToMeeting (DTMeeting dtMeeting)
         {
             Convocatoria meeting = new Convocatoria();
             meeting.id = dtMeeting.id;
             meeting.idMovimiento = dtMeeting.idMovement;
             meeting.titulo = dtMeeting.name;
             meeting.descripcion = dtMeeting.description;
+            // *** ARREGLAR las coordenadas de la base de datos. ***
+            meeting.geoUbicacion = dtMeeting.locationLati.ToString();
+            meeting.geoUbicacion = dtMeeting.locationLong.ToString();
             meeting.minQuorum = dtMeeting.minQuorum;
             return meeting;
         }
 
-        public static Movimiento MovementToDT(DTMovement dtMovement)
+        public static Movimiento DTToMovement(DTMovement dtMovement)
         {
             Movimiento movement = new Movimiento();
             movement.nombre = dtMovement.name;

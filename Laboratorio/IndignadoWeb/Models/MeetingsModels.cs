@@ -20,6 +20,14 @@ namespace IndignadoWeb.Models
         public String description { get; set; }
 
         [Required]
+        [Display(Name = "Location - Latitude: ")]
+        public double locationLati { get; set; }
+
+        [Required]
+        [Display(Name = "Location - Longitude: ")]
+        public double locationLong { get; set; }
+
+        [Required]
         [Display(Name = "Minimum quorum: ")]
         public int minQuorum { get; set; }
     }

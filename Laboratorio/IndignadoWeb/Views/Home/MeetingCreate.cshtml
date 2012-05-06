@@ -36,6 +36,22 @@
             </div>
 
             <div class="editor-label">
+                @Html.LabelFor(m => m.locationLati)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.locationLati)
+                @Html.ValidationMessageFor(m => m.locationLati)
+            </div>
+            
+            <div class="editor-label">
+                @Html.LabelFor(m => m.locationLong)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.locationLong)
+                @Html.ValidationMessageFor(m => m.locationLong)
+            </div>
+
+            <div class="editor-label">
                 @Html.LabelFor(m => m.minQuorum)
             </div>
             <div class="editor-field">

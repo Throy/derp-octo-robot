@@ -23,12 +23,16 @@
         var map = new google.maps.Map(document.getElementById("map_canvas"),
         myOptions);
 
-        for (var idx = 0; idx < 10; idx += 1) {
+        
+        @foreach (var item in Model.items)
+        {
+        <text>
             var marker = new google.maps.Marker({
                 map: map,
-                position: new google.maps.LatLng(-32.9 + Math.random(), -56.1 + Math.random()),
-                title: "Hello World!"
+                position: new google.maps.LatLng(-33.5 + Math.random(), -56.6 + Math.random()),
+                title: "Hello World"
             });
+        </text>
         }
     }
 </script>

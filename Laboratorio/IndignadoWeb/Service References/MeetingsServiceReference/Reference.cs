@@ -32,6 +32,12 @@ namespace IndignadoWeb.MeetingsServiceReference {
         private int idMovementField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double locationLatiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double locationLongField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int minQuorumField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -82,6 +88,32 @@ namespace IndignadoWeb.MeetingsServiceReference {
                 if ((this.idMovementField.Equals(value) != true)) {
                     this.idMovementField = value;
                     this.RaisePropertyChanged("idMovement");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double locationLati {
+            get {
+                return this.locationLatiField;
+            }
+            set {
+                if ((this.locationLatiField.Equals(value) != true)) {
+                    this.locationLatiField = value;
+                    this.RaisePropertyChanged("locationLati");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double locationLong {
+            get {
+                return this.locationLongField;
+            }
+            set {
+                if ((this.locationLongField.Equals(value) != true)) {
+                    this.locationLongField = value;
+                    this.RaisePropertyChanged("locationLong");
                 }
             }
         }

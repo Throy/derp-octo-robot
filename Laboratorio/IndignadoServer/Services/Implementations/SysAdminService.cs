@@ -17,7 +17,7 @@ namespace IndignadoServer.Services
         public void createMovement (DTMovement dtMovement)
         {
             LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
-            Movimiento nuevo = DTToClass.MovementToDT(dtMovement);
+            Movimiento nuevo = DTToClass.DTToMovement(dtMovement);
             nuevo.id = indignadoContext.Movimientos.Count();
             indignadoContext.Movimientos.InsertOnSubmit(nuevo);
             indignadoContext.SubmitChanges();

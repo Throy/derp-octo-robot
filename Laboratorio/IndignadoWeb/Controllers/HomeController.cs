@@ -81,6 +81,29 @@ namespace IndignadoWeb.Controllers
             return View(meetings);
         }
 
+        // shows all movements in a map.
+        public ActionResult MeetingsMap()
+        {
+            // open service
+            ChannelFactory<MeetingsServiceReference.IMeetingsService> scf;
+            scf = new ChannelFactory<MeetingsServiceReference.IMeetingsService>(
+                        new BasicHttpBinding(),
+                        "http://localhost:8730/IndignadoServer/MeetingsService/");
+
+
+            MeetingsServiceReference.IMeetingsService serv;
+            serv = scf.CreateChannel();
+
+            // get all meetings
+            DTMeetingsCol meetings = serv.getMeetingsList();
+
+            // close service
+            (serv as ICommunicationObject).Close();
+
+            // send the meetings to the model.
+            return View(meetings);
+        }
+
         // create meeting.
         public ActionResult MeetingCreate()
         {
@@ -150,12 +173,6 @@ namespace IndignadoWeb.Controllers
 
             // send the movements to the model.
             return View(movements);
-        }
-
-        // shows all movements in a map.
-        public ActionResult MeetingsMap()
-        {
-            return View();
         }
 
         // create movement.

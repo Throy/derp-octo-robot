@@ -46,7 +46,7 @@ namespace IndignadoServer.Services
             dtMeeting.id = indignadoContext.Convocatorias.Count();
             dtMeeting.idMovement = 666;
 
-            indignadoContext.Convocatorias.InsertOnSubmit(DTToClass.MeetingToDT(dtMeeting));
+            indignadoContext.Convocatorias.InsertOnSubmit(DTToClass.DTToMeeting(dtMeeting));
             indignadoContext.SubmitChanges();
         }
 
