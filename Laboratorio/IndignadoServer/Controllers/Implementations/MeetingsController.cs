@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using IndignadoServer.LinqDataContext;
+using System.Collections.Generic;
 
 namespace IndignadoServer.Controllers
 {
@@ -46,19 +47,16 @@ namespace IndignadoServer.Controllers
         // returns all meetings
         public Collection<Convocatoria> getMeetingsList()
         {
-            // create new meetings collection
-            Collection<Convocatoria> meetingsCol = new Collection<Convocatoria>();
-
-            LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
-
             // only get meetings from this movement.
             int idMovement = 666;
-            foreach (Convocatoria meeting in indignadoContext.Convocatorias)
+
+            LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
+            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>("SELECT id, idMovimiento, titulo, descripcion, geoUbicacion, minQuorum FROM Convocatorias WHERE idMovimiento = {0}", idMovement);
+
+            Collection<Convocatoria> meetingsCol = new Collection<Convocatoria>();
+            foreach (Convocatoria meeting in meetingsEnum)
             {
-                if (meeting.idMovimiento == idMovement)
-                {
-                    meetingsCol.Add(meeting);
-                }
+                meetingsCol.Add (meeting);
             }
 
             // return the collection
