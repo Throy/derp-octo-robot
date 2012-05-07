@@ -140,6 +140,7 @@ namespace IndignadoServer.Services
         public static Movimiento DTToMovement(DTMovement dtMovement)
         {
             Movimiento movement = new Movimiento();
+            movement.id = dtMovement.id;
             movement.nombre = dtMovement.name;
             movement.descripcion = dtMovement.description;
             movement.latitud = dtMovement.locationLati.ToString();

@@ -13,12 +13,6 @@
   <wsdl:message name="ISysAdminService_createMovement_OutputMessage">
     <wsdl:part name="parameters" element="tns:createMovementResponse" />
   </wsdl:message>
-  <wsdl:message name="ISysAdminService_setMovement_InputMessage">
-    <wsdl:part name="parameters" element="tns:setMovement" />
-  </wsdl:message>
-  <wsdl:message name="ISysAdminService_setMovement_OutputMessage">
-    <wsdl:part name="parameters" element="tns:setMovementResponse" />
-  </wsdl:message>
   <wsdl:message name="ISysAdminService_getMovementsList_InputMessage">
     <wsdl:part name="parameters" element="tns:getMovementsList" />
   </wsdl:message>
@@ -42,10 +36,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISysAdminService/createMovement" message="tns:ISysAdminService_createMovement_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISysAdminService/createMovementResponse" message="tns:ISysAdminService_createMovement_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="setMovement">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISysAdminService/setMovement" message="tns:ISysAdminService_setMovement_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISysAdminService/setMovementResponse" message="tns:ISysAdminService_setMovement_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="getMovementsList">
       <wsdl:input wsaw:Action="http://tempuri.org/ISysAdminService/getMovementsList" message="tns:ISysAdminService_getMovementsList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISysAdminService/getMovementsListResponse" message="tns:ISysAdminService_getMovementsList_OutputMessage" />
@@ -63,15 +53,6 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="createMovement">
       <soap:operation soapAction="http://tempuri.org/ISysAdminService/createMovement" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="setMovement">
-      <soap:operation soapAction="http://tempuri.org/ISysAdminService/setMovement" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

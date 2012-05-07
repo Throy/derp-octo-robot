@@ -9,7 +9,7 @@ namespace IndignadoWeb.Models
 {
     // model for Create movement
 
-    public class CreateMovementModel
+    public class SingleMovementModel
     {
         [Required]
         [Display(Name = "Name: ")]

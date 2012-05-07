@@ -13,16 +13,6 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="setMovement">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="setMovementResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="getMovementsList">
     <xs:complexType>
       <xs:sequence />

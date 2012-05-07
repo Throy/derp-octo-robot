@@ -78,6 +78,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\MovAdminServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SysAdminServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -144,6 +149,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\MeetingsServiceReference\MeetingsService.wsdl" />
+    <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTMovement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MovAdminServiceReference\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MovAdminServiceReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MovAdminServiceReference\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MovAdminServiceReference\MovAdminService.wsdl" />
     <None Include="Service References\SysAdminServiceReference\IndignadoServer.Services.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -173,6 +191,13 @@
     <None Include="Service References\SysAdminServiceReference\configuration91.svcinfo" />
     <None Include="Service References\SysAdminServiceReference\configuration.svcinfo" />
     <None Include="Service References\SysAdminServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\MovAdminServiceReference\item.disco" />
+    <None Include="Service References\MovAdminServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\MovAdminServiceReference\configuration.svcinfo" />
+    <None Include="Service References\MovAdminServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -214,6 +239,7 @@
     <Content Include="Views\Home\MovementsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMovement.cshtml" />
     <Content Include="Views\Home\MeetingsMap.cshtml" />
+    <Content Include="Views\Home\MovementConfig.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -226,6 +252,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\MeetingsServiceReference\" />
+    <WCFMetadataStorage Include="Service References\MovAdminServiceReference\" />
     <WCFMetadataStorage Include="Service References\SysAdminServiceReference\" />
     <WCFMetadataStorage Include="Service References\TestServiceReference\" />
   </ItemGroup>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.ServiceModel;
 using IndignadoWeb.MeetingsServiceReference;
+using IndignadoWeb.MovAdminServiceReference;
 using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.Models;
 
@@ -127,8 +128,6 @@ namespace IndignadoWeb.Controllers
                 serv = scf.CreateChannel();
 
                 // create new meeting
-                //serv.addEmptyMeeting();
-
                 DTMeeting dtMeeting = new DTMeeting();
                 dtMeeting.id = -1;
                 dtMeeting.name = model.name;
@@ -183,7 +182,7 @@ namespace IndignadoWeb.Controllers
 
         // create movement.
         [HttpPost]
-        public ActionResult MovementCreate (CreateMovementModel model)
+        public ActionResult MovementCreate (SingleMovementModel model)
         {
             if (ModelState.IsValid)
             {
@@ -200,7 +199,7 @@ namespace IndignadoWeb.Controllers
                 // create new movement
                 //serv.addEmptyMovement();
 
-                DTMovement dtMovement = new DTMovement();
+                IndignadoWeb.SysAdminServiceReference.DTMovement dtMovement = new IndignadoWeb.SysAdminServiceReference.DTMovement();
                 dtMovement.id = -1;
                 dtMovement.name = model.name;
                 dtMovement.description = model.description;
@@ -216,6 +215,91 @@ namespace IndignadoWeb.Controllers
 
                 // close service
                 (serv as ICommunicationObject).Close();
+
+                // send the movements to the model.
+                return View("MovementsList", movements);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        // configure movement.
+        public ActionResult MovementConfig()
+        {
+            // open service
+            ChannelFactory<MovAdminServiceReference.IMovAdminService> scf;
+            scf = new ChannelFactory<MovAdminServiceReference.IMovAdminService>(
+                        new BasicHttpBinding(),
+                        "http://localhost:8730/IndignadoServer/MovAdminService/");
+
+
+            MovAdminServiceReference.IMovAdminService serv;
+            serv = scf.CreateChannel();
+
+            // get movement
+            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv.getMovement(0);
+
+            // close service
+            (serv as ICommunicationObject).Close();
+
+            // send the meeting to the model.
+            SingleMovementModel model = new SingleMovementModel();
+            model.name = movement.name;
+            model.description = movement.description;
+            model.locationLati = movement.locationLati;
+            model.locationLong = movement.locationLong;
+            model.adminNick = movement.adminMail;
+            model.adminPassword = movement.adminPassword;
+            model.adminMail = movement.adminMail;
+            return View(model);
+        }
+
+        // configure  movement.
+        [HttpPost]
+        public ActionResult MovementConfig(SingleMovementModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // open service
+                ChannelFactory<MovAdminServiceReference.IMovAdminService> scf;
+                scf = new ChannelFactory<MovAdminServiceReference.IMovAdminService>(
+                            new BasicHttpBinding(),
+                            "http://localhost:8730/IndignadoServer/MovAdminService/");
+
+
+                MovAdminServiceReference.IMovAdminService serv;
+                serv = scf.CreateChannel();
+
+                // create new movement
+                //serv.addEmptyMovement();
+
+                IndignadoWeb.MovAdminServiceReference.DTMovement dtMovement = new IndignadoWeb.MovAdminServiceReference.DTMovement();
+                dtMovement.id = -1;
+                dtMovement.name = model.name;
+                dtMovement.description = model.description;
+                dtMovement.locationLati = model.locationLati;
+                dtMovement.locationLong = model.locationLong;
+                dtMovement.adminNick = model.adminNick;
+                dtMovement.adminPassword = model.adminPassword;
+                dtMovement.adminMail = model.adminMail;
+                serv.setMovement(dtMovement);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // open service
+                ChannelFactory<SysAdminServiceReference.ISysAdminService> scf2;
+                scf2 = new ChannelFactory<SysAdminServiceReference.ISysAdminService>(
+                            new BasicHttpBinding(),
+                            "http://localhost:8730/IndignadoServer/SysAdminService/");
+
+
+                SysAdminServiceReference.ISysAdminService serv2;
+                serv2 = scf2.CreateChannel();
+
+                // get all movements
+                DTMovementsCol movements = serv2.getMovementsList();
 
                 // send the movements to the model.
                 return View("MovementsList", movements);

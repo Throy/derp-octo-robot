@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
+﻿using System.ServiceModel;
 
 namespace IndignadoServer.Services
 {
@@ -12,14 +7,11 @@ namespace IndignadoServer.Services
     [ServiceContract]
     public interface ISysAdminService
     {
-        // creates a meeting
+        // creates a movement.
         [OperationContract]
         void createMovement (DTMovement dtMovement);
-
-        [OperationContract]
-        void setMovement();
         
-        // returns all movements
+        // returns all movements.
         [OperationContract]
         DTMovementsCol getMovementsList();
 

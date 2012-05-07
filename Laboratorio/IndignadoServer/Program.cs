@@ -14,6 +14,7 @@ namespace IndignadoServer
         {
             ServiceHost _svcHostTest = null;
             ServiceHost _svcHostMeetings = null;
+            ServiceHost _svcHostMovAdmin = null;
             ServiceHost _svcHostSysAdmin = null;
             
             try
@@ -23,6 +24,7 @@ namespace IndignadoServer
                 // open service hosts
                 _svcHostTest = LoadTestService();
                 _svcHostMeetings = LoadMeetingsService();
+                _svcHostMovAdmin = LoadMovAdminService();
                 _svcHostSysAdmin = LoadSysAdminService();
 
                 // work!
@@ -96,6 +98,31 @@ namespace IndignadoServer
             catch (Exception ex)
             {
                 Console.WriteLine("\nError at loading MeetingsService. ");
+                Console.WriteLine("Exception : " + ex.Message);
+                throw ex;
+            }
+
+            return svcHost;
+        }
+
+
+        // load movadmin service
+        private static ServiceHost LoadMovAdminService()
+        {
+            ServiceHost svcHost = null;
+            try
+            {
+                Console.Write("Loading MovAdminService ... ");
+
+                // Create Service Host.
+                svcHost = new ServiceHost(typeof(MovAdminService));
+                svcHost.Open();
+
+                Console.WriteLine("Done!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\nError at loading MovAdminService. ");
                 Console.WriteLine("Exception : " + ex.Message);
                 throw ex;
             }

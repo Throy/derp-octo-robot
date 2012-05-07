@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
+using IndignadoServer.Controllers;
 using IndignadoServer.LinqDataContext;
 
 namespace IndignadoServer.Services
@@ -12,36 +7,30 @@ namespace IndignadoServer.Services
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "SysAdminService" in both code and config file together.
     public class SysAdminService : ISysAdminService
     {
-
-        
+        // creates a movement.
         public void createMovement (DTMovement dtMovement)
         {
-            LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
-            Movimiento nuevo = DTToClass.DTToMovement(dtMovement);
-            nuevo.id = indignadoContext.Movimientos.Count();
-            indignadoContext.Movimientos.InsertOnSubmit(nuevo);
-            indignadoContext.SubmitChanges();
+            ControllersHub.getInstance().getISysAdminController().createMovement(DTToClass.DTToMovement(dtMovement));
         }
 
-        public void setMovement(){}
-
-
-        // returns all movements
+        // returns all movements.
         public DTMovementsCol getMovementsList()
         {
-            // create new movements datatype collection
-            DTMovementsCol dtMovementsCol = new DTMovementsCol();
-            dtMovementsCol.items = new Collection<DTMovement>();
+            // create new meetings datatype collection
+            DTMovementsCol dtMovementCol = new DTMovementsCol();
+            dtMovementCol.items = new Collection<DTMovement>();
 
-            LinqDataContextDataContext indignadoContext = new LinqDataContextDataContext();
+            // get meetings from the controller
+            Collection<Movimiento> meetingsCol = ControllersHub.getInstance().getISysAdminController().getMovementsList();
 
-            foreach (Movimiento movement in indignadoContext.Movimientos)
+            // add meetings to the datatype collection
+            foreach (Movimiento movement in meetingsCol)
             {
-                dtMovementsCol.items.Add (ClassToDT.MovementToDT(movement));
+                dtMovementCol.items.Add (ClassToDT.MovementToDT(movement));
             }
 
             // return the collection
-            return dtMovementsCol;
+            return dtMovementCol;
         }
 
         public void enableMovement(){}

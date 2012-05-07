@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IndignadoWeb.SysAdminServiceReference {
+namespace IndignadoWeb.MovAdminServiceReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -170,109 +170,50 @@ namespace IndignadoWeb.SysAdminServiceReference {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DTMovementsCol", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
-    [System.SerializableAttribute()]
-    public partial class DTMovementsCol : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MovAdminServiceReference.IMovAdminService")]
+    public interface IMovAdminService {
         
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getMovement", ReplyAction="http://tempuri.org/IMovAdminService/getMovementResponse")]
+        IndignadoWeb.MovAdminServiceReference.DTMovement getMovement(int idMovement);
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private IndignadoWeb.SysAdminServiceReference.DTMovement[] itemsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public IndignadoWeb.SysAdminServiceReference.DTMovement[] items {
-            get {
-                return this.itemsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
-                    this.itemsField = value;
-                    this.RaisePropertyChanged("items");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/setMovement", ReplyAction="http://tempuri.org/IMovAdminService/setMovementResponse")]
+        void setMovement(IndignadoWeb.MovAdminServiceReference.DTMovement dtMovement);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SysAdminServiceReference.ISysAdminService")]
-    public interface ISysAdminService {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISysAdminService/createMovement", ReplyAction="http://tempuri.org/ISysAdminService/createMovementResponse")]
-        void createMovement(IndignadoWeb.SysAdminServiceReference.DTMovement dtMovement);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISysAdminService/getMovementsList", ReplyAction="http://tempuri.org/ISysAdminService/getMovementsListResponse")]
-        IndignadoWeb.SysAdminServiceReference.DTMovementsCol getMovementsList();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISysAdminService/enableMovement", ReplyAction="http://tempuri.org/ISysAdminService/enableMovementResponse")]
-        void enableMovement();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISysAdminService/disableMovement", ReplyAction="http://tempuri.org/ISysAdminService/disableMovementResponse")]
-        void disableMovement();
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISysAdminServiceChannel : IndignadoWeb.SysAdminServiceReference.ISysAdminService, System.ServiceModel.IClientChannel {
+    public interface IMovAdminServiceChannel : IndignadoWeb.MovAdminServiceReference.IMovAdminService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SysAdminServiceClient : System.ServiceModel.ClientBase<IndignadoWeb.SysAdminServiceReference.ISysAdminService>, IndignadoWeb.SysAdminServiceReference.ISysAdminService {
+    public partial class MovAdminServiceClient : System.ServiceModel.ClientBase<IndignadoWeb.MovAdminServiceReference.IMovAdminService>, IndignadoWeb.MovAdminServiceReference.IMovAdminService {
         
-        public SysAdminServiceClient() {
+        public MovAdminServiceClient() {
         }
         
-        public SysAdminServiceClient(string endpointConfigurationName) : 
+        public MovAdminServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public SysAdminServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public MovAdminServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SysAdminServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public MovAdminServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SysAdminServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public MovAdminServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public void createMovement(IndignadoWeb.SysAdminServiceReference.DTMovement dtMovement) {
-            base.Channel.createMovement(dtMovement);
+        public IndignadoWeb.MovAdminServiceReference.DTMovement getMovement(int idMovement) {
+            return base.Channel.getMovement(idMovement);
         }
         
-        public IndignadoWeb.SysAdminServiceReference.DTMovementsCol getMovementsList() {
-            return base.Channel.getMovementsList();
-        }
-        
-        public void enableMovement() {
-            base.Channel.enableMovement();
-        }
-        
-        public void disableMovement() {
-            base.Channel.disableMovement();
+        public void setMovement(IndignadoWeb.MovAdminServiceReference.DTMovement dtMovement) {
+            base.Channel.setMovement(dtMovement);
         }
     }
 }
