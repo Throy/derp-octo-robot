@@ -1,0 +1,47 @@
+﻿<!-- model -->
+@model IndignadoWeb.MeetingsServiceReference.DTMeetingsCol
+
+<!-- page title -->
+@{
+    ViewBag.Title = "Indignado Framework - Meetings map";
+}
+
+<!-- scripts -->
+
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDMxElmlzDp8EFWG0el5fZxRrRzN3E3NRU&sensor=false">
+</script>
+
+<script type="text/javascript">
+    function googleMapsInitialize() {
+        // initialize map
+        var myOptions = {
+            center: new google.maps.LatLng(-32.8, -56),
+            zoom: 6,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+
+        
+        @foreach (var item in Model.items)
+        {
+        <text>
+            var marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(-33.5 + Math.random(), -56.6 + Math.random()),
+                title: "Hello World"
+            });
+        </text>
+        }
+    }
+</script>
+
+<!-- page content -->
+
+<h2>Meetings map</h2>
+
+<div id="map_canvas" style="width: 400px; height:300px"></div>
+
+<script type="text/javascript">googleMapsInitialize();</script>
+

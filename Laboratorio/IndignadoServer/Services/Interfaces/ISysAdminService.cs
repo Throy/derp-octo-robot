@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
+﻿using System.ServiceModel;
 
 namespace IndignadoServer.Services
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ISysAdminService" in both code and config file together.
+    // ISysAdminService defines all the services of the SysAdmin subsystem.
+
     [ServiceContract]
     public interface ISysAdminService
     {
+        // creates a movement.
         [OperationContract]
-        void createMovement();
-
+        void createMovement (DTMovement dtMovement);
+        
+        // returns all movements.
         [OperationContract]
-        void setMovement();
+        DTMovementsCol getMovementsList();
 
         [OperationContract]
         void enableMovement();

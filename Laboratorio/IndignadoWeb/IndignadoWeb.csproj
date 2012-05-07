@@ -74,13 +74,25 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\MovementsModels.cs" />
+    <Compile Include="Models\MeetingsModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\MeetingsServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\MovAdminServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SessionServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SysAdminServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -146,6 +158,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\MeetingsServiceReference\MeetingsService.wsdl" />
+    <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTMovement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MovAdminServiceReference\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MovAdminServiceReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MovAdminServiceReference\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MovAdminServiceReference\MovAdminService.wsdl" />
     <None Include="Service References\SessionServiceReference\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -153,9 +178,29 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SessionServiceReference\SessionService.wsdl" />
+    <None Include="Service References\SysAdminServiceReference\IndignadoWeb.SysAdminServiceReference.DTMovementsCol.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SysAdminServiceReference\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SysAdminServiceReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SysAdminServiceReference\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SysAdminServiceReference\SysAdminService.wsdl" />
     <None Include="Service References\TestServiceReference\configuration91.svcinfo" />
     <None Include="Service References\TestServiceReference\configuration.svcinfo" />
     <None Include="Service References\TestServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SessionServiceReference\item.disco" />
+    <None Include="Service References\SessionServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\SessionServiceReference\configuration.svcinfo" />
+    <None Include="Service References\SessionServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -166,10 +211,17 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\SessionServiceReference\item.disco" />
-    <None Include="Service References\SessionServiceReference\configuration91.svcinfo" />
-    <None Include="Service References\SessionServiceReference\configuration.svcinfo" />
-    <None Include="Service References\SessionServiceReference\Reference.svcmap">
+    <None Include="Service References\MovAdminServiceReference\item.disco" />
+    <None Include="Service References\MovAdminServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\MovAdminServiceReference\configuration.svcinfo" />
+    <None Include="Service References\MovAdminServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SysAdminServiceReference\item.disco" />
+    <None Include="Service References\SysAdminServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\SysAdminServiceReference\configuration.svcinfo" />
+    <None Include="Service References\SysAdminServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -201,11 +253,18 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\MeetingDetails.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Home\MeetingsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMeeting.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Home\MeetingCreate.cshtml" />
+    <Content Include="Views\Home\MovementCreate.cshtml" />
+    <Content Include="Views\Home\MovementsList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTMovement.cshtml" />
+    <Content Include="Views\Home\MeetingsMap.cshtml" />
+    <Content Include="Views\Home\MovementConfig.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -218,7 +277,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\MeetingsServiceReference\" />
+    <WCFMetadataStorage Include="Service References\MovAdminServiceReference\" />
     <WCFMetadataStorage Include="Service References\SessionServiceReference\" />
+    <WCFMetadataStorage Include="Service References\SysAdminServiceReference\" />
     <WCFMetadataStorage Include="Service References\TestServiceReference\" />
   </ItemGroup>
   <ItemGroup>
