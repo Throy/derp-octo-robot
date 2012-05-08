@@ -1,6 +1,0 @@
-C:\Users\Xeral\Desktop\fing\tsi\git2\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe.config
-C:\Users\Xeral\Desktop\fing\tsi\git2\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe
-C:\Users\Xeral\Desktop\fing\tsi\git2\derp-octo-robot\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.pdb
-C:\Users\Xeral\Desktop\fing\tsi\git2\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Xeral\Desktop\fing\tsi\git2\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.exe
-C:\Users\Xeral\Desktop\fing\tsi\git2\derp-octo-robot\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.pdb
