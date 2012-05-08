@@ -22,11 +22,18 @@ namespace IndignadoWeb
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.Add("DomainRoute", new DomainRoute(
-                       "{movimiento}.indignado.local",     // Domain with parameters 
+            routes.Add("SubDomainRoute", new DomainRoute(
+                       "{movimiento}.4c7.net",     // Domain with parameters 
                        "{controller}/{action}/{id}",    // URL with parameters 
                        new { movimiento = "default", controller = "Home", action = "Index", id = "" }  // Parameter defaults 
                     ));
+
+            routes.Add("SubDomain2Route", new DomainRoute(
+                       "{movimiento}.indignado.4c7.net",     // Domain with parameters 
+                       "{controller}/{action}/{id}",    // URL with parameters 
+                       new { movimiento = "default", controller = "Home", action = "Index", id = "" }  // Parameter defaults 
+                    ));
+            
             /*
             routes.MapRoute(
                 "Default", // Route name

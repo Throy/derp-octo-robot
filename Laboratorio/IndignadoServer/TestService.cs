@@ -30,7 +30,7 @@ namespace IndignadoServer
             // puedo tambien chekear de esta otra forma, y hacer cosas si el usuario no tiene
             // permisos en ves de solo tirar exception
             if (principal.IsInRole(Roles.RegUser))
-                return "Hello User, " + name;
+                return "Hello User del movimiento: "+ principal.Identity.AuthenticationType +" , " + name;
             else
                 return "Tas pasado";
         }

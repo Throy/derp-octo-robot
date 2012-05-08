@@ -58,6 +58,9 @@ namespace IndignadoServer.Services
         public String name { get; set; }
 
         [DataMember]
+        public int idLayout { get; set; }
+
+        [DataMember]
         public String description { get; set; }
 
         [DataMember]
@@ -65,15 +68,25 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public float locationLong { get; set; }
+    }
+
+    [DataContract]
+    public class DTTenantInfo
+    {
+        [DataMember]
+        public int id { get; set; }
 
         [DataMember]
-        public String adminNick { get; set; }
+        public String name { get; set; }
 
         [DataMember]
-        public String adminPassword { get; set; }
+        public bool habilitado { get; set; }
 
         [DataMember]
-        public String adminMail { get; set; }
+        public String logo { get; set; }
+
+        [DataMember]
+        public String layoutFile { get; set; }
     }
 
     // Movement Collection datatype
@@ -114,6 +127,7 @@ namespace IndignadoServer.Services
             dtMovement.description = movement.descripcion;
             dtMovement.locationLati = movement.latitud;
             dtMovement.locationLong = movement.longitud;
+            dtMovement.idLayout = movement.idLayout;
             return dtMovement;
         }
     }
@@ -144,6 +158,7 @@ namespace IndignadoServer.Services
             movement.descripcion = dtMovement.description;
             movement.latitud = dtMovement.locationLati;
             movement.longitud = dtMovement.locationLong;
+            movement.idLayout = dtMovement.idLayout;
             return movement;
         }
     }

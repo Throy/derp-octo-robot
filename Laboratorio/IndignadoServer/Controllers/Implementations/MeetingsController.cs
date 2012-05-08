@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace IndignadoServer.Controllers
 {
-    class MeetingsController : IMeetingsController
+    class MeetingsController : IndignadoController, IMeetingsController
     {
         // ******************
         // controller methods
@@ -49,10 +49,8 @@ namespace IndignadoServer.Controllers
         public Collection<Convocatoria> getMeetingsList()
         {
             // only get meetings from this movement.
-            int idMovement = 0;
-
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>("SELECT id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum FROM Convocatorias WHERE idMovimiento = {0}", idMovement);
+            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>("SELECT id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum FROM Convocatorias WHERE idMovimiento = {0}", IdMovimiento);
 
             Collection<Convocatoria> meetingsCol = new Collection<Convocatoria>();
             foreach (Convocatoria meeting in meetingsEnum)

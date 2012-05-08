@@ -25,6 +25,7 @@
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="61ab73dd-f802-4b92-a7dc-5c483cfbcfd1" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SessionService/?disco" />
     <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="78f7119c-5040-42cf-99b8-e0474b7b56c7" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SessionService/?xsd=xsd0" />
     <MetadataFile FileName="SessionService.wsdl" MetadataType="Wsdl" ID="12de5e88-9ae9-4259-85c8-2e5f1449c928" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SessionService/?wsdl" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="20f8dd44-261d-407f-ae18-6acd91a24420" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SessionService/?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

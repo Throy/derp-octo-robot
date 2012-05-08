@@ -30,18 +30,24 @@ namespace IndignadoServer.LinqDataContext
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertConvocatoria(Convocatoria instance);
+    partial void UpdateConvocatoria(Convocatoria instance);
+    partial void DeleteConvocatoria(Convocatoria instance);
     partial void InsertUsuario(Usuario instance);
     partial void UpdateUsuario(Usuario instance);
     partial void DeleteUsuario(Usuario instance);
+    partial void InsertLayout(Layout instance);
+    partial void UpdateLayout(Layout instance);
+    partial void DeleteLayout(Layout instance);
+    partial void InsertRssFeed(RssFeed instance);
+    partial void UpdateRssFeed(RssFeed instance);
+    partial void DeleteRssFeed(RssFeed instance);
     partial void InsertUsuarioFacebook(UsuarioFacebook instance);
     partial void UpdateUsuarioFacebook(UsuarioFacebook instance);
     partial void DeleteUsuarioFacebook(UsuarioFacebook instance);
     partial void InsertMovimiento(Movimiento instance);
     partial void UpdateMovimiento(Movimiento instance);
     partial void DeleteMovimiento(Movimiento instance);
-    partial void InsertConvocatoria(Convocatoria instance);
-    partial void UpdateConvocatoria(Convocatoria instance);
-    partial void DeleteConvocatoria(Convocatoria instance);
     #endregion
 		
 		public IndignadoDBDataContext() : 
@@ -74,11 +80,35 @@ namespace IndignadoServer.LinqDataContext
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<Convocatoria> Convocatorias
+		{
+			get
+			{
+				return this.GetTable<Convocatoria>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Usuario> Usuarios
 		{
 			get
 			{
 				return this.GetTable<Usuario>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Layout> Layouts
+		{
+			get
+			{
+				return this.GetTable<Layout>();
+			}
+		}
+		
+		public System.Data.Linq.Table<RssFeed> RssFeeds
+		{
+			get
+			{
+				return this.GetTable<RssFeed>();
 			}
 		}
 		
@@ -97,12 +127,388 @@ namespace IndignadoServer.LinqDataContext
 				return this.GetTable<Movimiento>();
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Convocatorias")]
+	public partial class Convocatoria : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		public System.Data.Linq.Table<Convocatoria> Convocatorias
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _idMovimiento;
+		
+		private int _idAutor;
+		
+		private string _titulo;
+		
+		private string _descripcion;
+		
+		private string _logo;
+		
+		private float _latitud;
+		
+		private float _longitud;
+		
+		private string _inicio;
+		
+		private string _fin;
+		
+		private System.Nullable<int> _minQuorum;
+		
+		private EntityRef<Usuario> _Usuario;
+		
+		private EntityRef<Movimiento> _Movimiento;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnidMovimientoChanging(int value);
+    partial void OnidMovimientoChanged();
+    partial void OnidAutorChanging(int value);
+    partial void OnidAutorChanged();
+    partial void OntituloChanging(string value);
+    partial void OntituloChanged();
+    partial void OndescripcionChanging(string value);
+    partial void OndescripcionChanged();
+    partial void OnlogoChanging(string value);
+    partial void OnlogoChanged();
+    partial void OnlatitudChanging(float value);
+    partial void OnlatitudChanged();
+    partial void OnlongitudChanging(float value);
+    partial void OnlongitudChanged();
+    partial void OninicioChanging(string value);
+    partial void OninicioChanged();
+    partial void OnfinChanging(string value);
+    partial void OnfinChanged();
+    partial void OnminQuorumChanging(System.Nullable<int> value);
+    partial void OnminQuorumChanged();
+    #endregion
+		
+		public Convocatoria()
+		{
+			this._Usuario = default(EntityRef<Usuario>);
+			this._Movimiento = default(EntityRef<Movimiento>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
 		{
 			get
 			{
-				return this.GetTable<Convocatoria>();
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMovimiento", DbType="Int NOT NULL")]
+		public int idMovimiento
+		{
+			get
+			{
+				return this._idMovimiento;
+			}
+			set
+			{
+				if ((this._idMovimiento != value))
+				{
+					if (this._Movimiento.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidMovimientoChanging(value);
+					this.SendPropertyChanging();
+					this._idMovimiento = value;
+					this.SendPropertyChanged("idMovimiento");
+					this.OnidMovimientoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAutor", DbType="Int NOT NULL")]
+		public int idAutor
+		{
+			get
+			{
+				return this._idAutor;
+			}
+			set
+			{
+				if ((this._idAutor != value))
+				{
+					if (this._Usuario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidAutorChanging(value);
+					this.SendPropertyChanging();
+					this._idAutor = value;
+					this.SendPropertyChanged("idAutor");
+					this.OnidAutorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_titulo", DbType="VarChar(50)")]
+		public string titulo
+		{
+			get
+			{
+				return this._titulo;
+			}
+			set
+			{
+				if ((this._titulo != value))
+				{
+					this.OntituloChanging(value);
+					this.SendPropertyChanging();
+					this._titulo = value;
+					this.SendPropertyChanged("titulo");
+					this.OntituloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(50)")]
+		public string descripcion
+		{
+			get
+			{
+				return this._descripcion;
+			}
+			set
+			{
+				if ((this._descripcion != value))
+				{
+					this.OndescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._descripcion = value;
+					this.SendPropertyChanged("descripcion");
+					this.OndescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_logo", DbType="VarChar(MAX)")]
+		public string logo
+		{
+			get
+			{
+				return this._logo;
+			}
+			set
+			{
+				if ((this._logo != value))
+				{
+					this.OnlogoChanging(value);
+					this.SendPropertyChanging();
+					this._logo = value;
+					this.SendPropertyChanged("logo");
+					this.OnlogoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitud", DbType="Float NOT NULL")]
+		public float latitud
+		{
+			get
+			{
+				return this._latitud;
+			}
+			set
+			{
+				if ((this._latitud != value))
+				{
+					this.OnlatitudChanging(value);
+					this.SendPropertyChanging();
+					this._latitud = value;
+					this.SendPropertyChanged("latitud");
+					this.OnlatitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", DbType="Float NOT NULL")]
+		public float longitud
+		{
+			get
+			{
+				return this._longitud;
+			}
+			set
+			{
+				if ((this._longitud != value))
+				{
+					this.OnlongitudChanging(value);
+					this.SendPropertyChanging();
+					this._longitud = value;
+					this.SendPropertyChanged("longitud");
+					this.OnlongitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_inicio", DbType="VarChar(50)")]
+		public string inicio
+		{
+			get
+			{
+				return this._inicio;
+			}
+			set
+			{
+				if ((this._inicio != value))
+				{
+					this.OninicioChanging(value);
+					this.SendPropertyChanging();
+					this._inicio = value;
+					this.SendPropertyChanged("inicio");
+					this.OninicioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fin", DbType="VarChar(50)")]
+		public string fin
+		{
+			get
+			{
+				return this._fin;
+			}
+			set
+			{
+				if ((this._fin != value))
+				{
+					this.OnfinChanging(value);
+					this.SendPropertyChanging();
+					this._fin = value;
+					this.SendPropertyChanged("fin");
+					this.OnfinChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_minQuorum", DbType="Int")]
+		public System.Nullable<int> minQuorum
+		{
+			get
+			{
+				return this._minQuorum;
+			}
+			set
+			{
+				if ((this._minQuorum != value))
+				{
+					this.OnminQuorumChanging(value);
+					this.SendPropertyChanging();
+					this._minQuorum = value;
+					this.SendPropertyChanged("minQuorum");
+					this.OnminQuorumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Usuario", ThisKey="idAutor", OtherKey="id", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.Convocatorias.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.Convocatorias.Add(this);
+						this._idAutor = value.id;
+					}
+					else
+					{
+						this._idAutor = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movimiento_Convocatoria", Storage="_Movimiento", ThisKey="idMovimiento", OtherKey="id", IsForeignKey=true)]
+		public Movimiento Movimiento
+		{
+			get
+			{
+				return this._Movimiento.Entity;
+			}
+			set
+			{
+				Movimiento previousValue = this._Movimiento.Entity;
+				if (((previousValue != value) 
+							|| (this._Movimiento.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Movimiento.Entity = null;
+						previousValue.Convocatorias.Remove(this);
+					}
+					this._Movimiento.Entity = value;
+					if ((value != null))
+					{
+						value.Convocatorias.Add(this);
+						this._idMovimiento = value.id;
+					}
+					else
+					{
+						this._idMovimiento = default(int);
+					}
+					this.SendPropertyChanged("Movimiento");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -127,17 +533,17 @@ namespace IndignadoServer.LinqDataContext
 		
 		private float _latitud;
 		
+		private float _longitud;
+		
 		private string _fechaRegistro;
 		
 		private System.Nullable<bool> _banned;
 		
 		private short _privilegio;
 		
-		private float _longitud;
+		private EntitySet<Convocatoria> _Convocatorias;
 		
 		private EntitySet<UsuarioFacebook> _UsuarioFacebooks;
-		
-		private EntitySet<Convocatoria> _Convocatorias;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -157,20 +563,20 @@ namespace IndignadoServer.LinqDataContext
     partial void OncontraseñaChanged();
     partial void OnlatitudChanging(float value);
     partial void OnlatitudChanged();
+    partial void OnlongitudChanging(float value);
+    partial void OnlongitudChanged();
     partial void OnfechaRegistroChanging(string value);
     partial void OnfechaRegistroChanged();
     partial void OnbannedChanging(System.Nullable<bool> value);
     partial void OnbannedChanged();
     partial void OnprivilegioChanging(short value);
     partial void OnprivilegioChanged();
-    partial void OnlongitudChanging(float value);
-    partial void OnlongitudChanged();
     #endregion
 		
 		public Usuario()
 		{
-			this._UsuarioFacebooks = new EntitySet<UsuarioFacebook>(new Action<UsuarioFacebook>(this.attach_UsuarioFacebooks), new Action<UsuarioFacebook>(this.detach_UsuarioFacebooks));
 			this._Convocatorias = new EntitySet<Convocatoria>(new Action<Convocatoria>(this.attach_Convocatorias), new Action<Convocatoria>(this.detach_Convocatorias));
+			this._UsuarioFacebooks = new EntitySet<UsuarioFacebook>(new Action<UsuarioFacebook>(this.attach_UsuarioFacebooks), new Action<UsuarioFacebook>(this.detach_UsuarioFacebooks));
 			OnCreated();
 		}
 		
@@ -314,6 +720,26 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", DbType="Float NOT NULL")]
+		public float longitud
+		{
+			get
+			{
+				return this._longitud;
+			}
+			set
+			{
+				if ((this._longitud != value))
+				{
+					this.OnlongitudChanging(value);
+					this.SendPropertyChanging();
+					this._longitud = value;
+					this.SendPropertyChanged("longitud");
+					this.OnlongitudChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaRegistro", DbType="VarChar(50)")]
 		public string fechaRegistro
 		{
@@ -374,23 +800,16 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", DbType="Float NOT NULL")]
-		public float longitud
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Convocatorias", ThisKey="id", OtherKey="idAutor")]
+		public EntitySet<Convocatoria> Convocatorias
 		{
 			get
 			{
-				return this._longitud;
+				return this._Convocatorias;
 			}
 			set
 			{
-				if ((this._longitud != value))
-				{
-					this.OnlongitudChanging(value);
-					this.SendPropertyChanging();
-					this._longitud = value;
-					this.SendPropertyChanged("longitud");
-					this.OnlongitudChanged();
-				}
+				this._Convocatorias.Assign(value);
 			}
 		}
 		
@@ -404,19 +823,6 @@ namespace IndignadoServer.LinqDataContext
 			set
 			{
 				this._UsuarioFacebooks.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Convocatorias", ThisKey="id", OtherKey="idAutor")]
-		public EntitySet<Convocatoria> Convocatorias
-		{
-			get
-			{
-				return this._Convocatorias;
-			}
-			set
-			{
-				this._Convocatorias.Assign(value);
 			}
 		}
 		
@@ -440,6 +846,18 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		private void attach_Convocatorias(Convocatoria entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_Convocatorias(Convocatoria entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
 		private void attach_UsuarioFacebooks(UsuarioFacebook entity)
 		{
 			this.SendPropertyChanging();
@@ -451,17 +869,270 @@ namespace IndignadoServer.LinqDataContext
 			this.SendPropertyChanging();
 			entity.Usuario = null;
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Layouts")]
+	public partial class Layout : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		private void attach_Convocatorias(Convocatoria entity)
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _layoutFile;
+		
+		private EntitySet<Movimiento> _Movimientos;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnlayoutFileChanging(string value);
+    partial void OnlayoutFileChanged();
+    #endregion
+		
+		public Layout()
 		{
-			this.SendPropertyChanging();
-			entity.Usuario = this;
+			this._Movimientos = new EntitySet<Movimiento>(new Action<Movimiento>(this.attach_Movimientos), new Action<Movimiento>(this.detach_Movimientos));
+			OnCreated();
 		}
 		
-		private void detach_Convocatorias(Convocatoria entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_layoutFile", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string layoutFile
+		{
+			get
+			{
+				return this._layoutFile;
+			}
+			set
+			{
+				if ((this._layoutFile != value))
+				{
+					this.OnlayoutFileChanging(value);
+					this.SendPropertyChanging();
+					this._layoutFile = value;
+					this.SendPropertyChanged("layoutFile");
+					this.OnlayoutFileChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Layout_Movimiento", Storage="_Movimientos", ThisKey="id", OtherKey="idLayout")]
+		public EntitySet<Movimiento> Movimientos
+		{
+			get
+			{
+				return this._Movimientos;
+			}
+			set
+			{
+				this._Movimientos.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Movimientos(Movimiento entity)
 		{
 			this.SendPropertyChanging();
-			entity.Usuario = null;
+			entity.Layout = this;
+		}
+		
+		private void detach_Movimientos(Movimiento entity)
+		{
+			this.SendPropertyChanging();
+			entity.Layout = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RssFeeds")]
+	public partial class RssFeed : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _url;
+		
+		private int _idMovimiento;
+		
+		private string _tag;
+		
+		private EntityRef<Movimiento> _Movimiento;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnurlChanging(string value);
+    partial void OnurlChanged();
+    partial void OnidMovimientoChanging(int value);
+    partial void OnidMovimientoChanged();
+    partial void OntagChanging(string value);
+    partial void OntagChanged();
+    #endregion
+		
+		public RssFeed()
+		{
+			this._Movimiento = default(EntityRef<Movimiento>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string url
+		{
+			get
+			{
+				return this._url;
+			}
+			set
+			{
+				if ((this._url != value))
+				{
+					this.OnurlChanging(value);
+					this.SendPropertyChanging();
+					this._url = value;
+					this.SendPropertyChanged("url");
+					this.OnurlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMovimiento", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idMovimiento
+		{
+			get
+			{
+				return this._idMovimiento;
+			}
+			set
+			{
+				if ((this._idMovimiento != value))
+				{
+					if (this._Movimiento.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidMovimientoChanging(value);
+					this.SendPropertyChanging();
+					this._idMovimiento = value;
+					this.SendPropertyChanged("idMovimiento");
+					this.OnidMovimientoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tag", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string tag
+		{
+			get
+			{
+				return this._tag;
+			}
+			set
+			{
+				if ((this._tag != value))
+				{
+					this.OntagChanging(value);
+					this.SendPropertyChanging();
+					this._tag = value;
+					this.SendPropertyChanged("tag");
+					this.OntagChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movimiento_RssFeed", Storage="_Movimiento", ThisKey="idMovimiento", OtherKey="id", IsForeignKey=true)]
+		public Movimiento Movimiento
+		{
+			get
+			{
+				return this._Movimiento.Entity;
+			}
+			set
+			{
+				Movimiento previousValue = this._Movimiento.Entity;
+				if (((previousValue != value) 
+							|| (this._Movimiento.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Movimiento.Entity = null;
+						previousValue.RssFeeds.Remove(this);
+					}
+					this._Movimiento.Entity = value;
+					if ((value != null))
+					{
+						value.RssFeeds.Add(this);
+						this._idMovimiento = value.id;
+					}
+					else
+					{
+						this._idMovimiento = default(int);
+					}
+					this.SendPropertyChanged("Movimiento");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -626,13 +1297,17 @@ namespace IndignadoServer.LinqDataContext
 		
 		private string _nombre;
 		
+		private bool _habilitado;
+		
+		private string _logo;
+		
+		private int _idLayout;
+		
 		private string _descripcion;
 		
 		private float _latitud;
 		
-		private System.Data.Linq.Binary _logo;
-		
-		private int _plantillaEstilo;
+		private float _longitud;
 		
 		private System.Nullable<int> _maxMarcasInadecuadasRecursoX;
 		
@@ -642,11 +1317,11 @@ namespace IndignadoServer.LinqDataContext
 		
 		private System.Nullable<int> _maxUltimosRecursosM;
 		
-		private bool _habilitado;
-		
-		private float _longitud;
-		
 		private EntitySet<Convocatoria> _Convocatorias;
+		
+		private EntitySet<RssFeed> _RssFeeds;
+		
+		private EntityRef<Layout> _Layout;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -656,14 +1331,18 @@ namespace IndignadoServer.LinqDataContext
     partial void OnidChanged();
     partial void OnnombreChanging(string value);
     partial void OnnombreChanged();
+    partial void OnhabilitadoChanging(bool value);
+    partial void OnhabilitadoChanged();
+    partial void OnlogoChanging(string value);
+    partial void OnlogoChanged();
+    partial void OnidLayoutChanging(int value);
+    partial void OnidLayoutChanged();
     partial void OndescripcionChanging(string value);
     partial void OndescripcionChanged();
     partial void OnlatitudChanging(float value);
     partial void OnlatitudChanged();
-    partial void OnlogoChanging(System.Data.Linq.Binary value);
-    partial void OnlogoChanged();
-    partial void OnplantillaEstiloChanging(int value);
-    partial void OnplantillaEstiloChanged();
+    partial void OnlongitudChanging(float value);
+    partial void OnlongitudChanged();
     partial void OnmaxMarcasInadecuadasRecursoXChanging(System.Nullable<int> value);
     partial void OnmaxMarcasInadecuadasRecursoXChanged();
     partial void OnmaxRecursosInadecuadosUsuarioZChanging(System.Nullable<int> value);
@@ -672,19 +1351,17 @@ namespace IndignadoServer.LinqDataContext
     partial void OnmaxRecursosPopularesNChanged();
     partial void OnmaxUltimosRecursosMChanging(System.Nullable<int> value);
     partial void OnmaxUltimosRecursosMChanged();
-    partial void OnhabilitadoChanging(bool value);
-    partial void OnhabilitadoChanged();
-    partial void OnlongitudChanging(float value);
-    partial void OnlongitudChanged();
     #endregion
 		
 		public Movimiento()
 		{
 			this._Convocatorias = new EntitySet<Convocatoria>(new Action<Convocatoria>(this.attach_Convocatorias), new Action<Convocatoria>(this.detach_Convocatorias));
+			this._RssFeeds = new EntitySet<RssFeed>(new Action<RssFeed>(this.attach_RssFeeds), new Action<RssFeed>(this.detach_RssFeeds));
+			this._Layout = default(EntityRef<Layout>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -724,7 +1401,71 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_habilitado", DbType="Bit NOT NULL")]
+		public bool habilitado
+		{
+			get
+			{
+				return this._habilitado;
+			}
+			set
+			{
+				if ((this._habilitado != value))
+				{
+					this.OnhabilitadoChanging(value);
+					this.SendPropertyChanging();
+					this._habilitado = value;
+					this.SendPropertyChanged("habilitado");
+					this.OnhabilitadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_logo", DbType="VarChar(MAX)")]
+		public string logo
+		{
+			get
+			{
+				return this._logo;
+			}
+			set
+			{
+				if ((this._logo != value))
+				{
+					this.OnlogoChanging(value);
+					this.SendPropertyChanging();
+					this._logo = value;
+					this.SendPropertyChanged("logo");
+					this.OnlogoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idLayout", DbType="Int NOT NULL")]
+		public int idLayout
+		{
+			get
+			{
+				return this._idLayout;
+			}
+			set
+			{
+				if ((this._idLayout != value))
+				{
+					if (this._Layout.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidLayoutChanging(value);
+					this.SendPropertyChanging();
+					this._idLayout = value;
+					this.SendPropertyChanged("idLayout");
+					this.OnidLayoutChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(MAX)")]
 		public string descripcion
 		{
 			get
@@ -764,42 +1505,22 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_logo", DbType="Image", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary logo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", DbType="Float NOT NULL")]
+		public float longitud
 		{
 			get
 			{
-				return this._logo;
+				return this._longitud;
 			}
 			set
 			{
-				if ((this._logo != value))
+				if ((this._longitud != value))
 				{
-					this.OnlogoChanging(value);
+					this.OnlongitudChanging(value);
 					this.SendPropertyChanging();
-					this._logo = value;
-					this.SendPropertyChanged("logo");
-					this.OnlogoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plantillaEstilo", DbType="Int NOT NULL")]
-		public int plantillaEstilo
-		{
-			get
-			{
-				return this._plantillaEstilo;
-			}
-			set
-			{
-				if ((this._plantillaEstilo != value))
-				{
-					this.OnplantillaEstiloChanging(value);
-					this.SendPropertyChanging();
-					this._plantillaEstilo = value;
-					this.SendPropertyChanged("plantillaEstilo");
-					this.OnplantillaEstiloChanged();
+					this._longitud = value;
+					this.SendPropertyChanged("longitud");
+					this.OnlongitudChanged();
 				}
 			}
 		}
@@ -884,46 +1605,6 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_habilitado", DbType="Bit NOT NULL")]
-		public bool habilitado
-		{
-			get
-			{
-				return this._habilitado;
-			}
-			set
-			{
-				if ((this._habilitado != value))
-				{
-					this.OnhabilitadoChanging(value);
-					this.SendPropertyChanging();
-					this._habilitado = value;
-					this.SendPropertyChanged("habilitado");
-					this.OnhabilitadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", DbType="Float NOT NULL")]
-		public float longitud
-		{
-			get
-			{
-				return this._longitud;
-			}
-			set
-			{
-				if ((this._longitud != value))
-				{
-					this.OnlongitudChanging(value);
-					this.SendPropertyChanging();
-					this._longitud = value;
-					this.SendPropertyChanged("longitud");
-					this.OnlongitudChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movimiento_Convocatoria", Storage="_Convocatorias", ThisKey="id", OtherKey="idMovimiento")]
 		public EntitySet<Convocatoria> Convocatorias
 		{
@@ -934,6 +1615,53 @@ namespace IndignadoServer.LinqDataContext
 			set
 			{
 				this._Convocatorias.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movimiento_RssFeed", Storage="_RssFeeds", ThisKey="id", OtherKey="idMovimiento")]
+		public EntitySet<RssFeed> RssFeeds
+		{
+			get
+			{
+				return this._RssFeeds;
+			}
+			set
+			{
+				this._RssFeeds.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Layout_Movimiento", Storage="_Layout", ThisKey="idLayout", OtherKey="id", IsForeignKey=true)]
+		public Layout Layout
+		{
+			get
+			{
+				return this._Layout.Entity;
+			}
+			set
+			{
+				Layout previousValue = this._Layout.Entity;
+				if (((previousValue != value) 
+							|| (this._Layout.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Layout.Entity = null;
+						previousValue.Movimientos.Remove(this);
+					}
+					this._Layout.Entity = value;
+					if ((value != null))
+					{
+						value.Movimientos.Add(this);
+						this._idLayout = value.id;
+					}
+					else
+					{
+						this._idLayout = default(int);
+					}
+					this.SendPropertyChanged("Layout");
+				}
 			}
 		}
 		
@@ -968,389 +1696,17 @@ namespace IndignadoServer.LinqDataContext
 			this.SendPropertyChanging();
 			entity.Movimiento = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Convocatorias")]
-	public partial class Convocatoria : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private int _idMovimiento;
-		
-		private int _idAutor;
-		
-		private string _titulo;
-		
-		private string _descripcion;
-		
-		private float _latitud;
-		
-		private string _inicio;
-		
-		private string _fin;
-		
-		private System.Data.Linq.Binary _logo;
-		
-		private System.Nullable<int> _minQuorum;
-		
-		private float _longitud;
-		
-		private EntityRef<Movimiento> _Movimiento;
-		
-		private EntityRef<Usuario> _Usuario;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnidMovimientoChanging(int value);
-    partial void OnidMovimientoChanged();
-    partial void OnidAutorChanging(int value);
-    partial void OnidAutorChanged();
-    partial void OntituloChanging(string value);
-    partial void OntituloChanged();
-    partial void OndescripcionChanging(string value);
-    partial void OndescripcionChanged();
-    partial void OnlatitudChanging(float value);
-    partial void OnlatitudChanged();
-    partial void OninicioChanging(string value);
-    partial void OninicioChanged();
-    partial void OnfinChanging(string value);
-    partial void OnfinChanged();
-    partial void OnlogoChanging(System.Data.Linq.Binary value);
-    partial void OnlogoChanged();
-    partial void OnminQuorumChanging(System.Nullable<int> value);
-    partial void OnminQuorumChanged();
-    partial void OnlongitudChanging(float value);
-    partial void OnlongitudChanged();
-    #endregion
-		
-		public Convocatoria()
+		private void attach_RssFeeds(RssFeed entity)
 		{
-			this._Movimiento = default(EntityRef<Movimiento>);
-			this._Usuario = default(EntityRef<Usuario>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.Movimiento = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int id
+		private void detach_RssFeeds(RssFeed entity)
 		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMovimiento", DbType="Int NOT NULL")]
-		public int idMovimiento
-		{
-			get
-			{
-				return this._idMovimiento;
-			}
-			set
-			{
-				if ((this._idMovimiento != value))
-				{
-					if (this._Movimiento.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidMovimientoChanging(value);
-					this.SendPropertyChanging();
-					this._idMovimiento = value;
-					this.SendPropertyChanged("idMovimiento");
-					this.OnidMovimientoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAutor", DbType="Int NOT NULL")]
-		public int idAutor
-		{
-			get
-			{
-				return this._idAutor;
-			}
-			set
-			{
-				if ((this._idAutor != value))
-				{
-					if (this._Usuario.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidAutorChanging(value);
-					this.SendPropertyChanging();
-					this._idAutor = value;
-					this.SendPropertyChanged("idAutor");
-					this.OnidAutorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_titulo", DbType="VarChar(50)")]
-		public string titulo
-		{
-			get
-			{
-				return this._titulo;
-			}
-			set
-			{
-				if ((this._titulo != value))
-				{
-					this.OntituloChanging(value);
-					this.SendPropertyChanging();
-					this._titulo = value;
-					this.SendPropertyChanged("titulo");
-					this.OntituloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(50)")]
-		public string descripcion
-		{
-			get
-			{
-				return this._descripcion;
-			}
-			set
-			{
-				if ((this._descripcion != value))
-				{
-					this.OndescripcionChanging(value);
-					this.SendPropertyChanging();
-					this._descripcion = value;
-					this.SendPropertyChanged("descripcion");
-					this.OndescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitud", DbType="Float NOT NULL")]
-		public float latitud
-		{
-			get
-			{
-				return this._latitud;
-			}
-			set
-			{
-				if ((this._latitud != value))
-				{
-					this.OnlatitudChanging(value);
-					this.SendPropertyChanging();
-					this._latitud = value;
-					this.SendPropertyChanged("latitud");
-					this.OnlatitudChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_inicio", DbType="VarChar(50)")]
-		public string inicio
-		{
-			get
-			{
-				return this._inicio;
-			}
-			set
-			{
-				if ((this._inicio != value))
-				{
-					this.OninicioChanging(value);
-					this.SendPropertyChanging();
-					this._inicio = value;
-					this.SendPropertyChanged("inicio");
-					this.OninicioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fin", DbType="VarChar(50)")]
-		public string fin
-		{
-			get
-			{
-				return this._fin;
-			}
-			set
-			{
-				if ((this._fin != value))
-				{
-					this.OnfinChanging(value);
-					this.SendPropertyChanging();
-					this._fin = value;
-					this.SendPropertyChanged("fin");
-					this.OnfinChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_logo", DbType="Image", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary logo
-		{
-			get
-			{
-				return this._logo;
-			}
-			set
-			{
-				if ((this._logo != value))
-				{
-					this.OnlogoChanging(value);
-					this.SendPropertyChanging();
-					this._logo = value;
-					this.SendPropertyChanged("logo");
-					this.OnlogoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_minQuorum", DbType="Int")]
-		public System.Nullable<int> minQuorum
-		{
-			get
-			{
-				return this._minQuorum;
-			}
-			set
-			{
-				if ((this._minQuorum != value))
-				{
-					this.OnminQuorumChanging(value);
-					this.SendPropertyChanging();
-					this._minQuorum = value;
-					this.SendPropertyChanged("minQuorum");
-					this.OnminQuorumChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", DbType="Float NOT NULL")]
-		public float longitud
-		{
-			get
-			{
-				return this._longitud;
-			}
-			set
-			{
-				if ((this._longitud != value))
-				{
-					this.OnlongitudChanging(value);
-					this.SendPropertyChanging();
-					this._longitud = value;
-					this.SendPropertyChanged("longitud");
-					this.OnlongitudChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movimiento_Convocatoria", Storage="_Movimiento", ThisKey="idMovimiento", OtherKey="id", IsForeignKey=true)]
-		public Movimiento Movimiento
-		{
-			get
-			{
-				return this._Movimiento.Entity;
-			}
-			set
-			{
-				Movimiento previousValue = this._Movimiento.Entity;
-				if (((previousValue != value) 
-							|| (this._Movimiento.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Movimiento.Entity = null;
-						previousValue.Convocatorias.Remove(this);
-					}
-					this._Movimiento.Entity = value;
-					if ((value != null))
-					{
-						value.Convocatorias.Add(this);
-						this._idMovimiento = value.id;
-					}
-					else
-					{
-						this._idMovimiento = default(int);
-					}
-					this.SendPropertyChanged("Movimiento");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Usuario", ThisKey="idAutor", OtherKey="id", IsForeignKey=true)]
-		public Usuario Usuario
-		{
-			get
-			{
-				return this._Usuario.Entity;
-			}
-			set
-			{
-				Usuario previousValue = this._Usuario.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuario.Entity = null;
-						previousValue.Convocatorias.Remove(this);
-					}
-					this._Usuario.Entity = value;
-					if ((value != null))
-					{
-						value.Convocatorias.Add(this);
-						this._idAutor = value.id;
-					}
-					else
-					{
-						this._idAutor = default(int);
-					}
-					this.SendPropertyChanged("Usuario");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.Movimiento = null;
 		}
 	}
 }

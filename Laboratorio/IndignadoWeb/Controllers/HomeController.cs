@@ -9,9 +9,12 @@ using IndignadoWeb.MovAdminServiceReference;
 using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.Models;
 using IndignadoWeb.TestServiceReference;
+using IndignadoWeb.Common;
+using IndignadoWeb.SessionServiceReference;
 
 namespace IndignadoWeb.Controllers
 {
+    [MultiTenanActionFilter]
     public class HomeController : Controller
     {
         public T GetService<T>(String url)
@@ -25,15 +28,15 @@ namespace IndignadoWeb.Controllers
                         binding,
                         url);
 
-            scf.Credentials.UserName.UserName = "0"; // idMovimiento
+            DTTenantInfo tenantInfo = HttpContext.Session["tenantInfo"] as DTTenantInfo;
+
+            scf.Credentials.UserName.UserName = tenantInfo.id.ToString(); // idMovimiento
             scf.Credentials.UserName.Password = (HttpContext.Session["token"] == null) ? "Guest" : HttpContext.Session["token"].ToString();
 
-            T serv;
-            serv = scf.CreateChannel();
-            return serv;
+            return scf.CreateChannel();
         }
 
-        public ActionResult Index(String movimiento)
+        public ActionResult Index(DTTenantInfo tenantInfo)
         {
             ITestService serv = GetService<ITestService>("http://localhost:8730/IndignadoServer/TestService/");
                 
@@ -48,9 +51,7 @@ namespace IndignadoWeb.Controllers
             
             (serv as ICommunicationObject).Close();
 
-            ViewBag.Movimiento = movimiento;
-
-            return View("Index", "~/Views/Shared/_Layout2.cshtml");
+            return View("Index");
         }
 
         public ActionResult About()
@@ -160,6 +161,7 @@ namespace IndignadoWeb.Controllers
         // create movement.
         public ActionResult MovementCreate()
         {
+
             return View();
         }
 
@@ -180,9 +182,6 @@ namespace IndignadoWeb.Controllers
                 dtMovement.description = model.description;
                 dtMovement.locationLati = model.locationLati;
                 dtMovement.locationLong = model.locationLong;
-                dtMovement.adminNick = model.adminNick;
-                dtMovement.adminPassword = model.adminPassword;
-                dtMovement.adminMail = model.adminMail;
                 serv.createMovement(dtMovement);
 
                 // get all movements
@@ -216,9 +215,7 @@ namespace IndignadoWeb.Controllers
             model.description = movement.description;
             model.locationLati = movement.locationLati;
             model.locationLong = movement.locationLong;
-            model.adminNick = movement.adminMail;
-            model.adminPassword = movement.adminPassword;
-            model.adminMail = movement.adminMail;
+
             return View(model);
         }
 
@@ -239,9 +236,6 @@ namespace IndignadoWeb.Controllers
                 dtMovement.description = model.description;
                 dtMovement.locationLati = model.locationLati;
                 dtMovement.locationLong = model.locationLong;
-                dtMovement.adminNick = model.adminNick;
-                dtMovement.adminPassword = model.adminPassword;
-                dtMovement.adminMail = model.adminMail;
                 serv.setMovement(dtMovement);
 
                 // close service

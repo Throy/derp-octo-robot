@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using System.IdentityModel.Tokens;
 using System.ServiceModel.Security.Tokens;
+using IndignadoServer.Services;
 
 namespace IndignadoServer
 {
@@ -15,5 +16,8 @@ namespace IndignadoServer
     {
         [OperationContract]
         String Login(int idMovmiento, String userName, String password);
+
+        [OperationContract]
+        DTTenantInfo GetTenantInfo(String movimiento);
     }
 }

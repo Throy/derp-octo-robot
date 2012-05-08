@@ -14,7 +14,7 @@ namespace IndignadoServer.Controllers
         public void createMovement(Movimiento movement)
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            movement.id = indignadoContext.Movimientos.Count();
+
             indignadoContext.Movimientos.InsertOnSubmit (movement);
             indignadoContext.SubmitChanges();
         }
