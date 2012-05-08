@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.ServiceModel;
 using IndignadoWeb.MeetingsServiceReference;
 using IndignadoWeb.MovAdminServiceReference;
+using IndignadoWeb.NewsResourcesServiceReference;
 using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.Models;
 
@@ -323,9 +324,9 @@ namespace IndignadoWeb.Controllers
             serv2 = scf2.CreateChannel();
 
             // get all movements
-            serv2.getResourcesList();
+            DTRssItemsCol rssItemsCol = serv2.getResourcesList();
 
-            return View();
+            return View(rssItemsCol);
         }
     }
 }

@@ -167,7 +167,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\MovAdminServiceReference\MovAdminService.wsdl" />
+    <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTRssItemsCol.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\NewsResourcesServiceReference\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NewsResourcesServiceReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NewsResourcesServiceReference\item11.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\NewsResourcesServiceReference\NewsResourcesService.wsdl" />
@@ -257,6 +266,7 @@
     <Content Include="Views\Home\MeetingsMap.cshtml" />
     <Content Include="Views\Home\MovementConfig.cshtml" />
     <Content Include="Views\Home\ResourcesList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTRssItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

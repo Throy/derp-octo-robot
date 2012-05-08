@@ -6,8 +6,8 @@ namespace IndignadoServer.Services
     [ServiceContract]
     public interface INewsResourcesService
     {
-        // returns all meetings
+        // returns all rss items.
         [OperationContract]
-        void getResourcesList();
+        DTRssItemsCol getResourcesList();
     }
 }

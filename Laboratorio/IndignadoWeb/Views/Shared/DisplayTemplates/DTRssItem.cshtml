@@ -1,0 +1,16 @@
+﻿<!-- model -->
+@model IndignadoWeb.NewsResourcesServiceReference.DTRssItem
+           
+<div>
+     <h3>@Html.DisplayFor(m => m.title)</h3>
+     <br />
+     Description: @Html.Raw(HttpUtility.HtmlDecode(Model.description))
+     <br />
+     <br />
+     Date: @Html.DisplayFor(m => m.date)
+     <br />
+     Source: @Html.DisplayFor(m => m.sourceText)
+     <br />
+     URL: @Html.DisplayFor(m => m.sourceUrl)
+     <br />
+</div>
