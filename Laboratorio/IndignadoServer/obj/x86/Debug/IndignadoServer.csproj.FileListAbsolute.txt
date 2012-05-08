@@ -9,3 +9,6 @@ C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\I
 C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.exe
 C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\bin\Debug\IndignadoServer.pdb
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\obj\x86\Debug\IndignadoServer.RssToolkit.Resources.RssToolkit.resources
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Public\Documents\Visual Studio 2010\Projects\IndignadoNBU\Laboratorio\IndignadoServer\obj\x86\Debug\GenerateResource.write.1.tlog

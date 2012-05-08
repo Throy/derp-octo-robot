@@ -255,7 +255,7 @@ namespace IndignadoWeb.Controllers
             return View(model);
         }
 
-        // configure  movement.
+        // configure movement.
         [HttpPost]
         public ActionResult MovementConfig(SingleMovementModel model)
         {
@@ -307,6 +307,25 @@ namespace IndignadoWeb.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        // shows all resources in a list.
+        public ActionResult ResourcesList()
+        {
+            // open service
+            ChannelFactory<NewsResourcesServiceReference.INewsResourcesService> scf2;
+            scf2 = new ChannelFactory<NewsResourcesServiceReference.INewsResourcesService>(
+                        new BasicHttpBinding(),
+                        "http://localhost:8730/IndignadoServer/NewsResourcesService/");
+
+
+            NewsResourcesServiceReference.INewsResourcesService serv2;
+            serv2 = scf2.CreateChannel();
+
+            // get all movements
+            serv2.getResourcesList();
+
+            return View();
         }
     }
 }

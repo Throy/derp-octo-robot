@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="dee48651-87b7-4d5b-850d-74af28743b33" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8730/IndignadoServer/NewsResourcesService/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="2c43b42a-d7bf-45fd-a415-f5a9bf5b600c" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/NewsResourcesService/?disco" />
+    <MetadataFile FileName="NewsResourcesService.wsdl" MetadataType="Wsdl" ID="16ad34f7-c60e-482e-91a1-61bac40cc713" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/NewsResourcesService/?wsdl" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="e78de574-b0b3-4543-8d25-6e07d371da42" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/NewsResourcesService/?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
