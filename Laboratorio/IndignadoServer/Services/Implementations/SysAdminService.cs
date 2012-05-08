@@ -10,7 +10,7 @@ namespace IndignadoServer.Services
         // creates a movement.
         public void createMovement (DTMovement dtMovement)
         {
-            ControllersHub.getInstance().getISysAdminController().createMovement(DTToClass.DTToMovement(dtMovement));
+            ControllersHub.Instance.getISysAdminController().createMovement(DTToClass.DTToMovement(dtMovement));
         }
 
         // returns all movements.
@@ -21,7 +21,7 @@ namespace IndignadoServer.Services
             dtMovementCol.items = new Collection<DTMovement>();
 
             // get meetings from the controller
-            Collection<Movimiento> meetingsCol = ControllersHub.getInstance().getISysAdminController().getMovementsList();
+            Collection<Movimiento> meetingsCol = ControllersHub.Instance.getISysAdminController().getMovementsList();
 
             // add meetings to the datatype collection
             foreach (Movimiento movement in meetingsCol)

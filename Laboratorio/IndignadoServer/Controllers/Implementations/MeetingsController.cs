@@ -38,7 +38,8 @@ namespace IndignadoServer.Controllers
 
             // set internal and foreign ids (berreta)
             meeting.id = indignadoContext.Convocatorias.Count();
-            meeting.idMovimiento = 666;
+            meeting.idMovimiento = 0;
+            meeting.idAutor = 3;
 
             indignadoContext.Convocatorias.InsertOnSubmit(meeting);
             indignadoContext.SubmitChanges();
@@ -48,7 +49,7 @@ namespace IndignadoServer.Controllers
         public Collection<Convocatoria> getMeetingsList()
         {
             // only get meetings from this movement.
-            int idMovement = 666;
+            int idMovement = 0;
 
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>("SELECT id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum FROM Convocatorias WHERE idMovimiento = {0}", idMovement);

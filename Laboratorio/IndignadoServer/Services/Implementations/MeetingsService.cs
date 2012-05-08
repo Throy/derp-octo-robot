@@ -18,7 +18,7 @@ namespace IndignadoServer.Services
         {
             try
             {
-                return ClassToDT.MeetingToDT(ControllersHub.getInstance().getIMeetingsController().getMeeting(idMeeting));
+                return ClassToDT.MeetingToDT(ControllersHub.Instance.getIMeetingsController().getMeeting(idMeeting));
             }
             catch { 
                 return null;
@@ -28,7 +28,7 @@ namespace IndignadoServer.Services
         // creates a meeting
         public void createMeeting (DTMeeting dtMeeting)
         {
-            ControllersHub.getInstance().getIMeetingsController().createMeeting (DTToClass.DTToMeeting(dtMeeting));
+            ControllersHub.Instance.getIMeetingsController().createMeeting(DTToClass.DTToMeeting(dtMeeting));
         }
 
         // returns all meetings
@@ -39,7 +39,7 @@ namespace IndignadoServer.Services
             dtMeetingsCol.items = new Collection<DTMeeting>();
 
             // get meetings from the controller
-            Collection<Convocatoria> meetingsCol = ControllersHub.getInstance().getIMeetingsController().getMeetingsList();
+            Collection<Convocatoria> meetingsCol = ControllersHub.Instance.getIMeetingsController().getMeetingsList();
 
             // add meetings to the datatype collection
             foreach (Convocatoria meeting in meetingsCol)

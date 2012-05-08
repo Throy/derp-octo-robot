@@ -11,7 +11,7 @@ using System.Data.Linq.Mapping;
 
 namespace IndignadoServer.Controllers
 {
-    class SessionController
+    class SessionController : ISessionController
     {
         private static SessionController _instance;
         private Dictionary<String, UserOnlineInfo> _usersOnline;

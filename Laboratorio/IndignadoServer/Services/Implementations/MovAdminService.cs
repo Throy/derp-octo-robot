@@ -16,7 +16,7 @@ namespace IndignadoServer.Services
         {
             try
             {
-                return ClassToDT.MovementToDT(ControllersHub.getInstance().getIMovAdminController().getMovement(idMovement));
+                return ClassToDT.MovementToDT(ControllersHub.Instance.getIMovAdminController().getMovement(idMovement));
             }
             catch
             {
@@ -27,7 +27,7 @@ namespace IndignadoServer.Services
         // changes the configuration of the movement.
         public void setMovement(DTMovement dtMovement)
         {
-            ControllersHub.getInstance().getIMovAdminController().setMovement(DTToClass.DTToMovement(dtMovement));
+            ControllersHub.Instance.getIMovAdminController().setMovement(DTToClass.DTToMovement(dtMovement));
         }
     }
 }

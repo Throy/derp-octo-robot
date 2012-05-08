@@ -9,10 +9,11 @@ namespace IndignadoServer.Controllers
     class ControllersHub
     {
         // *** singleton instances ***
-        private static ControllersHub instance = null;
-        private static IMeetingsController iMeetingsController;
-        private static ISysAdminController iSysAdminController;
-        private static IMovAdminController iMovAdminController;
+        private static ControllersHub _instance = null;
+        private static ISessionController  _iSessionController;
+        private static IMeetingsController _iMeetingsController;
+        private static ISysAdminController _iSysAdminController;
+        private static IMovAdminController _iMovAdminController;
         // ...
 
         private ControllersHub()
@@ -20,34 +21,44 @@ namespace IndignadoServer.Controllers
         }
 
         // returns an instance of the IMeetingsController.
-        public static ControllersHub getInstance()
+        public static ControllersHub Instance
         {
-            if (instance == null)
+            get
             {
-                instance = new ControllersHub();
-                iMeetingsController = new MeetingsController();
-                iSysAdminController = new SysAdminController();
-                iMovAdminController = new MovAdminController();
+                if (_instance == null)
+                {
+                    _instance = new ControllersHub();
+                    _iSessionController = new SessionController();
+                    _iMeetingsController = new MeetingsController();
+                    _iSysAdminController = new SysAdminController();
+                    _iMovAdminController = new MovAdminController();
+                }
+                return _instance;
             }
-            return instance;
+        }
+
+        // returns an instance of the ISessionController.
+        public ISessionController getISessionController()
+        {
+            return _iSessionController;
         }
 
         // returns an instance of the IMeetingsController.
         public IMeetingsController getIMeetingsController()
         {
-            return iMeetingsController;
+            return _iMeetingsController;
         }
 
         // returns an instance of the ISysAdminController.
         public ISysAdminController getISysAdminController()
         {
-            return iSysAdminController;
+            return _iSysAdminController;
         }
 
         // returns an instance of the IMovAdminController.
         public IMovAdminController getIMovAdminController()
         {
-            return iMovAdminController;
+            return _iMovAdminController;
         }
 
         /*
