@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using IndignadoServer.LinqDataContext;
 using RssToolkit.Rss;
+using System.Text.RegularExpressions;
 
 namespace IndignadoServer.Services
 {
@@ -96,13 +97,10 @@ namespace IndignadoServer.Services
         public String description { get; set; }
 
         [DataMember]
-        public String sourceText { get; set; }
+        public String link { get; set; }
 
         [DataMember]
-        public String sourceUrl { get; set; }
-
-        [DataMember]
-        public String date { get; set; }
+        public DateTime date { get; set; }
     }
 
     // RssItems Collection datatype
@@ -121,6 +119,8 @@ namespace IndignadoServer.Services
 
     public class ClassToDT
     {
+        public static Random random = new Random();
+
         public static DTMeeting MeetingToDT (Convocatoria meeting)
         {
             DTMeeting dtMeeting = new DTMeeting();
@@ -129,8 +129,8 @@ namespace IndignadoServer.Services
             dtMeeting.name = meeting.titulo;
             dtMeeting.description = meeting.descripcion;
 
-            dtMeeting.locationLati = meeting.latitud;
-            dtMeeting.locationLong = meeting.longitud;
+            dtMeeting.locationLati = meeting.latitud + (float) random.NextDouble();
+            dtMeeting.locationLong = meeting.longitud + (float)random.NextDouble();
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
             return dtMeeting;
         }
@@ -150,11 +150,9 @@ namespace IndignadoServer.Services
         {
             DTRssItem dtRssItem = new DTRssItem();
             dtRssItem.title = rssItem.Title;
-            //Regex.Replace(rssItem.Description, @"<(.|\n)*?>", string.Empty, RegexOptions.IgnorePatternWhitespace);
-            dtRssItem.description = rssItem.Description;
-            dtRssItem.sourceText = (rssItem.Source == null) ? "" : rssItem.Source.Text;
-            dtRssItem.sourceUrl = (rssItem.Source == null) ? "" : rssItem.Source.Url;
-            dtRssItem.date = rssItem.PubDate;
+            dtRssItem.description = Regex.Replace(rssItem.Description, @"</?(img|div|p|strong)[^>]*?>", string.Empty);
+            dtRssItem.link = (rssItem.Link == null) ? "" : rssItem.Link;
+            dtRssItem.date = rssItem.PubDateParsed;
             return dtRssItem;
         }
     }
@@ -194,8 +192,7 @@ namespace IndignadoServer.Services
             RssItem rssItem = new RssItem();
             rssItem.Title = dtRssItem.title;
             rssItem.Description = dtRssItem.description;
-            rssItem.Source.Text = dtRssItem.sourceText;
-            rssItem.Source.Url = dtRssItem.sourceUrl;
+            rssItem.Link = dtRssItem.link;
             rssItem.PubDate = dtRssItem.date;
             return rssItem;
         }

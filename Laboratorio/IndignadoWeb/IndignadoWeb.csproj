@@ -291,6 +291,7 @@
     <Content Include="Views\Home\MeetingsMap.cshtml" />
     <Content Include="Views\Home\MovementConfig.cshtml" />
     <Content Include="Views\Home\NewsList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTRssItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

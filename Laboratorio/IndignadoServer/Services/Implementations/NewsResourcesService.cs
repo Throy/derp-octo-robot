@@ -19,7 +19,7 @@ namespace IndignadoServer.Services
             List<RssItem> rssItemsList4 = RssDocument.Load(new System.Uri("http://cnnespanol.cnn.com/feed/")).Channel.Items;
         
             //List<RssItem> rssItemsList4 = RssDocument.Load(new System.Uri("http://es.autoblog.com/category/competicipn/rss.xml")).Channel.Items;
-
+            
 
             // create new rss items collection.
             Collection<RssItem> rssItemsCol = new Collection<RssItem>();

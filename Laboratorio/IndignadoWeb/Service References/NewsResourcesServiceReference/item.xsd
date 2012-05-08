@@ -14,10 +14,9 @@
   <xs:element name="ArrayOfDTRssItem" nillable="true" type="tns:ArrayOfDTRssItem" />
   <xs:complexType name="DTRssItem">
     <xs:sequence>
-      <xs:element minOccurs="0" name="date" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
       <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="sourceText" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="sourceUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="link" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

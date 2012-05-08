@@ -68,16 +68,13 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string dateField;
+        private System.DateTime dateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string descriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string sourceTextField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string sourceUrlField;
+        private string linkField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string titleField;
@@ -93,12 +90,12 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string date {
+        public System.DateTime date {
             get {
                 return this.dateField;
             }
             set {
-                if ((object.ReferenceEquals(this.dateField, value) != true)) {
+                if ((this.dateField.Equals(value) != true)) {
                     this.dateField = value;
                     this.RaisePropertyChanged("date");
                 }
@@ -119,27 +116,14 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string sourceText {
+        public string link {
             get {
-                return this.sourceTextField;
+                return this.linkField;
             }
             set {
-                if ((object.ReferenceEquals(this.sourceTextField, value) != true)) {
-                    this.sourceTextField = value;
-                    this.RaisePropertyChanged("sourceText");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string sourceUrl {
-            get {
-                return this.sourceUrlField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.sourceUrlField, value) != true)) {
-                    this.sourceUrlField = value;
-                    this.RaisePropertyChanged("sourceUrl");
+                if ((object.ReferenceEquals(this.linkField, value) != true)) {
+                    this.linkField = value;
+                    this.RaisePropertyChanged("link");
                 }
             }
         }
