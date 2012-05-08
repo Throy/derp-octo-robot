@@ -100,6 +100,9 @@ namespace IndignadoServer.Services
         public String link { get; set; }
 
         [DataMember]
+        public String image { get; set; }
+
+        [DataMember]
         public DateTime date { get; set; }
     }
 
@@ -128,7 +131,7 @@ namespace IndignadoServer.Services
             dtMeeting.idMovement = meeting.idMovimiento;
             dtMeeting.name = meeting.titulo;
             dtMeeting.description = meeting.descripcion;
-
+            // *** ***
             dtMeeting.locationLati = meeting.latitud + (float) random.NextDouble();
             dtMeeting.locationLong = meeting.longitud + (float)random.NextDouble();
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
@@ -150,8 +153,12 @@ namespace IndignadoServer.Services
         {
             DTRssItem dtRssItem = new DTRssItem();
             dtRssItem.title = rssItem.Title;
-            dtRssItem.description = Regex.Replace(rssItem.Description, @"</?(img|div|p|strong)[^>]*?>", string.Empty);
+            dtRssItem.description = Regex.Replace(rssItem.Description, @"</?(a|img|div|p|strong) ?[^>]*?>", string.Empty);
             dtRssItem.link = (rssItem.Link == null) ? "" : rssItem.Link;
+            dtRssItem.image = Regex.Match(rssItem.Description, @"<img[^>]*/>").Value;
+            dtRssItem.image = (dtRssItem.image == null) ? null : Regex.Match(dtRssItem.image, @"src\=\"".*?\""").Value;
+            dtRssItem.image = (dtRssItem.image == null) || (dtRssItem.image.Length < 5) ? null : dtRssItem.image.Substring(5);
+            dtRssItem.image = (dtRssItem.image == null) || (dtRssItem.image.Length < 5) ? null : dtRssItem.image.Substring (0, dtRssItem.image.Length - 1);
             dtRssItem.date = rssItem.PubDateParsed;
             return dtRssItem;
         }
