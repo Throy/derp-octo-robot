@@ -87,6 +87,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\NewsResourcesServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SessionServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -171,6 +176,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\MovAdminServiceReference\MovAdminService.wsdl" />
+    <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTRssItemsCol.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\NewsResourcesServiceReference\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NewsResourcesServiceReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NewsResourcesServiceReference\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NewsResourcesServiceReference\NewsResourcesService.wsdl" />
     <None Include="Service References\SessionServiceReference\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -225,6 +243,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\NewsResourcesServiceReference\item.disco" />
+    <None Include="Service References\NewsResourcesServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\NewsResourcesServiceReference\configuration.svcinfo" />
+    <None Include="Service References\NewsResourcesServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -265,6 +290,7 @@
     <Content Include="Views\Shared\DisplayTemplates\DTMovement.cshtml" />
     <Content Include="Views\Home\MeetingsMap.cshtml" />
     <Content Include="Views\Home\MovementConfig.cshtml" />
+    <Content Include="Views\Home\NewsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -278,6 +304,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\MeetingsServiceReference\" />
     <WCFMetadataStorage Include="Service References\MovAdminServiceReference\" />
+    <WCFMetadataStorage Include="Service References\NewsResourcesServiceReference\" />
     <WCFMetadataStorage Include="Service References\SessionServiceReference\" />
     <WCFMetadataStorage Include="Service References\SysAdminServiceReference\" />
     <WCFMetadataStorage Include="Service References\TestServiceReference\" />

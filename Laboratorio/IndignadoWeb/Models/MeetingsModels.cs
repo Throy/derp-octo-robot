@@ -21,11 +21,11 @@ namespace IndignadoWeb.Models
 
         [Required]
         [Display(Name = "Location - Latitude: ")]
-        public double locationLati { get; set; }
+        public float locationLati { get; set; }
 
         [Required]
         [Display(Name = "Location - Longitude: ")]
-        public double locationLong { get; set; }
+        public float locationLong { get; set; }
 
         [Required]
         [Display(Name = "Minimum quorum: ")]

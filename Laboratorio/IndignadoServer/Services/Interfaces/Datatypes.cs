@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using IndignadoServer.LinqDataContext;
+using RssToolkit.Rss;
 
 namespace IndignadoServer.Services
 {
@@ -84,6 +85,34 @@ namespace IndignadoServer.Services
         public Collection<DTMovement> items { get; set; }
     }
 
+    // RssItems datatype
+    [DataContract]
+    public class DTRssItem
+    {
+        [DataMember]
+        public String title { get; set; }
+
+        [DataMember]
+        public String description { get; set; }
+
+        [DataMember]
+        public String sourceText { get; set; }
+
+        [DataMember]
+        public String sourceUrl { get; set; }
+
+        [DataMember]
+        public String date { get; set; }
+    }
+
+    // RssItems Collection datatype
+    [DataContract]
+    public class DTRssItemsCol
+    {
+        [DataMember]
+        public Collection<DTRssItem> items { get; set; }
+    }
+
     // **********
     // conversors
     // **********
@@ -116,6 +145,18 @@ namespace IndignadoServer.Services
             dtMovement.locationLong = movement.longitud;
             return dtMovement;
         }
+
+        public static DTRssItem RssItemToDT(RssItem rssItem)
+        {
+            DTRssItem dtRssItem = new DTRssItem();
+            dtRssItem.title = rssItem.Title;
+            //Regex.Replace(rssItem.Description, @"<(.|\n)*?>", string.Empty, RegexOptions.IgnorePatternWhitespace);
+            dtRssItem.description = rssItem.Description;
+            dtRssItem.sourceText = (rssItem.Source == null) ? "" : rssItem.Source.Text;
+            dtRssItem.sourceUrl = (rssItem.Source == null) ? "" : rssItem.Source.Url;
+            dtRssItem.date = rssItem.PubDate;
+            return dtRssItem;
+        }
     }
 
     // converts datatypes to classes
@@ -146,6 +187,19 @@ namespace IndignadoServer.Services
             movement.longitud = dtMovement.locationLong;
             return movement;
         }
+
+        /*
+        public static RssItem DTToRssItem(DTRssItem dtRssItem)
+        {
+            RssItem rssItem = new RssItem();
+            rssItem.Title = dtRssItem.title;
+            rssItem.Description = dtRssItem.description;
+            rssItem.Source.Text = dtRssItem.sourceText;
+            rssItem.Source.Url = dtRssItem.sourceUrl;
+            rssItem.PubDate = dtRssItem.date;
+            return rssItem;
+        }
+         * */
     }
 
 }

@@ -11,7 +11,8 @@
     <RootNamespace>IndignadoServer</RootNamespace>
     <AssemblyName>IndignadoServer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -50,12 +51,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -91,6 +95,54 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RssToolkit\Opml\OpmlBody.cs" />
+    <Compile Include="RssToolkit\Opml\OpmlDocument.cs" />
+    <Compile Include="RssToolkit\Opml\OpmlHead.cs" />
+    <Compile Include="RssToolkit\Opml\OpmlOutline.cs" />
+    <Compile Include="RssToolkit\Opml\OutlineInfo.cs" />
+    <Compile Include="RssToolkit\Resources\RssToolkit.Designer.cs" />
+    <Compile Include="RssToolkit\Rss\CodeGeneration\ClassInfo.cs" />
+    <Compile Include="RssToolkit\Rss\CodeGeneration\PropertyInfo.cs" />
+    <Compile Include="RssToolkit\Rss\CodeGeneration\RssBuildProvider.cs" />
+    <Compile Include="RssToolkit\Rss\CodeGeneration\RssCodeGenerator.cs" />
+    <Compile Include="RssToolkit\Rss\CodeGeneration\RssCodeTreeGenerator.cs" />
+    <Compile Include="RssToolkit\Rss\CodeGeneration\RssDlBuildProvider.cs" />
+    <Compile Include="RssToolkit\Rss\Constants.cs" />
+    <Compile Include="RssToolkit\Rss\DocumentType.cs" />
+    <Compile Include="RssToolkit\Rss\DownloadManager.cs" />
+    <Compile Include="RssToolkit\Rss\Pluralizer.cs" />
+    <Compile Include="RssToolkit\Rss\RssAggregationEventArgs.cs" />
+    <Compile Include="RssToolkit\Rss\RssAggregator.cs" />
+    <Compile Include="RssToolkit\Rss\RssCategory.cs" />
+    <Compile Include="RssToolkit\Rss\RssChannel.cs" />
+    <Compile Include="RssToolkit\Rss\RssCloud.cs" />
+    <Compile Include="RssToolkit\Rss\RssDocument.cs" />
+    <Compile Include="RssToolkit\Rss\RssDocumentBase.cs" />
+    <Compile Include="RssToolkit\Rss\RssDocumentHttpHandler.cs" />
+    <Compile Include="RssToolkit\Rss\RssEnclosure.cs" />
+    <Compile Include="RssToolkit\Rss\RssGuid.cs" />
+    <Compile Include="RssToolkit\Rss\RssHttpHandlerBase.cs" />
+    <Compile Include="RssToolkit\Rss\RssHttpHandlerHelper.cs" />
+    <Compile Include="RssToolkit\Rss\RssImage.cs" />
+    <Compile Include="RssToolkit\Rss\RssItem.cs" />
+    <Compile Include="RssToolkit\Rss\RssSeverityType.cs" />
+    <Compile Include="RssToolkit\Rss\RssSkipDays.cs" />
+    <Compile Include="RssToolkit\Rss\RssSkipHours.cs" />
+    <Compile Include="RssToolkit\Rss\RssSource.cs" />
+    <Compile Include="RssToolkit\Rss\RssTextInput.cs" />
+    <Compile Include="RssToolkit\Rss\RssXmlHelper.cs" />
+    <Compile Include="RssToolkit\Rss\RssXmlSchemaValidator.cs" />
+    <Compile Include="RssToolkit\Web\Design\RssDataSourceConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RssToolkit\Web\Design\RssDataSourceConfigForm.Designer.cs">
+      <DependentUpon>RssDataSourceConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RssToolkit\Web\Design\RssDataSourceDesigner.cs" />
+    <Compile Include="RssToolkit\Web\Design\RssDataSourceView.cs" />
+    <Compile Include="RssToolkit\Web\WebControls\RssDataSource.cs" />
+    <Compile Include="RssToolkit\Web\WebControls\RssHyperLink.cs" />
+    <Compile Include="Services\Implementations\NewsResourcesService.cs" />
     <Compile Include="Services\Implementations\SessionService.cs" />
     <Compile Include="ITestService.cs" />
     <Compile Include="Program.cs" />
@@ -98,14 +150,13 @@
     <Compile Include="Services\Implementations\ChatsService.cs" />
     <Compile Include="Services\Implementations\MeetingsService.cs" />
     <Compile Include="Services\Implementations\MovAdminService.cs" />
-    <Compile Include="Services\Implementations\ResorceService.cs" />
     <Compile Include="Services\Implementations\SysAdminService.cs" />
     <Compile Include="Services\Implementations\UsersService.cs" />
     <Compile Include="Services\Interfaces\Datatypes.cs" />
     <Compile Include="Services\Interfaces\IChatsService.cs" />
     <Compile Include="Services\Interfaces\IMeetingsService.cs" />
     <Compile Include="Services\Interfaces\IMovAdminService.cs" />
-    <Compile Include="Services\Interfaces\IResorceService.cs" />
+    <Compile Include="Services\Interfaces\INewsResourcesService.cs" />
     <Compile Include="Services\Interfaces\ISessionService.cs" />
     <Compile Include="Services\Interfaces\ISysAdminService.cs" />
     <Compile Include="Services\Interfaces\IUsersService.cs" />
@@ -123,6 +174,9 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="RssToolkit\Resources\Rss20.xsd">
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +211,19 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RssToolkit\Resources\AtomToRss20.xsl" />
+    <Content Include="RssToolkit\Resources\RdfToRss20.xsl" />
+    <Content Include="RssToolkit\Resources\Rss20ToAtom.xsl" />
+    <Content Include="RssToolkit\Resources\Rss20ToOpml.xsl" />
+    <Content Include="RssToolkit\Resources\Rss20ToRdf.xsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RssToolkit\Resources\RssToolkit.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RssToolkit\Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

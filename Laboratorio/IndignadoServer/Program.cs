@@ -17,6 +17,7 @@ namespace IndignadoServer
             ServiceHost _svcHostSession = null;
             ServiceHost _svcHostMovAdmin = null;
             ServiceHost _svcHostSysAdmin = null;
+            ServiceHost _svcHostNewsResources = null;
             
             try
             {
@@ -28,6 +29,7 @@ namespace IndignadoServer
                 _svcHostMeetings = LoadMeetingsService();
                 _svcHostMovAdmin = LoadMovAdminService();
                 _svcHostSysAdmin = LoadSysAdminService();
+                _svcHostNewsResources = LoadNewsResourcesService();
 
                 // work!
                 
@@ -177,6 +179,31 @@ namespace IndignadoServer
             catch (Exception ex)
             {
                 Console.WriteLine("\nError at loading SysAdminService. ");
+                Console.WriteLine("Exception : " + ex.Message);
+                throw ex;
+            }
+
+            return svcHost;
+        }
+
+
+        // load sysadmin service
+        private static ServiceHost LoadNewsResourcesService()
+        {
+            ServiceHost svcHost = null;
+            try
+            {
+                Console.Write("Loading NewsResourcesService ... ");
+
+                // Create Service Host.
+                svcHost = new ServiceHost(typeof(NewsResourcesService));
+                svcHost.Open();
+
+                Console.WriteLine("Done!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\nError at loading NewsResourcesService. ");
                 Console.WriteLine("Exception : " + ex.Message);
                 throw ex;
             }

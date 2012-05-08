@@ -9,6 +9,7 @@ using IndignadoWeb.MovAdminServiceReference;
 using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.Models;
 using IndignadoWeb.TestServiceReference;
+using IndignadoWeb.NewsResourcesServiceReference;
 
 namespace IndignadoWeb.Controllers
 {
@@ -121,8 +122,11 @@ namespace IndignadoWeb.Controllers
                 // create new meeting
                 DTMeeting dtMeeting = new DTMeeting();
                 dtMeeting.id = -1;
+                dtMeeting.idMovement = 0;
                 dtMeeting.name = model.name;
                 dtMeeting.description = model.description;
+                dtMeeting.locationLati = model.locationLati;
+                dtMeeting.locationLong = model.locationLong;
                 dtMeeting.minQuorum = model.minQuorum;
                 serv.createMeeting(dtMeeting);
 
@@ -266,6 +270,18 @@ namespace IndignadoWeb.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        // shows all news in a list.
+        public ActionResult NewsList()
+        {
+            // open service
+            INewsResourcesService serv = GetService<INewsResourcesService>("http://localhost:8730/IndignadoServer/NewsResourcesService/");
+
+            // get all news
+            DTRssItemsCol rssItemsCol = serv.getNewsList();
+
+            return View(rssItemsCol);
         }
     }
 }
