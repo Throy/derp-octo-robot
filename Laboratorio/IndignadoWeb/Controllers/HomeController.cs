@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
-using System.ServiceModel;
-using IndignadoWeb.MeetingsServiceReference;
-using IndignadoWeb.MovAdminServiceReference;
-using IndignadoWeb.SysAdminServiceReference;
-using IndignadoWeb.Models;
-using IndignadoWeb.TestServiceReference;
 using IndignadoWeb.Common;
+using IndignadoWeb.MeetingsServiceReference;
+using IndignadoWeb.Models;
+using IndignadoWeb.MovAdminServiceReference;
 using IndignadoWeb.NewsResourcesServiceReference;
 using IndignadoWeb.SessionServiceReference;
-using System.Web.Security;
+using IndignadoWeb.SysAdminServiceReference;
+using IndignadoWeb.TestServiceReference;
 
 namespace IndignadoWeb.Controllers
 {
@@ -124,7 +121,7 @@ namespace IndignadoWeb.Controllers
                 // create new meeting
                 DTMeeting dtMeeting = new DTMeeting();
                 dtMeeting.id = -1;
-                dtMeeting.idMovement = 0;
+                dtMeeting.idMovement = -1;
                 dtMeeting.name = model.name;
                 dtMeeting.description = model.description;
                 dtMeeting.locationLati = model.locationLati;
@@ -145,8 +142,6 @@ namespace IndignadoWeb.Controllers
             // If we got this far, something failed, redisplay form
             return View (model);
         }
-
-
 
         // shows all movements in a list.
         public ActionResult MovementsList()
@@ -224,7 +219,7 @@ namespace IndignadoWeb.Controllers
             return View(model);
         }
 
-        // configure  movement.
+        // configure movement.
         [HttpPost]
         public ActionResult MovementConfig(SingleMovementModel model)
         {
@@ -289,6 +284,61 @@ namespace IndignadoWeb.Controllers
             DTResourcesCol resourcesCol = serv.getResourcesList();
 
             return View(resourcesCol);
+        }
+
+        // create resource.
+        public ActionResult ResourceShare(CreateResourceModel model)
+        {
+            return View(model);
+        }
+
+        // create resource.
+        [HttpPost]
+        public ActionResult ResourceShare(string buttonShare, string buttonGetData, CreateResourceModel model)
+        {
+            // button share
+            if (buttonShare != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>("http://localhost:8730/IndignadoServer/NewsResourcesService/");
+
+                    // create new meeting
+                    DTResource dtResource = new DTResource();
+                    dtResource.id = -1;
+                    dtResource.idUser = -1;
+                    dtResource.title = model.title;
+                    dtResource.description = model.description;
+                    dtResource.link = model.link;
+                    dtResource.thumbnail = model.thumbnail;
+                    serv.createResource(dtResource);
+
+                    // open resources list view.
+                    return RedirectToAction("ResourcesList");
+                }
+
+                // If we got this far, something failed, redisplay form
+                return View(model);
+            }
+
+            // button get data from link
+            else if (buttonGetData != null)
+            {
+                // open service
+                INewsResourcesService serv = GetService<INewsResourcesService>("http://localhost:8730/IndignadoServer/NewsResourcesService/");
+                
+                // get data
+                DTResource dtResource = serv.getResourceData(model.link);
+                model.title = dtResource.title;
+                model.description = dtResource.description;
+                model.thumbnail = dtResource.thumbnail;
+
+                // update data in view.
+                return RedirectToAction("ResourceShare", model);
+            }
+            
+            return View(model);
         }
     }
 }

@@ -15,5 +15,11 @@ namespace IndignadoServer.Controllers
 
         // returns all resources.
         Collection<Recurso> getResourcesList();
+
+        // creates a resource.
+        void createResource(Recurso resource);
+        
+        // geta resource data from the link.
+        Recurso getResourceData(string link);
     }
 }

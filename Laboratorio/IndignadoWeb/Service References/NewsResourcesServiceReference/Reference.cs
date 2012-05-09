@@ -378,6 +378,12 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/getResourcesList", ReplyAction="http://tempuri.org/INewsResourcesService/getResourcesListResponse")]
         IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol getResourcesList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/createResource", ReplyAction="http://tempuri.org/INewsResourcesService/createResourceResponse")]
+        void createResource(IndignadoWeb.NewsResourcesServiceReference.DTResource dtResource);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/getResourceData", ReplyAction="http://tempuri.org/INewsResourcesService/getResourceDataResponse")]
+        IndignadoWeb.NewsResourcesServiceReference.DTResource getResourceData(string link);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -413,6 +419,14 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         
         public IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol getResourcesList() {
             return base.Channel.getResourcesList();
+        }
+        
+        public void createResource(IndignadoWeb.NewsResourcesServiceReference.DTResource dtResource) {
+            base.Channel.createResource(dtResource);
+        }
+        
+        public IndignadoWeb.NewsResourcesServiceReference.DTResource getResourceData(string link) {
+            return base.Channel.getResourceData(link);
         }
     }
 }

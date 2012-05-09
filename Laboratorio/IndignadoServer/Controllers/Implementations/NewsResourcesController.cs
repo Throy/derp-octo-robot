@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using IndignadoServer.LinqDataContext;
 using RssToolkit.Rss;
+using System.Text.RegularExpressions;
+using System.Net;
 
 namespace IndignadoServer.Controllers
 {
@@ -62,12 +64,60 @@ namespace IndignadoServer.Controllers
 
             // create new resources collection.
             Collection<Recurso> recursosCol = new Collection<Recurso>();
-            foreach (Recurso meeting in recursosEnum)
+            foreach (Recurso resource in recursosEnum)
             {
-                recursosCol.Add(meeting);
+                recursosCol.Add(resource);
             }
 
             return recursosCol;
+        }
+
+        // creates a resource.
+        public void createResource(Recurso resource)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+
+            // set internal and foreign ids
+            resource.idUsuario = UserInfo.Id;
+            resource.fecha = DateTime.UtcNow;
+
+            indignadoContext.Recursos.InsertOnSubmit(resource);
+            indignadoContext.SubmitChanges();
+        }
+
+        /// <summary>
+        /// gets resource data from the link.
+        /// </summary>
+        /// <param name="link"></param>
+        /// <returns></returns>
+ 
+        public Recurso getResourceData(string link)
+        {
+            // create resource
+            Recurso resource = new Recurso();
+            
+            // get website
+            string website = new WebClient().DownloadString(link);
+
+            // get data
+            if (website != null)
+            {
+                // get title
+                resource.titulo = Regex.Match(website, @"<title>(.+?)</title>").Value;
+                resource.titulo = (resource.titulo == null) || (resource.titulo.Length < 7) ? null : resource.titulo.Substring(7);
+                resource.titulo = (resource.titulo == null) || (resource.titulo.Length < 7) ? null : resource.titulo.Substring(0, resource.titulo.Length - 8);
+
+                // get description
+                resource.descripcion = Regex.Match(website, @"<meta(.+?)name\=\""(description|Description)\""(.+?)(/\s*|></\s*meta>)>").Value;
+                resource.descripcion = (resource.descripcion == null) ? null : Regex.Match(resource.descripcion, @"content\=\"".*?\""").Value;
+                resource.descripcion = (resource.descripcion == null) || (resource.descripcion.Length < 9) ? null : resource.descripcion.Substring(9);
+                resource.descripcion = (resource.descripcion == null) || (resource.descripcion.Length < 5) ? null : resource.descripcion.Substring(0, resource.descripcion.Length - 1);
+                
+                // get images
+                //resource.logo;
+            }
+
+            return resource;
         }
     }
 }

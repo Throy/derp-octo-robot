@@ -15,7 +15,6 @@ namespace IndignadoWeb.Models
         [Display(Name = "Name: ")]
         public String name { get; set; }
 
-        [Required]
         [Display(Name = "Description: ")]
         public String description { get; set; }
 

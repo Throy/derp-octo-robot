@@ -76,8 +76,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\MovementsModels.cs" />
     <Compile Include="Models\MeetingsModels.cs" />
+    <Compile Include="Models\MovementsModels.cs" />
+    <Compile Include="Models\ResourceModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\MeetingsServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -178,6 +179,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\MovAdminServiceReference\MovAdminService.wsdl" />
+    <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTResource.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -305,6 +309,7 @@
     <Content Include="Views\Shared\DisplayTemplates\DTRssItem.cshtml" />
     <Content Include="Views\Home\ResourcesList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTResource.cshtml" />
+    <Content Include="Views\Home\ResourceShare.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

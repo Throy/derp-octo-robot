@@ -60,5 +60,17 @@ namespace IndignadoServer.Services
             // return the collection.
             return dtResourcesCol;
         }
+
+        // creates a resource.
+        public void createResource (DTResource dtResource)
+        {
+            ControllersHub.Instance.getINewsResourcesController().createResource (DTToClass.DTToResource (dtResource));
+        }
+
+        // geta resource data from the link.
+        public DTResource getResourceData(string link)
+        {
+            return ClassToDT.ResourceToDT(ControllersHub.Instance.getINewsResourcesController().getResourceData(link));
+        }
     }
 }

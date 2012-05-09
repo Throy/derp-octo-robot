@@ -216,7 +216,7 @@ namespace IndignadoServer.Services
             dtResource.description = resource.descripcion;
             dtResource.link = resource.link;
             dtResource.thumbnail = resource.logo;
-            dtResource.date = resource.fecha.Value;
+            dtResource.date = (resource.fecha == null) ? new DateTime() : resource.fecha.Value;
             dtResource.numberLikes = 0;
             return dtResource;
         }
@@ -264,13 +264,13 @@ namespace IndignadoServer.Services
         }
          * */
 
-        public static Recurso ResourceToDT(DTResource dtResource)
+        public static Recurso DTToResource(DTResource dtResource)
         {
             Recurso resource = new Recurso();
             resource.id = dtResource.id;
             resource.idUsuario = dtResource.idUser;
             resource.titulo = dtResource.title;
-            resource.descripcion= dtResource.description;
+            resource.descripcion = dtResource.description;
             resource.link = dtResource.link;
             resource.logo = dtResource.thumbnail;
             resource.fecha = dtResource.date;

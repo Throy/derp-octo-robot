@@ -13,5 +13,13 @@ namespace IndignadoServer.Services
         // returns all resources.
         [OperationContract]
         DTResourcesCol getResourcesList();
+
+        // creates a resource.
+        [OperationContract]
+        void createResource (DTResource dtResource);
+
+        // geta resource data from the link.
+        [OperationContract]
+        DTResource getResourceData(string link);
     }
 }
