@@ -127,6 +127,43 @@ namespace IndignadoServer.Services
         public Collection<DTRssItem> items { get; set; }
     }
 
+    // Resource datatype
+    [DataContract]
+    public class DTResource
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public int idUser { get; set; }
+
+        [DataMember]
+        public String title { get; set; }
+
+        [DataMember]
+        public String description { get; set; }
+
+        [DataMember]
+        public String link { get; set; }
+
+        [DataMember]
+        public String thumbnail { get; set; }
+
+        [DataMember]
+        public DateTime date { get; set; }
+
+        [DataMember]
+        public int numberLikes { get; set; }
+    }
+
+    // Resource Collection datatype
+    [DataContract]
+    public class DTResourcesCol
+    {
+        [DataMember]
+        public Collection<DTResource> items { get; set; }
+    }
+
     // **********
     // conversors
     // **********
@@ -176,6 +213,20 @@ namespace IndignadoServer.Services
             dtRssItem.date = rssItem.PubDateParsed;
             return dtRssItem;
         }
+
+        public static DTResource ResourceToDT(Recurso resource)
+        {
+            DTResource dtResource = new DTResource();
+            dtResource.id = resource.id;
+            dtResource.idUser = resource.idUsuario;
+            dtResource.title = resource.titulo;
+            dtResource.description = resource.descripcion;
+            dtResource.link = resource.link;
+            dtResource.thumbnail = resource.logo;
+            dtResource.date = resource.fecha.Value;
+            dtResource.numberLikes = 0;
+            return dtResource;
+        }
     }
 
     // converts datatypes to classes
@@ -219,6 +270,19 @@ namespace IndignadoServer.Services
             return rssItem;
         }
          * */
+
+        public static Recurso ResourceToDT(DTResource dtResource)
+        {
+            Recurso resource = new Recurso();
+            resource.id = dtResource.id;
+            resource.idUsuario = dtResource.idUser;
+            resource.titulo = dtResource.title;
+            resource.descripcion= dtResource.description;
+            resource.link = dtResource.link;
+            resource.logo = dtResource.thumbnail;
+            resource.fecha = dtResource.date;
+            return resource;
+        }
     }
 
 }

@@ -277,5 +277,17 @@ namespace IndignadoWeb.Controllers
 
             return View(rssItemsCol);
         }
+
+        // shows all resources in a list.
+        public ActionResult ResourcesList()
+        {
+            // open service
+            INewsResourcesService serv = GetService<INewsResourcesService>("http://localhost:8730/IndignadoServer/NewsResourcesService/");
+
+            // get all news
+            DTResourcesCol resourcesCol = serv.getResourcesList();
+
+            return View(resourcesCol);
+        }
     }
 }
