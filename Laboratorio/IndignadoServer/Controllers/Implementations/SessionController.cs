@@ -63,7 +63,7 @@ namespace IndignadoServer.Controllers
 
         public bool ValidateToken(int idMovmiento, String token)
         {
-            if (_usersOnline[token] == null)
+            if (!_usersOnline.ContainsKey(token))
                 return false;
             
             return _usersOnline[token].IdMovimiento == idMovmiento;

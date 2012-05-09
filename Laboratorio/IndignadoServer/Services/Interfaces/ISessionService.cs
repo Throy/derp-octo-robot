@@ -18,6 +18,9 @@ namespace IndignadoServer
         String Login(int idMovmiento, String userName, String password);
 
         [OperationContract]
+        bool ValidateToken(int idMovmiento, String token);
+
+        [OperationContract]
         DTTenantInfo GetTenantInfo(String movimiento);
     }
 }

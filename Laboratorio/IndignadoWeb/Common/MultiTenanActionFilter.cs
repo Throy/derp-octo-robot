@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.ServiceModel;
 using IndignadoWeb.SessionServiceReference;
+using System.Web.Security;
 
 namespace IndignadoWeb.Common
 {
@@ -21,6 +22,19 @@ namespace IndignadoWeb.Common
 
             filterContext.HttpContext.Session.Add("tenantInfo", _tenantInfo);
             filterContext.ActionParameters["tenantInfo"] = _tenantInfo;
+
+            if (filterContext.HttpContext.Session["token"] != null)
+            {
+                if (!session.ValidateToken(_tenantInfo.id, filterContext.HttpContext.Session["token"] as String))
+                {
+                    filterContext.HttpContext.Session.Abandon();
+                    FormsAuthentication.SignOut();
+                }
+            }
+            else
+            {
+                FormsAuthentication.SignOut();
+            }
 
             (session as ICommunicationObject).Close();
         }

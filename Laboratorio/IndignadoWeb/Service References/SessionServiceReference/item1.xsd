@@ -17,6 +17,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ValidateToken">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idMovmiento" type="xs:int" />
+        <xs:element minOccurs="0" name="token" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidateTokenResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ValidateTokenResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetTenantInfo">
     <xs:complexType>
       <xs:sequence>

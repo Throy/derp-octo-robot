@@ -134,6 +134,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ISessionService_ValidateToken_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ISessionService_ValidateToken_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_ISessionService_GetTenantInfo_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -185,6 +223,12 @@
   <wsdl:message name="ISessionService_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
+  <wsdl:message name="ISessionService_ValidateToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateToken" />
+  </wsdl:message>
+  <wsdl:message name="ISessionService_ValidateToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateTokenResponse" />
+  </wsdl:message>
   <wsdl:message name="ISessionService_GetTenantInfo_InputMessage">
     <wsdl:part name="parameters" element="tns:GetTenantInfo" />
   </wsdl:message>
@@ -195,6 +239,10 @@
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/ISessionService/Login" message="tns:ISessionService_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISessionService/LoginResponse" message="tns:ISessionService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISessionService/ValidateToken" message="tns:ISessionService_ValidateToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISessionService/ValidateTokenResponse" message="tns:ISessionService_ValidateToken_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetTenantInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/ISessionService/GetTenantInfo" message="tns:ISessionService_GetTenantInfo_InputMessage" />
@@ -212,6 +260,17 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_ISessionService_Login_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateToken">
+      <soap12:operation soapAction="http://tempuri.org/ISessionService/ValidateToken" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_ISessionService_ValidateToken_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_ISessionService_ValidateToken_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

@@ -12,6 +12,7 @@ using IndignadoWeb.TestServiceReference;
 using IndignadoWeb.Common;
 using IndignadoWeb.NewsResourcesServiceReference;
 using IndignadoWeb.SessionServiceReference;
+using System.Web.Security;
 
 namespace IndignadoWeb.Controllers
 {
