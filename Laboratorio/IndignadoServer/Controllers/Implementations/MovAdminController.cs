@@ -7,21 +7,21 @@ using IndignadoServer.LinqDataContext;
 
 namespace IndignadoServer.Controllers
 {
-    class MovAdminController : IMovAdminController
+    class MovAdminController : IndignadoController, IMovAdminController
     {
         // ******************
         // controller methods
         // ******************
 
-        // gets a movement by its id.
-        public Movimiento getMovement(int idMovement)
+        // gets the admin's movement.
+        public Movimiento getMovement()
         {
             // get movement from database
             Movimiento movement;
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             try
             {
-                movement = indignadoContext.Movimientos.Single(x => x.id == idMovement);
+                movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
             }
             catch
             {

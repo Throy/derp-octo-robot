@@ -29,6 +29,9 @@ namespace IndignadoWeb.MovAdminServiceReference {
         private int idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idLayoutField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private float locationLatiField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -69,6 +72,19 @@ namespace IndignadoWeb.MovAdminServiceReference {
                 if ((this.idField.Equals(value) != true)) {
                     this.idField = value;
                     this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idLayout {
+            get {
+                return this.idLayoutField;
+            }
+            set {
+                if ((this.idLayoutField.Equals(value) != true)) {
+                    this.idLayoutField = value;
+                    this.RaisePropertyChanged("idLayout");
                 }
             }
         }
@@ -127,7 +143,7 @@ namespace IndignadoWeb.MovAdminServiceReference {
     public interface IMovAdminService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getMovement", ReplyAction="http://tempuri.org/IMovAdminService/getMovementResponse")]
-        IndignadoWeb.MovAdminServiceReference.DTMovement getMovement(int idMovement);
+        IndignadoWeb.MovAdminServiceReference.DTMovement getMovement();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/setMovement", ReplyAction="http://tempuri.org/IMovAdminService/setMovementResponse")]
         void setMovement(IndignadoWeb.MovAdminServiceReference.DTMovement dtMovement);
@@ -160,8 +176,8 @@ namespace IndignadoWeb.MovAdminServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public IndignadoWeb.MovAdminServiceReference.DTMovement getMovement(int idMovement) {
-            return base.Channel.getMovement(idMovement);
+        public IndignadoWeb.MovAdminServiceReference.DTMovement getMovement() {
+            return base.Channel.getMovement();
         }
         
         public void setMovement(IndignadoWeb.MovAdminServiceReference.DTMovement dtMovement) {

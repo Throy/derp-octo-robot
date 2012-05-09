@@ -27,8 +27,8 @@
         
         @foreach (var item in Model.items)
         {
-            String latitud = item.locationLati.ToString("R").Replace(",", ".");
-            String longitud = item.locationLong.ToString("R").Replace(",", ".");
+            String latitud = item.locationLati.ToString().Replace(",", ".");
+            String longitud = item.locationLong.ToString().Replace(",", ".");
         <text>
             var marker = new google.maps.Marker({
                 map: map,

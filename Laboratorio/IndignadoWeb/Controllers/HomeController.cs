@@ -209,7 +209,7 @@ namespace IndignadoWeb.Controllers
             IMovAdminService serv = GetService<IMovAdminService>("http://localhost:8730/IndignadoServer/MovAdminService/");
 
             // get movement
-            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv.getMovement(0);
+            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv.getMovement();
 
             // close service
             (serv as ICommunicationObject).Close();

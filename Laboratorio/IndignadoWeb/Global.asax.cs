@@ -49,11 +49,7 @@ namespace IndignadoWeb
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-        }
-
-        protected void Application_Disposed()
-        {
-            Session.Abandon();
+            ModelBinders.Binders.Add(typeof(float), new DecimalModelBinder());
         }
     }
 }

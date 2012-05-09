@@ -65,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DecimalModelBinder.cs" />
     <Compile Include="Common\DomainData.cs" />
     <Compile Include="Common\DomainRoute.cs" />
     <Compile Include="Common\LinkExtensions.cs" />

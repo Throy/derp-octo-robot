@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
 using IndignadoServer.LinqDataContext;
 using RssToolkit.Rss;
 using System.Text.RegularExpressions;
@@ -172,8 +168,6 @@ namespace IndignadoServer.Services
 
     public class ClassToDT
     {
-        public static Random random = new Random();
-
         public static DTMeeting MeetingToDT (Convocatoria meeting)
         {
             DTMeeting dtMeeting = new DTMeeting();
@@ -181,9 +175,8 @@ namespace IndignadoServer.Services
             dtMeeting.idMovement = meeting.idMovimiento;
             dtMeeting.name = meeting.titulo;
             dtMeeting.description = meeting.descripcion;
-            // *** ***
-            dtMeeting.locationLati = meeting.latitud + (float) random.NextDouble();
-            dtMeeting.locationLong = meeting.longitud + (float)random.NextDouble();
+            dtMeeting.locationLati = meeting.latitud;
+            dtMeeting.locationLong = meeting.longitud;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
             return dtMeeting;
         }
