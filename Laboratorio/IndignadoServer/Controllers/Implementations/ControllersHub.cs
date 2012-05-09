@@ -14,6 +14,7 @@ namespace IndignadoServer.Controllers
         private static IMeetingsController _iMeetingsController;
         private static ISysAdminController _iSysAdminController;
         private static IMovAdminController _iMovAdminController;
+        private static INewsResourcesController _iNewsResourcesController;
         // ...
 
         private ControllersHub()
@@ -32,6 +33,7 @@ namespace IndignadoServer.Controllers
                     _iMeetingsController = new MeetingsController();
                     _iSysAdminController = new SysAdminController();
                     _iMovAdminController = new MovAdminController();
+                    _iNewsResourcesController = new NewsResourcesController();
                 }
                 return _instance;
             }
@@ -59,6 +61,12 @@ namespace IndignadoServer.Controllers
         public IMovAdminController getIMovAdminController()
         {
             return _iMovAdminController;
+        }
+
+        // returns an instance of the INewsResourcesController.
+        public INewsResourcesController getINewsResourcesController()
+        {
+            return _iNewsResourcesController;
         }
 
         /*
