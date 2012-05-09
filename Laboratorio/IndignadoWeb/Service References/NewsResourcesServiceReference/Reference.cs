@@ -167,12 +167,217 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTResourcesCol", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTResourcesCol : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.NewsResourcesServiceReference.DTResource[] itemsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.NewsResourcesServiceReference.DTResource[] items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
+                    this.itemsField = value;
+                    this.RaisePropertyChanged("items");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTResource", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTResource : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime dateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string descriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idUserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string linkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int numberLikesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string thumbnailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string titleField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime date {
+            get {
+                return this.dateField;
+            }
+            set {
+                if ((this.dateField.Equals(value) != true)) {
+                    this.dateField = value;
+                    this.RaisePropertyChanged("date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.descriptionField, value) != true)) {
+                    this.descriptionField = value;
+                    this.RaisePropertyChanged("description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idUser {
+            get {
+                return this.idUserField;
+            }
+            set {
+                if ((this.idUserField.Equals(value) != true)) {
+                    this.idUserField = value;
+                    this.RaisePropertyChanged("idUser");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string link {
+            get {
+                return this.linkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.linkField, value) != true)) {
+                    this.linkField = value;
+                    this.RaisePropertyChanged("link");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int numberLikes {
+            get {
+                return this.numberLikesField;
+            }
+            set {
+                if ((this.numberLikesField.Equals(value) != true)) {
+                    this.numberLikesField = value;
+                    this.RaisePropertyChanged("numberLikes");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string thumbnail {
+            get {
+                return this.thumbnailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.thumbnailField, value) != true)) {
+                    this.thumbnailField = value;
+                    this.RaisePropertyChanged("thumbnail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string title {
+            get {
+                return this.titleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.titleField, value) != true)) {
+                    this.titleField = value;
+                    this.RaisePropertyChanged("title");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NewsResourcesServiceReference.INewsResourcesService")]
     public interface INewsResourcesService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/getNewsList", ReplyAction="http://tempuri.org/INewsResourcesService/getNewsListResponse")]
         IndignadoWeb.NewsResourcesServiceReference.DTRssItemsCol getNewsList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/getResourcesList", ReplyAction="http://tempuri.org/INewsResourcesService/getResourcesListResponse")]
+        IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol getResourcesList();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -204,6 +409,10 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         
         public IndignadoWeb.NewsResourcesServiceReference.DTRssItemsCol getNewsList() {
             return base.Channel.getNewsList();
+        }
+        
+        public IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol getResourcesList() {
+            return base.Channel.getResourcesList();
         }
     }
 }

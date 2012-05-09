@@ -22,4 +22,29 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTRssItem" nillable="true" type="tns:DTRssItem" />
+  <xs:complexType name="DTResourcesCol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTResource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTResourcesCol" nillable="true" type="tns:DTResourcesCol" />
+  <xs:complexType name="ArrayOfDTResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTResource" nillable="true" type="tns:DTResource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTResource" nillable="true" type="tns:ArrayOfDTResource" />
+  <xs:complexType name="DTResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="idUser" type="xs:int" />
+      <xs:element minOccurs="0" name="link" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="numberLikes" type="xs:int" />
+      <xs:element minOccurs="0" name="thumbnail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTResource" nillable="true" type="tns:DTResource" />
 </xs:schema>

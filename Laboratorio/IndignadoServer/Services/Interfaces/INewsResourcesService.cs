@@ -9,5 +9,9 @@ namespace IndignadoServer.Services
         // returns all rss items.
         [OperationContract]
         DTRssItemsCol getNewsList();
+
+        // returns all resources.
+        [OperationContract]
+        DTResourcesCol getResourcesList();
     }
 }

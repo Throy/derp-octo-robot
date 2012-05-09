@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using RssToolkit.Rss;
+using IndignadoServer.Controllers;
+using IndignadoServer.LinqDataContext;
 
 namespace IndignadoServer.Services
 {
@@ -33,7 +35,7 @@ namespace IndignadoServer.Services
 
             /* esto sí va en el servicio 
              
-             * rssItemsCol = NewsResourcesController.getResourcesList()
+             * rssItemsCol = NewsResourcesController.getNewsList()
              * 
              */
 
@@ -45,6 +47,48 @@ namespace IndignadoServer.Services
             }
 
             return dtRssItemsCol;
+        }
+
+        // returns all resources.
+        public DTResourcesCol getResourcesList()
+        {
+            // only get meetings from this movement.
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>("SELECT id, idUsuario, titulo, descripcion, logo, fecha, tipo, link FROM Recursos"); // *** FALTA AGREGAR WHERE idMovimiento = {0}", IdMovimiento);
+
+            Collection<Recurso> recursosCol = new Collection<Recurso>();
+            foreach (Recurso meeting in recursosEnum)
+            {
+                recursosCol.Add(meeting);
+            }
+
+            /* esto sí va en el servicio 
+             
+             * recursosCol = NewsResourcesController.getResourcesList()
+             * 
+             */
+
+            DTResourcesCol dtResourcesCol = new DTResourcesCol();
+            dtResourcesCol.items = new Collection<DTResource>();
+
+            // add meetings to the datatype collection
+            foreach (Recurso resource in recursosCol)
+            {
+                dtResourcesCol.items.Add(ClassToDT.ResourceToDT(resource));
+            }
+
+            DTResource dtResource = new DTResource();
+            dtResource.id = 0;
+            dtResource.idUser = 1;
+            dtResource.title = "Autito";
+            dtResource.description = "el juego revolucionarazo";
+            dtResource.link = "autito.tk";
+            dtResource.thumbnail = "logo_autito.gif";
+            dtResource.date = new System.DateTime (2012, 05, 24, 20, 38, 0);
+            dtResource.numberLikes = 38;
+            dtResourcesCol.items.Add(dtResource);
+
+            return dtResourcesCol;
         }
     }
 }

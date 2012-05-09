@@ -13,4 +13,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getResourcesList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getResourcesListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getResourcesListResult" nillable="true" type="q2:DTResourcesCol" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
