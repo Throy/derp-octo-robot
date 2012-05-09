@@ -11,7 +11,7 @@ namespace IndignadoServer
 
     public class IndignadoController
     {
-        public int IdMovimiento
+        public int IdMovement
         {
             get
             {

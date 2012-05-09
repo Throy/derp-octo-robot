@@ -11,9 +11,9 @@ namespace IndignadoServer.Services
     [ServiceContract]
     public interface IMovAdminService
     {
-        // gets a movement by its id.
+        // gets the admin's movement.
         [OperationContract]
-        DTMovement getMovement(int idMovement);
+        DTMovement getMovement();
 
         // changes the configuration of the movement.
         [OperationContract]

@@ -9,8 +9,8 @@ namespace IndignadoServer.Controllers
 {
     interface IMovAdminController
     {
-        // gets a movement by its id.
-        Movimiento getMovement(int idMovement);
+        // gets the admin's movement.
+        Movimiento getMovement();
 
         // changes the configuration of the movement.
         void setMovement(Movimiento dtMovement);

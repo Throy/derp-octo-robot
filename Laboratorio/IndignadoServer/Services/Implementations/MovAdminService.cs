@@ -11,12 +11,12 @@ namespace IndignadoServer.Services
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "MovAdmin" in both code and config file together.
     public class MovAdminService : IMovAdminService
     {
-        // gets a movement by its id.
-        public DTMovement getMovement(int idMovement)
+        // gets the admin's movement.
+        public DTMovement getMovement()
         {
             try
             {
-                return ClassToDT.MovementToDT(ControllersHub.Instance.getIMovAdminController().getMovement(idMovement));
+                return ClassToDT.MovementToDT(ControllersHub.Instance.getIMovAdminController().getMovement());
             }
             catch
             {
