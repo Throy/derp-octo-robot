@@ -20,23 +20,15 @@ namespace IndignadoWeb.Models
         public String description { get; set; }
 
         [Required]
+        [Display(Name = "Layout: ")]
+        public int layoutId { get; set; }
+
+        [Required]
         [Display(Name = "Location - Latitude: ")]
         public float locationLati { get; set; }
 
         [Required]
         [Display(Name = "Location - Longitude: ")]
         public float locationLong { get; set; }
-
-        [Required]
-        [Display(Name = "Admin nick: ")]
-        public String adminNick { get; set; }
-
-        [Required]
-        [Display(Name = "Admin password: ")]
-        public String adminPassword { get; set; }
-
-        [Required]
-        [Display(Name = "Admin mail: ")]
-        public String adminMail { get; set; }
     }
 }

@@ -4,6 +4,7 @@
 <!-- page title -->
 @{
     ViewBag.Title = "Indignado Framework - Meetings map";
+    
 }
 
 <!-- scripts -->
@@ -26,11 +27,13 @@
         
         @foreach (var item in Model.items)
         {
+            String latitud = item.locationLati.ToString("R").Replace(",", ".");
+            String longitud = item.locationLong.ToString("R").Replace(",", ".");
         <text>
             var marker = new google.maps.Marker({
                 map: map,
-                position: new google.maps.LatLng(-34.2 + Math.random(), -56.6 + Math.random())
-                title: "Hello World " + '@item.description'
+                position: new google.maps.LatLng(@latitud, @longitud),
+                title: "Hello World"
             });
         </text>
         }
@@ -38,7 +41,6 @@
 </script>
 
 <!-- page content -->
-
 <h2>Meetings map</h2>
 
 <div id="map_canvas" style="width: 400px; height:300px"></div>

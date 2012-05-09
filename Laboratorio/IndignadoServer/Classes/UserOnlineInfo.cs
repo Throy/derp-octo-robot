@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace IndignadoServer
 {
-    class UserOnlineInfo
+    public class UserOnlineInfo
     {
         private int _id;
         private int _idMovimiento;
@@ -29,9 +29,9 @@ namespace IndignadoServer
 
             ArrayList list = new ArrayList();
             list.Add(IndignadoServer.Roles.RegUser);
-            if ((privilegios & 2) != 0)
+            if ((privilegios & IndignadoServer.Roles.MovAdminMask) != 0)
                 list.Add(IndignadoServer.Roles.MovAdmin);
-            if ((privilegios & 4) != 0)
+            if ((privilegios & IndignadoServer.Roles.SysAdminMask) != 0)
                 list.Add(IndignadoServer.Roles.SysAdmin);
 
             _roles = list.ToArray(typeof(string)) as string[];

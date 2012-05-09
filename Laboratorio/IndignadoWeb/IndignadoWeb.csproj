@@ -68,6 +68,7 @@
     <Compile Include="Common\DomainData.cs" />
     <Compile Include="Common\DomainRoute.cs" />
     <Compile Include="Common\LinkExtensions.cs" />
+    <Compile Include="Common\MultiTenanActionFilter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -176,6 +177,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\MovAdminServiceReference\MovAdminService.wsdl" />
+    <None Include="Service References\SessionServiceReference\IndignadoWeb.SessionServiceReference.DTTenantInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTRssItemsCol.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -193,6 +197,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SessionServiceReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SessionServiceReference\item2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SessionServiceReference\SessionService.wsdl" />
@@ -283,7 +290,7 @@
     </Content>
     <Content Include="Views\Home\MeetingsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMeeting.cshtml" />
-    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_Default.cshtml" />
     <Content Include="Views\Home\MeetingCreate.cshtml" />
     <Content Include="Views\Home\MovementCreate.cshtml" />
     <Content Include="Views\Home\MovementsList.cshtml" />

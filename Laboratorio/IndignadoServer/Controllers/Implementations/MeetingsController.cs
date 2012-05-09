@@ -2,10 +2,11 @@
 using System.Linq;
 using IndignadoServer.LinqDataContext;
 using System.Collections.Generic;
+using System.Security.Permissions;
 
 namespace IndignadoServer.Controllers
 {
-    class MeetingsController : IMeetingsController
+    class MeetingsController : IndignadoController, IMeetingsController
     {
         // ******************
         // controller methods
@@ -31,15 +32,15 @@ namespace IndignadoServer.Controllers
 
 
         // creates a meeting
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void createMeeting(Convocatoria meeting)
         {
             // create meeting and add it to the database
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
 
-            // set internal and foreign ids (berreta)
-            meeting.id = indignadoContext.Convocatorias.Count();
-            meeting.idMovimiento = 0;
-            meeting.idAutor = 3;
+            // set internal and foreign ids 
+            meeting.idMovimiento = IdMovimiento;
+            meeting.idAutor = UserInfo.Id;
 
             indignadoContext.Convocatorias.InsertOnSubmit(meeting);
             indignadoContext.SubmitChanges();
@@ -49,10 +50,8 @@ namespace IndignadoServer.Controllers
         public Collection<Convocatoria> getMeetingsList()
         {
             // only get meetings from this movement.
-            int idMovement = 0;
-
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>("SELECT id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum FROM Convocatorias WHERE idMovimiento = {0}", idMovement);
+            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>("SELECT id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum FROM Convocatorias WHERE idMovimiento = {0}", IdMovimiento);
 
             Collection<Convocatoria> meetingsCol = new Collection<Convocatoria>();
             foreach (Convocatoria meeting in meetingsEnum)

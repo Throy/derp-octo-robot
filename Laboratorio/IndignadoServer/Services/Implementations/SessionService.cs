@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens;
 using System.ServiceModel.Security.Tokens;
 using System.Security.Cryptography;
 using IndignadoServer.Controllers;
+using IndignadoServer.Services;
 
 namespace IndignadoServer
 {
@@ -16,7 +17,12 @@ namespace IndignadoServer
     {
         public String Login(int idMovmiento, String userName, String password)
         {
-            return SessionController.Instance.Login(idMovmiento, userName, password);
+            return ControllersHub.Instance.getISessionController().Login(idMovmiento, userName, password);
+        }
+
+        public DTTenantInfo GetTenantInfo(String movimiento)
+        {
+            return ControllersHub.Instance.getISessionController().GetTenantInfo(movimiento);
         }
     }
 }

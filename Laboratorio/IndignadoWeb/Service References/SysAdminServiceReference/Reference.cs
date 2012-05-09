@@ -23,15 +23,6 @@ namespace IndignadoWeb.SysAdminServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string adminMailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string adminNickField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string adminPasswordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string descriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -53,45 +44,6 @@ namespace IndignadoWeb.SysAdminServiceReference {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string adminMail {
-            get {
-                return this.adminMailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.adminMailField, value) != true)) {
-                    this.adminMailField = value;
-                    this.RaisePropertyChanged("adminMail");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string adminNick {
-            get {
-                return this.adminNickField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.adminNickField, value) != true)) {
-                    this.adminNickField = value;
-                    this.RaisePropertyChanged("adminNick");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string adminPassword {
-            get {
-                return this.adminPasswordField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.adminPasswordField, value) != true)) {
-                    this.adminPasswordField = value;
-                    this.RaisePropertyChanged("adminPassword");
-                }
             }
         }
         

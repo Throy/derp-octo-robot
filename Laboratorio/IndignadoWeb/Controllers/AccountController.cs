@@ -7,11 +7,26 @@ using System.Web.Routing;
 using System.Web.Security;
 using IndignadoWeb.Models;
 using System.ServiceModel;
+using IndignadoWeb.SessionServiceReference;
 
 namespace IndignadoWeb.Controllers
 {
     public class AccountController : Controller
     {
+
+        public T GetService<T>(String url)
+        {
+            var binding = new WSHttpBinding();
+            binding.Security.Mode = SecurityMode.Message;
+            binding.Security.Message.ClientCredentialType = MessageCredentialType.None;
+
+            ChannelFactory<T> scf;
+            scf = new ChannelFactory<T>(
+                        binding,
+                        url);
+
+            return scf.CreateChannel();
+        }
 
         //
         // GET: /Account/LogOn
@@ -29,22 +44,12 @@ namespace IndignadoWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var binding = new WSHttpBinding();
-                binding.Security.Mode = SecurityMode.Message;
-                binding.Security.Message.ClientCredentialType = MessageCredentialType.None;
-
-                ChannelFactory<SessionServiceReference.ISessionService> scf;
-                scf = new ChannelFactory<SessionServiceReference.ISessionService>(
-                            binding,
-                            "http://localhost:8730/IndignadoServer/SessionService/");
-
-
-                SessionServiceReference.ISessionService session;
-                session = scf.CreateChannel();
+                ISessionService session = GetService<ISessionService>("http://localhost:8730/IndignadoServer/SessionService/");
 
                 bool success = true;
                 String token = "";
-                int idMovimiento = 0;
+                DTTenantInfo tenantInfo = HttpContext.Session["tenantInfo"] as DTTenantInfo;
+                int idMovimiento = tenantInfo.id;
                 try
                 {
                     token = session.Login(idMovimiento, model.UserName, model.Password);
@@ -70,6 +75,8 @@ namespace IndignadoWeb.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
+
+                (session as ICommunicationObject).Close();
             }
 
             // If we got this far, something failed, redisplay form

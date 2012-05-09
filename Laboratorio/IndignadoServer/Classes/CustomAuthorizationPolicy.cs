@@ -55,14 +55,15 @@ namespace IndignadoServer
             GenericIdentity newIdentity;
             String[] roles = new string[] { };
 
-            if (Password != "Guest" && SessionController.Instance.ValidateToken(Convert.ToInt32(UserName), Password))
+            // Password es el token, y UserName el idMovimiento
+            if (Password != "Guest" && ControllersHub.Instance.getISessionController().ValidateToken(Convert.ToInt32(UserName), Password))
             {
-                newIdentity = new GenericIdentity(Password, "User");
-                roles = SessionController.Instance.GetUserInfo(Password).Roles;
+                newIdentity = new GenericIdentity(Password, UserName);
+                roles = ControllersHub.Instance.getISessionController().GetUserInfo(Password).Roles;
             }
             else
             {
-                newIdentity = new GenericIdentity("NoId", "Guest");
+                newIdentity = new GenericIdentity("NoId", UserName);
             }
 
             const String PrimaryIdentityKey = "PrimaryIdentity"; 

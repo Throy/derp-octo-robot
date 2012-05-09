@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="IndignadoDB" Class="IndignadoDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Aprobaciones" Member="Aprobaciones">
+    <Type Name="Aprobacione">
+      <Column Name="idRecurso" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Usuario_Aprobacione" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Recurso_Aprobacione" Member="Recurso" ThisKey="idRecurso" OtherKey="id" Type="Recurso" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Usuarios" Member="Usuarios">
     <Type Name="Usuario">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -9,12 +17,79 @@
       <Column Name="mail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="contraseña" Type="System.Data.Linq.Binary" DbType="VarBinary(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="latitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="longitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="fechaRegistro" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="banned" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="privilegio" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
-      <Column Name="longitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="Usuario_UsuarioFacebook" Member="UsuarioFacebooks" ThisKey="id" OtherKey="idUsuario" Type="UsuarioFacebook" />
+      <Association Name="Usuario_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idUsuario" Type="Aprobacione" />
       <Association Name="Usuario_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idAutor" Type="Convocatoria" />
+      <Association Name="Usuario_Recurso" Member="Recurso" ThisKey="id" OtherKey="id" Type="Recurso" Cardinality="One" />
+      <Association Name="Usuario_UsuarioFacebook" Member="UsuarioFacebooks" ThisKey="id" OtherKey="idUsuario" Type="UsuarioFacebook" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Convocatorias" Member="Convocatorias">
+    <Type Name="Convocatoria">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idAutor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="titulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="logo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="latitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="longitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="inicio" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="fin" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="minQuorum" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Usuario_Convocatoria" Member="Usuario" ThisKey="idAutor" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Movimiento_Convocatoria" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Layouts" Member="Layouts">
+    <Type Name="Layout">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="layoutFile" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Layout_Movimiento" Member="Movimientos" ThisKey="id" OtherKey="idLayout" Type="Movimiento" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Movimiento" Member="Movimientos">
+    <Type Name="Movimiento">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="habilitado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="logo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="idLayout" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="latitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="longitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="maxMarcasInadecuadasRecursoX" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="maxRecursosInadecuadosUsuarioZ" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="maxRecursosPopularesN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="maxUltimosRecursosM" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Movimiento_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idMovimiento" Type="Convocatoria" />
+      <Association Name="Movimiento_RssFeed" Member="RssFeeds" ThisKey="id" OtherKey="idMovimiento" Type="RssFeed" />
+      <Association Name="Layout_Movimiento" Member="Layout" ThisKey="idLayout" OtherKey="id" Type="Layout" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Recursos" Member="Recursos">
+    <Type Name="Recurso">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="titulo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="logo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="tipo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="link" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Recurso_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idRecurso" Type="Aprobacione" />
+      <Association Name="Usuario_Recurso" Member="Usuario" ThisKey="id" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RssFeeds" Member="RssFeeds">
+    <Type Name="RssFeed">
+      <Column Name="url" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tag" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Movimiento_RssFeed" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.UsuarioFacebook" Member="UsuarioFacebooks">
@@ -23,40 +98,6 @@
       <Column Name="idFacebook" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="Usuario_UsuarioFacebook" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Movimiento" Member="Movimientos">
-    <Type Name="Movimiento">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="latitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="logo" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="plantillaEstilo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="maxMarcasInadecuadasRecursoX" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="maxRecursosInadecuadosUsuarioZ" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="maxRecursosPopularesN" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="maxUltimosRecursosM" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="habilitado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="longitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="Movimiento_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idMovimiento" Type="Convocatoria" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Convocatorias" Member="Convocatorias">
-    <Type Name="Convocatoria">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idAutor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="titulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="latitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="inicio" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="fin" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="logo" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="minQuorum" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="longitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="Movimiento_Convocatoria" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
-      <Association Name="Usuario_Convocatoria" Member="Usuario" ThisKey="idAutor" OtherKey="id" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
