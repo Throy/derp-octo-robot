@@ -29,5 +29,19 @@ namespace IndignadoServer.Services
         {
             ControllersHub.Instance.getIMovAdminController().setMovement(DTToClass.DTToMovement(dtMovement));
         }
+
+
+        public void addRssSource(DTRssSource dtRssSource){
+            ControllersHub.Instance.getIMovAdminController().addRssSource(dtRssSource.url,dtRssSource.tag);
+        }
+
+
+        public void removeRssSource(DTRssSource dtRssSource){
+            ControllersHub.Instance.getIMovAdminController().removeRssSource(dtRssSource.url,dtRssSource.tag);
+        }
+
+        public DTRssSourcesCol listRssSources(){
+            return ControllersHub.Instance.getIMovAdminController().listRssSources();
+        }
     }
 }

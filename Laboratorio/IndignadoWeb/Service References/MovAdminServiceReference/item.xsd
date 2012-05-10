@@ -25,4 +25,40 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="addRssSource">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtRssSource" nillable="true" type="q3:DTRssSource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addRssSourceResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeRssSource">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtRssSource" nillable="true" type="q4:DTRssSource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeRssSourceResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="listRssSources">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="listRssSourcesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="listRssSourcesResult" nillable="true" type="q5:DTRssSourcesCol" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -18,5 +18,14 @@ namespace IndignadoServer.Services
         // changes the configuration of the movement.
         [OperationContract]
         void setMovement(DTMovement dtMovement);
+
+        [OperationContract]
+        void addRssSource(DTRssSource dtRssSource);
+
+        [OperationContract]
+        void removeRssSource(DTRssSource dtRssSource);
+
+        [OperationContract]
+        DTRssSourcesCol listRssSources(); 
     }
 }
