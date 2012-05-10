@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="IndignadoDB" Class="IndignadoDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Aprobaciones" Member="Aprobaciones">
-    <Type Name="Aprobacione">
-      <Column Name="idRecurso" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="idUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Usuario_Aprobacione" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
-      <Association Name="Recurso_Aprobacione" Member="Recurso" ThisKey="idRecurso" OtherKey="id" Type="Recurso" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Usuarios" Member="Usuarios">
     <Type Name="Usuario">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -25,6 +17,14 @@
       <Association Name="Usuario_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idAutor" Type="Convocatoria" />
       <Association Name="Usuario_Recurso" Member="Recurso" ThisKey="id" OtherKey="id" Type="Recurso" Cardinality="One" />
       <Association Name="Usuario_UsuarioFacebook" Member="UsuarioFacebooks" ThisKey="id" OtherKey="idUsuario" Type="UsuarioFacebook" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Aprobaciones" Member="Aprobaciones">
+    <Type Name="Aprobacione">
+      <Column Name="idRecurso" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Usuario_Aprobacione" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Recurso_Aprobacione" Member="Recurso" ThisKey="idRecurso" OtherKey="id" Type="Recurso" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Convocatorias" Member="Convocatorias">

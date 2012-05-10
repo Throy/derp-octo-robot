@@ -83,19 +83,19 @@ namespace IndignadoServer.LinqDataContext
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Aprobacione> Aprobaciones
-		{
-			get
-			{
-				return this.GetTable<Aprobacione>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Usuario> Usuarios
 		{
 			get
 			{
 				return this.GetTable<Usuario>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Aprobacione> Aprobaciones
+		{
+			get
+			{
+				return this.GetTable<Aprobacione>();
 			}
 		}
 		
@@ -144,51 +144,6 @@ namespace IndignadoServer.LinqDataContext
 			get
 			{
 				return this.GetTable<UsuarioFacebook>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Aprobaciones")]
-	public partial class Aprobacione
-	{
-		
-		private System.Nullable<int> _idRecurso;
-		
-		private System.Nullable<int> _idUsuario;
-		
-		public Aprobacione()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idRecurso", DbType="Int")]
-		public System.Nullable<int> idRecurso
-		{
-			get
-			{
-				return this._idRecurso;
-			}
-			set
-			{
-				if ((this._idRecurso != value))
-				{
-					this._idRecurso = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int")]
-		public System.Nullable<int> idUsuario
-		{
-			get
-			{
-				return this._idUsuario;
-			}
-			set
-			{
-				if ((this._idUsuario != value))
-				{
-					this._idUsuario = value;
-				}
 			}
 		}
 	}
@@ -580,6 +535,51 @@ namespace IndignadoServer.LinqDataContext
 		{
 			this.SendPropertyChanging();
 			entity.Usuario = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Aprobaciones")]
+	public partial class Aprobacione
+	{
+		
+		private System.Nullable<int> _idRecurso;
+		
+		private System.Nullable<int> _idUsuario;
+		
+		public Aprobacione()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idRecurso", DbType="Int")]
+		public System.Nullable<int> idRecurso
+		{
+			get
+			{
+				return this._idRecurso;
+			}
+			set
+			{
+				if ((this._idRecurso != value))
+				{
+					this._idRecurso = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int")]
+		public System.Nullable<int> idUsuario
+		{
+			get
+			{
+				return this._idUsuario;
+			}
+			set
+			{
+				if ((this._idUsuario != value))
+				{
+					this._idUsuario = value;
+				}
+			}
 		}
 	}
 	
