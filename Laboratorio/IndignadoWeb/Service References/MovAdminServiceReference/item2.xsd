@@ -11,4 +11,23 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTMovement" nillable="true" type="tns:DTMovement" />
+  <xs:complexType name="DTRssSource">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="tag" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="url" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTRssSource" nillable="true" type="tns:DTRssSource" />
+  <xs:complexType name="DTRssSourcesCol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTRssSource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTRssSourcesCol" nillable="true" type="tns:DTRssSourcesCol" />
+  <xs:complexType name="ArrayOfDTRssSource">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTRssSource" nillable="true" type="tns:DTRssSource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTRssSource" nillable="true" type="tns:ArrayOfDTRssSource" />
 </xs:schema>

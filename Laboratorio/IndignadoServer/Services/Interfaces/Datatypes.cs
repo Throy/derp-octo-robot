@@ -220,6 +220,27 @@ namespace IndignadoServer.Services
         GenericError = 8,
     }
 
+
+    // RssSource datatype
+    [DataContract]
+    public class DTRssSource
+    {
+        [DataMember]
+        public String url { get; set; }
+
+        [DataMember]
+        public String tag { get; set; }
+    }
+
+    // RssSources Collection datatype
+    [DataContract]
+    public class DTRssSourcesCol
+    {
+        [DataMember]
+        public Collection<DTRssSource> items { get; set; }
+    }
+
+
     // **********
     // conversors
     // **********
@@ -353,6 +374,7 @@ namespace IndignadoServer.Services
 
             return user;
         }
+
     }
 
 }

@@ -455,5 +455,48 @@ namespace IndignadoWeb.Controllers
                 return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
             }
         }
+        
+        public ActionResult SourcesConfig()
+        {
+            IMovAdminService serv = GetService<IMovAdminService>("http://localhost:8730/IndignadoServer/MovAdminService/");
+
+            RssSourcesModel model = new RssSourcesModel();
+            model.newItem = new DTRssSource();
+            DTRssSourcesCol col = serv.listRssSources();
+            model.items = col;
+
+            return View(model);
+        }
+        
+        
+        // configure rss sources
+        [HttpPost]
+        public ActionResult SourcesConfig(string buttonAdd, string buttonRemove, RssSourcesModel model)
+        {
+            IMovAdminService serv = GetService<IMovAdminService>("http://localhost:8730/IndignadoServer/MovAdminService/");
+            
+            // button Add
+            if (buttonAdd != null)
+            {
+                if (model.newItem != null)
+                {
+                    serv.addRssSource(model.newItem);
+                }
+            }
+            else if (buttonRemove != null)
+            {
+                if (model.newItem != null)
+                {
+                    serv.removeRssSource(model.newItem);
+                }
+             }
+            DTRssSourcesCol col = serv.listRssSources();
+
+            model.items = col;
+
+            return View(model);
+            
+        }
+         
     }
 }
