@@ -45,6 +45,10 @@ namespace IndignadoWeb.Models
     public class RegisterModel
     {
         [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
@@ -63,5 +67,13 @@ namespace IndignadoWeb.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Location - Latitude: ")]
+        public float Latitud { get; set; }
+
+        [Required]
+        [Display(Name = "Location - Longitude: ")]
+        public float Longitud { get; set; }
     }
 }

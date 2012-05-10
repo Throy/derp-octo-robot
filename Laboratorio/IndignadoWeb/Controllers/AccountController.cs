@@ -14,7 +14,7 @@ namespace IndignadoWeb.Controllers
     public class AccountController : Controller
     {
 
-        public T GetService<T>(String url)
+        private static T GetService<T>(String url)
         {
             var binding = new WSHttpBinding();
             binding.Security.Mode = SecurityMode.Message;
@@ -49,10 +49,9 @@ namespace IndignadoWeb.Controllers
                 bool success = true;
                 String token = "";
                 DTTenantInfo tenantInfo = HttpContext.Session["tenantInfo"] as DTTenantInfo;
-                int idMovimiento = tenantInfo.id;
                 try
                 {
-                    token = session.Login(idMovimiento, model.UserName, model.Password);
+                    token = session.Login(tenantInfo.id, model.UserName, model.Password);
                 }
                 catch (FaultException e)
                 {
@@ -111,11 +110,25 @@ namespace IndignadoWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
-                MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
+                ISessionService session = GetService<ISessionService>("http://localhost:8730/IndignadoServer/SessionService/");
+                
+                DTTenantInfo tenantInfo = HttpContext.Session["tenantInfo"] as DTTenantInfo;
 
-                if (createStatus == MembershipCreateStatus.Success)
+                // Attempt to register the user
+                //MembershipCreateStatus createStatus;
+                //Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
+                DTRegisterModel user =  new DTRegisterModel();
+                user.apodo = model.UserName;
+                user.contraseña = model.Password;
+                user.idMovimiento = tenantInfo.id;
+                user.latitud = model.Latitud;
+                user.longitud = model.Longitud;
+                user.mail = model.Email;
+                user.nombre = model.Name;
+
+                DTUserCreateStatus createStatus = session.RegisterUser(user);
+
+                if (createStatus == DTUserCreateStatus.Success)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
@@ -124,6 +137,8 @@ namespace IndignadoWeb.Controllers
                 {
                     ModelState.AddModelError("", ErrorCodeToString(createStatus));
                 }
+
+                (session as ICommunicationObject).Close();
             }
 
             // If we got this far, something failed, redisplay form
@@ -185,38 +200,27 @@ namespace IndignadoWeb.Controllers
         }
 
         #region Status Codes
-        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
+        private static string ErrorCodeToString(DTUserCreateStatus createStatus)
         {
-            // See http://go.microsoft.com/fwlink/?LinkID=177550 for
-            // a full list of status codes.
             switch (createStatus)
             {
-                case MembershipCreateStatus.DuplicateUserName:
+                case DTUserCreateStatus.DuplicateUserName:
                     return "User name already exists. Please enter a different user name.";
 
-                case MembershipCreateStatus.DuplicateEmail:
+                case DTUserCreateStatus.DuplicateEmail:
                     return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
 
-                case MembershipCreateStatus.InvalidPassword:
+                case DTUserCreateStatus.InvalidPassword:
                     return "The password provided is invalid. Please enter a valid password value.";
 
-                case MembershipCreateStatus.InvalidEmail:
+                case DTUserCreateStatus.InvalidEmail:
                     return "The e-mail address provided is invalid. Please check the value and try again.";
 
-                case MembershipCreateStatus.InvalidAnswer:
-                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidQuestion:
-                    return "The password retrieval question provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidUserName:
+                case DTUserCreateStatus.InvalidUserName:
                     return "The user name provided is invalid. Please check the value and try again.";
 
-                case MembershipCreateStatus.ProviderError:
-                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                case MembershipCreateStatus.UserRejected:
-                    return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+                case DTUserCreateStatus.GenericError:
+                    return "Error generico de prueba";
 
                 default:
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";

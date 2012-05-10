@@ -17,9 +17,16 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
-    <div>
+    <div class="reg-box big-red">
         <fieldset>
-            <legend>Account Information</legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Name)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
 
             <div class="editor-label">
                 @Html.LabelFor(m => m.UserName)
@@ -53,8 +60,25 @@
                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
             </div>
 
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Latitud)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Latitud)
+                @Html.ValidationMessageFor(m => m.Latitud)
+            </div>
+            
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Longitud)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Longitud)
+                @Html.ValidationMessageFor(m => m.Longitud)
+            </div>
+
             <p>
-                <input type="submit" value="Register" />
+                <input type="submit" value="Register" style="display:none;" id="WorkaroundForOperaInputFocusBorderBug" />
+                <input type="submit"  class="boton-big-red" value="Register" />
             </p>
         </fieldset>
     </div>

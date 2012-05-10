@@ -215,7 +215,7 @@ namespace IndignadoServer.LinqDataContext
 		
 		private float _longitud;
 		
-		private string _fechaRegistro;
+		private System.Nullable<System.DateTime> _fechaRegistro;
 		
 		private System.Nullable<bool> _banned;
 		
@@ -247,7 +247,7 @@ namespace IndignadoServer.LinqDataContext
     partial void OnlatitudChanged();
     partial void OnlongitudChanging(float value);
     partial void OnlongitudChanged();
-    partial void OnfechaRegistroChanging(string value);
+    partial void OnfechaRegistroChanging(System.Nullable<System.DateTime> value);
     partial void OnfechaRegistroChanged();
     partial void OnbannedChanging(System.Nullable<bool> value);
     partial void OnbannedChanged();
@@ -323,7 +323,7 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_apodo", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_apodo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string apodo
 		{
 			get
@@ -423,8 +423,8 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaRegistro", DbType="VarChar(50)")]
-		public string fechaRegistro
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaRegistro", DbType="DateTime")]
+		public System.Nullable<System.DateTime> fechaRegistro
 		{
 			get
 			{

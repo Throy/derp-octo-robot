@@ -61,6 +61,31 @@ namespace IndignadoServer.Controllers
             return token.Id;
         }
 
+        public DTUserCreateStatus RegisterUser(DTRegisterModel user)
+        {
+            DTUserCreateStatus status;
+            status = DTUserCreateStatus.Success;
+            // create meeting and add it to the database
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            Usuario userDb = DTToClass.DTToUsuario(user);
+
+            userDb.banned = false;
+            userDb.privilegio = 0;
+            userDb.fechaRegistro = DateTime.Now;
+
+            try
+            {
+                indignadoContext.Usuarios.InsertOnSubmit(userDb);
+                indignadoContext.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                status = DTUserCreateStatus.GenericError;
+            }
+
+            return status;
+        }
+
         public bool ValidateToken(int idMovmiento, String token)
         {
             if (!_usersOnline.ContainsKey(token))

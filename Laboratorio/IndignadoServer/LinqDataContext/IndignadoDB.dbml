@@ -13,12 +13,12 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="apodo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="apodo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="mail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="contraseña" Type="System.Data.Linq.Binary" DbType="VarBinary(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="latitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="longitud" Type="System.Single" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="fechaRegistro" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="fechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="banned" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="privilegio" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
       <Association Name="Usuario_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idUsuario" Type="Aprobacione" />

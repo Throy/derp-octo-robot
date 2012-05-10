@@ -19,7 +19,7 @@ namespace IndignadoWeb.Controllers
     [MultiTenanActionFilter]
     public class HomeController : Controller
     {
-        public T GetService<T>(String url)
+        private T GetService<T>(String url)
         {
             var binding = new WSHttpBinding();
             binding.Security.Mode = SecurityMode.Message;

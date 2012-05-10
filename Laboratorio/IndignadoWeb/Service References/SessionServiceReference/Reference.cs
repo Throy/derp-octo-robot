@@ -15,6 +15,173 @@ namespace IndignadoWeb.SessionServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTRegisterModel", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTRegisterModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string apodoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string contraseñaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idMovimientoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float latitudField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float longitudField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string mailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nombreField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string apodo {
+            get {
+                return this.apodoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.apodoField, value) != true)) {
+                    this.apodoField = value;
+                    this.RaisePropertyChanged("apodo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string contraseña {
+            get {
+                return this.contraseñaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.contraseñaField, value) != true)) {
+                    this.contraseñaField = value;
+                    this.RaisePropertyChanged("contraseña");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idMovimiento {
+            get {
+                return this.idMovimientoField;
+            }
+            set {
+                if ((this.idMovimientoField.Equals(value) != true)) {
+                    this.idMovimientoField = value;
+                    this.RaisePropertyChanged("idMovimiento");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float latitud {
+            get {
+                return this.latitudField;
+            }
+            set {
+                if ((this.latitudField.Equals(value) != true)) {
+                    this.latitudField = value;
+                    this.RaisePropertyChanged("latitud");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float longitud {
+            get {
+                return this.longitudField;
+            }
+            set {
+                if ((this.longitudField.Equals(value) != true)) {
+                    this.longitudField = value;
+                    this.RaisePropertyChanged("longitud");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string mail {
+            get {
+                return this.mailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.mailField, value) != true)) {
+                    this.mailField = value;
+                    this.RaisePropertyChanged("mail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nombreField, value) != true)) {
+                    this.nombreField = value;
+                    this.RaisePropertyChanged("nombre");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUserCreateStatus", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    public enum DTUserCreateStatus : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Success = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvalidUserName = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvalidPassword = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvalidEmail = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DuplicateUserName = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DuplicateEmail = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GenericError = 8,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DTTenantInfo", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
     [System.SerializableAttribute()]
     public partial class DTTenantInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -129,6 +296,9 @@ namespace IndignadoWeb.SessionServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionService/Login", ReplyAction="http://tempuri.org/ISessionService/LoginResponse")]
         string Login(int idMovmiento, string userName, string password);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionService/RegisterUser", ReplyAction="http://tempuri.org/ISessionService/RegisterUserResponse")]
+        IndignadoWeb.SessionServiceReference.DTUserCreateStatus RegisterUser(IndignadoWeb.SessionServiceReference.DTRegisterModel user);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionService/ValidateToken", ReplyAction="http://tempuri.org/ISessionService/ValidateTokenResponse")]
         bool ValidateToken(int idMovmiento, string token);
         
@@ -165,6 +335,10 @@ namespace IndignadoWeb.SessionServiceReference {
         
         public string Login(int idMovmiento, string userName, string password) {
             return base.Channel.Login(idMovmiento, userName, password);
+        }
+        
+        public IndignadoWeb.SessionServiceReference.DTUserCreateStatus RegisterUser(IndignadoWeb.SessionServiceReference.DTRegisterModel user) {
+            return base.Channel.RegisterUser(user);
         }
         
         public bool ValidateToken(int idMovmiento, string token) {

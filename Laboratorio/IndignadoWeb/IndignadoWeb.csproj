@@ -197,6 +197,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\NewsResourcesServiceReference\NewsResourcesService.wsdl" />
+    <None Include="Service References\SessionServiceReference\IndignadoWeb.SessionServiceReference.DTUserCreateStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SessionServiceReference\item.xsd">
       <SubType>Designer</SubType>
     </None>

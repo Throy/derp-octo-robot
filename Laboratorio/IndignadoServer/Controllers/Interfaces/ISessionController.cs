@@ -10,6 +10,8 @@ namespace IndignadoServer.Controllers
     {
         String Login(int idMovmiento, String userName, String password);
 
+        DTUserCreateStatus RegisterUser(DTRegisterModel user);
+
         bool ValidateToken(int idMovmiento, String token);
 
         UserOnlineInfo GetUserInfo(String token);

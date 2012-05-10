@@ -4,6 +4,8 @@ using System.Runtime.Serialization;
 using IndignadoServer.LinqDataContext;
 using RssToolkit.Rss;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace IndignadoServer.Services
 {
@@ -160,6 +162,64 @@ namespace IndignadoServer.Services
         public Collection<DTResource> items { get; set; }
     }
 
+    public class DTRegisterModel
+    {
+        [DataMember]
+        public int idMovimiento { get; set; }
+
+        [DataMember]
+        public String nombre { get; set; }
+
+        [DataMember]
+        public String apodo { get; set; }
+
+        [DataMember]
+        public String mail { get; set; }
+
+        [DataMember]
+        public String contraseña { get; set; }
+
+        [DataMember]
+        public float latitud { get; set; }
+
+        [DataMember]
+        public float longitud { get; set; }
+    }
+
+    // Summary:
+    //     Describes the result of a Session Controller register user
+    //     operation
+    public enum DTUserCreateStatus
+    {
+        // Summary:
+        //     The user was successfully created.
+        Success = 0,
+        //
+        // Summary:
+        //     The user name was not found in the database.
+        InvalidUserName = 1,
+        //
+        // Summary:
+        //     The password is not formatted correctly.
+        InvalidPassword = 2,
+        //
+        // Summary:
+        //     The e-mail address is not formatted correctly.
+        InvalidEmail = 5,
+        //
+        // Summary:
+        //     The user name already exists in the database for the application.
+        DuplicateUserName = 6,
+        //
+        // Summary:
+        //     The e-mail address already exists in the database for the application.
+        DuplicateEmail = 7,
+        //
+        // Summary:
+        //     Hubo algun error, solo porque todavia no estan hechos los errores
+        GenericError = 8,
+    }
+
     // **********
     // conversors
     // **********
@@ -275,6 +335,23 @@ namespace IndignadoServer.Services
             resource.logo = dtResource.thumbnail;
             resource.fecha = dtResource.date;
             return resource;
+        }
+
+        public static Usuario DTToUsuario(DTRegisterModel dtUser)
+        {
+            Usuario user = new Usuario();
+            user.idMovimiento = dtUser.idMovimiento;
+            user.latitud = dtUser.latitud;
+            user.longitud = dtUser.longitud;
+            user.mail = dtUser.mail;
+            user.nombre = dtUser.nombre;
+            user.apodo = dtUser.apodo;
+
+            HashAlgorithm sha = new SHA1CryptoServiceProvider();
+            byte[] passwordHash = sha.ComputeHash(ASCIIEncoding.ASCII.GetBytes(dtUser.contraseña));
+            user.contraseña = passwordHash;
+
+            return user;
         }
     }
 

@@ -20,6 +20,11 @@ namespace IndignadoServer
             return ControllersHub.Instance.getISessionController().Login(idMovmiento, userName, password);
         }
 
+        public DTUserCreateStatus RegisterUser(DTRegisterModel user)
+        {
+            return ControllersHub.Instance.getISessionController().RegisterUser(user);
+        }
+
         public bool ValidateToken(int idMovmiento, String token)
         {
             return ControllersHub.Instance.getISessionController().ValidateToken(idMovmiento, token);
