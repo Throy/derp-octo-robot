@@ -1,8 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using IndignadoServer.LinqDataContext;
-using System.Collections.Generic;
-using System.Security.Permissions;
 
 namespace IndignadoServer.Controllers
 {
@@ -32,7 +31,6 @@ namespace IndignadoServer.Controllers
 
 
         // creates a meeting
-        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void createMeeting(Convocatoria meeting)
         {
             // create meeting and add it to the database

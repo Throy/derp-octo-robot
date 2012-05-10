@@ -29,6 +29,9 @@ namespace IndignadoWeb.SysAdminServiceReference {
         private int idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idLayoutField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private float locationLatiField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -69,6 +72,19 @@ namespace IndignadoWeb.SysAdminServiceReference {
                 if ((this.idField.Equals(value) != true)) {
                     this.idField = value;
                     this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idLayout {
+            get {
+                return this.idLayoutField;
+            }
+            set {
+                if ((this.idLayoutField.Equals(value) != true)) {
+                    this.idLayoutField = value;
+                    this.RaisePropertyChanged("idLayout");
                 }
             }
         }

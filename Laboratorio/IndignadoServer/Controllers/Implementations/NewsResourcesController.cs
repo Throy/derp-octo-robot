@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using System.Net;
+using System.Text.RegularExpressions;
 using IndignadoServer.LinqDataContext;
 using RssToolkit.Rss;
-using System.Text.RegularExpressions;
-using System.Net;
 
 namespace IndignadoServer.Controllers
 {
@@ -22,11 +20,11 @@ namespace IndignadoServer.Controllers
             // Java, esto es para vos.
             /*
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            IEnumerable<Fuente> fuentesEnum = indignadoContext.ExecuteQuery<Fuente>("SELECT id, link FROM Fuentes WHERE idMovimiento = {0}", IdMovement);
+            IEnumerable<RssFeed> fuentesEnum = indignadoContext.ExecuteQuery<RssFeed>("SELECT idMovimiento, url, tag FROM RssFeeds WHERE idMovimiento = {0}", IdMovement);
             
-            foreach (Fuente source in fuentesEnum)
+            foreach (RssFeed source in fuentesEnum)
             {
-             * List<RssItem> rssItemsList = RssDocument.Load(new System.Uri(source.link)).Channel.Items;
+                List<RssItem> rssItemsList = RssDocument.Load(new System.Uri(source.url)).Channel.Items;
             }
             */
 
@@ -35,8 +33,6 @@ namespace IndignadoServer.Controllers
             List<RssItem> rssItemsList2 = RssDocument.Load(new System.Uri("http://www.montevideo.com.uy/anxml.aspx?59")).Channel.Items;
             List<RssItem> rssItemsList3 = RssDocument.Load(new System.Uri("http://www.elobservador.com.uy/rss/nacional/")).Channel.Items;
             List<RssItem> rssItemsList4 = RssDocument.Load(new System.Uri("http://cnnespanol.cnn.com/feed/")).Channel.Items;
-        
-            //List<RssItem> rssItemsList4 = RssDocument.Load(new System.Uri("http://es.autoblog.com/category/competicipn/rss.xml")).Channel.Items;
             
             // create new rss items collection.
             Collection<RssItem> rssItemsCol = new Collection<RssItem>();

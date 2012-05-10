@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Security.Permissions;
 using IndignadoServer.Controllers;
 using IndignadoServer.LinqDataContext;
 
@@ -26,6 +27,7 @@ namespace IndignadoServer.Services
         }
 
         // creates a meeting
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void createMeeting (DTMeeting dtMeeting)
         {
             ControllersHub.Instance.getIMeetingsController().createMeeting(DTToClass.DTToMeeting(dtMeeting));

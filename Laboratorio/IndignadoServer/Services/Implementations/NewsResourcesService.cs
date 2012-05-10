@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Security.Permissions;
 using RssToolkit.Rss;
 using IndignadoServer.Controllers;
 using IndignadoServer.LinqDataContext;
@@ -62,6 +62,7 @@ namespace IndignadoServer.Services
         }
 
         // creates a resource.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void createResource (DTResource dtResource)
         {
             ControllersHub.Instance.getINewsResourcesController().createResource (DTToClass.DTToResource (dtResource));

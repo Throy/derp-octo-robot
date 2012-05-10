@@ -10,9 +10,33 @@ using IndignadoWeb.NewsResourcesServiceReference;
 using IndignadoWeb.SessionServiceReference;
 using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.TestServiceReference;
+using System.ServiceModel.Security;
 
 namespace IndignadoWeb.Controllers
 {
+    public class HomeControllerConstants
+    {
+        public const string viewAccessDenied = "AccessDenied";
+        public const string viewLogOn = "LogOn";
+        public const string viewMeetings = "Meetings";
+        public const string viewMeetingsList = "MeetingsList";
+        public const string viewMeetingsMap = "MeetingsMap";
+        public const string viewMovementConfig = "MovementConfig";
+        public const string viewMovementCreate = "MovementCreate";
+        public const string viewMovementsList = "MovementsList";
+        public const string viewNewsList = "NewsList";
+        public const string viewResourceShare = "ResourceShare";
+        public const string viewResourcesList = "ResourcesList";
+
+        public const string urlMeetingsService = "http://localhost:8730/IndignadoServer/MeetingsService/";
+        public const string urlMovAdminService = "http://localhost:8730/IndignadoServer/MovAdminService/";
+        public const string urlNewsResourcesService = "http://localhost:8730/IndignadoServer/NewsResourcesService/";
+        public const string urlSessionService = "http://localhost:8730/IndignadoServer/SessionService/";
+        public const string urlSysAdminService = "http://localhost:8730/IndignadoServer/SysAdminService/";
+        public const string urlTestService = "http://localhost:8730/IndignadoServer/TestService/";
+    }
+
+
     [MultiTenanActionFilter]
     public class HomeController : Controller
     {
@@ -37,7 +61,7 @@ namespace IndignadoWeb.Controllers
 
         public ActionResult Index(DTTenantInfo tenantInfo)
         {
-            ITestService serv = GetService<ITestService>("http://localhost:8730/IndignadoServer/TestService/");
+            ITestService serv = GetService<ITestService>(HomeControllerConstants.urlTestService);
                 
             if (HttpContext.Session["token"] != null)
             {   
@@ -58,11 +82,16 @@ namespace IndignadoWeb.Controllers
             return View();
         }
 
+        public ActionResult AccessDenied()
+        {
+            return View();
+        }
+
         // shows a meeting.
         public ActionResult MeetingDetails()
         {
             // open service
-            IMeetingsService serv = GetService<IMeetingsService>("http://localhost:8730/IndignadoServer/MeetingsService/");
+            IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
             // get meeting
             DTMeeting meeting = serv.getMeeting(0);
@@ -77,7 +106,7 @@ namespace IndignadoWeb.Controllers
         // shows all meetings.
         public ActionResult MeetingsList()
         {
-            IMeetingsService serv = GetService<IMeetingsService>("http://localhost:8730/IndignadoServer/MeetingsService/");
+            IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
             // get all meetings
             DTMeetingsCol meetings = serv.getMeetingsList();
@@ -92,7 +121,7 @@ namespace IndignadoWeb.Controllers
         // shows all movements in a map.
         public ActionResult MeetingsMap()
         {
-            IMeetingsService serv = GetService<IMeetingsService>("http://localhost:8730/IndignadoServer/MeetingsService/");
+            IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
             // get all meetings
             DTMeetingsCol meetings = serv.getMeetingsList();
@@ -107,46 +136,68 @@ namespace IndignadoWeb.Controllers
         // create meeting.
         public ActionResult MeetingCreate()
         {
-            return View();
+            /*
+            try
+            {
+                // check if the user is a registered user.
+                ISessionService serv = GetService<ISessionService>(HomeControllerConstants.urlSessionService);
+                serv.ValidateRegUser();
+            */
+                // show form
+                return View();
+            /*
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
+            */
         }
 
         // create meeting.
         [HttpPost]
         public ActionResult MeetingCreate (CreateMeetingModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                IMeetingsService serv = GetService<IMeetingsService>("http://localhost:8730/IndignadoServer/MeetingsService/");
+                if (ModelState.IsValid)
+                {
+                    IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
-                // create new meeting
-                DTMeeting dtMeeting = new DTMeeting();
-                dtMeeting.id = -1;
-                dtMeeting.idMovement = -1;
-                dtMeeting.name = model.name;
-                dtMeeting.description = model.description;
-                dtMeeting.locationLati = model.locationLati;
-                dtMeeting.locationLong = model.locationLong;
-                dtMeeting.minQuorum = model.minQuorum;
-                serv.createMeeting(dtMeeting);
+                    // create new meeting
+                    DTMeeting dtMeeting = new DTMeeting();
+                    dtMeeting.id = -1;
+                    dtMeeting.idMovement = -1;
+                    dtMeeting.name = model.name;
+                    dtMeeting.description = model.description;
+                    dtMeeting.locationLati = model.locationLati;
+                    dtMeeting.locationLong = model.locationLong;
+                    dtMeeting.minQuorum = model.minQuorum;
+                    serv.createMeeting(dtMeeting);
 
-                // get all meetings
-                DTMeetingsCol meetings = serv.getMeetingsList();
+                    // get all meetings
+                    DTMeetingsCol meetings = serv.getMeetingsList();
 
-                // close service
-                (serv as ICommunicationObject).Close();
+                    // close service
+                    (serv as ICommunicationObject).Close();
 
-                // send the meetings to the model.
-                return View ("MeetingsList", meetings);
+                    // send the meetings to the model.
+                    return View(HomeControllerConstants.viewMeetingsList, meetings);
+                }
+
+                // If we got this far, something failed, redisplay form
+                return View(model);
             }
-
-            // If we got this far, something failed, redisplay form
-            return View (model);
+            catch
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
         }
 
         // shows all movements in a list.
         public ActionResult MovementsList()
         {
-            ISysAdminService serv = GetService<ISysAdminService>("http://localhost:8730/IndignadoServer/SysAdminService/");
+            ISysAdminService serv = GetService<ISysAdminService>(HomeControllerConstants.urlSysAdminService);
 
             // get all movements
             DTMovementsCol movements = serv.getMovementsList();
@@ -161,112 +212,154 @@ namespace IndignadoWeb.Controllers
         // create movement.
         public ActionResult MovementCreate()
         {
-
-            return View();
+            /*
+            try
+            {
+                // check if the user is a system admin.
+                ISessionService serv = GetService<ISessionService>(HomeControllerConstants.urlSessionService);
+                serv.ValidateSysAdmin();
+            */
+                // show form
+                return View();
+            /*
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+            */
         }
 
         // create movement.
         [HttpPost]
         public ActionResult MovementCreate (SingleMovementModel model)
         {
-            if (ModelState.IsValid)
-            {
-                ISysAdminService serv = GetService<ISysAdminService>("http://localhost:8730/IndignadoServer/SysAdminService/");
+            try {
+                if (ModelState.IsValid)
+                {
+                    ISysAdminService serv = GetService<ISysAdminService>(HomeControllerConstants.urlSysAdminService);
 
-                // create new movement
-                //serv.addEmptyMovement();
+                    // create new movement
+                    //serv.addEmptyMovement();
 
-                IndignadoWeb.SysAdminServiceReference.DTMovement dtMovement = new IndignadoWeb.SysAdminServiceReference.DTMovement();
-                dtMovement.id = -1;
-                dtMovement.name = model.name;
-                dtMovement.description = model.description;
-                dtMovement.locationLati = model.locationLati;
-                dtMovement.locationLong = model.locationLong;
-                serv.createMovement(dtMovement);
+                    IndignadoWeb.SysAdminServiceReference.DTMovement dtMovement = new IndignadoWeb.SysAdminServiceReference.DTMovement();
+                    dtMovement.id = -1;
+                    dtMovement.name = model.name;
+                    dtMovement.description = model.description;
+                    dtMovement.locationLati = model.locationLati;
+                    dtMovement.locationLong = model.locationLong;
+                    serv.createMovement(dtMovement);
 
-                // get all movements
-                DTMovementsCol movements = serv.getMovementsList();
+                    // get all movements
+                    DTMovementsCol movements = serv.getMovementsList();
 
-                // close service
-                (serv as ICommunicationObject).Close();
+                    // close service
+                    (serv as ICommunicationObject).Close();
 
-                // send the movements to the model.
-                return View("MovementsList", movements);
+                    // send the movements to the model.
+                    return View(HomeControllerConstants.viewMovementsList, movements);
+                }
+
+                // If we got this far, something failed, redisplay form
+                return View(model);
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            catch
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
         }
 
         // configure movement.
         public ActionResult MovementConfig()
         {
-            IMovAdminService serv = GetService<IMovAdminService>("http://localhost:8730/IndignadoServer/MovAdminService/");
+            /*
+            try
+            {
+                // check if the user is a movement admin.
+                ISessionService serv1 = GetService<ISessionService>(HomeControllerConstants.urlSessionService);
+                serv1.ValidateMovAdmin();
+            */
+                // show configuration
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
 
-            // get movement
-            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv.getMovement();
+                // get movement
+                IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv.getMovement();
 
-            // close service
-            (serv as ICommunicationObject).Close();
+                // close service
+                (serv as ICommunicationObject).Close();
 
-            // send the meeting to the model.
-            SingleMovementModel model = new SingleMovementModel();
-            model.name = movement.name;
-            model.description = movement.description;
-            model.locationLati = movement.locationLati;
-            model.locationLong = movement.locationLong;
+                // send the meeting to the model.
+                SingleMovementModel model = new SingleMovementModel();
+                model.name = movement.name;
+                model.description = movement.description;
+                model.locationLati = movement.locationLati;
+                model.locationLong = movement.locationLong;
 
-            return View(model);
+                return View(model);
+            /*
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+            */
         }
 
         // configure movement.
         [HttpPost]
         public ActionResult MovementConfig(SingleMovementModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                IMovAdminService serv = GetService<IMovAdminService>("http://localhost:8730/IndignadoServer/MovAdminService/");
+                if (ModelState.IsValid)
+                {
+                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
 
-                // create new movement
-                //serv.addEmptyMovement();
+                    // create new movement
+                    //serv.addEmptyMovement();
 
-                IndignadoWeb.MovAdminServiceReference.DTMovement dtMovement = new IndignadoWeb.MovAdminServiceReference.DTMovement();
-                dtMovement.id = -1;
-                dtMovement.name = model.name;
-                dtMovement.description = model.description;
-                dtMovement.locationLati = model.locationLati;
-                dtMovement.locationLong = model.locationLong;
-                serv.setMovement(dtMovement);
+                    IndignadoWeb.MovAdminServiceReference.DTMovement dtMovement = new IndignadoWeb.MovAdminServiceReference.DTMovement();
+                    dtMovement.id = -1;
+                    dtMovement.name = model.name;
+                    dtMovement.description = model.description;
+                    dtMovement.locationLati = model.locationLati;
+                    dtMovement.locationLong = model.locationLong;
+                    serv.setMovement(dtMovement);
 
-                // close service
-                (serv as ICommunicationObject).Close();
+                    // close service
+                    (serv as ICommunicationObject).Close();
 
-                // open service
-                ChannelFactory<SysAdminServiceReference.ISysAdminService> scf2;
-                scf2 = new ChannelFactory<SysAdminServiceReference.ISysAdminService>(
-                            new BasicHttpBinding(),
-                            "http://localhost:8730/IndignadoServer/SysAdminService/");
+                    // open service
+                    ChannelFactory<SysAdminServiceReference.ISysAdminService> scf2;
+                    scf2 = new ChannelFactory<SysAdminServiceReference.ISysAdminService>(
+                                new BasicHttpBinding(),
+                                HomeControllerConstants.urlSysAdminService);
 
 
-                SysAdminServiceReference.ISysAdminService serv2;
-                serv2 = scf2.CreateChannel();
+                    SysAdminServiceReference.ISysAdminService serv2;
+                    serv2 = scf2.CreateChannel();
 
-                // get all movements
-                DTMovementsCol movements = serv2.getMovementsList();
+                    // get all movements
+                    DTMovementsCol movements = serv2.getMovementsList();
 
-                // send the movements to the model.
-                return View("MovementsList", movements);
+                    // send the movements to the model.
+                    return View(HomeControllerConstants.viewMovementsList, movements);
+                }
+
+                // If we got this far, something failed, redisplay form
+                return View(model);
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            catch
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
         }
 
         // shows all news in a list.
         public ActionResult NewsList()
         {
             // open service
-            INewsResourcesService serv = GetService<INewsResourcesService>("http://localhost:8730/IndignadoServer/NewsResourcesService/");
+            INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
             // get all news
             DTRssItemsCol rssItemsCol = serv.getNewsList();
@@ -278,7 +371,7 @@ namespace IndignadoWeb.Controllers
         public ActionResult ResourcesList()
         {
             // open service
-            INewsResourcesService serv = GetService<INewsResourcesService>("http://localhost:8730/IndignadoServer/NewsResourcesService/");
+            INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
             // get all news
             DTResourcesCol resourcesCol = serv.getResourcesList();
@@ -289,56 +382,78 @@ namespace IndignadoWeb.Controllers
         // create resource.
         public ActionResult ResourceShare(CreateResourceModel model)
         {
-            return View(model);
+            /*
+            try
+            {
+                // check if the user is a registered user.
+                ISessionService serv = GetService<ISessionService>(HomeControllerConstants.urlSessionService);
+                serv.ValidateRegUser();
+            */
+
+                // show form
+                return View(model);
+            /*
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
+            */
         }
 
         // create resource.
         [HttpPost]
         public ActionResult ResourceShare(string buttonShare, string buttonGetData, CreateResourceModel model)
         {
-            // button share
-            if (buttonShare != null)
-            {
-                if (ModelState.IsValid)
+            try {
+                // button share
+                if (buttonShare != null)
                 {
-                    // open service
-                    INewsResourcesService serv = GetService<INewsResourcesService>("http://localhost:8730/IndignadoServer/NewsResourcesService/");
+                    if (ModelState.IsValid)
+                    {
+                        // open service
+                        INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
-                    // create new meeting
-                    DTResource dtResource = new DTResource();
-                    dtResource.id = -1;
-                    dtResource.idUser = -1;
-                    dtResource.title = model.title;
-                    dtResource.description = model.description;
-                    dtResource.link = model.link;
-                    dtResource.thumbnail = model.thumbnail;
-                    serv.createResource(dtResource);
+                        // create new meeting
+                        DTResource dtResource = new DTResource();
+                        dtResource.id = -1;
+                        dtResource.idUser = -1;
+                        dtResource.title = model.title;
+                        dtResource.description = model.description;
+                        dtResource.link = model.link;
+                        dtResource.thumbnail = model.thumbnail;
+                        serv.createResource(dtResource);
 
-                    // open resources list view.
-                    return RedirectToAction("ResourcesList");
+                        // open resources list view.
+                        return RedirectToAction(HomeControllerConstants.viewResourcesList);
+                    }
+
+                    // If we got this far, something failed, redisplay form
+                    return View(model);
                 }
 
-                // If we got this far, something failed, redisplay form
+                // button get data from link
+                else if (buttonGetData != null)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+                
+                    // get data
+                    DTResource dtResource = serv.getResourceData(model.link);
+                    model.title = dtResource.title;
+                    model.description = dtResource.description;
+                    model.thumbnail = dtResource.thumbnail;
+
+                    // update data in view.
+                    return RedirectToAction(HomeControllerConstants.viewResourceShare, model);
+                }
+            
                 return View(model);
             }
-
-            // button get data from link
-            else if (buttonGetData != null)
+            catch
             {
-                // open service
-                INewsResourcesService serv = GetService<INewsResourcesService>("http://localhost:8730/IndignadoServer/NewsResourcesService/");
-                
-                // get data
-                DTResource dtResource = serv.getResourceData(model.link);
-                model.title = dtResource.title;
-                model.description = dtResource.description;
-                model.thumbnail = dtResource.thumbnail;
-
-                // update data in view.
-                return RedirectToAction("ResourceShare", model);
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
             }
-            
-            return View(model);
         }
     }
 }

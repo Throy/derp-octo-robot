@@ -7,6 +7,7 @@ using System.Text;
 using System.IdentityModel.Tokens;
 using System.ServiceModel.Security.Tokens;
 using System.Security.Cryptography;
+using System.Security.Permissions;
 using IndignadoServer.Controllers;
 using IndignadoServer.Services;
 
@@ -33,6 +34,28 @@ namespace IndignadoServer
         public DTTenantInfo GetTenantInfo(String movimiento)
         {
             return ControllersHub.Instance.getISessionController().GetTenantInfo(movimiento);
+        }
+
+
+        // checks that the client is a registered user.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public bool ValidateRegUser()
+        {
+            return true;
+        }
+
+        // checks that the client is a movement admin.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
+        public bool ValidateMovAdmin()
+        {
+            return true;
+        }
+
+        // checks that the client is a system admin.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.SysAdmin)]
+        public bool ValidateSysAdmin()
+        {
+            return true;
         }
     }
 }

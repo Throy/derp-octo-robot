@@ -25,5 +25,18 @@ namespace IndignadoServer
 
         [OperationContract]
         DTTenantInfo GetTenantInfo(String movimiento);
+        
+
+        // checks that the client is a registered user.
+        [OperationContract]
+        bool ValidateRegUser();
+
+        // checks that the client is a movement admin.
+        [OperationContract]
+        bool ValidateMovAdmin();
+
+        // checks that the client is a system admin.
+        [OperationContract]
+        bool ValidateSysAdmin();
     }
 }

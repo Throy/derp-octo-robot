@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
+﻿using System.Security.Permissions;
 using IndignadoServer.Controllers;
 
 namespace IndignadoServer.Services
@@ -25,6 +20,7 @@ namespace IndignadoServer.Services
         }
 
         // changes the configuration of the movement.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public void setMovement(DTMovement dtMovement)
         {
             ControllersHub.Instance.getIMovAdminController().setMovement(DTToClass.DTToMovement(dtMovement));

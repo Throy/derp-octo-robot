@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Security.Permissions;
 using IndignadoServer.Controllers;
 using IndignadoServer.LinqDataContext;
 
@@ -8,6 +9,7 @@ namespace IndignadoServer.Services
     public class SysAdminService : ISysAdminService
     {
         // creates a movement.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.SysAdmin)]
         public void createMovement (DTMovement dtMovement)
         {
             ControllersHub.Instance.getISysAdminController().createMovement(DTToClass.DTToMovement(dtMovement));
@@ -33,8 +35,10 @@ namespace IndignadoServer.Services
             return dtMovementCol;
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.SysAdmin)]
         public void enableMovement(){}
-        
+
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.SysAdmin)]
         public void disableMovement(){}
     }
 }

@@ -313,6 +313,7 @@
     <Content Include="Views\Home\ResourcesList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTResource.cshtml" />
     <Content Include="Views\Home\ResourceShare.cshtml" />
+    <Content Include="Views\Home\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
