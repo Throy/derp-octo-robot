@@ -21,5 +21,9 @@ namespace IndignadoServer.Services
         // geta resource data from the link.
         [OperationContract]
         DTResource getResourceData(string link);
+
+        // likes a resource.
+        [OperationContract]
+        void likeResource(DTResource dtResource);
     }
 }

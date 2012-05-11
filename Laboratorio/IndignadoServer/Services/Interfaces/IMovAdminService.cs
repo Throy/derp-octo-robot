@@ -19,12 +19,15 @@ namespace IndignadoServer.Services
         [OperationContract]
         void setMovement(DTMovement dtMovement);
 
+        // adds a new rss resource.
         [OperationContract]
         void addRssSource(DTRssSource dtRssSource);
 
+        // removes a current rss resource.
         [OperationContract]
         void removeRssSource(DTRssSource dtRssSource);
 
+        // gets the rss resources.
         [OperationContract]
         DTRssSourcesCol listRssSources(); 
     }

@@ -19,7 +19,10 @@ namespace IndignadoServer.Controllers
         // creates a resource.
         void createResource(Recurso resource);
         
-        // geta resource data from the link.
+        // gets resource data from the link.
         Recurso getResourceData(string link);
+        
+        // likes a resource.
+        void likeResource(Recurso resource);
     }
 }

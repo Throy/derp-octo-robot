@@ -26,16 +26,19 @@ namespace IndignadoServer.Services
             ControllersHub.Instance.getIMovAdminController().setMovement(DTToClass.DTToMovement(dtMovement));
         }
 
-
+        // adds a new rss resource.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public void addRssSource(DTRssSource dtRssSource){
             ControllersHub.Instance.getIMovAdminController().addRssSource(dtRssSource.url,dtRssSource.tag);
         }
 
-
+        // removes a current rss resource.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public void removeRssSource(DTRssSource dtRssSource){
             ControllersHub.Instance.getIMovAdminController().removeRssSource(dtRssSource.url,dtRssSource.tag);
         }
 
+        // gets the rss resources.
         public DTRssSourcesCol listRssSources(){
             return ControllersHub.Instance.getIMovAdminController().listRssSources();
         }

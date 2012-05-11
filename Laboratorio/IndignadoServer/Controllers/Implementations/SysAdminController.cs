@@ -1,6 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using IndignadoServer.LinqDataContext;
+using System;
+using IndignadoServer.Services;
+using System.Collections.Generic;
 
 namespace IndignadoServer.Controllers
 {
@@ -15,7 +18,39 @@ namespace IndignadoServer.Controllers
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
 
-            indignadoContext.Movimientos.InsertOnSubmit (movement);
+            // creates the movement.
+            indignadoContext.Movimientos.InsertOnSubmit(movement);
+            indignadoContext.SubmitChanges();
+
+            // get the movement's id.
+            IEnumerable<Movimiento> movementsEnum = indignadoContext.ExecuteQuery<Movimiento> ("SELECT id FROM Movimiento WHERE nombre = {0}", movement.nombre);
+
+            int idMov = -1;
+            foreach (Movimiento mov in movementsEnum)
+            {
+                if (mov.nombre == movement.nombre)
+                {
+                    idMov = mov.id;
+                }
+            }
+
+            // creates the movement admin.
+            DTRegisterModel user = new DTRegisterModel();
+            user.nombre = "movadmin";
+            user.apodo = "movadmin";
+            user.contraseña = "1234";
+            user.idMovimiento = idMov;
+            user.latitud = movement.latitud;
+            user.longitud = movement.longitud;
+            user.mail = movement.nombre + "@tsi1.com.uy";
+                
+            Usuario userDb = DTToClass.DTToUsuario(user);
+            userDb.banned = false;
+            userDb.privilegio = (short) Roles.MovAdminMask;
+            userDb.fechaRegistro = DateTime.Now;
+            indignadoContext.Usuarios.InsertOnSubmit(userDb);
+
+            // submit changes to the database
             indignadoContext.SubmitChanges();
         }
 

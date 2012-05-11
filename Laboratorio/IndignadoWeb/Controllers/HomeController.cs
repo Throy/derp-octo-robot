@@ -313,6 +313,7 @@ namespace IndignadoWeb.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    // open service
                     IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
 
                     // create new movement
@@ -330,14 +331,7 @@ namespace IndignadoWeb.Controllers
                     (serv as ICommunicationObject).Close();
 
                     // open service
-                    ChannelFactory<SysAdminServiceReference.ISysAdminService> scf2;
-                    scf2 = new ChannelFactory<SysAdminServiceReference.ISysAdminService>(
-                                new BasicHttpBinding(),
-                                HomeControllerConstants.urlSysAdminService);
-
-
-                    SysAdminServiceReference.ISysAdminService serv2;
-                    serv2 = scf2.CreateChannel();
+                    ISysAdminService serv2 = GetService<ISysAdminService>(HomeControllerConstants.urlSysAdminService);
 
                     // get all movements
                     DTMovementsCol movements = serv2.getMovementsList();
@@ -456,9 +450,10 @@ namespace IndignadoWeb.Controllers
             }
         }
         
-        public ActionResult SourcesConfig()
+        // configures the rss sources.
+        public ActionResult RssSourcesConfig()
         {
-            IMovAdminService serv = GetService<IMovAdminService>("http://localhost:8730/IndignadoServer/MovAdminService/");
+            IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
 
             RssSourcesModel model = new RssSourcesModel();
             model.newItem = new DTRssSource();
@@ -467,35 +462,42 @@ namespace IndignadoWeb.Controllers
 
             return View(model);
         }
-        
-        
-        // configure rss sources
+
+        // configures the rss sources.
         [HttpPost]
-        public ActionResult SourcesConfig(string buttonAdd, string buttonRemove, RssSourcesModel model)
+        public ActionResult RssSourcesConfig(string buttonAdd, string buttonRemove, RssSourcesModel model)
         {
-            IMovAdminService serv = GetService<IMovAdminService>("http://localhost:8730/IndignadoServer/MovAdminService/");
-            
-            // button Add
-            if (buttonAdd != null)
+            try
             {
-                if (model.newItem != null)
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+            
+                // button Add
+                if (buttonAdd != null)
                 {
-                    serv.addRssSource(model.newItem);
+                    if (model.newItem != null)
+                    {
+                        serv.addRssSource(model.newItem);
+                    }
                 }
+
+                // button Remove
+                else if (buttonRemove != null)
+                {
+                    if (model.newItem != null)
+                    {
+                        serv.removeRssSource(model.newItem);
+                    }
+                }
+
+                // show rss sources
+                model.items = serv.listRssSources();
+
+                return View(model);
             }
-            else if (buttonRemove != null)
+            catch
             {
-                if (model.newItem != null)
-                {
-                    serv.removeRssSource(model.newItem);
-                }
-             }
-            DTRssSourcesCol col = serv.listRssSources();
-
-            model.items = col;
-
-            return View(model);
-            
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
         }
          
     }

@@ -319,7 +319,7 @@
     <Content Include="Views\Home\ResourceShare.cshtml" />
     <Content Include="Views\Home\AccessDenied.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTRssSource.cshtml" />
-    <Content Include="Views\Home\SourcesConfig.cshtml" />
+    <Content Include="Views\Home\RssSourcesConfig.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

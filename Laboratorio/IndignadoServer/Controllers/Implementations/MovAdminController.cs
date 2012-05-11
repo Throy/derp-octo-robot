@@ -33,13 +33,11 @@ namespace IndignadoServer.Controllers
         // changes the configuration of the movement.
         public void setMovement(Movimiento movement)
         {
-            // *** lista de campos levantada de DTToClass.DTToMovement() ***
-
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            movement.id = 0;
-            indignadoContext.ExecuteCommand("UPDATE Movimiento SET nombre = {0}, descripcion = {1}, latitud = {2}, longitud = {3} WHERE id = {4}", movement.nombre, movement.descripcion, movement.latitud, movement.longitud, movement.id);
+            indignadoContext.ExecuteCommand("UPDATE Movimiento SET nombre = {0}, descripcion = {1}, latitud = {2}, longitud = {3} WHERE id = {4}", movement.nombre, movement.descripcion, movement.latitud, movement.longitud, IdMovement);
         }
 
+        // adds a new rss resource.
         public void addRssSource(String url, String tag){
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             RssFeed rssFeed = new RssFeed();
@@ -49,9 +47,9 @@ namespace IndignadoServer.Controllers
      
             indignadoContext.RssFeeds.InsertOnSubmit(rssFeed);
             indignadoContext.SubmitChanges();
-
         }
 
+        // removes a current rss resource.
         public void removeRssSource(String url, String tag)
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
@@ -71,6 +69,7 @@ namespace IndignadoServer.Controllers
             }
         }
 
+        // gets the rss resources.
         public DTRssSourcesCol listRssSources()
         {
             DTRssSourcesCol result = new DTRssSourcesCol();

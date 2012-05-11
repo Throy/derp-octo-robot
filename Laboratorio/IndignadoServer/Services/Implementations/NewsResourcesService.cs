@@ -73,5 +73,11 @@ namespace IndignadoServer.Services
         {
             return ClassToDT.ResourceToDT(ControllersHub.Instance.getINewsResourcesController().getResourceData(link));
         }
+
+        // likes a resource.
+        public void likeResource(DTResource dtResource)
+        {
+            ControllersHub.Instance.getINewsResourcesController().likeResource(DTToClass.DTToResource(dtResource));
+        }
     }
 }

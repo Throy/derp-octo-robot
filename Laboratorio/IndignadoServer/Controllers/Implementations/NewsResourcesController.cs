@@ -53,10 +53,7 @@ namespace IndignadoServer.Controllers
             // only get meetings from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, logo, fecha, tipo, link FROM Recursos LEFT JOIN Usuarios ON ((Usuarios.id = Recursos.idUsuario) AND (Usuarios.idMovimiento = {0}))", 9);
-
- //           select * from a LEFT OUTER JOIN b on a.a = b.b;
-
+                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, logo, fecha, tipo, link FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0})", IdMovement);
 
             // create new resources collection.
             Collection<Recurso> recursosCol = new Collection<Recurso>();
@@ -81,12 +78,7 @@ namespace IndignadoServer.Controllers
             indignadoContext.SubmitChanges();
         }
 
-        /// <summary>
         /// gets resource data from the link.
-        /// </summary>
-        /// <param name="link"></param>
-        /// <returns></returns>
- 
         public Recurso getResourceData(string link)
         {
             // create resource
@@ -114,6 +106,20 @@ namespace IndignadoServer.Controllers
             }
 
             return resource;
+        }
+
+        // likes a resource.
+        public void likeResource(Recurso resource)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+
+            // creates a likeResource
+            Aprobacione likeResource = new Aprobacione();
+            likeResource.idRecurso = resource.id;
+            likeResource.idUsuario = UserInfo.Id;
+
+            indignadoContext.Recursos.InsertOnSubmit(resource);
+            indignadoContext.SubmitChanges();
         }
     }
 }
