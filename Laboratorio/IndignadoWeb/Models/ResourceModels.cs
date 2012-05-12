@@ -4,12 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+using IndignadoWeb.NewsResourcesServiceReference;
 
 namespace IndignadoWeb.Models
 {
     // model for Create resource
 
-    public class CreateResourceModel
+    public class ShareResourceModel
     {
         [Display(Name = "Title: ")]
         public String title { get; set; }
@@ -18,9 +19,19 @@ namespace IndignadoWeb.Models
         public String description { get; set; }
 
         [Display(Name = "URL: ")]
-        public String link { get; set; }
+        public String url { get; set; }
 
         [Display(Name = "Thumbnail: ")]
         public String thumbnail { get; set; }
+    }
+
+    // model for List resources
+
+    public class ListResourcesModel
+    {
+        public DTResourcesCol items { get; set; }
+
+        [Display(Name = "ID: ")]
+        public int id { get; set; }
     }
 }

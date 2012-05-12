@@ -40,8 +40,8 @@ namespace IndignadoServer.Controllers
             user.apodo = "movadmin";
             user.contraseña = "1234";
             user.idMovimiento = idMov;
-            user.latitud = movement.latitud;
-            user.longitud = movement.longitud;
+            user.latitud = (float)movement.latitud;
+            user.longitud = (float)movement.longitud;
             user.mail = movement.nombre + "@tsi1.com.uy";
                 
             Usuario userDb = DTToClass.DTToUsuario(user);

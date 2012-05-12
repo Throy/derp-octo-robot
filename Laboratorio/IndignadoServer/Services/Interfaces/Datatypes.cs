@@ -142,7 +142,7 @@ namespace IndignadoServer.Services
         public String description { get; set; }
 
         [DataMember]
-        public String link { get; set; }
+        public String url { get; set; }
 
         [DataMember]
         public String thumbnail { get; set; }
@@ -152,6 +152,9 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public int numberLikes { get; set; }
+
+        [DataMember]
+        public int iLikeIt { get; set; }
     }
 
     // Resource Collection datatype
@@ -256,8 +259,8 @@ namespace IndignadoServer.Services
             dtMeeting.idMovement = meeting.idMovimiento;
             dtMeeting.name = meeting.titulo;
             dtMeeting.description = meeting.descripcion;
-            dtMeeting.locationLati = meeting.latitud;
-            dtMeeting.locationLong = meeting.longitud;
+            dtMeeting.locationLati = (float)meeting.latitud;
+            dtMeeting.locationLong = (float)meeting.longitud;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
             return dtMeeting;
         }
@@ -268,8 +271,8 @@ namespace IndignadoServer.Services
             dtMovement.id = movement.id;
             dtMovement.name = movement.nombre;
             dtMovement.description = movement.descripcion;
-            dtMovement.locationLati = movement.latitud;
-            dtMovement.locationLong = movement.longitud;
+            dtMovement.locationLati = (float)movement.latitud;
+            dtMovement.locationLong = (float)movement.longitud;
             dtMovement.idLayout = movement.idLayout;
             return dtMovement;
         }
@@ -295,10 +298,11 @@ namespace IndignadoServer.Services
             dtResource.idUser = resource.idUsuario;
             dtResource.title = resource.titulo;
             dtResource.description = resource.descripcion;
-            dtResource.link = resource.link;
+            dtResource.url = resource.url;
             dtResource.thumbnail = resource.logo;
             dtResource.date = (resource.fecha == null) ? new DateTime() : resource.fecha.Value;
-            dtResource.numberLikes = 0;
+            dtResource.numberLikes = (resource.cantAprobaciones == null) ? 0 : resource.cantAprobaciones.Value;
+            dtResource.iLikeIt = (resource.meGusta == null) ? 0 : resource.meGusta.Value;
             return dtResource;
         }
     }
@@ -352,9 +356,11 @@ namespace IndignadoServer.Services
             resource.idUsuario = dtResource.idUser;
             resource.titulo = dtResource.title;
             resource.descripcion = dtResource.description;
-            resource.link = dtResource.link;
+            resource.url = dtResource.url;
             resource.logo = dtResource.thumbnail;
             resource.fecha = dtResource.date;
+            resource.cantAprobaciones = dtResource.numberLikes;
+            resource.meGusta = dtResource.iLikeIt;
             return resource;
         }
 

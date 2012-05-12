@@ -2,23 +2,40 @@
 @model IndignadoWeb.NewsResourcesServiceReference.DTResource
            
 <div>
-     <h3>@Html.DisplayFor(m => m.title)</h3>
+    <!-- header -->
+    <h3>@Html.DisplayFor(m => m.title)</h3>
      
-     D1: @Html.DisplayFor(m => m.description)
-     <br />
-     Description: @Html.Raw(HttpUtility.HtmlDecode(Model.description))
-     <br />
-     <br />
-     ID: @Html.DisplayFor(m => m.id)
-     <br />
-     User: @Html.DisplayFor(m => m.idUser)
-     <br />
-     URL: @Html.DisplayFor(m => m.link)
-     <br />
-     Thumbnail: @Html.DisplayFor(m => m.thumbnail)
-     <br />
-     Date: @Html.DisplayFor(m => m.date)
-     <br />
-     Likes: @Html.DisplayFor(m => m.numberLikes)
-     <br />
+    <!-- fields -->
+    D1: @Html.DisplayFor(m => m.description)
+    <br />
+    Description: @Html.Raw(HttpUtility.HtmlDecode(Model.description))
+    <br />
+    <br />
+    ID: @Html.DisplayFor(m => m.id)
+    <br />
+    User: @Html.DisplayFor(m => m.idUser)
+    <br />
+    URL: @Html.DisplayFor(m => m.url)
+    <br />
+    Thumbnail: @Html.DisplayFor(m => m.thumbnail)
+    <br />
+    Date: @Html.DisplayFor(m => m.date)
+    <br />
+    Likes: @Html.DisplayFor(m => m.numberLikes)
+    <br />
+
+    @using (Html.BeginForm(new { id = @Model.id }))
+    {
+        if (@Model.iLikeIt == 0)
+        {
+            <input type="submit" name="buttonLike" value="Like it" />
+            <br />
+        }
+    
+        if (Model.iLikeIt > 0)
+        {
+            <input type="submit" name="buttonUnlike" value="Unlike it" />
+            <br />
+        }
+    }
 </div>

@@ -368,13 +368,98 @@ namespace IndignadoWeb.Controllers
             INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
             // get all news
-            DTResourcesCol resourcesCol = serv.getResourcesList();
+            ListResourcesModel listResourcesModel = new ListResourcesModel();
+            listResourcesModel.items = serv.getResourcesList();
 
-            return View(resourcesCol);
+            return View(listResourcesModel);
         }
 
+        // like resource.
+        [HttpPost]
+        public ActionResult ResourcesList(string buttonLike, string buttonUnlike, int id)
+        {
+            try
+            {
+                if (buttonLike != null)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                    // like resource
+                    DTResource dtResource = new DTResource();
+                    dtResource.id = id;
+                    serv.likeResource(dtResource);
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesList);
+                }
+            
+                else if (buttonUnlike != null)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                    // like resource
+                    DTResource dtResource = new DTResource();
+                    dtResource.id = id;
+                    serv.unlikeResource(dtResource);
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesList);
+                }
+
+                return View ();
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
+        }
+
+        /*
+        // like resource.
+        [HttpPost]
+        public ActionResult ResourcesList(string buttonLike, string buttonUnlike, ListResourcesModel model)
+        {
+            try
+            {
+                // button like
+                if (buttonLike != null)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                    // like resource
+                    DTResource dtResource = new DTResource();
+                    dtResource.id = model.id;
+                    serv.likeResource(dtResource);
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesList);
+                }
+
+                // button unlike
+                else if (buttonUnlike != null)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                    // like resource
+                    DTResource dtResource = new DTResource();
+                    dtResource.id = model.id;
+                    serv.unlikeResource(dtResource);
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesList);
+                }
+
+                return View(model);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
+        }
+         * */
+
         // create resource.
-        public ActionResult ResourceShare(CreateResourceModel model)
+        public ActionResult ResourceShare(ShareResourceModel model)
         {
             /*
             try
@@ -397,7 +482,7 @@ namespace IndignadoWeb.Controllers
 
         // create resource.
         [HttpPost]
-        public ActionResult ResourceShare(string buttonShare, string buttonGetData, CreateResourceModel model)
+        public ActionResult ResourceShare(string buttonShare, string buttonGetData, ShareResourceModel model)
         {
             try {
                 // button share
@@ -414,7 +499,7 @@ namespace IndignadoWeb.Controllers
                         dtResource.idUser = -1;
                         dtResource.title = model.title;
                         dtResource.description = model.description;
-                        dtResource.link = model.link;
+                        dtResource.url = model.url;
                         dtResource.thumbnail = model.thumbnail;
                         serv.createResource(dtResource);
 
@@ -433,7 +518,7 @@ namespace IndignadoWeb.Controllers
                     INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
                 
                     // get data
-                    DTResource dtResource = serv.getResourceData(model.link);
+                    DTResource dtResource = serv.getResourceData(model.url);
                     model.title = dtResource.title;
                     model.description = dtResource.description;
                     model.thumbnail = dtResource.thumbnail;

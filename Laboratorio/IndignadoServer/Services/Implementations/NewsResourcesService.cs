@@ -51,7 +51,7 @@ namespace IndignadoServer.Services
             dtResource.idUser = 1;
             dtResource.title = "Autito";
             dtResource.description = "el juego revolucionarazo";
-            dtResource.link = "autito.tk";
+            dtResource.url = "autito.tk";
             dtResource.thumbnail = "logo_autito.gif";
             dtResource.date = new System.DateTime (2012, 05, 24, 20, 38, 0);
             dtResource.numberLikes = 38;
@@ -75,9 +75,17 @@ namespace IndignadoServer.Services
         }
 
         // likes a resource.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void likeResource(DTResource dtResource)
         {
             ControllersHub.Instance.getINewsResourcesController().likeResource(DTToClass.DTToResource(dtResource));
+        }
+
+        // unlikes a resource.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void unlikeResource(DTResource dtResource)
+        {
+            ControllersHub.Instance.getINewsResourcesController().unlikeResource(DTToClass.DTToResource(dtResource));
         }
     }
 }

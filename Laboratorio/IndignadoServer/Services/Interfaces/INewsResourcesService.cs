@@ -18,12 +18,16 @@ namespace IndignadoServer.Services
         [OperationContract]
         void createResource (DTResource dtResource);
 
-        // geta resource data from the link.
+        // gets resource data from the link.
         [OperationContract]
         DTResource getResourceData(string link);
 
         // likes a resource.
         [OperationContract]
         void likeResource(DTResource dtResource);
+
+        // unlikes a resource.
+        [OperationContract]
+        void unlikeResource(DTResource dtResource);
     }
 }
