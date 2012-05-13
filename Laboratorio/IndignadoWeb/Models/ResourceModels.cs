@@ -18,11 +18,17 @@ namespace IndignadoWeb.Models
         [Display(Name = "Description: ")]
         public String description { get; set; }
 
-        [Display(Name = "URL: ")]
-        public String url { get; set; }
+        [Display(Name = "Link: ")]
+        public String urlLink { get; set; }
 
         [Display(Name = "Thumbnail: ")]
-        public String thumbnail { get; set; }
+        public String urlThumb { get; set; }
+
+        [Display(Name = "Image: ")]
+        public String urlImage { get; set; }
+
+        [Display(Name = "Video: ")]
+        public String urlVideo { get; set; }
     }
 
     // model for List resources

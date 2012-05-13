@@ -89,10 +89,12 @@
       <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="titulo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="logo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="tipo" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="urlLink" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="urlImage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="urlVideo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="urlThumb" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="cantAprobaciones" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="meGusta" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Recurso_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idRecurso" Type="Aprobacione" />

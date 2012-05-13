@@ -240,13 +240,19 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         private int numberLikesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string thumbnailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string titleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string urlField;
+        private string urlImageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string urlLinkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string urlThumbField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string urlVideoField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -337,19 +343,6 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string thumbnail {
-            get {
-                return this.thumbnailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.thumbnailField, value) != true)) {
-                    this.thumbnailField = value;
-                    this.RaisePropertyChanged("thumbnail");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string title {
             get {
                 return this.titleField;
@@ -363,14 +356,53 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string url {
+        public string urlImage {
             get {
-                return this.urlField;
+                return this.urlImageField;
             }
             set {
-                if ((object.ReferenceEquals(this.urlField, value) != true)) {
-                    this.urlField = value;
-                    this.RaisePropertyChanged("url");
+                if ((object.ReferenceEquals(this.urlImageField, value) != true)) {
+                    this.urlImageField = value;
+                    this.RaisePropertyChanged("urlImage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string urlLink {
+            get {
+                return this.urlLinkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.urlLinkField, value) != true)) {
+                    this.urlLinkField = value;
+                    this.RaisePropertyChanged("urlLink");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string urlThumb {
+            get {
+                return this.urlThumbField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.urlThumbField, value) != true)) {
+                    this.urlThumbField = value;
+                    this.RaisePropertyChanged("urlThumb");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string urlVideo {
+            get {
+                return this.urlVideoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.urlVideoField, value) != true)) {
+                    this.urlVideoField = value;
+                    this.RaisePropertyChanged("urlVideo");
                 }
             }
         }

@@ -1979,13 +1979,17 @@ namespace IndignadoServer.LinqDataContext
 		
 		private string _descripcion;
 		
-		private string _logo;
-		
 		private System.Nullable<System.DateTime> _fecha;
 		
 		private System.Nullable<int> _tipo;
 		
-		private string _url;
+		private string _urlLink;
+		
+		private string _urlImage;
+		
+		private string _urlVideo;
+		
+		private string _urlThumb;
 		
 		private System.Nullable<int> _cantAprobaciones;
 		
@@ -2007,14 +2011,18 @@ namespace IndignadoServer.LinqDataContext
     partial void OntituloChanged();
     partial void OndescripcionChanging(string value);
     partial void OndescripcionChanged();
-    partial void OnlogoChanging(string value);
-    partial void OnlogoChanged();
     partial void OnfechaChanging(System.Nullable<System.DateTime> value);
     partial void OnfechaChanged();
     partial void OntipoChanging(System.Nullable<int> value);
     partial void OntipoChanged();
-    partial void OnurlChanging(string value);
-    partial void OnurlChanged();
+    partial void OnurlLinkChanging(string value);
+    partial void OnurlLinkChanged();
+    partial void OnurlImageChanging(string value);
+    partial void OnurlImageChanged();
+    partial void OnurlVideoChanging(string value);
+    partial void OnurlVideoChanged();
+    partial void OnurlThumbChanging(string value);
+    partial void OnurlThumbChanged();
     partial void OncantAprobacionesChanging(System.Nullable<int> value);
     partial void OncantAprobacionesChanged();
     partial void OnmeGustaChanging(System.Nullable<int> value);
@@ -2112,26 +2120,6 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_logo", DbType="VarChar(MAX)")]
-		public string logo
-		{
-			get
-			{
-				return this._logo;
-			}
-			set
-			{
-				if ((this._logo != value))
-				{
-					this.OnlogoChanging(value);
-					this.SendPropertyChanging();
-					this._logo = value;
-					this.SendPropertyChanged("logo");
-					this.OnlogoChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha", DbType="DateTime")]
 		public System.Nullable<System.DateTime> fecha
 		{
@@ -2172,22 +2160,82 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="VarChar(MAX)")]
-		public string url
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_urlLink", DbType="VarChar(MAX)")]
+		public string urlLink
 		{
 			get
 			{
-				return this._url;
+				return this._urlLink;
 			}
 			set
 			{
-				if ((this._url != value))
+				if ((this._urlLink != value))
 				{
-					this.OnurlChanging(value);
+					this.OnurlLinkChanging(value);
 					this.SendPropertyChanging();
-					this._url = value;
-					this.SendPropertyChanged("url");
-					this.OnurlChanged();
+					this._urlLink = value;
+					this.SendPropertyChanged("urlLink");
+					this.OnurlLinkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_urlImage", DbType="VarChar(MAX)")]
+		public string urlImage
+		{
+			get
+			{
+				return this._urlImage;
+			}
+			set
+			{
+				if ((this._urlImage != value))
+				{
+					this.OnurlImageChanging(value);
+					this.SendPropertyChanging();
+					this._urlImage = value;
+					this.SendPropertyChanged("urlImage");
+					this.OnurlImageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_urlVideo", DbType="VarChar(MAX)")]
+		public string urlVideo
+		{
+			get
+			{
+				return this._urlVideo;
+			}
+			set
+			{
+				if ((this._urlVideo != value))
+				{
+					this.OnurlVideoChanging(value);
+					this.SendPropertyChanging();
+					this._urlVideo = value;
+					this.SendPropertyChanged("urlVideo");
+					this.OnurlVideoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_urlThumb", DbType="VarChar(MAX)")]
+		public string urlThumb
+		{
+			get
+			{
+				return this._urlThumb;
+			}
+			set
+			{
+				if ((this._urlThumb != value))
+				{
+					this.OnurlThumbChanging(value);
+					this.SendPropertyChanging();
+					this._urlThumb = value;
+					this.SendPropertyChanged("urlThumb");
+					this.OnurlThumbChanged();
 				}
 			}
 		}

@@ -3,40 +3,74 @@
            
 <div>
     <!-- header -->
-    <h3>@Html.DisplayFor(m => m.title)</h3>
-     
-    <!-- fields -->
-    D1: @Html.DisplayFor(m => m.description)
-    <br />
-    Description: @Html.Raw(HttpUtility.HtmlDecode(Model.description))
-    <br />
-    <br />
-    Internal ID: @Html.DisplayFor(m => m.id)
-    <br />
-    User: @Html.DisplayFor(m => m.idUser)
-    <br />
-    URL: @Html.DisplayFor(m => m.url)
-    <br />
-    Thumbnail: @Html.DisplayFor(m => m.thumbnail)
-    <br />
-    Date: @Html.DisplayFor(m => m.date)
-    <br />
-    Likes: @Html.DisplayFor(m => m.numberLikes)
-    <br />
-
-    <!-- like buttons -->
-    @using (Html.BeginForm(new { id = @Model.id }))
-    {
-        if (@Model.iLikeIt == 0)
-        {
-            <input type="submit" name="buttonLike" value="Like it" />
-            <br />
-        }
+    <h3><a href="@Html.DisplayFor(m => m.urlLink)">@Html.DisplayFor(m => m.title)</a></h3>
     
-        if (Model.iLikeIt > 0)
-        {
-            <input type="submit" name="buttonUnlike" value="Unlike it" />
-            <br />
-        }
-    }
+    <table border-style="none">
+        <tr>
+            <td valign="top">
+                <!-- fields -->
+                D1: @Html.DisplayFor(m => m.description)
+                <br />
+                Description: @Html.Raw(HttpUtility.HtmlDecode(Model.description))
+                <br />
+                <br />
+                Internal ID: @Html.DisplayFor(m => m.id)
+                <br />
+                User: @Html.DisplayFor(m => m.idUser)
+                <br />
+                Date: @Html.DisplayFor(m => m.date)
+                <br />
+
+                <!-- thumbnail -->
+                Thumbnail: @Html.DisplayFor(m => m.urlThumb)
+                <br />
+                
+                <!-- image -->
+                @{
+                    if ((@Model.urlImage != null) && (@Model.urlImage != ""))
+                    {
+                        <text>
+                            Image:
+                            <br />
+                            <img src="@Html.DisplayFor(m => m.urlImage)" width="400" height="300"/>
+                            <br />
+                        </text>
+                    }
+                }
+                <br />
+                
+                <!-- video -->
+                @{
+                    if ((@Model.urlVideo != null) && (@Model.urlVideo != ""))
+                    {
+                        <text>
+                            Video:
+                            <br />
+                            <iframe src="@Html.DisplayFor(m => m.urlVideo)" frameborder="0" width="400" height="300"></iframe>
+                            <br />
+                        </text>
+                    }
+                }
+
+                Likes: @Html.DisplayFor(m => m.numberLikes)
+                <br />
+
+                <!-- like buttons -->
+                @using (Html.BeginForm(new { id = @Model.id }))
+                {
+                    if (@Model.iLikeIt == 0)
+                    {
+                        <input type="submit" name="buttonLike" value="Like it" />
+                        <br />
+                    }
+
+                    if (Model.iLikeIt > 0)
+                    {
+                        <input type="submit" name="buttonUnlike" value="Unlike it" />
+                        <br />
+                    }
+                }
+            </td>
+        </tr>
+    </table>
 </div>

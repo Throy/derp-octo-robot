@@ -148,10 +148,16 @@ namespace IndignadoServer.Services
         public String description { get; set; }
 
         [DataMember]
-        public String url { get; set; }
+        public String urlLink { get; set; }
 
         [DataMember]
-        public String thumbnail { get; set; }
+        public String urlImage { get; set; }
+
+        [DataMember]
+        public String urlVideo { get; set; }
+
+        [DataMember]
+        public String urlThumb { get; set; }
 
         [DataMember]
         public DateTime date { get; set; }
@@ -306,8 +312,10 @@ namespace IndignadoServer.Services
             dtResource.idUser = resource.idUsuario;
             dtResource.title = resource.titulo;
             dtResource.description = resource.descripcion;
-            dtResource.url = resource.url;
-            dtResource.thumbnail = resource.logo;
+            dtResource.urlLink = resource.urlLink;
+            dtResource.urlImage = resource.urlImage;
+            dtResource.urlVideo = resource.urlVideo;
+            dtResource.urlThumb = resource.urlThumb;
             dtResource.date = (resource.fecha == null) ? new DateTime() : resource.fecha.Value;
             dtResource.numberLikes = (resource.cantAprobaciones == null) ? 0 : resource.cantAprobaciones.Value;
             dtResource.iLikeIt = (resource.meGusta == null) ? 0 : resource.meGusta.Value;
@@ -365,8 +373,10 @@ namespace IndignadoServer.Services
             resource.idUsuario = dtResource.idUser;
             resource.titulo = dtResource.title;
             resource.descripcion = dtResource.description;
-            resource.url = dtResource.url;
-            resource.logo = dtResource.thumbnail;
+            resource.urlLink = dtResource.urlLink;
+            resource.urlImage = dtResource.urlImage;
+            resource.urlVideo = dtResource.urlVideo;
+            resource.urlThumb = dtResource.urlThumb;
             resource.fecha = dtResource.date;
             resource.cantAprobaciones = dtResource.numberLikes;
             resource.meGusta = dtResource.iLikeIt;

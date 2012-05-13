@@ -51,8 +51,8 @@ namespace IndignadoServer.Services
             dtResource.idUser = 1;
             dtResource.title = "Autito";
             dtResource.description = "el juego revolucionarazo";
-            dtResource.url = "autito.tk";
-            dtResource.thumbnail = "logo_autito.gif";
+            dtResource.urlLink = "autito.tk";
+            dtResource.urlThumb = "logo_autito.gif";
             dtResource.date = new System.DateTime (2012, 05, 24, 20, 38, 0);
             dtResource.numberLikes = 38;
             dtResourcesCol.items.Add(dtResource);
