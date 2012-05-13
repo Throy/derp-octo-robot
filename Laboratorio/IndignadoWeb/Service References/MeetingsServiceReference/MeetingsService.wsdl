@@ -219,7 +219,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_doAssistMeeting_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_doAttendMeeting_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -238,7 +238,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_doAssistMeeting_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_doAttendMeeting_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -257,7 +257,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_unconfirmAssistMeeting_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_unconfirmAttendMeeting_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -276,7 +276,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_unconfirmAssistMeeting_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_unconfirmAttendMeeting_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -295,7 +295,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_dontAssistMeeting_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_dontAttendMeeting_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -314,7 +314,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_dontAssistMeeting_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_dontAttendMeeting_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -358,23 +358,23 @@
   <wsdl:message name="IMeetingsService_getMeetingsList_OutputMessage">
     <wsdl:part name="parameters" element="tns:getMeetingsListResponse" />
   </wsdl:message>
-  <wsdl:message name="IMeetingsService_doAssistMeeting_InputMessage">
-    <wsdl:part name="parameters" element="tns:doAssistMeeting" />
+  <wsdl:message name="IMeetingsService_doAttendMeeting_InputMessage">
+    <wsdl:part name="parameters" element="tns:doAttendMeeting" />
   </wsdl:message>
-  <wsdl:message name="IMeetingsService_doAssistMeeting_OutputMessage">
-    <wsdl:part name="parameters" element="tns:doAssistMeetingResponse" />
+  <wsdl:message name="IMeetingsService_doAttendMeeting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:doAttendMeetingResponse" />
   </wsdl:message>
-  <wsdl:message name="IMeetingsService_unconfirmAssistMeeting_InputMessage">
-    <wsdl:part name="parameters" element="tns:unconfirmAssistMeeting" />
+  <wsdl:message name="IMeetingsService_unconfirmAttendMeeting_InputMessage">
+    <wsdl:part name="parameters" element="tns:unconfirmAttendMeeting" />
   </wsdl:message>
-  <wsdl:message name="IMeetingsService_unconfirmAssistMeeting_OutputMessage">
-    <wsdl:part name="parameters" element="tns:unconfirmAssistMeetingResponse" />
+  <wsdl:message name="IMeetingsService_unconfirmAttendMeeting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:unconfirmAttendMeetingResponse" />
   </wsdl:message>
-  <wsdl:message name="IMeetingsService_dontAssistMeeting_InputMessage">
-    <wsdl:part name="parameters" element="tns:dontAssistMeeting" />
+  <wsdl:message name="IMeetingsService_dontAttendMeeting_InputMessage">
+    <wsdl:part name="parameters" element="tns:dontAttendMeeting" />
   </wsdl:message>
-  <wsdl:message name="IMeetingsService_dontAssistMeeting_OutputMessage">
-    <wsdl:part name="parameters" element="tns:dontAssistMeetingResponse" />
+  <wsdl:message name="IMeetingsService_dontAttendMeeting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:dontAttendMeetingResponse" />
   </wsdl:message>
   <wsdl:portType name="IMeetingsService">
     <wsdl:operation name="getMeeting">
@@ -389,17 +389,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/getMeetingsList" message="tns:IMeetingsService_getMeetingsList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/getMeetingsListResponse" message="tns:IMeetingsService_getMeetingsList_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="doAssistMeeting">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/doAssistMeeting" message="tns:IMeetingsService_doAssistMeeting_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/doAssistMeetingResponse" message="tns:IMeetingsService_doAssistMeeting_OutputMessage" />
+    <wsdl:operation name="doAttendMeeting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/doAttendMeeting" message="tns:IMeetingsService_doAttendMeeting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/doAttendMeetingResponse" message="tns:IMeetingsService_doAttendMeeting_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="unconfirmAssistMeeting">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/unconfirmAssistMeeting" message="tns:IMeetingsService_unconfirmAssistMeeting_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/unconfirmAssistMeetingResponse" message="tns:IMeetingsService_unconfirmAssistMeeting_OutputMessage" />
+    <wsdl:operation name="unconfirmAttendMeeting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/unconfirmAttendMeeting" message="tns:IMeetingsService_unconfirmAttendMeeting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/unconfirmAttendMeetingResponse" message="tns:IMeetingsService_unconfirmAttendMeeting_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="dontAssistMeeting">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/dontAssistMeeting" message="tns:IMeetingsService_dontAssistMeeting_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/dontAssistMeetingResponse" message="tns:IMeetingsService_dontAssistMeeting_OutputMessage" />
+    <wsdl:operation name="dontAttendMeeting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/dontAttendMeeting" message="tns:IMeetingsService_dontAttendMeeting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/dontAttendMeetingResponse" message="tns:IMeetingsService_dontAttendMeeting_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IMeetingsService" type="tns:IMeetingsService">
@@ -438,36 +438,36 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="doAssistMeeting">
-      <soap12:operation soapAction="http://tempuri.org/IMeetingsService/doAssistMeeting" style="document" />
+    <wsdl:operation name="doAttendMeeting">
+      <soap12:operation soapAction="http://tempuri.org/IMeetingsService/doAttendMeeting" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_doAssistMeeting_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_doAttendMeeting_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_doAssistMeeting_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_doAttendMeeting_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="unconfirmAssistMeeting">
-      <soap12:operation soapAction="http://tempuri.org/IMeetingsService/unconfirmAssistMeeting" style="document" />
+    <wsdl:operation name="unconfirmAttendMeeting">
+      <soap12:operation soapAction="http://tempuri.org/IMeetingsService/unconfirmAttendMeeting" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_unconfirmAssistMeeting_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_unconfirmAttendMeeting_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_unconfirmAssistMeeting_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_unconfirmAttendMeeting_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="dontAssistMeeting">
-      <soap12:operation soapAction="http://tempuri.org/IMeetingsService/dontAssistMeeting" style="document" />
+    <wsdl:operation name="dontAttendMeeting">
+      <soap12:operation soapAction="http://tempuri.org/IMeetingsService/dontAttendMeeting" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_dontAssistMeeting_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_dontAttendMeeting_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_dontAssistMeeting_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_dontAttendMeeting_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

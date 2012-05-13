@@ -41,13 +41,13 @@ namespace IndignadoWeb.MeetingsServiceReference {
         private int minQuorumField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int myAssistField;
+        private int myAttendanceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int numberAssistsField;
+        private int numberAttendantsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -138,14 +138,14 @@ namespace IndignadoWeb.MeetingsServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int myAssist {
+        public int myAttendance {
             get {
-                return this.myAssistField;
+                return this.myAttendanceField;
             }
             set {
-                if ((this.myAssistField.Equals(value) != true)) {
-                    this.myAssistField = value;
-                    this.RaisePropertyChanged("myAssist");
+                if ((this.myAttendanceField.Equals(value) != true)) {
+                    this.myAttendanceField = value;
+                    this.RaisePropertyChanged("myAttendance");
                 }
             }
         }
@@ -164,14 +164,14 @@ namespace IndignadoWeb.MeetingsServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int numberAssists {
+        public int numberAttendants {
             get {
-                return this.numberAssistsField;
+                return this.numberAttendantsField;
             }
             set {
-                if ((this.numberAssistsField.Equals(value) != true)) {
-                    this.numberAssistsField = value;
-                    this.RaisePropertyChanged("numberAssists");
+                if ((this.numberAttendantsField.Equals(value) != true)) {
+                    this.numberAttendantsField = value;
+                    this.RaisePropertyChanged("numberAttendants");
                 }
             }
         }
@@ -244,14 +244,14 @@ namespace IndignadoWeb.MeetingsServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/getMeetingsList", ReplyAction="http://tempuri.org/IMeetingsService/getMeetingsListResponse")]
         IndignadoWeb.MeetingsServiceReference.DTMeetingsCol getMeetingsList();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/doAssistMeeting", ReplyAction="http://tempuri.org/IMeetingsService/doAssistMeetingResponse")]
-        void doAssistMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/doAttendMeeting", ReplyAction="http://tempuri.org/IMeetingsService/doAttendMeetingResponse")]
+        void doAttendMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/unconfirmAssistMeeting", ReplyAction="http://tempuri.org/IMeetingsService/unconfirmAssistMeetingResponse")]
-        void unconfirmAssistMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/unconfirmAttendMeeting", ReplyAction="http://tempuri.org/IMeetingsService/unconfirmAttendMeetingResponse")]
+        void unconfirmAttendMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/dontAssistMeeting", ReplyAction="http://tempuri.org/IMeetingsService/dontAssistMeetingResponse")]
-        void dontAssistMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/dontAttendMeeting", ReplyAction="http://tempuri.org/IMeetingsService/dontAttendMeetingResponse")]
+        void dontAttendMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -293,16 +293,16 @@ namespace IndignadoWeb.MeetingsServiceReference {
             return base.Channel.getMeetingsList();
         }
         
-        public void doAssistMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting) {
-            base.Channel.doAssistMeeting(dtMeeting);
+        public void doAttendMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting) {
+            base.Channel.doAttendMeeting(dtMeeting);
         }
         
-        public void unconfirmAssistMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting) {
-            base.Channel.unconfirmAssistMeeting(dtMeeting);
+        public void unconfirmAttendMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting) {
+            base.Channel.unconfirmAttendMeeting(dtMeeting);
         }
         
-        public void dontAssistMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting) {
-            base.Channel.dontAssistMeeting(dtMeeting);
+        public void dontAttendMeeting(IndignadoWeb.MeetingsServiceReference.DTMeeting dtMeeting) {
+            base.Channel.dontAttendMeeting(dtMeeting);
         }
     }
 }

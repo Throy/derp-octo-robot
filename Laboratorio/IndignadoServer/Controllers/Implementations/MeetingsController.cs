@@ -55,21 +55,21 @@ namespace IndignadoServer.Controllers
             Collection<Convocatoria> meetingsCol = new Collection<Convocatoria>();
             foreach (Convocatoria meeting in meetingsEnum)
             {
-                // get number of assists
-                IEnumerable<int> numbersAssists = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM Asistencias WHERE (idConvocatoria = {0}) AND (hayAsistencia = 1)", meeting.id);
-                foreach (int numberAssists in numbersAssists)
+                // get number of attendants
+                IEnumerable<int> numbersAttendants = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM Asistencias WHERE (idConvocatoria = {0}) AND (hayAsistencia = 1)", meeting.id);
+                foreach (int numberAttendants in numbersAttendants)
                 {
-                    meeting.cantAsistencias = numberAssists;
+                    meeting.cantAsistencias = numberAttendants;
                 }
 
-                // get own assist
+                // get own attendance
                 meeting.miAsistencia = 0;
                 if (UserInfo != null)
                 {
-                    IEnumerable<int> myAssists = indignadoContext.ExecuteQuery<int>("SELECT hayAsistencia FROM Asistencias WHERE (idConvocatoria = {0}) AND (idUsuario = {1})", meeting.id, UserInfo.Id);
-                    foreach (int myAssist in myAssists)
+                    IEnumerable<int> myAttendances = indignadoContext.ExecuteQuery<int>("SELECT hayAsistencia FROM Asistencias WHERE (idConvocatoria = {0}) AND (idUsuario = {1})", meeting.id, UserInfo.Id);
+                    foreach (int myAttendance in myAttendances)
                     {
-                        meeting.miAsistencia = myAssist;
+                        meeting.miAsistencia = myAttendance;
                     }
                 }
             
@@ -81,21 +81,21 @@ namespace IndignadoServer.Controllers
             return meetingsCol;
         }
 
-        // do assist to a meeting.
-        public void doAssistMeeting(Convocatoria meeting)
+        // do attend a meeting.
+        public void doAttendMeeting(Convocatoria meeting)
         {
-            // create an assist
-            Asistencia assist = new Asistencia();
-            assist.idConvocatoria = meeting.id;
-            assist.idUsuario = UserInfo.Id;
-            assist.hayAsistencia = 1;
+            // create an attendance
+            Asistencia attendance = new Asistencia();
+            attendance.idConvocatoria = meeting.id;
+            attendance.idUsuario = UserInfo.Id;
+            attendance.hayAsistencia = 1;
 
             // add likeResource to the database.
             try
             {
                 IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
                 indignadoContext.ExecuteCommand("DELETE FROM Asistencias WHERE (idConvocatoria = {0}) AND (idUsuario = {1})", meeting.id, UserInfo.Id);
-                indignadoContext.Asistencias.InsertOnSubmit(assist);
+                indignadoContext.Asistencias.InsertOnSubmit(attendance);
                 indignadoContext.SubmitChanges();
             }
             catch (Exception error)
@@ -103,21 +103,21 @@ namespace IndignadoServer.Controllers
             }
         }
 
-        // unconfirm assist to a meeting.
-        public void unconfirmAssistMeeting(Convocatoria meeting)
+        // unconfirm attendance to a meeting.
+        public void unconfirmAttendanceMeeting(Convocatoria meeting)
         {
-            // create an assist
-            Asistencia assist = new Asistencia();
-            assist.idConvocatoria = meeting.id;
-            assist.idUsuario = UserInfo.Id;
-            assist.hayAsistencia = -1;
+            // create an attendance
+            Asistencia attendance = new Asistencia();
+            attendance.idConvocatoria = meeting.id;
+            attendance.idUsuario = UserInfo.Id;
+            attendance.hayAsistencia = -1;
 
             // add likeResource to the database.
             try
             {
                 IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
                 indignadoContext.ExecuteCommand("DELETE FROM Asistencias WHERE (idConvocatoria = {0}) AND (idUsuario = {1})", meeting.id, UserInfo.Id);
-                indignadoContext.Asistencias.InsertOnSubmit(assist);
+                indignadoContext.Asistencias.InsertOnSubmit(attendance);
                 indignadoContext.SubmitChanges();
             }
             catch (Exception error)
@@ -125,10 +125,10 @@ namespace IndignadoServer.Controllers
             }
         }
 
-        // don't assist to a meeting.
-        public void dontAssistMeeting(Convocatoria meeting)
+        // don't attend a meeting.
+        public void dontAttendMeeting(Convocatoria meeting)
         {
-            // remove likeResource from the database.
+            // remove attendance from the database.
             try
             {
                 IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();

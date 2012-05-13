@@ -53,25 +53,25 @@ namespace IndignadoServer.Services
             return dtMeetingsCol;
         }
 
-        // do assist to a meeting.
+        // do attend a meeting.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
-        public void doAssistMeeting(DTMeeting dtMeeting)
+        public void doAttendMeeting(DTMeeting dtMeeting)
         {
-            ControllersHub.Instance.getIMeetingsController().doAssistMeeting(DTToClass.DTToMeeting(dtMeeting));
+            ControllersHub.Instance.getIMeetingsController().doAttendMeeting(DTToClass.DTToMeeting(dtMeeting));
         }
 
-        // unconfirm assist to a meeting.
+        // unconfirm attendace to a meeting.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
-        public void unconfirmAssistMeeting(DTMeeting dtMeeting)
+        public void unconfirmAttendMeeting(DTMeeting dtMeeting)
         {
-            ControllersHub.Instance.getIMeetingsController().unconfirmAssistMeeting(DTToClass.DTToMeeting(dtMeeting));
+            ControllersHub.Instance.getIMeetingsController().unconfirmAttendanceMeeting(DTToClass.DTToMeeting(dtMeeting));
         }
 
-        // don't assist to a meeting.
+        // don't attend a meeting.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
-        public void dontAssistMeeting(DTMeeting dtMeeting)
+        public void dontAttendMeeting(DTMeeting dtMeeting)
         {
-            ControllersHub.Instance.getIMeetingsController().dontAssistMeeting(DTToClass.DTToMeeting(dtMeeting));
+            ControllersHub.Instance.getIMeetingsController().dontAttendMeeting(DTToClass.DTToMeeting(dtMeeting));
         }
     }
 }

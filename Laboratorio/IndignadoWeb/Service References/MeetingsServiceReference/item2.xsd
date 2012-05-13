@@ -39,38 +39,38 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="doAssistMeeting">
+  <xs:element name="doAttendMeeting">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtMeeting" nillable="true" type="q4:DTMeeting" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="doAssistMeetingResponse">
+  <xs:element name="doAttendMeetingResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="unconfirmAssistMeeting">
+  <xs:element name="unconfirmAttendMeeting">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtMeeting" nillable="true" type="q5:DTMeeting" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="unconfirmAssistMeetingResponse">
+  <xs:element name="unconfirmAttendMeetingResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="dontAssistMeeting">
+  <xs:element name="dontAttendMeeting">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtMeeting" nillable="true" type="q6:DTMeeting" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="dontAssistMeetingResponse">
+  <xs:element name="dontAttendMeetingResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

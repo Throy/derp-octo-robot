@@ -18,27 +18,27 @@
     <br />
     Min quorum: @Html.DisplayFor(m => m.minQuorum)
     <br />
-    Number of assists: @Html.DisplayFor(m => m.numberAssists)
+    Attendance: @Html.DisplayFor(m => m.numberAttendants)
     <br />
     
-    <!-- assist buttons -->
+    <!-- attendance buttons -->
     @using (Html.BeginForm(new { id = @Model.id }))
     {
-        if (@Model.myAssist != 1)
+        if (@Model.myAttendance != 1)
         {
-            <input type="submit" name="buttonDoAssist" value="Do assist" />
+            <input type="submit" name="buttonDoAttend" value="Do attend" />
             <br />
         }
 
-        if (Model.myAssist != 0)
+        if (Model.myAttendance != 0)
         {
-            <input type="submit" name="buttonDontAssist" value="Don't assist" />
+            <input type="submit" name="buttonDontAttend" value="Don't attend" />
             <br />
         }
 
-        if (Model.myAssist != -1)
+        if (Model.myAttendance != -1)
         {
-            <input type="submit" name="buttonUnconfirmAssist" value="Unconfirm assist" />
+            <input type="submit" name="buttonUnconfirmAttendance" value="Unconfirm attendance" />
             <br />
         }
     }

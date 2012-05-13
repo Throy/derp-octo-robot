@@ -120,45 +120,45 @@ namespace IndignadoWeb.Controllers
 
         // like resource.
         [HttpPost]
-        public ActionResult MeetingsList(string buttonDoAssist, string buttonDontAssist, string buttonUnconfirmAssist, int id)
+        public ActionResult MeetingsList(string buttonDoAttend, string buttonDontAttend, string buttonUnconfirmAttendance, int id)
         {
             try
             {
-                if (buttonDoAssist != null)
+                if (buttonDoAttend != null)
                 {
                     // open service
                     IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
-                    // do assist
+                    // do attend
                     DTMeeting dtMeeting = new DTMeeting();
                     dtMeeting.id = id;
-                    serv.doAssistMeeting(dtMeeting);
+                    serv.doAttendMeeting(dtMeeting);
 
                     return RedirectToAction(HomeControllerConstants.viewMeetingsList);
                 }
 
-                else if (buttonDontAssist != null)
+                else if (buttonDontAttend != null)
                 {
                     // open service
                     IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
-                    // don't assist
+                    // don't attend
                     DTMeeting dtMeeting = new DTMeeting();
                     dtMeeting.id = id;
-                    serv.dontAssistMeeting(dtMeeting);
+                    serv.dontAttendMeeting(dtMeeting);
 
                     return RedirectToAction(HomeControllerConstants.viewMeetingsList);
                 }
 
-                else if (buttonUnconfirmAssist != null)
+                else if (buttonUnconfirmAttendance != null)
                 {
                     // open service
                     IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
-                    // unconfirm assist
+                    // unconfirm attendance
                     DTMeeting dtMeeting = new DTMeeting();
                     dtMeeting.id = id;
-                    serv.unconfirmAssistMeeting(dtMeeting);
+                    serv.unconfirmAttendMeeting(dtMeeting);
 
                     return RedirectToAction(HomeControllerConstants.viewMeetingsList);
                 }

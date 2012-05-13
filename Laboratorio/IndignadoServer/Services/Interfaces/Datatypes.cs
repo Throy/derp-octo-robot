@@ -39,10 +39,10 @@ namespace IndignadoServer.Services
         public int minQuorum { get; set; }
 
         [DataMember]
-        public int numberAssists { get; set; }
+        public int numberAttendants { get; set; }
 
         [DataMember]
-        public int myAssist { get; set; }
+        public int myAttendance { get; set; }
     }
 
     // Meeting Collection datatype
@@ -268,8 +268,8 @@ namespace IndignadoServer.Services
             dtMeeting.locationLati = (float)meeting.latitud;
             dtMeeting.locationLong = (float)meeting.longitud;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
-            dtMeeting.numberAssists = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
-            dtMeeting.myAssist = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
+            dtMeeting.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
+            dtMeeting.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
             return dtMeeting;
         }
 
@@ -329,8 +329,8 @@ namespace IndignadoServer.Services
             meeting.latitud = dtMeeting.locationLati;
             meeting.longitud = dtMeeting.locationLong;
             meeting.minQuorum = dtMeeting.minQuorum;
-            meeting.cantAsistencias = dtMeeting.numberAssists;
-            meeting.miAsistencia = dtMeeting.myAssist;
+            meeting.cantAsistencias = dtMeeting.numberAttendants;
+            meeting.miAsistencia = dtMeeting.myAttendance;
             return meeting;
         }
 

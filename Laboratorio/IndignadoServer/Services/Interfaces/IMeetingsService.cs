@@ -31,16 +31,16 @@ namespace IndignadoServer.Services
         [OperationContract]
         DTMeetingsCol getMeetingsList();
 
-        // do assist to a meeting.
+        // do attend a meeting.
         [OperationContract]
-        void doAssistMeeting(DTMeeting dtMeeting);
+        void doAttendMeeting(DTMeeting dtMeeting);
 
-        // unconfirm assist to a meeting.
+        // unconfirm attendance to a meeting.
         [OperationContract]
-        void unconfirmAssistMeeting(DTMeeting dtMeeting);
+        void unconfirmAttendMeeting(DTMeeting dtMeeting);
 
-        // don't assist to a meeting.
+        // don't attend a meeting.
         [OperationContract]
-        void dontAssistMeeting(DTMeeting dtMeeting);
+        void dontAttendMeeting(DTMeeting dtMeeting);
     }
 }
