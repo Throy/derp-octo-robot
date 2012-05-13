@@ -30,5 +30,17 @@ namespace IndignadoServer.Services
         // returns all meetings
         [OperationContract]
         DTMeetingsCol getMeetingsList();
+
+        // do assist to a meeting.
+        [OperationContract]
+        void doAssistMeeting(DTMeeting dtMeeting);
+
+        // unconfirm assist to a meeting.
+        [OperationContract]
+        void unconfirmAssistMeeting(DTMeeting dtMeeting);
+
+        // don't assist to a meeting.
+        [OperationContract]
+        void dontAssistMeeting(DTMeeting dtMeeting);
     }
 }

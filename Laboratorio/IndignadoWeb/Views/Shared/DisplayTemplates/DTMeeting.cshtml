@@ -2,18 +2,44 @@
 @model IndignadoWeb.MeetingsServiceReference.DTMeeting
            
 <div>
-     <h3>@Html.DisplayFor(m => m.name)</h3>
+    <!-- header -->
+    <h3>@Html.DisplayFor(m => m.name)</h3>
      
-     Internal ID: @Html.DisplayFor(m => m.id)
-     <br />
-     Movement ID: @Html.DisplayFor(m => m.idMovement)
-     <br />
-     Description: @Html.DisplayFor(m => m.description)
-     <br />
-     Location - Latitude: @Html.DisplayFor(m => m.locationLati)
-     <br />
-     Location - Longitude: @Html.DisplayFor(m => m.locationLong)
-     <br />
-     Min quorum: @Html.DisplayFor(m => m.minQuorum)
-     <br />
+    <!-- fields -->
+    Internal ID: @Html.DisplayFor(m => m.id)
+    <br />
+    Movement ID: @Html.DisplayFor(m => m.idMovement)
+    <br />
+    Description: @Html.DisplayFor(m => m.description)
+    <br />
+    Location - Latitude: @Html.DisplayFor(m => m.locationLati)
+    <br />
+    Location - Longitude: @Html.DisplayFor(m => m.locationLong)
+    <br />
+    Min quorum: @Html.DisplayFor(m => m.minQuorum)
+    <br />
+    Number of assists: @Html.DisplayFor(m => m.numberAssists)
+    <br />
+    
+    <!-- assist buttons -->
+    @using (Html.BeginForm(new { id = @Model.id }))
+    {
+        if (@Model.myAssist != 1)
+        {
+            <input type="submit" name="buttonDoAssist" value="Do assist" />
+            <br />
+        }
+
+        if (Model.myAssist != 0)
+        {
+            <input type="submit" name="buttonDontAssist" value="Don't assist" />
+            <br />
+        }
+
+        if (Model.myAssist != -1)
+        {
+            <input type="submit" name="buttonUnconfirmAssist" value="Unconfirm assist" />
+            <br />
+        }
+    }
 </div>

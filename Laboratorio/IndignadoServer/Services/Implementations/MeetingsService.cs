@@ -52,5 +52,26 @@ namespace IndignadoServer.Services
             // return the collection
             return dtMeetingsCol;
         }
+
+        // do assist to a meeting.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void doAssistMeeting(DTMeeting dtMeeting)
+        {
+            ControllersHub.Instance.getIMeetingsController().doAssistMeeting(DTToClass.DTToMeeting(dtMeeting));
+        }
+
+        // unconfirm assist to a meeting.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void unconfirmAssistMeeting(DTMeeting dtMeeting)
+        {
+            ControllersHub.Instance.getIMeetingsController().unconfirmAssistMeeting(DTToClass.DTToMeeting(dtMeeting));
+        }
+
+        // don't assist to a meeting.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void dontAssistMeeting(DTMeeting dtMeeting)
+        {
+            ControllersHub.Instance.getIMeetingsController().dontAssistMeeting(DTToClass.DTToMeeting(dtMeeting));
+        }
     }
 }

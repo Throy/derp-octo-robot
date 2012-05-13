@@ -37,6 +37,12 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public int minQuorum { get; set; }
+
+        [DataMember]
+        public int numberAssists { get; set; }
+
+        [DataMember]
+        public int myAssist { get; set; }
     }
 
     // Meeting Collection datatype
@@ -262,6 +268,8 @@ namespace IndignadoServer.Services
             dtMeeting.locationLati = (float)meeting.latitud;
             dtMeeting.locationLong = (float)meeting.longitud;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
+            dtMeeting.numberAssists = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
+            dtMeeting.myAssist = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
             return dtMeeting;
         }
 
@@ -318,10 +326,11 @@ namespace IndignadoServer.Services
             meeting.idMovimiento = dtMeeting.idMovement;
             meeting.titulo = dtMeeting.name;
             meeting.descripcion = dtMeeting.description;
-            // *** ARREGLAR las coordenadas de la base de datos. ***
             meeting.latitud = dtMeeting.locationLati;
             meeting.longitud = dtMeeting.locationLong;
             meeting.minQuorum = dtMeeting.minQuorum;
+            meeting.cantAsistencias = dtMeeting.numberAssists;
+            meeting.miAsistencia = dtMeeting.myAssist;
             return meeting;
         }
 

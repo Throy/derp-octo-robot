@@ -22,9 +22,19 @@
       <Column Name="banned" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="privilegio" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
       <Association Name="Usuario_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idUsuario" Type="Aprobacione" />
+      <Association Name="Usuario_Asistencia" Member="Asistencias" ThisKey="id" OtherKey="idUsuario" Type="Asistencia" />
       <Association Name="Usuario_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idAutor" Type="Convocatoria" />
       <Association Name="Usuario_Recurso" Member="Recurso" ThisKey="id" OtherKey="id" Type="Recurso" Cardinality="One" />
       <Association Name="Usuario_UsuarioFacebook" Member="UsuarioFacebooks" ThisKey="id" OtherKey="idUsuario" Type="UsuarioFacebook" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Asistencias" Member="Asistencias">
+    <Type Name="Asistencia">
+      <Column Name="idConvocatoria" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="hayAsistencia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Usuario_Asistencia" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Convocatoria_Asistencia" Member="Convocatoria" ThisKey="idConvocatoria" OtherKey="id" Type="Convocatoria" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Convocatorias" Member="Convocatorias">
@@ -40,6 +50,9 @@
       <Column Name="inicio" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="fin" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="minQuorum" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cantAsistencias" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="miAsistencia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Convocatoria_Asistencia" Member="Asistencias" ThisKey="id" OtherKey="idConvocatoria" Type="Asistencia" />
       <Association Name="Usuario_Convocatoria" Member="Usuario" ThisKey="idAutor" OtherKey="id" Type="Usuario" IsForeignKey="true" />
       <Association Name="Movimiento_Convocatoria" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
     </Type>

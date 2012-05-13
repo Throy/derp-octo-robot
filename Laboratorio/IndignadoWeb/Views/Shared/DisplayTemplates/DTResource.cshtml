@@ -11,7 +11,7 @@
     Description: @Html.Raw(HttpUtility.HtmlDecode(Model.description))
     <br />
     <br />
-    ID: @Html.DisplayFor(m => m.id)
+    Internal ID: @Html.DisplayFor(m => m.id)
     <br />
     User: @Html.DisplayFor(m => m.idUser)
     <br />
@@ -24,6 +24,7 @@
     Likes: @Html.DisplayFor(m => m.numberLikes)
     <br />
 
+    <!-- like buttons -->
     @using (Html.BeginForm(new { id = @Model.id }))
     {
         if (@Model.iLikeIt == 0)

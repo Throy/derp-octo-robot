@@ -8,7 +8,9 @@
       <xs:element minOccurs="0" name="locationLati" type="xs:float" />
       <xs:element minOccurs="0" name="locationLong" type="xs:float" />
       <xs:element minOccurs="0" name="minQuorum" type="xs:int" />
+      <xs:element minOccurs="0" name="myAssist" type="xs:int" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="numberAssists" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTMeeting" nillable="true" type="tns:DTMeeting" />

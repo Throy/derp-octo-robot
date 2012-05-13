@@ -36,6 +36,9 @@ namespace IndignadoServer.LinqDataContext
     partial void InsertUsuario(Usuario instance);
     partial void UpdateUsuario(Usuario instance);
     partial void DeleteUsuario(Usuario instance);
+    partial void InsertAsistencia(Asistencia instance);
+    partial void UpdateAsistencia(Asistencia instance);
+    partial void DeleteAsistencia(Asistencia instance);
     partial void InsertConvocatoria(Convocatoria instance);
     partial void UpdateConvocatoria(Convocatoria instance);
     partial void DeleteConvocatoria(Convocatoria instance);
@@ -99,6 +102,14 @@ namespace IndignadoServer.LinqDataContext
 			get
 			{
 				return this.GetTable<Usuario>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Asistencia> Asistencias
+		{
+			get
+			{
+				return this.GetTable<Asistencia>();
 			}
 		}
 		
@@ -349,6 +360,8 @@ namespace IndignadoServer.LinqDataContext
 		
 		private EntitySet<Aprobacione> _Aprobaciones;
 		
+		private EntitySet<Asistencia> _Asistencias;
+		
 		private EntitySet<Convocatoria> _Convocatorias;
 		
 		private EntityRef<Recurso> _Recurso;
@@ -386,6 +399,7 @@ namespace IndignadoServer.LinqDataContext
 		public Usuario()
 		{
 			this._Aprobaciones = new EntitySet<Aprobacione>(new Action<Aprobacione>(this.attach_Aprobaciones), new Action<Aprobacione>(this.detach_Aprobaciones));
+			this._Asistencias = new EntitySet<Asistencia>(new Action<Asistencia>(this.attach_Asistencias), new Action<Asistencia>(this.detach_Asistencias));
 			this._Convocatorias = new EntitySet<Convocatoria>(new Action<Convocatoria>(this.attach_Convocatorias), new Action<Convocatoria>(this.detach_Convocatorias));
 			this._Recurso = default(EntityRef<Recurso>);
 			this._UsuarioFacebooks = new EntitySet<UsuarioFacebook>(new Action<UsuarioFacebook>(this.attach_UsuarioFacebooks), new Action<UsuarioFacebook>(this.detach_UsuarioFacebooks));
@@ -625,6 +639,19 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Asistencia", Storage="_Asistencias", ThisKey="id", OtherKey="idUsuario")]
+		public EntitySet<Asistencia> Asistencias
+		{
+			get
+			{
+				return this._Asistencias;
+			}
+			set
+			{
+				this._Asistencias.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Convocatorias", ThisKey="id", OtherKey="idAutor")]
 		public EntitySet<Convocatoria> Convocatorias
 		{
@@ -712,6 +739,18 @@ namespace IndignadoServer.LinqDataContext
 			entity.Usuario = null;
 		}
 		
+		private void attach_Asistencias(Asistencia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_Asistencias(Asistencia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
 		private void attach_Convocatorias(Convocatoria entity)
 		{
 			this.SendPropertyChanging();
@@ -734,6 +773,198 @@ namespace IndignadoServer.LinqDataContext
 		{
 			this.SendPropertyChanging();
 			entity.Usuario = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Asistencias")]
+	public partial class Asistencia : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idConvocatoria;
+		
+		private int _idUsuario;
+		
+		private int _hayAsistencia;
+		
+		private EntityRef<Usuario> _Usuario;
+		
+		private EntityRef<Convocatoria> _Convocatoria;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidConvocatoriaChanging(int value);
+    partial void OnidConvocatoriaChanged();
+    partial void OnidUsuarioChanging(int value);
+    partial void OnidUsuarioChanged();
+    partial void OnhayAsistenciaChanging(int value);
+    partial void OnhayAsistenciaChanged();
+    #endregion
+		
+		public Asistencia()
+		{
+			this._Usuario = default(EntityRef<Usuario>);
+			this._Convocatoria = default(EntityRef<Convocatoria>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idConvocatoria", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idConvocatoria
+		{
+			get
+			{
+				return this._idConvocatoria;
+			}
+			set
+			{
+				if ((this._idConvocatoria != value))
+				{
+					if (this._Convocatoria.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidConvocatoriaChanging(value);
+					this.SendPropertyChanging();
+					this._idConvocatoria = value;
+					this.SendPropertyChanged("idConvocatoria");
+					this.OnidConvocatoriaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idUsuario
+		{
+			get
+			{
+				return this._idUsuario;
+			}
+			set
+			{
+				if ((this._idUsuario != value))
+				{
+					if (this._Usuario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._idUsuario = value;
+					this.SendPropertyChanged("idUsuario");
+					this.OnidUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_hayAsistencia", DbType="Int NOT NULL")]
+		public int hayAsistencia
+		{
+			get
+			{
+				return this._hayAsistencia;
+			}
+			set
+			{
+				if ((this._hayAsistencia != value))
+				{
+					this.OnhayAsistenciaChanging(value);
+					this.SendPropertyChanging();
+					this._hayAsistencia = value;
+					this.SendPropertyChanged("hayAsistencia");
+					this.OnhayAsistenciaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Asistencia", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.Asistencias.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.Asistencias.Add(this);
+						this._idUsuario = value.id;
+					}
+					else
+					{
+						this._idUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convocatoria_Asistencia", Storage="_Convocatoria", ThisKey="idConvocatoria", OtherKey="id", IsForeignKey=true)]
+		public Convocatoria Convocatoria
+		{
+			get
+			{
+				return this._Convocatoria.Entity;
+			}
+			set
+			{
+				Convocatoria previousValue = this._Convocatoria.Entity;
+				if (((previousValue != value) 
+							|| (this._Convocatoria.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Convocatoria.Entity = null;
+						previousValue.Asistencias.Remove(this);
+					}
+					this._Convocatoria.Entity = value;
+					if ((value != null))
+					{
+						value.Asistencias.Add(this);
+						this._idConvocatoria = value.id;
+					}
+					else
+					{
+						this._idConvocatoria = default(int);
+					}
+					this.SendPropertyChanged("Convocatoria");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -765,6 +996,12 @@ namespace IndignadoServer.LinqDataContext
 		
 		private System.Nullable<int> _minQuorum;
 		
+		private System.Nullable<int> _cantAsistencias;
+		
+		private System.Nullable<int> _miAsistencia;
+		
+		private EntitySet<Asistencia> _Asistencias;
+		
 		private EntityRef<Usuario> _Usuario;
 		
 		private EntityRef<Movimiento> _Movimiento;
@@ -795,10 +1032,15 @@ namespace IndignadoServer.LinqDataContext
     partial void OnfinChanged();
     partial void OnminQuorumChanging(System.Nullable<int> value);
     partial void OnminQuorumChanged();
+    partial void OncantAsistenciasChanging(System.Nullable<int> value);
+    partial void OncantAsistenciasChanged();
+    partial void OnmiAsistenciaChanging(System.Nullable<int> value);
+    partial void OnmiAsistenciaChanged();
     #endregion
 		
 		public Convocatoria()
 		{
+			this._Asistencias = new EntitySet<Asistencia>(new Action<Asistencia>(this.attach_Asistencias), new Action<Asistencia>(this.detach_Asistencias));
 			this._Usuario = default(EntityRef<Usuario>);
 			this._Movimiento = default(EntityRef<Movimiento>);
 			OnCreated();
@@ -1032,6 +1274,59 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cantAsistencias", DbType="Int")]
+		public System.Nullable<int> cantAsistencias
+		{
+			get
+			{
+				return this._cantAsistencias;
+			}
+			set
+			{
+				if ((this._cantAsistencias != value))
+				{
+					this.OncantAsistenciasChanging(value);
+					this.SendPropertyChanging();
+					this._cantAsistencias = value;
+					this.SendPropertyChanged("cantAsistencias");
+					this.OncantAsistenciasChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_miAsistencia", DbType="Int")]
+		public System.Nullable<int> miAsistencia
+		{
+			get
+			{
+				return this._miAsistencia;
+			}
+			set
+			{
+				if ((this._miAsistencia != value))
+				{
+					this.OnmiAsistenciaChanging(value);
+					this.SendPropertyChanging();
+					this._miAsistencia = value;
+					this.SendPropertyChanged("miAsistencia");
+					this.OnmiAsistenciaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convocatoria_Asistencia", Storage="_Asistencias", ThisKey="id", OtherKey="idConvocatoria")]
+		public EntitySet<Asistencia> Asistencias
+		{
+			get
+			{
+				return this._Asistencias;
+			}
+			set
+			{
+				this._Asistencias.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Usuario", ThisKey="idAutor", OtherKey="id", IsForeignKey=true)]
 		public Usuario Usuario
 		{
@@ -1118,6 +1413,18 @@ namespace IndignadoServer.LinqDataContext
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Asistencias(Asistencia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Convocatoria = this;
+		}
+		
+		private void detach_Asistencias(Asistencia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Convocatoria = null;
 		}
 	}
 	

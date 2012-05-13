@@ -19,5 +19,14 @@ namespace IndignadoServer.Controllers
 
         // returns all meetings
         Collection<Convocatoria> getMeetingsList();
+        
+        // do assist to a meeting.
+        void doAssistMeeting(Convocatoria meeting);
+
+        // unconfirm assist to a meeting.
+        void unconfirmAssistMeeting(Convocatoria meeting);
+
+        // don't assist to a meeting.
+        void dontAssistMeeting(Convocatoria meeting);
     }
 }
