@@ -61,7 +61,7 @@ namespace IndignadoServer.Controllers
                 }
                 else
                 {
-                    indignadoContext.ExecuteCommand("DELETE FROM RssFeeds WHERE url = {0} AND tag = {1} AND idMovimiento = {1}  ", url, tag, IdMovement);
+                    indignadoContext.ExecuteCommand("DELETE FROM RssFeeds WHERE url = {0} AND tag = {1} AND idMovimiento = {2}  ", url, tag, IdMovement);
                 }
             
             }
@@ -86,5 +86,61 @@ namespace IndignadoServer.Controllers
             return result;
         }
 
+        
+        // adds a new theme category.
+        public void addThemeCategory(CategoriasTematica themeCategory)
+        {
+            // set foreign ids 
+            themeCategory.idMovimiento = IdMovement;
+
+            // add the theme category to the database
+            try
+            {
+                IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+                indignadoContext.CategoriasTematicas.InsertOnSubmit(themeCategory);
+                indignadoContext.SubmitChanges();
+            }
+            catch (Exception error)
+            {
+            }
+        }
+        
+        // removes a current theme category.
+        public void removeThemeCategory(CategoriasTematica themeCategory)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            indignadoContext.ExecuteCommand("DELETE FROM CategoriasTematicas WHERE (id = {0})", themeCategory.id);
+        }
+        
+        // gets the theme categories.
+        public Collection<CategoriasTematica> listThemeCategories()
+        {
+            // only get theme categories from this movement.
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<CategoriasTematica> themeCategoriesEnum = indignadoContext.ExecuteQuery<CategoriasTematica>("SELECT id, idMovimiento, titulo, descripcion FROM CategoriasTematicas WHERE idMovimiento = {0}", IdMovement);
+
+            Collection<CategoriasTematica> themeCategoriesCol = new Collection<CategoriasTematica>();
+            foreach (CategoriasTematica themeCategory in themeCategoriesEnum)
+            {
+                /*
+                // get own attendance
+                themeCategory.miInteres = -1;
+                if (UserInfo != null)
+                {
+                    IEnumerable<int> myInterests = indignadoContext.ExecuteQuery<int>("SELECT interes FROM Interes WHERE (idCategoriaTematica = {0}) AND (idUsuario = {1})", themeCategory.id, UserInfo.Id);
+                    foreach (int myInterest in myInterests)
+                    {
+                        themeCategory.miInteres = myInterest;
+                    }
+                }
+                 * */
+
+                // add item to the collection
+                themeCategoriesCol.Add(themeCategory);
+            }
+
+            // return the collection
+            return themeCategoriesCol;
+        }
     }
 }

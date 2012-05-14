@@ -39,9 +39,6 @@ namespace IndignadoServer.Services
         public int minQuorum { get; set; }
 
         [DataMember]
-        public String imagePath { get; set; }
-
-        [DataMember]
         public int numberAttendants { get; set; }
 
         [DataMember]
@@ -315,6 +312,62 @@ namespace IndignadoServer.Services
         public DTLoginFaultType Type { get; set; }
     }
 
+    // ThemeCategory datatype
+    [DataContract]
+    public class DTThemeCategoryMovAdmin
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public int idMovement { get; set; }
+
+        [DataMember]
+        public String title { get; set; }
+
+        [DataMember]
+        public String description { get; set; }
+
+        [DataMember]
+        public int myInterest { get; set; }
+    }
+
+    // ThemeCategories Collection datatype
+    [DataContract]
+    public class DTThemeCategoriesColMovAdmin
+    {
+        [DataMember]
+        public Collection<DTThemeCategoryMovAdmin> items { get; set; }
+    }
+
+    // ThemeCategory datatype
+    [DataContract]
+    public class DTThemeCategoryUsers
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public int idMovement { get; set; }
+
+        [DataMember]
+        public String title { get; set; }
+
+        [DataMember]
+        public String description { get; set; }
+
+        [DataMember]
+        public int myInterest { get; set; }
+    }
+
+    // ThemeCategories Collection datatype
+    [DataContract]
+    public class DTThemeCategoriesColUsers
+    {
+        [DataMember]
+        public Collection<DTThemeCategoryUsers> items { get; set; }
+    }
+
 
 
     // **********
@@ -335,7 +388,6 @@ namespace IndignadoServer.Services
             dtMeeting.locationLati = (float)meeting.latitud;
             dtMeeting.locationLong = (float)meeting.longitud;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
-            dtMeeting.imagePath = meeting.logo;
             dtMeeting.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
             dtMeeting.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
             return dtMeeting;
@@ -383,6 +435,28 @@ namespace IndignadoServer.Services
             dtResource.iLikeIt = (resource.meGusta == null) ? 0 : resource.meGusta.Value;
             return dtResource;
         }
+
+        public static DTThemeCategoryMovAdmin ThemeCategoryMovAdminToDT(CategoriasTematica themeCategory)
+        {
+            DTThemeCategoryMovAdmin dtThemeCategory = new DTThemeCategoryMovAdmin();
+            dtThemeCategory.id = themeCategory.id;
+            dtThemeCategory.idMovement = themeCategory.idMovimiento;
+            dtThemeCategory.title = themeCategory.titulo;
+            dtThemeCategory.description = themeCategory.descripcion;
+            dtThemeCategory.myInterest = (themeCategory.miInteres == null) ? 0 : themeCategory.miInteres.Value; ;
+            return dtThemeCategory;
+        }
+
+        public static DTThemeCategoryUsers ThemeCategoryUsersToDT(CategoriasTematica themeCategory)
+        {
+            DTThemeCategoryUsers dtThemeCategory = new DTThemeCategoryUsers();
+            dtThemeCategory.id = themeCategory.id;
+            dtThemeCategory.idMovement = themeCategory.idMovimiento;
+            dtThemeCategory.title = themeCategory.titulo;
+            dtThemeCategory.description = themeCategory.descripcion;
+            dtThemeCategory.myInterest = (themeCategory.miInteres == null) ? 0 : themeCategory.miInteres.Value; ;
+            return dtThemeCategory;
+        }
     }
 
     // converts datatypes to classes
@@ -399,7 +473,6 @@ namespace IndignadoServer.Services
             meeting.latitud = dtMeeting.locationLati;
             meeting.longitud = dtMeeting.locationLong;
             meeting.minQuorum = dtMeeting.minQuorum;
-            meeting.logo = dtMeeting.imagePath;
             meeting.cantAsistencias = dtMeeting.numberAttendants;
             meeting.miAsistencia = dtMeeting.myAttendance;
             return meeting;
@@ -463,6 +536,27 @@ namespace IndignadoServer.Services
             return user;
         }
 
+        public static CategoriasTematica DTToThemeCategoryMovAdmin(DTThemeCategoryMovAdmin dtThemeCategory)
+        {
+            CategoriasTematica themeCategory = new CategoriasTematica();
+            themeCategory.id = dtThemeCategory.id;
+            themeCategory.idMovimiento = dtThemeCategory.idMovement;
+            themeCategory.titulo = dtThemeCategory.title;
+            themeCategory.descripcion = dtThemeCategory.description;
+            themeCategory.miInteres = dtThemeCategory.myInterest;
+            return themeCategory;
+        }
+
+        public static CategoriasTematica DTToThemeCategoryUsers(DTThemeCategoryUsers dtThemeCategory)
+        {
+            CategoriasTematica themeCategory = new CategoriasTematica();
+            themeCategory.id = dtThemeCategory.id;
+            themeCategory.idMovimiento = dtThemeCategory.idMovement;
+            themeCategory.titulo = dtThemeCategory.title;
+            themeCategory.descripcion = dtThemeCategory.description;
+            themeCategory.miInteres = dtThemeCategory.myInterest;
+            return themeCategory;
+        }
     }
 
 }

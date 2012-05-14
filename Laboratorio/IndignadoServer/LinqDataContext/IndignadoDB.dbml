@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="IndignadoDB" Class="IndignadoDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=BETTOSIACOVS-PC\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Aprobaciones" Member="Aprobaciones">
     <Type Name="Aprobacione">
       <Column Name="idRecurso" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -35,6 +35,16 @@
       <Column Name="hayAsistencia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Usuario_Asistencia" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
       <Association Name="Convocatoria_Asistencia" Member="Convocatoria" ThisKey="idConvocatoria" OtherKey="id" Type="Convocatoria" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CategoriasTematicas" Member="CategoriasTematicas">
+    <Type Name="CategoriasTematica">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="titulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="miInteres" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Movimiento_CategoriasTematica" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Convocatorias" Member="Convocatorias">
@@ -78,6 +88,7 @@
       <Column Name="maxRecursosInadecuadosUsuarioZ" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="maxRecursosPopularesN" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="maxUltimosRecursosM" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Movimiento_CategoriasTematica" Member="CategoriasTematicas" ThisKey="id" OtherKey="idMovimiento" Type="CategoriasTematica" />
       <Association Name="Movimiento_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idMovimiento" Type="Convocatoria" />
       <Association Name="Movimiento_RssFeed" Member="RssFeeds" ThisKey="id" OtherKey="idMovimiento" Type="RssFeed" />
       <Association Name="Layout_Movimiento" Member="Layout" ThisKey="idLayout" OtherKey="id" Type="Layout" IsForeignKey="true" />

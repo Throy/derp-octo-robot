@@ -22,12 +22,6 @@ namespace IndignadoWeb
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.Add("SysAdminRoute", new DomainRoute(
-                       "indignado.4c7.net",     // Domain with parameters 
-                       "admin/{action}/{id}",    // URL with parameters 
-                       new { controller = "SysAdmin", action = "LogOn", id = "" }  // Parameter defaults 
-                    ));
-
             routes.Add("SubDomainRoute", new DomainRoute(
                        "{movimiento}.4c7.net",     // Domain with parameters 
                        "{controller}/{action}/{id}",    // URL with parameters 

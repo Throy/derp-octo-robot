@@ -29,6 +29,18 @@ namespace IndignadoServer.Services
 
         // gets the rss resources.
         [OperationContract]
-        DTRssSourcesCol listRssSources(); 
+        DTRssSourcesCol listRssSources();
+
+        // adds a new theme category.
+        [OperationContract]
+        void addThemeCategory(DTThemeCategoryMovAdmin dtThemeCategory);
+
+        // removes a current theme category.
+        [OperationContract]
+        void removeThemeCategory(DTThemeCategoryMovAdmin dtThemeCategory);
+
+        // gets the theme categories.
+        [OperationContract]
+        DTThemeCategoriesColMovAdmin listThemeCategories();
     }
 }

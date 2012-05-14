@@ -15,6 +15,7 @@ namespace IndignadoServer.Controllers
         private static ISysAdminController _iSysAdminController;
         private static IMovAdminController _iMovAdminController;
         private static INewsResourcesController _iNewsResourcesController;
+        private static IUsersController _iUsersController;
         // ...
 
         private ControllersHub()
@@ -34,6 +35,7 @@ namespace IndignadoServer.Controllers
                     _iSysAdminController = new SysAdminController();
                     _iMovAdminController = new MovAdminController();
                     _iNewsResourcesController = new NewsResourcesController();
+                    _iUsersController = new UsersController();
                 }
                 return _instance;
             }
@@ -69,9 +71,19 @@ namespace IndignadoServer.Controllers
             return _iNewsResourcesController;
         }
 
+
+        // returns an instance of the IUsersController.
+        public IUsersController getIUsersController()
+        {
+            return _iUsersController;
+        }
+
         /*
         // returns an instance of the IBlablaController.
-        public static IBlablaController getIBlablaController();
+        public IBlablaController getIBlablaController()
+        {
+            return _iBlablaController;
+        }
          * */
     }
 }

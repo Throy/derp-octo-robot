@@ -7,11 +7,11 @@ using System.Text;
 
 namespace IndignadoServer.Services
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IUsersService" in both code and config file together.
     [ServiceContract]
     public interface IUsersService
     {
+        // returns all theme categories.
         [OperationContract]
-        void DoWork();
+        DTThemeCategoriesColUsers getThemeCategoriesList();
     }
 }

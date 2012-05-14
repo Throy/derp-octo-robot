@@ -61,4 +61,40 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="addThemeCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtThemeCategory" nillable="true" type="q6:DTThemeCategoryMovAdmin" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addThemeCategoryResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeThemeCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtThemeCategory" nillable="true" type="q7:DTThemeCategoryMovAdmin" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeThemeCategoryResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="listThemeCategories">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="listThemeCategoriesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="listThemeCategoriesResult" nillable="true" type="q8:DTThemeCategoriesColMovAdmin" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

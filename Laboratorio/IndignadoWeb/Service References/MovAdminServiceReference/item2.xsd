@@ -30,4 +30,26 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfDTRssSource" nillable="true" type="tns:ArrayOfDTRssSource" />
+  <xs:complexType name="DTThemeCategoryMovAdmin">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="idMovement" type="xs:int" />
+      <xs:element minOccurs="0" name="myInterest" type="xs:int" />
+      <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTThemeCategoryMovAdmin" nillable="true" type="tns:DTThemeCategoryMovAdmin" />
+  <xs:complexType name="DTThemeCategoriesColMovAdmin">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTThemeCategoryMovAdmin" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTThemeCategoriesColMovAdmin" nillable="true" type="tns:DTThemeCategoriesColMovAdmin" />
+  <xs:complexType name="ArrayOfDTThemeCategoryMovAdmin">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTThemeCategoryMovAdmin" nillable="true" type="tns:DTThemeCategoryMovAdmin" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTThemeCategoryMovAdmin" nillable="true" type="tns:ArrayOfDTThemeCategoryMovAdmin" />
 </xs:schema>

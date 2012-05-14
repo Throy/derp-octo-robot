@@ -23,6 +23,15 @@ namespace IndignadoServer.Controllers
         void removeRssSource(String url, String tag);
 
         // gets the rss resources.
-        DTRssSourcesCol listRssSources(); 
+        DTRssSourcesCol listRssSources();
+
+        // adds a new theme category.
+        void addThemeCategory(CategoriasTematica themeCategory);
+
+        // removes a current theme category.
+        void removeThemeCategory(CategoriasTematica themeCategory);
+
+        // gets the theme categories.
+        Collection<CategoriasTematica> listThemeCategories();
     }
 }

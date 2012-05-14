@@ -65,7 +65,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\AuthFilter.cs" />
     <Compile Include="Common\DecimalModelBinder.cs" />
     <Compile Include="Common\DomainData.cs" />
     <Compile Include="Common\DomainRoute.cs" />
@@ -73,11 +72,11 @@
     <Compile Include="Common\MultiTenanActionFilter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SysAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ThemeCategoriesModels.cs" />
     <Compile Include="Models\MeetingsModels.cs" />
     <Compile Include="Models\MovementsModels.cs" />
     <Compile Include="Models\ResourceModels.cs" />
@@ -113,26 +112,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\UsersServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\images\ajax-loader.gif" />
-    <Content Include="Content\images\anon_seal_small.png" />
-    <Content Include="Content\images\bg.png" />
-    <Content Include="Content\images\fondo.png" />
-    <Content Include="Content\images\Full\1da5b9c9-3daf-4a5d-8237-bfe7e05bde92.jpg" />
-    <Content Include="Content\images\Full\23cbe05a-d032-41cb-9e42-09904c45d920.jpg" />
-    <Content Include="Content\images\Full\a135a344-6a7a-42c6-a82f-cc725adeb09b.jpg" />
-    <Content Include="Content\images\Full\e2267cc2-160a-4138-9338-2558a93779c2.jpg" />
-    <Content Include="Content\images\ibeticon.png" />
-    <Content Include="Content\images\logo-box.png" />
-    <Content Include="Content\images\logo.png" />
-    <Content Include="Content\images\menubg - copia.png" />
-    <Content Include="Content\images\menubg.png" />
-    <Content Include="Content\images\menubtn.png" />
-    <Content Include="Content\images\Thumb\1da5b9c9-3daf-4a5d-8237-bfe7e05bde92.jpg" />
-    <Content Include="Content\images\Thumb\23cbe05a-d032-41cb-9e42-09904c45d920.jpg" />
-    <Content Include="Content\images\Thumb\a135a344-6a7a-42c6-a82f-cc725adeb09b.jpg" />
-    <Content Include="Content\images\Thumb\e2267cc2-160a-4138-9338-2558a93779c2.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -171,8 +157,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
-    <None Include="Content\images\layout.psd" />
-    <None Include="Content\images\logo.psd" />
     <None Include="Service References\MeetingsServiceReference\IndignadoWeb.MeetingsServiceReference.DTMeeting.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -193,6 +177,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTRssSourcesCol1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTThemeCategoriesColMovAdmin.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\MovAdminServiceReference\item.xsd">
@@ -297,6 +284,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\UsersServiceReference\IndignadoWeb.UsersServiceReference.DTThemeCategoriesColUsers.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UsersServiceReference\item.disco" />
+    <None Include="Service References\UsersServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\UsersServiceReference\configuration.svcinfo" />
+    <None Include="Service References\UsersServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -332,8 +329,8 @@
     <Content Include="Views\Shared\DisplayTemplates\DTMeeting.cshtml" />
     <Content Include="Views\Shared\_Default.cshtml" />
     <Content Include="Views\Home\MeetingCreate.cshtml" />
-    <Content Include="Views\SysAdmin\MovementCreate.cshtml" />
-    <Content Include="Views\SysAdmin\MovementsList.cshtml" />
+    <Content Include="Views\Home\MovementCreate.cshtml" />
+    <Content Include="Views\Home\MovementsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMovement.cshtml" />
     <Content Include="Views\Home\MeetingsMap.cshtml" />
     <Content Include="Views\Home\MovementConfig.cshtml" />
@@ -346,12 +343,20 @@
     <Content Include="Views\Shared\DisplayTemplates\DTRssSource.cshtml" />
     <Content Include="Views\Home\RssSourcesConfig.cshtml" />
     <Content Include="Views\Account\Confirm.cshtml" />
-    <Content Include="Views\SysAdmin\LogOn.cshtml" />
-    <Content Include="Views\SysAdmin\Index.cshtml" />
-    <Content Include="Views\Shared\SysAdmin.cshtml" />
-    <Content Include="Views\Shared\SysAdminLogOn.cshtml" />
-    <Content Include="Views\SysAdmin\AccessDenied.cshtml" />
-    <Content Include="Views\Home\MovementConfigSuccess.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTThemeCategoryMovAdmin.cshtml" />
+    <Content Include="Views\Home\ThemeCategoriesConfig.cshtml" />
+    <Content Include="Views\Home\ThemeCategoriesList.cshtml" />
+    <None Include="Service References\UsersServiceReference\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UsersServiceReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UsersServiceReference\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UsersServiceReference\UsersService.wsdl" />
+    <Content Include="Views\Shared\DisplayTemplates\DTThemeCategoryUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -369,6 +374,7 @@
     <WCFMetadataStorage Include="Service References\SessionServiceReference\" />
     <WCFMetadataStorage Include="Service References\SysAdminServiceReference\" />
     <WCFMetadataStorage Include="Service References\TestServiceReference\" />
+    <WCFMetadataStorage Include="Service References\UsersServiceReference\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\TestServiceReference\service.wsdl" />

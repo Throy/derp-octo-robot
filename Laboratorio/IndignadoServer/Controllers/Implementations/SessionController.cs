@@ -166,7 +166,7 @@ namespace IndignadoServer.Controllers
             if (!_usersOnline.ContainsKey(token))
                 return false;
             
-            return _usersOnline[token].IdMovimiento == idMovmiento || _usersOnline[token].Roles.Contains(Roles.SysAdmin);
+            return _usersOnline[token].IdMovimiento == idMovmiento;
         }
 
         public UserOnlineInfo GetUserInfo(String token)

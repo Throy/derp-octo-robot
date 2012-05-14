@@ -295,6 +295,120 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_addThemeCategory_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_addThemeCategory_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_removeThemeCategory_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_removeThemeCategory_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_listThemeCategories_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_listThemeCategories_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8730/IndignadoServer/MovAdminService/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -332,6 +446,24 @@
   <wsdl:message name="IMovAdminService_listRssSources_OutputMessage">
     <wsdl:part name="parameters" element="tns:listRssSourcesResponse" />
   </wsdl:message>
+  <wsdl:message name="IMovAdminService_addThemeCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:addThemeCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMovAdminService_addThemeCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addThemeCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMovAdminService_removeThemeCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:removeThemeCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMovAdminService_removeThemeCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:removeThemeCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMovAdminService_listThemeCategories_InputMessage">
+    <wsdl:part name="parameters" element="tns:listThemeCategories" />
+  </wsdl:message>
+  <wsdl:message name="IMovAdminService_listThemeCategories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:listThemeCategoriesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMovAdminService">
     <wsdl:operation name="getMovement">
       <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/getMovement" message="tns:IMovAdminService_getMovement_InputMessage" />
@@ -352,6 +484,18 @@
     <wsdl:operation name="listRssSources">
       <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/listRssSources" message="tns:IMovAdminService_listRssSources_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMovAdminService/listRssSourcesResponse" message="tns:IMovAdminService_listRssSources_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addThemeCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/addThemeCategory" message="tns:IMovAdminService_addThemeCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMovAdminService/addThemeCategoryResponse" message="tns:IMovAdminService_addThemeCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="removeThemeCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/removeThemeCategory" message="tns:IMovAdminService_removeThemeCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMovAdminService/removeThemeCategoryResponse" message="tns:IMovAdminService_removeThemeCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="listThemeCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/listThemeCategories" message="tns:IMovAdminService_listThemeCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMovAdminService/listThemeCategoriesResponse" message="tns:IMovAdminService_listThemeCategories_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IMovAdminService" type="tns:IMovAdminService">
@@ -409,6 +553,39 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_listRssSources_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addThemeCategory">
+      <soap12:operation soapAction="http://tempuri.org/IMovAdminService/addThemeCategory" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_addThemeCategory_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_addThemeCategory_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeThemeCategory">
+      <soap12:operation soapAction="http://tempuri.org/IMovAdminService/removeThemeCategory" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_removeThemeCategory_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_removeThemeCategory_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listThemeCategories">
+      <soap12:operation soapAction="http://tempuri.org/IMovAdminService/listThemeCategories" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_listThemeCategories_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_listThemeCategories_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
