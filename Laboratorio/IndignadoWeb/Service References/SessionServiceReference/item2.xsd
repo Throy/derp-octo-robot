@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8730/IndignadoServer/SessionService/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="DTLoginInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="token" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTLoginInfo" nillable="true" type="tns:DTLoginInfo" />
+  <xs:complexType name="LoginFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Issue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:DTLoginFaultType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LoginFault" nillable="true" type="tns:LoginFault" />
+  <xs:simpleType name="DTLoginFaultType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UNKOWN_OR_INVALID" />
+      <xs:enumeration value="FB_NOT_REGISTERED" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DTLoginFaultType" nillable="true" type="tns:DTLoginFaultType" />
   <xs:complexType name="DTRegisterModel">
     <xs:sequence>
       <xs:element minOccurs="0" name="apodo" nillable="true" type="xs:string" />
@@ -49,6 +70,15 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="DTUserCreateStatus" nillable="true" type="tns:DTUserCreateStatus" />
+  <xs:complexType name="DTRegisterFBModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idMovimiento" type="xs:int" />
+      <xs:element minOccurs="0" name="latitud" type="xs:float" />
+      <xs:element minOccurs="0" name="longitud" type="xs:float" />
+      <xs:element minOccurs="0" name="token" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTRegisterFBModel" nillable="true" type="tns:DTRegisterFBModel" />
   <xs:complexType name="DTTenantInfo">
     <xs:sequence>
       <xs:element minOccurs="0" name="habilitado" type="xs:boolean" />

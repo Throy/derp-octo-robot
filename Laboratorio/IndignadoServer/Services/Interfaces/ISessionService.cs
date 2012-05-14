@@ -14,11 +14,19 @@ namespace IndignadoServer
     [ServiceContract]
     public interface ISessionService
     {
+        [FaultContract(typeof(LoginFault))]
         [OperationContract]
-        String Login(int idMovmiento, String userName, String password);
+        DTLoginInfo Login(int idMovmiento, String userName, String password);
+
+        [FaultContract(typeof(LoginFault))]
+        [OperationContract]
+        DTLoginInfo LoginFB(int idMovimiento, String accesToken);
 
         [OperationContract]
         DTUserCreateStatus RegisterUser(DTRegisterModel user);
+
+        [OperationContract]
+        DTUserCreateStatus RegisterFBUser(DTRegisterFBModel user);
 
         [OperationContract]
         bool ValidateToken(int idMovmiento, String token);

@@ -8,9 +8,13 @@ namespace IndignadoServer.Controllers
 {
     interface ISessionController
     {
-        String Login(int idMovmiento, String userName, String password);
+        DTLoginInfo Login(int idMovmiento, String userName, String password);
+
+        DTLoginInfo LoginFB(int idMovimiento, String accesToken);
 
         DTUserCreateStatus RegisterUser(DTRegisterModel user);
+
+        DTUserCreateStatus RegisterFBUser(DTRegisterFBModel user);
 
         bool ValidateToken(int idMovmiento, String token);
 

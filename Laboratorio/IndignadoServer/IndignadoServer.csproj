@@ -74,6 +74,7 @@
     <Compile Include="Classes\CustomServiceAuthorizationManager.cs" />
     <Compile Include="Classes\CustomServiceCredentials.cs" />
     <Compile Include="Classes\CustomUserNameValidator.cs" />
+    <Compile Include="Classes\Facebook.cs" />
     <Compile Include="Classes\IndignadoController.cs" />
     <Compile Include="Classes\Roles.cs" />
     <Compile Include="Classes\UserOnlineInfo.cs" />

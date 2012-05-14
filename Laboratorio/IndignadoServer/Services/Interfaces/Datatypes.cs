@@ -186,6 +186,21 @@ namespace IndignadoServer.Services
         public float longitud { get; set; }
     }
 
+    public class DTRegisterFBModel
+    {
+        [DataMember]
+        public int idMovimiento { get; set; }
+
+        [DataMember]
+        public float latitud { get; set; }
+
+        [DataMember]
+        public float longitud { get; set; }
+
+        [DataMember]
+        public String token { get; set; }
+    }
+
     // Summary:
     //     Describes the result of a Session Controller register user
     //     operation
@@ -239,6 +254,49 @@ namespace IndignadoServer.Services
         [DataMember]
         public Collection<DTRssSource> items { get; set; }
     }
+
+    // Login info datatype
+    [DataContract]
+    public class DTLoginInfo
+    {
+        public DTLoginInfo(String name, String token)
+        {
+            this.name = name;
+            this.token = token;
+        }
+
+        [DataMember]
+        public String name { get; set; }
+
+        [DataMember]
+        public String token { get; set; }
+    }
+
+    public enum DTLoginFaultType
+    {
+        // Unknown Username or Incorrect Password
+        UNKOWN_OR_INVALID = 0,
+        // El usuario de facebook no se encuentra registrado
+        FB_NOT_REGISTERED = 1
+    }
+
+    [DataContract]
+    public class LoginFault
+    {
+        public LoginFault(String issue, DTLoginFaultType type)
+        {
+            Issue = issue;
+            Type = type;
+        }
+
+        [DataMember]
+        public String Issue { get; set; }
+
+
+        [DataMember]
+        public DTLoginFaultType Type { get; set; }
+    }
+
 
 
     // **********

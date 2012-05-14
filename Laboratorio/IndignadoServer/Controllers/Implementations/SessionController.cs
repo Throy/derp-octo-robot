@@ -20,7 +20,7 @@ namespace IndignadoServer.Controllers
             _usersOnline = new Dictionary<String, UserOnlineInfo>();
         }
 
-        public String Login(int idMovimiento, String userName, String password)
+        public DTLoginInfo Login(int idMovimiento, String userName, String password)
         {
             if (null == userName || null == password)
             {
@@ -31,40 +31,67 @@ namespace IndignadoServer.Controllers
             HashAlgorithm sha = new SHA1CryptoServiceProvider();
             byte[] passwordHash = sha.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
 
+            byte[] noPass = new byte[1];
+            noPass[0] = 0;
+
             // busco el usuario en la base de datos
             var db = new IndignadoDBDataContext();
             var user = db.Usuarios.SingleOrDefault(u => (u.idMovimiento == idMovimiento &&
                                           u.apodo == userName &&
-                                          u.contraseña == passwordHash ) ||
-                                          (u.apodo == userName && 
+                                          u.contraseña == passwordHash &&
+                                          u.contraseña != noPass) ||
+                                          (u.apodo == userName &&
                                            u.contraseña == passwordHash &&
+                                           u.contraseña != noPass &&
                                            (u.privilegio & IndignadoServer.Roles.SysAdminMask) == IndignadoServer.Roles.SysAdminMask));
 
             if (user == null)
             {
                 // si no lo encontro
-                throw new FaultException("Unknown Username or Incorrect Password");
+                throw new FaultException<LoginFault>(new LoginFault("Unknown Username or Incorrect Password", DTLoginFaultType.UNKOWN_OR_INVALID));
             }
 
-            // Create an array to store the key bytes keysize=1024
-            byte[] key = new byte[1024 / 8];
-            // Create some random bytes
-            RNGCryptoServiceProvider random = new RNGCryptoServiceProvider();
-            random.GetNonZeroBytes(key);
+            String token = GenerateToken();
 
-            SecurityToken token = new BinarySecretSecurityToken(key);
+            _usersOnline[token] = new UserOnlineInfo(user.id, user.apodo, user.privilegio, idMovimiento, token);
 
+            return new DTLoginInfo(user.apodo, token);
+        }
 
-            _usersOnline[token.Id] = new UserOnlineInfo(user.id, user.apodo, user.privilegio, idMovimiento, token.Id);
+        public DTLoginInfo LoginFB(int idMovimiento, String accesToken)
+        {
+            if (null == accesToken)
+            {
+                throw new ArgumentNullException();
+            }
 
-            return token.Id;
+            FacebookUser fbUser = Facebook.GetInfo(accesToken);
+
+            // busco el usuario en la base de datos
+            var db = new IndignadoDBDataContext();
+
+            var fbUserDB = db.UsuarioFacebooks.SingleOrDefault(u => (u.idMovimiento == idMovimiento &&
+                                          u.idFacebook == fbUser.id));
+
+            if (fbUserDB == null)
+            {
+                throw new FaultException<LoginFault>(new LoginFault("El usuario logueado por facebook no se encuentra registrado", DTLoginFaultType.FB_NOT_REGISTERED));
+            }
+
+            var userDB = db.Usuarios.SingleOrDefault(u => (u.id == fbUserDB.idUsuario));
+
+            String token = GenerateToken();
+
+            _usersOnline[token] = new UserOnlineInfo(userDB.id, userDB.apodo, userDB.privilegio, idMovimiento, token);
+
+            return new DTLoginInfo(userDB.apodo, token);
         }
 
         public DTUserCreateStatus RegisterUser(DTRegisterModel user)
         {
             DTUserCreateStatus status;
             status = DTUserCreateStatus.Success;
-            // create meeting and add it to the database
+
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             Usuario userDb = DTToClass.DTToUsuario(user);
 
@@ -80,6 +107,55 @@ namespace IndignadoServer.Controllers
             catch (Exception ex)
             {
                 status = DTUserCreateStatus.GenericError;
+            }
+
+            return status;
+        }
+
+        public DTUserCreateStatus RegisterFBUser(DTRegisterFBModel user)
+        {
+            DTUserCreateStatus status;
+            status = DTUserCreateStatus.Success;
+
+            FacebookUser fbUser = Facebook.GetInfo(user.token);
+
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            Usuario userDb = new Usuario();
+
+            userDb.nombre = fbUser.name;
+            userDb.apodo = fbUser.first_name;
+            userDb.mail = fbUser.email;
+            userDb.idMovimiento = user.idMovimiento;
+            userDb.latitud = user.latitud;
+            userDb.longitud = user.longitud;
+
+            byte[] noPass = new byte[1];
+            noPass[0] = 0;
+            userDb.contraseña = noPass;
+
+            userDb.banned = false;
+            userDb.privilegio = 0;
+            userDb.fechaRegistro = DateTime.Now;
+
+            try
+            {
+                indignadoContext.Usuarios.InsertOnSubmit(userDb);
+                indignadoContext.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                status = DTUserCreateStatus.GenericError;
+            }
+
+            if (status == DTUserCreateStatus.Success)
+            {
+                UsuarioFacebook fbUserDb = new UsuarioFacebook();
+                fbUserDb.idUsuario = userDb.id;
+                fbUserDb.idFacebook = fbUser.id;
+                fbUserDb.idMovimiento = user.idMovimiento;
+
+                indignadoContext.UsuarioFacebooks.InsertOnSubmit(fbUserDb);
+                indignadoContext.SubmitChanges();
             }
 
             return status;
@@ -118,6 +194,20 @@ namespace IndignadoServer.Controllers
             info.layoutFile = movInfo.Layout.layoutFile;
 
             return info;
+        }
+
+        private String GenerateToken()
+        {
+            // este token no es muy bueno, revisar y mejorarlo
+            // Create an array to store the key bytes keysize=1024
+            byte[] key = new byte[1024 / 8];
+            // Create some random bytes
+            RNGCryptoServiceProvider random = new RNGCryptoServiceProvider();
+            random.GetNonZeroBytes(key);
+
+            SecurityToken token = new BinarySecretSecurityToken(key);
+
+            return token.Id;
         }
     }
 }

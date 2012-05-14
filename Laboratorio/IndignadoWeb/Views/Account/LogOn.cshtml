@@ -4,8 +4,9 @@
     ViewBag.Title = "Log On";
 }
 
-<h2>Log On</h2>
-<p>
+<h2 style="margin-left:30px;">Log On</h2>
+
+<p style="margin-left:30px;">
     Please enter your user name and password. @Html.ActionLink("Register", "Register") if you don't have an account.
 </p>
 
@@ -14,11 +15,76 @@
 
 @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
 
-@using (Html.BeginForm()) {
-    <div>
-        <fieldset>
-            <legend>Account Information</legend>
+<div class="special-btn-wrap">
+	<a id="fb-login" class="special-btn facebook badge-facebook-connect" label="LoginFormFacebookButton">Login with Facebook</a>
+</div>
 
+<div id="fb-root"></div>
+<script type="text/javascript">
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '341284062604349',
+            status     : true, 
+            cookie     : false,
+            xfbml      : true,
+            oauth      : true,
+        });
+    };
+    (function(d){
+        var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));
+
+    document.getElementById('fb-login').addEventListener('click', function(){
+        FB.login(function (response) {
+                    if (response.authResponse) {
+                        FB.api('/me', function (info) {
+                            login(response, info);
+                        });
+                    }
+                }, { scope: 'email,user_birthday,user_about_me' })
+    });
+
+
+    function login(response, info) {
+        if (response.authResponse) {
+            var accessToken = response.authResponse.accessToken;
+
+            post_to_url("@Url.Action("LogOnFB", "Account")", { fb : accessToken });
+        }
+    }
+
+    function post_to_url(path, params, method) {
+        method = method || "post"; // Set method to post by default, if not specified.
+
+        // The rest of this code assumes you are not using a library.
+        // It can be made less wordy if you use one.
+        var form = document.createElement("form");
+        form.setAttribute("method", method);
+        form.setAttribute("action", path);
+
+        for (var key in params) {
+            if (params.hasOwnProperty(key)) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", params[key]);
+
+                form.appendChild(hiddenField);
+            }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }    
+</script>
+
+
+@using (Html.BeginForm()) {
+    <div class="reg-box big-red">
+        <fieldset>
             <div class="editor-label">
                 @Html.LabelFor(m => m.UserName)
             </div>
@@ -41,8 +107,11 @@
             </div>
 
             <p>
-                <input type="submit" value="Log On" />
+                <input type="submit" value="Log On" style="display:none;" id="WorkaroundForOperaInputFocusBorderBug" />
+                <input type="submit"  class="boton-big-red" value="Log On" />
             </p>
         </fieldset>
     </div>
 }
+
+

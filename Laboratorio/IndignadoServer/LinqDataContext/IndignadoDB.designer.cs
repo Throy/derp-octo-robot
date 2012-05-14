@@ -1934,7 +1934,7 @@ namespace IndignadoServer.LinqDataContext
 		
 		private int _idUsuario;
 		
-		private int _idFacebook;
+		private long _idFacebook;
 		
 		private int _idMovimiento;
 		
@@ -1946,7 +1946,7 @@ namespace IndignadoServer.LinqDataContext
     partial void OnCreated();
     partial void OnidUsuarioChanging(int value);
     partial void OnidUsuarioChanged();
-    partial void OnidFacebookChanging(int value);
+    partial void OnidFacebookChanging(long value);
     partial void OnidFacebookChanged();
     partial void OnidMovimientoChanging(int value);
     partial void OnidMovimientoChanged();
@@ -1982,8 +1982,8 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idFacebook", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int idFacebook
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idFacebook", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long idFacebook
 		{
 			get
 			{

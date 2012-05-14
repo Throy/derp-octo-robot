@@ -13,21 +13,50 @@
   <xs:element name="LoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="LoginResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="LoginResult" nillable="true" type="q1:DTLoginInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginFB">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idMovimiento" type="xs:int" />
+        <xs:element minOccurs="0" name="accesToken" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginFBResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="LoginFBResult" nillable="true" type="q2:DTLoginInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RegisterUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q1:DTRegisterModel" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q3:DTRegisterModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RegisterUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="RegisterUserResult" type="q2:DTUserCreateStatus" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="RegisterUserResult" type="q4:DTUserCreateStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterFBUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q5:DTRegisterFBModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterFBUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="RegisterFBUserResult" type="q6:DTUserCreateStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -56,7 +85,7 @@
   <xs:element name="GetTenantInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="GetTenantInfoResult" nillable="true" type="q3:DTTenantInfo" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="GetTenantInfoResult" nillable="true" type="q7:DTTenantInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
