@@ -37,6 +37,9 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public int minQuorum { get; set; }
+
+        [DataMember]
+        public String imagePath { get; set; }
     }
 
     // Meeting Collection datatype
@@ -259,6 +262,7 @@ namespace IndignadoServer.Services
             dtMeeting.locationLati = meeting.latitud;
             dtMeeting.locationLong = meeting.longitud;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
+            dtMeeting.imagePath = meeting.logo;
             return dtMeeting;
         }
 
@@ -318,6 +322,7 @@ namespace IndignadoServer.Services
             meeting.latitud = dtMeeting.locationLati;
             meeting.longitud = dtMeeting.locationLong;
             meeting.minQuorum = dtMeeting.minQuorum;
+            meeting.logo = dtMeeting.imagePath;
             return meeting;
         }
 

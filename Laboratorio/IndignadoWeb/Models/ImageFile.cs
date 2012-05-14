@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+
 using System.Drawing;
 using System.Web;
 using System.IO;
@@ -12,33 +13,9 @@ using System.Drawing.Imaging;
 
 namespace IndignadoWeb.Models
 {
-    // model for Create meeting
-
-    public class CreateMeetingModel
+    public class ImageFile : HttpPostedFileBase
     {
-        [Required]
-        [Display(Name = "Name: ")]
-        public String name { get; set; }
-
-        [Display(Name = "Description: ")]
-        public String description { get; set; }
-
-        [Required]
-        [Display(Name = "Location - Latitude: ")]
-        public float locationLati { get; set; }
-
-        [Required]
-        [Display(Name = "Location - Longitude: ")]
-        public float locationLong { get; set; }
-
-        [Required]
-        [Display(Name = "Minimum quorum: ")]
-        public int minQuorum { get; set; }
-
-        
-        [Required]
-        public HttpPostedFileWrapper ImageUploaded { get; set; }
-
+         
         public static void ResizeAndSave(string savePath, string fileName, Stream imageBuffer, int maxSideSize, bool makeItSquare)
         {
             int newWidth;
@@ -62,6 +39,7 @@ namespace IndignadoWeb.Models
                 tempGraphic.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 tempGraphic.PixelOffsetMode = PixelOffsetMode.HighQuality;
                 tempGraphic.DrawImage(tempImage, new Rectangle(0, 0, maxSideSize, maxSideSize), cropX, cropY, maxSideSize, maxSideSize, GraphicsUnit.Pixel);
+                
             }
             else
             {
@@ -83,7 +61,6 @@ namespace IndignadoWeb.Models
             newImage.Save(savePath + fileName + ".jpg", ImageFormat.Jpeg);
             image.Dispose();
             newImage.Dispose();
-        }  
-    }
-    
+        }
+    }  
 }

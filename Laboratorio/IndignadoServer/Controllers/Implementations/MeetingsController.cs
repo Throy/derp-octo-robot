@@ -49,7 +49,7 @@ namespace IndignadoServer.Controllers
         {
             // only get meetings from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>("SELECT id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum FROM Convocatorias WHERE idMovimiento = {0}", IdMovement);
+            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>("SELECT id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum,logo FROM Convocatorias WHERE idMovimiento = {0}", IdMovement);
 
             Collection<Convocatoria> meetingsCol = new Collection<Convocatoria>();
             foreach (Convocatoria meeting in meetingsEnum)
@@ -59,6 +59,8 @@ namespace IndignadoServer.Controllers
 
             // return the collection
             return meetingsCol;
+
+            
         }
     }
 }
