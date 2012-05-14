@@ -424,8 +424,10 @@ namespace IndignadoWeb.Controllers
                         dtResource.idUser = -1;
                         dtResource.title = model.title;
                         dtResource.description = model.description;
-                        dtResource.url = model.url;
-                        dtResource.thumbnail = model.thumbnail;
+                        dtResource.urlLink = model.urlLink;
+                        dtResource.urlThumb = model.urlThumb;
+                        dtResource.urlImage = model.urlImage;
+                        dtResource.urlVideo = model.urlVideo;
                         serv.createResource(dtResource);
 
                         // open resources list view.
@@ -443,10 +445,10 @@ namespace IndignadoWeb.Controllers
                     INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
                 
                     // get data
-                    DTResource dtResource = serv.getResourceData(model.url);
+                    DTResource dtResource = serv.getResourceData(model.urlLink);
                     model.title = dtResource.title;
                     model.description = dtResource.description;
-                    model.thumbnail = dtResource.thumbnail;
+                    model.urlThumb = dtResource.urlThumb;
 
                     // update data in view.
                     return RedirectToAction(HomeControllerConstants.viewResourceShare, model);

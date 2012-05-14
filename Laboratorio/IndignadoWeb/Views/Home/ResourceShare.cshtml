@@ -36,19 +36,35 @@
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(m => m.url)
+                @Html.LabelFor(m => m.urlLink)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(m => m.url)
-                @Html.ValidationMessageFor(m => m.url)
+                @Html.TextBoxFor(m => m.urlLink)
+                @Html.ValidationMessageFor(m => m.urlLink)
             </div>
-            
+
             <div class="editor-label">
-                @Html.LabelFor(m => m.thumbnail)
+                @Html.LabelFor(m => m.urlThumb)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(m => m.thumbnail)
-                @Html.ValidationMessageFor(m => m.thumbnail)
+                @Html.TextBoxFor(m => m.urlThumb)
+                @Html.ValidationMessageFor(m => m.urlThumb)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.urlImage)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.urlImage)
+                @Html.ValidationMessageFor(m => m.urlImage)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.urlVideo)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.urlVideo)
+                @Html.ValidationMessageFor(m => m.urlVideo)
             </div>
 
             <p>

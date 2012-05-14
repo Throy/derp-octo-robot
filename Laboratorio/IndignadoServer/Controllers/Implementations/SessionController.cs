@@ -151,7 +151,7 @@ namespace IndignadoServer.Controllers
             {
                 UsuarioFacebook fbUserDb = new UsuarioFacebook();
                 fbUserDb.idUsuario = userDb.id;
-                fbUserDb.idFacebook = fbUser.id;
+                fbUserDb.idFacebook = (int) fbUser.id;
                 fbUserDb.idMovimiento = user.idMovimiento;
 
                 indignadoContext.UsuarioFacebooks.InsertOnSubmit(fbUserDb);
