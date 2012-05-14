@@ -53,12 +53,30 @@ namespace IndignadoServer.Controllers
             // only get meetings from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, logo, fecha, tipo, link FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0})", IdMovement);
+                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, logo, fecha, tipo, url FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0})", IdMovement);
 
             // create new resources collection.
             Collection<Recurso> recursosCol = new Collection<Recurso>();
             foreach (Recurso resource in recursosEnum)
             {
+                // get number of likes
+                IEnumerable<int> numbersLikes = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM Aprobaciones WHERE idRecurso = {0}", resource.id);
+                foreach (int numberLikes in numbersLikes)
+                {
+                    resource.cantAprobaciones = numberLikes;
+                }
+
+                // get own like
+                if (UserInfo != null)
+                {
+                    IEnumerable<int> iLikesIt = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM Aprobaciones WHERE (idRecurso = {0}) AND (idUsuario = {1})", resource.id, UserInfo.Id);
+                    foreach (int iLikeIt in iLikesIt)
+                    {
+                        resource.meGusta = iLikeIt;
+                    }
+                }
+
+                // add item to the collection
                 recursosCol.Add(resource);
             }
 
@@ -111,15 +129,36 @@ namespace IndignadoServer.Controllers
         // likes a resource.
         public void likeResource(Recurso resource)
         {
-            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-
-            // creates a likeResource
+            // create a likeResource
             Aprobacione likeResource = new Aprobacione();
             likeResource.idRecurso = resource.id;
             likeResource.idUsuario = UserInfo.Id;
 
-            indignadoContext.Recursos.InsertOnSubmit(resource);
-            indignadoContext.SubmitChanges();
+            // add likeResource to the database.
+            try
+            {
+                IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+                indignadoContext.Aprobaciones.InsertOnSubmit(likeResource);
+                indignadoContext.SubmitChanges();
+            }
+            catch (Exception error)
+            {
+            }
+        }
+
+        // unlikes a resource.
+        public void unlikeResource(Recurso resource)
+        {
+            // remove likeResource from the database.
+            try
+            {
+                IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+                indignadoContext.ExecuteCommand("DELETE FROM Aprobaciones WHERE (idRecurso = {0}) AND (idUsuario = {1})", resource.id, UserInfo.Id);
+                indignadoContext.SubmitChanges();
+            }
+            catch (Exception error)
+            {
+            }
         }
     }
 }

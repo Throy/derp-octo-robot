@@ -18,7 +18,7 @@ namespace IndignadoWeb.Controllers
     {
         public const string viewAccessDenied = "AccessDenied";
         public const string viewLogOn = "LogOn";
-        public const string viewMeetings = "Meetings";
+        public const string viewMeetingCreate = "MeetingCreate";
         public const string viewMeetingsList = "MeetingsList";
         public const string viewMeetingsMap = "MeetingsMap";
         public const string viewMovementConfig = "MovementConfig";
@@ -116,6 +116,59 @@ namespace IndignadoWeb.Controllers
 
             // send the meetings to the model.
             return View(meetings);
+        }
+
+        // like resource.
+        [HttpPost]
+        public ActionResult MeetingsList(string buttonDoAttend, string buttonDontAttend, string buttonUnconfirmAttendance, int id)
+        {
+            try
+            {
+                if (buttonDoAttend != null)
+                {
+                    // open service
+                    IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+
+                    // do attend
+                    DTMeeting dtMeeting = new DTMeeting();
+                    dtMeeting.id = id;
+                    serv.doAttendMeeting(dtMeeting);
+
+                    return RedirectToAction(HomeControllerConstants.viewMeetingsList);
+                }
+
+                else if (buttonDontAttend != null)
+                {
+                    // open service
+                    IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+
+                    // don't attend
+                    DTMeeting dtMeeting = new DTMeeting();
+                    dtMeeting.id = id;
+                    serv.dontAttendMeeting(dtMeeting);
+
+                    return RedirectToAction(HomeControllerConstants.viewMeetingsList);
+                }
+
+                else if (buttonUnconfirmAttendance != null)
+                {
+                    // open service
+                    IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+
+                    // unconfirm attendance
+                    DTMeeting dtMeeting = new DTMeeting();
+                    dtMeeting.id = id;
+                    serv.unconfirmAttendMeeting(dtMeeting);
+
+                    return RedirectToAction(HomeControllerConstants.viewMeetingsList);
+                }
+
+                return View();
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
         }
 
         // shows all movements in a map.
@@ -368,13 +421,54 @@ namespace IndignadoWeb.Controllers
             INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
             // get all news
-            DTResourcesCol resourcesCol = serv.getResourcesList();
+            ListResourcesModel listResourcesModel = new ListResourcesModel();
+            listResourcesModel.items = serv.getResourcesList();
 
-            return View(resourcesCol);
+            return View(listResourcesModel);
+        }
+
+        // like / dislike resource.
+        [HttpPost]
+        public ActionResult ResourcesList(string buttonLike, string buttonUnlike, int id)
+        {
+            try
+            {
+                if (buttonLike != null)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                    // like resource
+                    DTResource dtResource = new DTResource();
+                    dtResource.id = id;
+                    serv.likeResource(dtResource);
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesList);
+                }
+            
+                else if (buttonUnlike != null)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                    // like resource
+                    DTResource dtResource = new DTResource();
+                    dtResource.id = id;
+                    serv.unlikeResource(dtResource);
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesList);
+                }
+
+                return View ();
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
         }
 
         // create resource.
-        public ActionResult ResourceShare(CreateResourceModel model)
+        public ActionResult ResourceShare(ShareResourceModel model)
         {
             /*
             try
@@ -397,7 +491,7 @@ namespace IndignadoWeb.Controllers
 
         // create resource.
         [HttpPost]
-        public ActionResult ResourceShare(string buttonShare, string buttonGetData, CreateResourceModel model)
+        public ActionResult ResourceShare(string buttonShare, string buttonGetData, ShareResourceModel model)
         {
             try {
                 // button share
@@ -414,7 +508,7 @@ namespace IndignadoWeb.Controllers
                         dtResource.idUser = -1;
                         dtResource.title = model.title;
                         dtResource.description = model.description;
-                        dtResource.link = model.link;
+                        dtResource.url = model.url;
                         dtResource.thumbnail = model.thumbnail;
                         serv.createResource(dtResource);
 
@@ -433,7 +527,7 @@ namespace IndignadoWeb.Controllers
                     INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
                 
                     // get data
-                    DTResource dtResource = serv.getResourceData(model.link);
+                    DTResource dtResource = serv.getResourceData(model.url);
                     model.title = dtResource.title;
                     model.description = dtResource.description;
                     model.thumbnail = dtResource.thumbnail;
