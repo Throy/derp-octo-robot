@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 using IndignadoWeb.Common;
 using IndignadoWeb.MeetingsServiceReference;
 using IndignadoWeb.Models;
@@ -62,7 +63,7 @@ namespace IndignadoWeb.Controllers
 
             return scf.CreateChannel();
         }
-
+         
         public ActionResult Index(DTTenantInfo tenantInfo)
         {
             ITestService serv = GetService<ITestService>(HomeControllerConstants.urlTestService);
@@ -198,7 +199,12 @@ namespace IndignadoWeb.Controllers
             // send the meetings to the model.
             return View(meetings);
         }
-
+        public ActionResult ShowImage(String pathImg)
+        {
+            var file = Server.MapPath(pathImg);
+            return File(file, "image/jpg", Path.GetFileName(file));
+        }
+        
         // create meeting.
         public ActionResult MeetingCreate()
         {
@@ -226,33 +232,47 @@ namespace IndignadoWeb.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+                //if (ModelState.IsValid)
+                //{
+                    if (ModelState.IsValidField("name") && ModelState.IsValidField("description") && ModelState.IsValidField("locationLati")
+                        && ModelState.IsValidField("locationLong") && ModelState.IsValidField("minQuorum"))
+                    {
+                        IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
-                    // create new meeting
-                    DTMeeting dtMeeting = new DTMeeting();
-                    dtMeeting.id = -1;
-                    dtMeeting.idMovement = -1;
-                    dtMeeting.name = model.name;
-                    dtMeeting.description = model.description;
-                    dtMeeting.locationLati = model.locationLati;
-                    dtMeeting.locationLong = model.locationLong;
-                    dtMeeting.minQuorum = model.minQuorum;
-                    serv.createMeeting(dtMeeting);
+                        // create new meeting
+                        DTMeeting dtMeeting = new DTMeeting();
+                        dtMeeting.id = -1;
+                        dtMeeting.idMovement = -1;
+                        dtMeeting.name = model.name;
+                        dtMeeting.description = model.description;
+                        dtMeeting.locationLati = model.locationLati;
+                        dtMeeting.locationLong = model.locationLong;
+                        dtMeeting.minQuorum = model.minQuorum;
+                        
 
-                    // get all meetings
-                    DTMeetingsCol meetings = serv.getMeetingsList();
+                        string fileName = Guid.NewGuid().ToString();
+                        string serverPath = Server.MapPath("~");
+                        string imagesPath = serverPath + "Content\\Images\\";
+                        string thumbPath = imagesPath + "Thumb\\";
+                        string fullPath = imagesPath + "Full\\";
+                
+                        CreateMeetingModel.ResizeAndSave(thumbPath, fileName, model.ImageUploaded.InputStream, 80, true);
+                        CreateMeetingModel.ResizeAndSave(fullPath, fileName, model.ImageUploaded.InputStream, 600, true);
 
-                    // close service
-                    (serv as ICommunicationObject).Close();
+                        dtMeeting.imagePath = fileName + ".jpg";
+                        serv.createMeeting(dtMeeting);
+                        // get all meetings
+                        DTMeetingsCol meetings = serv.getMeetingsList();
 
-                    // send the meetings to the model.
-                    return View(HomeControllerConstants.viewMeetingsList, meetings);
-                }
+                        // close service
+                        (serv as ICommunicationObject).Close();
+
+                        // send the meetings to the model.
+                        return View(HomeControllerConstants.viewMeetingsList, meetings);
+                    }
 
                 // If we got this far, something failed, redisplay form
-                return View(model);
+                    return View(model);
             }
             catch
             {

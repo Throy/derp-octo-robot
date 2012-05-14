@@ -14,6 +14,8 @@
 </script>
 
 <script type="text/javascript">
+    
+    
     function googleMapsInitialize() {
         // initialize map
         var myOptions = {
@@ -21,29 +23,52 @@
             zoom: 6,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
-        myOptions);
-
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        var infoWindow = new google.maps.InfoWindow({ content : "cargando..."});
+        @{int i = 0; }
         
         @foreach (var item in Model.items)
         {
             String latitud = item.locationLati.ToString().Replace(",", ".");
             String longitud = item.locationLong.ToString().Replace(",", ".");
-        <text>
-            var marker = new google.maps.Marker({
-                map: map,
+            
+             if (i == 0)
+                {<text> var </text>}
+            <text> markerContent =  "<div style=\"border-width:2px; padding-left:5px; border-color:Black; border-style:dashed; width:290px; height:130px; margin-top:6px;\" >"
+                                        + "<h4 style =\"font-size:90%; text-align:center\"><u> Convocatoria</u></h4>" 
+                                         + "<img alt=\"Loading..\" style=\"float:left; margin-top:-3px; margin-right:6px; border-style:outset; border-width:2px; border-color:Gray;\" src=\"@Url.Content("~/Content/Images/Thumb/" + item.imagePath.ToString())\" />"
+                                        + "<h4 style =\" font-size:75%\"> Nombre: @item.name.ToString()</h4>"  
+                                        + "<h4 style =\" font-size:75%\"> Descripción: @item.description.ToString()</h4>" 
+                                        + "<h4 style =\" font-size:75%\"> Quorum Minimo: @item.minQuorum.ToString() </h4>"
+                                        + "</div>" ;
+            </text> 
+            if (i == 0)
+            {<text> var </text>}
+            
+            <text> 
+            
+            marker = new google.maps.Marker({
                 position: new google.maps.LatLng(@latitud, @longitud),
-                title: "Hello World"
+                map: map,
+                html: markerContent
             });
-        </text>
+            
+            google.maps.event.addListener(marker, 'click', function() {
+                                infoWindow.setContent(this.html);
+                                infoWindow.open(map, this);
+                                });
+            
+            </text>
+            i++;
         }
     }
 </script>
 
 <!-- page content -->
-<h2>Meetings map</h2>
+<h2 style="text-align:center">Meetings map</h2>
 
-<div id="map_canvas" style="width: 400px; height:300px"></div>
+
+<div id="map_canvas" style="width: 400px; height:300px ; margin-left:220px;border-style:outset; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA" ></div>
 
 <script type="text/javascript">googleMapsInitialize();</script>
 

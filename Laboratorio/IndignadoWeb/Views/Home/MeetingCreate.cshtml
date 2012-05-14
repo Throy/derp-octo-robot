@@ -1,9 +1,52 @@
 ﻿<!-- model -->
 @model IndignadoWeb.Models.CreateMeetingModel
 
+
 <!-- scripts -->
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="../../Scripts/jquery-1.5.1.js" type="text/javascript"></script>
+
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDMxElmlzDp8EFWG0el5fZxRrRzN3E3NRU&sensor=false">
+</script>
+
+<script type="text/javascript">
+    var map;
+    var markersArray = [];
+    function googleMapsInitialize() {
+        // initialize map
+        var myOptions = {
+            center: new google.maps.LatLng(-32.8, -56),
+            zoom: 6,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        // setting the function that will respond onclick (create a marker)
+        google.maps.event.addListener(map, 'click', function (event) {
+            placeMarker(event.latLng);
+        });
+        // Delete Markers Function
+        google.maps.Map.prototype.clearOverlays = function () {
+            if (markersArray) {
+                for (var i = 0; i < markersArray.length; i++) {
+                    markersArray[i].setMap(null);
+                }
+            }
+        }
+    }
+    function placeMarker(location) {
+    map.clearOverlays();
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+        markersArray.push(marker);
+        document.getElementById("locationLong").value = marker.getPosition().lng().toString();
+        document.getElementById("locationLati").value = marker.getPosition().lat().toString();
+    }
+
+ </script>
 
 <!-- page title -->
 @{
@@ -12,13 +55,19 @@
 
 <!-- page content -->
 
-<h2>Create meeting</h2>
+<h2 >Create meeting</h2>
 
-@using (Html.BeginForm())
-{
+<h4 style="font-style:italic; font-size: 90%">Seleccione la ubicacion de la meeting en el mapa:</h4>
+
+<div id="map_canvas" style="width:400px; height:310px; float:left; margin-left:70px; border-style:outset; margin-top:2px; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA"></div>
+
+<script type="text/javascript"> googleMapsInitialize();</script>
+
+
+<form action="/Home/MeetingCreate" method="post" enctype="multipart/form-data">
     @Html.ValidationSummary(true, "Some fields have errors, please fix them.")
-    <div>
-        <fieldset>
+    <div style="width:250px; float:left; border-style:solid; border-radius:4px; -moz-border-radius:4px; margin-left:20px; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA ">
+        <fieldset style="border-color:transparent">
             <div class="editor-label">
                 @Html.LabelFor(m => m.name)
             </div>
@@ -58,10 +107,16 @@
                 @Html.TextBoxFor(m => m.minQuorum)
                 @Html.ValidationMessageFor(m => m.minQuorum)
             </div>
+            <div >
+            <label>Logo</label>
+                <input name="ImageUploaded" id="ImageUploaded" type="file">  
 
+            </div>
             <p>
-                <input type="submit" value="Create meeting" />
+                <input class="boton-big-red" style="height:30px; margin-top:10px" type="submit" value="Create meeting" />
             </p>
         </fieldset>
     </div>
-}
+</form>
+
+

@@ -47,7 +47,12 @@ namespace IndignadoWeb.MeetingsServiceReference {
         private string nameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+<<<<<<< HEAD
         private int numberAttendantsField;
+=======
+        private string imagePathField;
+        
+>>>>>>> mapas
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -159,6 +164,23 @@ namespace IndignadoWeb.MeetingsServiceReference {
                 if ((object.ReferenceEquals(this.nameField, value) != true)) {
                     this.nameField = value;
                     this.RaisePropertyChanged("name");
+                }
+            }
+        }
+
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string imagePath
+        {
+            get
+            {
+                return this.imagePathField;
+            }
+            set
+            {
+                if ((object.ReferenceEquals(this.nameField, value) != true))
+                {
+                    this.imagePathField = value;
+                    this.RaisePropertyChanged("imagePath");
                 }
             }
         }
