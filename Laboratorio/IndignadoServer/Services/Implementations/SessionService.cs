@@ -16,14 +16,24 @@ namespace IndignadoServer
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "SessionService" in both code and config file together.
     public class SessionService : ISessionService
     {
-        public String Login(int idMovmiento, String userName, String password)
+        public DTLoginInfo Login(int idMovmiento, String userName, String password)
         {
             return ControllersHub.Instance.getISessionController().Login(idMovmiento, userName, password);
+        }
+
+        public DTLoginInfo LoginFB(int idMovimiento, String accesToken)
+        {
+            return ControllersHub.Instance.getISessionController().LoginFB(idMovimiento, accesToken);
         }
 
         public DTUserCreateStatus RegisterUser(DTRegisterModel user)
         {
             return ControllersHub.Instance.getISessionController().RegisterUser(user);
+        }
+
+        public DTUserCreateStatus RegisterFBUser(DTRegisterFBModel user)
+        {
+            return ControllersHub.Instance.getISessionController().RegisterFBUser(user);
         }
 
         public bool ValidateToken(int idMovmiento, String token)

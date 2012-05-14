@@ -214,6 +214,9 @@
     border: 1px solid #e66b10;
     border-radius: 3px 3px 3px 3px;
     -moz-border-radius: 3px 3px 3px 3px;
+    box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.300) inset, 0px 1px 0px rgba(0, 0, 0, 0.298);
+    -moz-box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.300) inset, 0px 1px 0px rgba(0, 0, 0, 0.298);
+    -webkit-box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.300) inset, 0px 1px 0px rgba(0, 0, 0, 0.298);
     color: #fff;
     cursor: pointer;
     font-weight:bold;
@@ -243,9 +246,9 @@
 .boton-red a:hover,
 .boton-ingresar-red:hover {
     background-color: #e6861f;
-    -moz-box-shadow: 2px 2px 1px #e2dac0;
-    -webkit-box-shadow: 2px 2px 1px #e2dac0;
-    box-shadow: 2px 2px 1px #e2dac0;
+    -moz-box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.400) inset, 2px 2px 1px #e2dac0;
+    -webkit-box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.400) inset, 2px 2px 1px #e2dac0;
+    box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.400) inset, 2px 2px 1px #e2dac0;
     text-decoration: none;
 }
 
@@ -261,4 +264,40 @@ input[type=reset],
 input[type=button]
 {
        filter:chroma(color=#000000);
+}
+
+a.special-btn.facebook { 
+    background: url("../images/facebook.png") 15px 2px no-repeat #3B5998;
+    padding-left: 33px;
+    width:344px;
+    margin:30px;
+    height:33px;
+    line-height:33px;
+}
+
+a.special-btn { 
+    border: 1px solid rgba(0, 0, 0, 0.196);
+    border-radius: 5px;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.400) inset, 0px -1px 0px rgba(0, 0, 0, 0.298) inset, 0px 0px 10px rgba(255, 255, 255, 0.298) inset, 0px 1px 1px rgba(0, 0, 0, 0.196);
+    -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.400) inset, 0px -1px 0px rgba(0, 0, 0, 0.298) inset, 0px 0px 10px rgba(255, 255, 255, 0.298) inset, 0px 1px 1px rgba(0, 0, 0, 0.196);
+    -webkit-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.400) inset, 0px -1px 0px rgba(0, 0, 0, 0.298) inset, 0px 0px 10px rgba(255, 255, 255, 0.298) inset, 0px 1px 1px rgba(0, 0, 0, 0.196);
+    color: #FFFFFF;
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0px -1px rgba(0, 0, 0, 0.196);
+}
+
+a.special-btn:hover {
+    background-color: #4566ac;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .4) inset, 0 -2px 0 rgba(0, 0, 0, .3) inset, 0 0 10px rgba(255, 255, 255, .4) inset, 0 1px 1px rgba(0, 0, 0, .3);
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .4) inset, 0 -2px 0 rgba(0, 0, 0, .3) inset, 0 0 10px rgba(255, 255, 255, .4) inset, 0 1px 1px rgba(0, 0, 0, .3);
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .4) inset, 0 -2px 0 rgba(0, 0, 0, .3) inset, 0 0 10px rgba(255, 255, 255, .4) inset, 0 1px 1px rgba(0, 0, 0, .3);
+    text-decoration: none;
+}
+
+a.special-btn.facebook:active {
+	background-color: #112f61;
 }

@@ -189,6 +189,9 @@
     <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SessionServiceReference\IndignadoWeb.SessionServiceReference.DTLoginInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SessionServiceReference\IndignadoWeb.SessionServiceReference.DTTenantInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -320,6 +323,7 @@
     <Content Include="Views\Home\AccessDenied.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTRssSource.cshtml" />
     <Content Include="Views\Home\RssSourcesConfig.cshtml" />
+    <Content Include="Views\Account\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
