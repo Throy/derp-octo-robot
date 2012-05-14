@@ -65,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AuthFilter.cs" />
     <Compile Include="Common\DecimalModelBinder.cs" />
     <Compile Include="Common\DomainData.cs" />
     <Compile Include="Common\DomainRoute.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Common\MultiTenanActionFilter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SysAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -310,8 +312,8 @@
     <Content Include="Views\Shared\DisplayTemplates\DTMeeting.cshtml" />
     <Content Include="Views\Shared\_Default.cshtml" />
     <Content Include="Views\Home\MeetingCreate.cshtml" />
-    <Content Include="Views\Home\MovementCreate.cshtml" />
-    <Content Include="Views\Home\MovementsList.cshtml" />
+    <Content Include="Views\SysAdmin\MovementCreate.cshtml" />
+    <Content Include="Views\SysAdmin\MovementsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMovement.cshtml" />
     <Content Include="Views\Home\MeetingsMap.cshtml" />
     <Content Include="Views\Home\MovementConfig.cshtml" />
@@ -324,6 +326,12 @@
     <Content Include="Views\Shared\DisplayTemplates\DTRssSource.cshtml" />
     <Content Include="Views\Home\RssSourcesConfig.cshtml" />
     <Content Include="Views\Account\Confirm.cshtml" />
+    <Content Include="Views\SysAdmin\LogOn.cshtml" />
+    <Content Include="Views\SysAdmin\Index.cshtml" />
+    <Content Include="Views\Shared\SysAdmin.cshtml" />
+    <Content Include="Views\Shared\SysAdminLogOn.cshtml" />
+    <Content Include="Views\SysAdmin\AccessDenied.cshtml" />
+    <Content Include="Views\Home\MovementConfigSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

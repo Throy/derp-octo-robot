@@ -22,8 +22,6 @@ namespace IndignadoWeb.Controllers
         public const string viewMeetingsList = "MeetingsList";
         public const string viewMeetingsMap = "MeetingsMap";
         public const string viewMovementConfig = "MovementConfig";
-        public const string viewMovementCreate = "MovementCreate";
-        public const string viewMovementsList = "MovementsList";
         public const string viewNewsList = "NewsList";
         public const string viewResourceShare = "ResourceShare";
         public const string viewResourcesList = "ResourcesList";
@@ -32,7 +30,6 @@ namespace IndignadoWeb.Controllers
         public const string urlMovAdminService = "http://localhost:8730/IndignadoServer/MovAdminService/";
         public const string urlNewsResourcesService = "http://localhost:8730/IndignadoServer/NewsResourcesService/";
         public const string urlSessionService = "http://localhost:8730/IndignadoServer/SessionService/";
-        public const string urlSysAdminService = "http://localhost:8730/IndignadoServer/SysAdminService/";
         public const string urlTestService = "http://localhost:8730/IndignadoServer/TestService/";
     }
 
@@ -247,81 +244,6 @@ namespace IndignadoWeb.Controllers
             }
         }
 
-        // shows all movements in a list.
-        public ActionResult MovementsList()
-        {
-            ISysAdminService serv = GetService<ISysAdminService>(HomeControllerConstants.urlSysAdminService);
-
-            // get all movements
-            DTMovementsCol movements = serv.getMovementsList();
-
-            // close service
-            (serv as ICommunicationObject).Close();
-
-            // send the movements to the model.
-            return View(movements);
-        }
-
-        // create movement.
-        public ActionResult MovementCreate()
-        {
-            /*
-            try
-            {
-                // check if the user is a system admin.
-                ISessionService serv = GetService<ISessionService>(HomeControllerConstants.urlSessionService);
-                serv.ValidateSysAdmin();
-            */
-                // show form
-                return View();
-            /*
-            }
-            catch (Exception error)
-            {
-                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
-            }
-            */
-        }
-
-        // create movement.
-        [HttpPost]
-        public ActionResult MovementCreate (SingleMovementModel model)
-        {
-            try {
-                if (ModelState.IsValid)
-                {
-                    ISysAdminService serv = GetService<ISysAdminService>(HomeControllerConstants.urlSysAdminService);
-
-                    // create new movement
-                    //serv.addEmptyMovement();
-
-                    IndignadoWeb.SysAdminServiceReference.DTMovement dtMovement = new IndignadoWeb.SysAdminServiceReference.DTMovement();
-                    dtMovement.id = -1;
-                    dtMovement.name = model.name;
-                    dtMovement.description = model.description;
-                    dtMovement.locationLati = model.locationLati;
-                    dtMovement.locationLong = model.locationLong;
-                    serv.createMovement(dtMovement);
-
-                    // get all movements
-                    DTMovementsCol movements = serv.getMovementsList();
-
-                    // close service
-                    (serv as ICommunicationObject).Close();
-
-                    // send the movements to the model.
-                    return View(HomeControllerConstants.viewMovementsList, movements);
-                }
-
-                // If we got this far, something failed, redisplay form
-                return View(model);
-            }
-            catch
-            {
-                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
-            }
-        }
-
         // configure movement.
         public ActionResult MovementConfig()
         {
@@ -383,14 +305,8 @@ namespace IndignadoWeb.Controllers
                     // close service
                     (serv as ICommunicationObject).Close();
 
-                    // open service
-                    ISysAdminService serv2 = GetService<ISysAdminService>(HomeControllerConstants.urlSysAdminService);
-
-                    // get all movements
-                    DTMovementsCol movements = serv2.getMovementsList();
-
                     // send the movements to the model.
-                    return View(HomeControllerConstants.viewMovementsList, movements);
+                    return View("MovementConfigSuccess");
                 }
 
                 // If we got this far, something failed, redisplay form
