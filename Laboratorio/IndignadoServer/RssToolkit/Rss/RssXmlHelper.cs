@@ -301,7 +301,14 @@ namespace RssToolkit.Rss
             else
             {
                 // fall-back, if regex does not match:
-                return DateTime.Parse(dateTime, CultureInfo.InvariantCulture);
+                try
+                {
+                    return DateTime.Parse(dateTime, CultureInfo.InvariantCulture);
+                }
+                catch
+                {
+                    return new DateTime();
+                }
             }
         }
 

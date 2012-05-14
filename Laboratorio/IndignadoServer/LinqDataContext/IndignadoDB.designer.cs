@@ -30,9 +30,15 @@ namespace IndignadoServer.LinqDataContext
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertAprobacione(Aprobacione instance);
+    partial void UpdateAprobacione(Aprobacione instance);
+    partial void DeleteAprobacione(Aprobacione instance);
     partial void InsertUsuario(Usuario instance);
     partial void UpdateUsuario(Usuario instance);
     partial void DeleteUsuario(Usuario instance);
+    partial void InsertAsistencia(Asistencia instance);
+    partial void UpdateAsistencia(Asistencia instance);
+    partial void DeleteAsistencia(Asistencia instance);
     partial void InsertConvocatoria(Convocatoria instance);
     partial void UpdateConvocatoria(Convocatoria instance);
     partial void DeleteConvocatoria(Convocatoria instance);
@@ -83,6 +89,14 @@ namespace IndignadoServer.LinqDataContext
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<Aprobacione> Aprobaciones
+		{
+			get
+			{
+				return this.GetTable<Aprobacione>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Usuario> Usuarios
 		{
 			get
@@ -91,11 +105,11 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		public System.Data.Linq.Table<Aprobacione> Aprobaciones
+		public System.Data.Linq.Table<Asistencia> Asistencias
 		{
 			get
 			{
-				return this.GetTable<Aprobacione>();
+				return this.GetTable<Asistencia>();
 			}
 		}
 		
@@ -148,6 +162,174 @@ namespace IndignadoServer.LinqDataContext
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Aprobaciones")]
+	public partial class Aprobacione : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idRecurso;
+		
+		private int _idUsuario;
+		
+		private EntityRef<Usuario> _Usuario;
+		
+		private EntityRef<Recurso> _Recurso;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidRecursoChanging(int value);
+    partial void OnidRecursoChanged();
+    partial void OnidUsuarioChanging(int value);
+    partial void OnidUsuarioChanged();
+    #endregion
+		
+		public Aprobacione()
+		{
+			this._Usuario = default(EntityRef<Usuario>);
+			this._Recurso = default(EntityRef<Recurso>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idRecurso", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idRecurso
+		{
+			get
+			{
+				return this._idRecurso;
+			}
+			set
+			{
+				if ((this._idRecurso != value))
+				{
+					if (this._Recurso.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidRecursoChanging(value);
+					this.SendPropertyChanging();
+					this._idRecurso = value;
+					this.SendPropertyChanged("idRecurso");
+					this.OnidRecursoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idUsuario
+		{
+			get
+			{
+				return this._idUsuario;
+			}
+			set
+			{
+				if ((this._idUsuario != value))
+				{
+					if (this._Usuario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._idUsuario = value;
+					this.SendPropertyChanged("idUsuario");
+					this.OnidUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Aprobacione", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.Aprobaciones.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.Aprobaciones.Add(this);
+						this._idUsuario = value.id;
+					}
+					else
+					{
+						this._idUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recurso_Aprobacione", Storage="_Recurso", ThisKey="idRecurso", OtherKey="id", IsForeignKey=true)]
+		public Recurso Recurso
+		{
+			get
+			{
+				return this._Recurso.Entity;
+			}
+			set
+			{
+				Recurso previousValue = this._Recurso.Entity;
+				if (((previousValue != value) 
+							|| (this._Recurso.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Recurso.Entity = null;
+						previousValue.Aprobaciones.Remove(this);
+					}
+					this._Recurso.Entity = value;
+					if ((value != null))
+					{
+						value.Aprobaciones.Add(this);
+						this._idRecurso = value.id;
+					}
+					else
+					{
+						this._idRecurso = default(int);
+					}
+					this.SendPropertyChanged("Recurso");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Usuarios")]
 	public partial class Usuario : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -166,15 +348,19 @@ namespace IndignadoServer.LinqDataContext
 		
 		private System.Data.Linq.Binary _contraseña;
 		
-		private float _latitud;
+		private double _latitud;
 		
-		private float _longitud;
+		private double _longitud;
 		
 		private System.Nullable<System.DateTime> _fechaRegistro;
 		
 		private System.Nullable<bool> _banned;
 		
 		private short _privilegio;
+		
+		private EntitySet<Aprobacione> _Aprobaciones;
+		
+		private EntitySet<Asistencia> _Asistencias;
 		
 		private EntitySet<Convocatoria> _Convocatorias;
 		
@@ -198,9 +384,9 @@ namespace IndignadoServer.LinqDataContext
     partial void OnmailChanged();
     partial void OncontraseñaChanging(System.Data.Linq.Binary value);
     partial void OncontraseñaChanged();
-    partial void OnlatitudChanging(float value);
+    partial void OnlatitudChanging(double value);
     partial void OnlatitudChanged();
-    partial void OnlongitudChanging(float value);
+    partial void OnlongitudChanging(double value);
     partial void OnlongitudChanged();
     partial void OnfechaRegistroChanging(System.Nullable<System.DateTime> value);
     partial void OnfechaRegistroChanged();
@@ -212,6 +398,8 @@ namespace IndignadoServer.LinqDataContext
 		
 		public Usuario()
 		{
+			this._Aprobaciones = new EntitySet<Aprobacione>(new Action<Aprobacione>(this.attach_Aprobaciones), new Action<Aprobacione>(this.detach_Aprobaciones));
+			this._Asistencias = new EntitySet<Asistencia>(new Action<Asistencia>(this.attach_Asistencias), new Action<Asistencia>(this.detach_Asistencias));
 			this._Convocatorias = new EntitySet<Convocatoria>(new Action<Convocatoria>(this.attach_Convocatorias), new Action<Convocatoria>(this.detach_Convocatorias));
 			this._Recurso = default(EntityRef<Recurso>);
 			this._UsuarioFacebooks = new EntitySet<UsuarioFacebook>(new Action<UsuarioFacebook>(this.attach_UsuarioFacebooks), new Action<UsuarioFacebook>(this.detach_UsuarioFacebooks));
@@ -339,7 +527,7 @@ namespace IndignadoServer.LinqDataContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitud", DbType="Float NOT NULL")]
-		public float latitud
+		public double latitud
 		{
 			get
 			{
@@ -359,7 +547,7 @@ namespace IndignadoServer.LinqDataContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", DbType="Float NOT NULL")]
-		public float longitud
+		public double longitud
 		{
 			get
 			{
@@ -438,6 +626,32 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Aprobacione", Storage="_Aprobaciones", ThisKey="id", OtherKey="idUsuario")]
+		public EntitySet<Aprobacione> Aprobaciones
+		{
+			get
+			{
+				return this._Aprobaciones;
+			}
+			set
+			{
+				this._Aprobaciones.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Asistencia", Storage="_Asistencias", ThisKey="id", OtherKey="idUsuario")]
+		public EntitySet<Asistencia> Asistencias
+		{
+			get
+			{
+				return this._Asistencias;
+			}
+			set
+			{
+				this._Asistencias.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Convocatorias", ThisKey="id", OtherKey="idAutor")]
 		public EntitySet<Convocatoria> Convocatorias
 		{
@@ -513,6 +727,30 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		private void attach_Aprobaciones(Aprobacione entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_Aprobaciones(Aprobacione entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
+		private void attach_Asistencias(Asistencia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_Asistencias(Asistencia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
 		private void attach_Convocatorias(Convocatoria entity)
 		{
 			this.SendPropertyChanging();
@@ -538,36 +776,67 @@ namespace IndignadoServer.LinqDataContext
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Aprobaciones")]
-	public partial class Aprobacione
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Asistencias")]
+	public partial class Asistencia : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private System.Nullable<int> _idRecurso;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private System.Nullable<int> _idUsuario;
+		private int _idConvocatoria;
 		
-		public Aprobacione()
+		private int _idUsuario;
+		
+		private int _hayAsistencia;
+		
+		private EntityRef<Usuario> _Usuario;
+		
+		private EntityRef<Convocatoria> _Convocatoria;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidConvocatoriaChanging(int value);
+    partial void OnidConvocatoriaChanged();
+    partial void OnidUsuarioChanging(int value);
+    partial void OnidUsuarioChanged();
+    partial void OnhayAsistenciaChanging(int value);
+    partial void OnhayAsistenciaChanged();
+    #endregion
+		
+		public Asistencia()
 		{
+			this._Usuario = default(EntityRef<Usuario>);
+			this._Convocatoria = default(EntityRef<Convocatoria>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idRecurso", DbType="Int")]
-		public System.Nullable<int> idRecurso
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idConvocatoria", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idConvocatoria
 		{
 			get
 			{
-				return this._idRecurso;
+				return this._idConvocatoria;
 			}
 			set
 			{
-				if ((this._idRecurso != value))
+				if ((this._idConvocatoria != value))
 				{
-					this._idRecurso = value;
+					if (this._Convocatoria.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidConvocatoriaChanging(value);
+					this.SendPropertyChanging();
+					this._idConvocatoria = value;
+					this.SendPropertyChanged("idConvocatoria");
+					this.OnidConvocatoriaChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int")]
-		public System.Nullable<int> idUsuario
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idUsuario
 		{
 			get
 			{
@@ -577,8 +846,124 @@ namespace IndignadoServer.LinqDataContext
 			{
 				if ((this._idUsuario != value))
 				{
+					if (this._Usuario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidUsuarioChanging(value);
+					this.SendPropertyChanging();
 					this._idUsuario = value;
+					this.SendPropertyChanged("idUsuario");
+					this.OnidUsuarioChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_hayAsistencia", DbType="Int NOT NULL")]
+		public int hayAsistencia
+		{
+			get
+			{
+				return this._hayAsistencia;
+			}
+			set
+			{
+				if ((this._hayAsistencia != value))
+				{
+					this.OnhayAsistenciaChanging(value);
+					this.SendPropertyChanging();
+					this._hayAsistencia = value;
+					this.SendPropertyChanged("hayAsistencia");
+					this.OnhayAsistenciaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Asistencia", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.Asistencias.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.Asistencias.Add(this);
+						this._idUsuario = value.id;
+					}
+					else
+					{
+						this._idUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convocatoria_Asistencia", Storage="_Convocatoria", ThisKey="idConvocatoria", OtherKey="id", IsForeignKey=true)]
+		public Convocatoria Convocatoria
+		{
+			get
+			{
+				return this._Convocatoria.Entity;
+			}
+			set
+			{
+				Convocatoria previousValue = this._Convocatoria.Entity;
+				if (((previousValue != value) 
+							|| (this._Convocatoria.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Convocatoria.Entity = null;
+						previousValue.Asistencias.Remove(this);
+					}
+					this._Convocatoria.Entity = value;
+					if ((value != null))
+					{
+						value.Asistencias.Add(this);
+						this._idConvocatoria = value.id;
+					}
+					else
+					{
+						this._idConvocatoria = default(int);
+					}
+					this.SendPropertyChanged("Convocatoria");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -601,15 +986,21 @@ namespace IndignadoServer.LinqDataContext
 		
 		private string _logo;
 		
-		private float _latitud;
+		private double _latitud;
 		
-		private float _longitud;
+		private double _longitud;
 		
 		private string _inicio;
 		
 		private string _fin;
 		
 		private System.Nullable<int> _minQuorum;
+		
+		private System.Nullable<int> _cantAsistencias;
+		
+		private System.Nullable<int> _miAsistencia;
+		
+		private EntitySet<Asistencia> _Asistencias;
 		
 		private EntityRef<Usuario> _Usuario;
 		
@@ -631,9 +1022,9 @@ namespace IndignadoServer.LinqDataContext
     partial void OndescripcionChanged();
     partial void OnlogoChanging(string value);
     partial void OnlogoChanged();
-    partial void OnlatitudChanging(float value);
+    partial void OnlatitudChanging(double value);
     partial void OnlatitudChanged();
-    partial void OnlongitudChanging(float value);
+    partial void OnlongitudChanging(double value);
     partial void OnlongitudChanged();
     partial void OninicioChanging(string value);
     partial void OninicioChanged();
@@ -641,10 +1032,15 @@ namespace IndignadoServer.LinqDataContext
     partial void OnfinChanged();
     partial void OnminQuorumChanging(System.Nullable<int> value);
     partial void OnminQuorumChanged();
+    partial void OncantAsistenciasChanging(System.Nullable<int> value);
+    partial void OncantAsistenciasChanged();
+    partial void OnmiAsistenciaChanging(System.Nullable<int> value);
+    partial void OnmiAsistenciaChanged();
     #endregion
 		
 		public Convocatoria()
 		{
+			this._Asistencias = new EntitySet<Asistencia>(new Action<Asistencia>(this.attach_Asistencias), new Action<Asistencia>(this.detach_Asistencias));
 			this._Usuario = default(EntityRef<Usuario>);
 			this._Movimiento = default(EntityRef<Movimiento>);
 			OnCreated();
@@ -779,7 +1175,7 @@ namespace IndignadoServer.LinqDataContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitud", DbType="Float NOT NULL")]
-		public float latitud
+		public double latitud
 		{
 			get
 			{
@@ -799,7 +1195,7 @@ namespace IndignadoServer.LinqDataContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", DbType="Float NOT NULL")]
-		public float longitud
+		public double longitud
 		{
 			get
 			{
@@ -875,6 +1271,59 @@ namespace IndignadoServer.LinqDataContext
 					this.SendPropertyChanged("minQuorum");
 					this.OnminQuorumChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cantAsistencias", DbType="Int")]
+		public System.Nullable<int> cantAsistencias
+		{
+			get
+			{
+				return this._cantAsistencias;
+			}
+			set
+			{
+				if ((this._cantAsistencias != value))
+				{
+					this.OncantAsistenciasChanging(value);
+					this.SendPropertyChanging();
+					this._cantAsistencias = value;
+					this.SendPropertyChanged("cantAsistencias");
+					this.OncantAsistenciasChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_miAsistencia", DbType="Int")]
+		public System.Nullable<int> miAsistencia
+		{
+			get
+			{
+				return this._miAsistencia;
+			}
+			set
+			{
+				if ((this._miAsistencia != value))
+				{
+					this.OnmiAsistenciaChanging(value);
+					this.SendPropertyChanging();
+					this._miAsistencia = value;
+					this.SendPropertyChanged("miAsistencia");
+					this.OnmiAsistenciaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convocatoria_Asistencia", Storage="_Asistencias", ThisKey="id", OtherKey="idConvocatoria")]
+		public EntitySet<Asistencia> Asistencias
+		{
+			get
+			{
+				return this._Asistencias;
+			}
+			set
+			{
+				this._Asistencias.Assign(value);
 			}
 		}
 		
@@ -964,6 +1413,18 @@ namespace IndignadoServer.LinqDataContext
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Asistencias(Asistencia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Convocatoria = this;
+		}
+		
+		private void detach_Asistencias(Asistencia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Convocatoria = null;
 		}
 	}
 	
@@ -1099,9 +1560,9 @@ namespace IndignadoServer.LinqDataContext
 		
 		private string _descripcion;
 		
-		private float _latitud;
+		private double _latitud;
 		
-		private float _longitud;
+		private double _longitud;
 		
 		private System.Nullable<int> _maxMarcasInadecuadasRecursoX;
 		
@@ -1133,9 +1594,9 @@ namespace IndignadoServer.LinqDataContext
     partial void OnidLayoutChanged();
     partial void OndescripcionChanging(string value);
     partial void OndescripcionChanged();
-    partial void OnlatitudChanging(float value);
+    partial void OnlatitudChanging(double value);
     partial void OnlatitudChanged();
-    partial void OnlongitudChanging(float value);
+    partial void OnlongitudChanging(double value);
     partial void OnlongitudChanged();
     partial void OnmaxMarcasInadecuadasRecursoXChanging(System.Nullable<int> value);
     partial void OnmaxMarcasInadecuadasRecursoXChanged();
@@ -1280,7 +1741,7 @@ namespace IndignadoServer.LinqDataContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitud", DbType="Float NOT NULL")]
-		public float latitud
+		public double latitud
 		{
 			get
 			{
@@ -1300,7 +1761,7 @@ namespace IndignadoServer.LinqDataContext
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", DbType="Float NOT NULL")]
-		public float longitud
+		public double longitud
 		{
 			get
 			{
@@ -1518,13 +1979,23 @@ namespace IndignadoServer.LinqDataContext
 		
 		private string _descripcion;
 		
-		private string _logo;
-		
 		private System.Nullable<System.DateTime> _fecha;
 		
 		private System.Nullable<int> _tipo;
 		
-		private string _link;
+		private string _urlLink;
+		
+		private string _urlImage;
+		
+		private string _urlVideo;
+		
+		private string _urlThumb;
+		
+		private System.Nullable<int> _cantAprobaciones;
+		
+		private System.Nullable<int> _meGusta;
+		
+		private EntitySet<Aprobacione> _Aprobaciones;
 		
 		private EntityRef<Usuario> _Usuario;
 		
@@ -1540,18 +2011,27 @@ namespace IndignadoServer.LinqDataContext
     partial void OntituloChanged();
     partial void OndescripcionChanging(string value);
     partial void OndescripcionChanged();
-    partial void OnlogoChanging(string value);
-    partial void OnlogoChanged();
     partial void OnfechaChanging(System.Nullable<System.DateTime> value);
     partial void OnfechaChanged();
     partial void OntipoChanging(System.Nullable<int> value);
     partial void OntipoChanged();
-    partial void OnlinkChanging(string value);
-    partial void OnlinkChanged();
+    partial void OnurlLinkChanging(string value);
+    partial void OnurlLinkChanged();
+    partial void OnurlImageChanging(string value);
+    partial void OnurlImageChanged();
+    partial void OnurlVideoChanging(string value);
+    partial void OnurlVideoChanged();
+    partial void OnurlThumbChanging(string value);
+    partial void OnurlThumbChanged();
+    partial void OncantAprobacionesChanging(System.Nullable<int> value);
+    partial void OncantAprobacionesChanged();
+    partial void OnmeGustaChanging(System.Nullable<int> value);
+    partial void OnmeGustaChanged();
     #endregion
 		
 		public Recurso()
 		{
+			this._Aprobaciones = new EntitySet<Aprobacione>(new Action<Aprobacione>(this.attach_Aprobaciones), new Action<Aprobacione>(this.detach_Aprobaciones));
 			this._Usuario = default(EntityRef<Usuario>);
 			OnCreated();
 		}
@@ -1640,26 +2120,6 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_logo", DbType="VarChar(MAX)")]
-		public string logo
-		{
-			get
-			{
-				return this._logo;
-			}
-			set
-			{
-				if ((this._logo != value))
-				{
-					this.OnlogoChanging(value);
-					this.SendPropertyChanging();
-					this._logo = value;
-					this.SendPropertyChanged("logo");
-					this.OnlogoChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha", DbType="DateTime")]
 		public System.Nullable<System.DateTime> fecha
 		{
@@ -1700,23 +2160,136 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_link", DbType="VarChar(MAX)")]
-		public string link
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_urlLink", DbType="VarChar(MAX)")]
+		public string urlLink
 		{
 			get
 			{
-				return this._link;
+				return this._urlLink;
 			}
 			set
 			{
-				if ((this._link != value))
+				if ((this._urlLink != value))
 				{
-					this.OnlinkChanging(value);
+					this.OnurlLinkChanging(value);
 					this.SendPropertyChanging();
-					this._link = value;
-					this.SendPropertyChanged("link");
-					this.OnlinkChanged();
+					this._urlLink = value;
+					this.SendPropertyChanged("urlLink");
+					this.OnurlLinkChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_urlImage", DbType="VarChar(MAX)")]
+		public string urlImage
+		{
+			get
+			{
+				return this._urlImage;
+			}
+			set
+			{
+				if ((this._urlImage != value))
+				{
+					this.OnurlImageChanging(value);
+					this.SendPropertyChanging();
+					this._urlImage = value;
+					this.SendPropertyChanged("urlImage");
+					this.OnurlImageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_urlVideo", DbType="VarChar(MAX)")]
+		public string urlVideo
+		{
+			get
+			{
+				return this._urlVideo;
+			}
+			set
+			{
+				if ((this._urlVideo != value))
+				{
+					this.OnurlVideoChanging(value);
+					this.SendPropertyChanging();
+					this._urlVideo = value;
+					this.SendPropertyChanged("urlVideo");
+					this.OnurlVideoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_urlThumb", DbType="VarChar(MAX)")]
+		public string urlThumb
+		{
+			get
+			{
+				return this._urlThumb;
+			}
+			set
+			{
+				if ((this._urlThumb != value))
+				{
+					this.OnurlThumbChanging(value);
+					this.SendPropertyChanging();
+					this._urlThumb = value;
+					this.SendPropertyChanged("urlThumb");
+					this.OnurlThumbChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cantAprobaciones", DbType="Int")]
+		public System.Nullable<int> cantAprobaciones
+		{
+			get
+			{
+				return this._cantAprobaciones;
+			}
+			set
+			{
+				if ((this._cantAprobaciones != value))
+				{
+					this.OncantAprobacionesChanging(value);
+					this.SendPropertyChanging();
+					this._cantAprobaciones = value;
+					this.SendPropertyChanged("cantAprobaciones");
+					this.OncantAprobacionesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_meGusta", DbType="Int")]
+		public System.Nullable<int> meGusta
+		{
+			get
+			{
+				return this._meGusta;
+			}
+			set
+			{
+				if ((this._meGusta != value))
+				{
+					this.OnmeGustaChanging(value);
+					this.SendPropertyChanging();
+					this._meGusta = value;
+					this.SendPropertyChanged("meGusta");
+					this.OnmeGustaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recurso_Aprobacione", Storage="_Aprobaciones", ThisKey="id", OtherKey="idRecurso")]
+		public EntitySet<Aprobacione> Aprobaciones
+		{
+			get
+			{
+				return this._Aprobaciones;
+			}
+			set
+			{
+				this._Aprobaciones.Assign(value);
 			}
 		}
 		
@@ -1773,6 +2346,18 @@ namespace IndignadoServer.LinqDataContext
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_Aprobaciones(Aprobacione entity)
+		{
+			this.SendPropertyChanging();
+			entity.Recurso = this;
+		}
+		
+		private void detach_Aprobaciones(Aprobacione entity)
+		{
+			this.SendPropertyChanging();
+			entity.Recurso = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RssFeeds")]
@@ -1807,7 +2392,7 @@ namespace IndignadoServer.LinqDataContext
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="NChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string url
 		{
 			get

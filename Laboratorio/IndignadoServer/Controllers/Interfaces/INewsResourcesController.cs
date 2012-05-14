@@ -24,5 +24,8 @@ namespace IndignadoServer.Controllers
         
         // likes a resource.
         void likeResource(Recurso resource);
+
+        // unlikes a resource.
+        void unlikeResource(Recurso resource);
     }
 }

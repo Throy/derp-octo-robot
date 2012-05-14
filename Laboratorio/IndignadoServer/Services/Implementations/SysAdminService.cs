@@ -16,6 +16,7 @@ namespace IndignadoServer.Services
         }
 
         // returns all movements.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.SysAdmin)]
         public DTMovementsCol getMovementsList()
         {
             // create new meetings datatype collection

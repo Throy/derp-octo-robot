@@ -36,7 +36,7 @@
                 {<text> var </text>}
             <text> markerContent =  "<div style=\"border-width:2px; padding-left:5px; border-color:Black; border-style:dashed; width:290px; height:130px; margin-top:6px;\" >"
                                         + "<h4 style =\"font-size:90%; text-align:center\"><u> Convocatoria</u></h4>" 
-                                         + "<img alt=\"Loading..\" style=\"float:left; margin-top:-3px; margin-right:6px; border-style:outset; border-width:2px; border-color:Gray;\" src=\"@Url.Content("~/Content/Images/Thumb/" + item.imagePath.ToString())\" />"
+ + "<img alt=\"No Image\" style=\"float:left; margin-top:-3px; margin-right:6px; border-style:outset; border-width:2px; border-color:Gray;\" src=\"@(item.imagePath==null?"sa": Url.Content("~/Content/Images/Thumb/" + item.imagePath.ToString()))\" />"
                                         + "<h4 style =\" font-size:75%\"> Nombre: @item.name.ToString()</h4>"  
                                         + "<h4 style =\" font-size:75%\"> Descripción: @item.description.ToString()</h4>" 
                                         + "<h4 style =\" font-size:75%\"> Quorum Minimo: @item.minQuorum.ToString() </h4>"

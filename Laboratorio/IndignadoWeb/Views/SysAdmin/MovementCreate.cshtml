@@ -8,6 +8,7 @@
 <!-- page title -->
 @{
     ViewBag.Title = "Indignado Framework - Create movement";
+    Layout = "~/Views/Shared/SysAdmin.cshtml";
 }
 
 <!-- page content -->
@@ -17,7 +18,7 @@
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true, "Some fields have errors, please fix them.")
-    <div>
+    <div class="reg-box big-red">
         <fieldset>
             <div class="editor-label">
                 @Html.LabelFor(m => m.name)
@@ -52,7 +53,8 @@
             </div>
 
             <p>
-                <input type="submit" value="Create movement" />
+                <input type="submit" value="Create movement" style="display:none;" id="WorkaroundForOperaInputFocusBorderBug" />
+                <input type="submit"  class="boton-big-red" value="Create movement" />
             </p>
         </fieldset>
     </div>

@@ -33,8 +33,8 @@
             <!-- news resources -->
             <li class="outer"><span class="menubtn"><a>NewsResources</a></span>
                 <ul style="width:114px;">
-                    <li class="menuitm">@Html.ActionLink("Get news", "NewsList", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("Get resources", "ResourcesList", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("List news", "NewsList", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("List resources", "ResourcesList", "Home")</li>
                     <li class="menuitm">@Html.ActionLink("Share resource", "ResourceShare", "Home")</li>
                 </ul>
             </li>
@@ -47,19 +47,10 @@
                 </ul>
             </li>
             
-            <!-- system admin -->
-            <li class="outer"><span class="menubtn"><a>SysAdmin</a></span>
-                <ul>
-                    <li class="menuitm">@Html.ActionLink("Create movement", "MovementCreate", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("Movements list", "MovementsList", "Home")</li>
-                </ul>
-            </li>
-            
             <!-- about -->
             <li class="outer"><span class="menubtn">@Html.ActionLink("About", "About", "Home")</span></li>
         </ul>                
         <span class="menufecha">
-             Layout2
              @Html.Partial("_LogOnPartial")
         </span>                   
       </div>

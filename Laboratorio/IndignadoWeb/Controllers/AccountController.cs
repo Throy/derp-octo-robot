@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Security;
 using IndignadoWeb.Models;
 using System.ServiceModel;
 using IndignadoWeb.SessionServiceReference;
+using IndignadoWeb.Common;
 
 namespace IndignadoWeb.Controllers
 {
+    [MultiTenanActionFilter]
     public class AccountController : Controller
     {
 
@@ -47,11 +46,11 @@ namespace IndignadoWeb.Controllers
                 ISessionService session = GetService<ISessionService>("http://localhost:8730/IndignadoServer/SessionService/");
 
                 bool success = true;
-                String token = "";
+                DTLoginInfo loginInfo = new DTLoginInfo();
                 DTTenantInfo tenantInfo = HttpContext.Session["tenantInfo"] as DTTenantInfo;
                 try
                 {
-                    token = session.Login(tenantInfo.id, model.UserName, model.Password);
+                    loginInfo = session.Login(tenantInfo.id, model.UserName, model.Password);
                 }
                 catch (FaultException e)
                 {
@@ -61,9 +60,9 @@ namespace IndignadoWeb.Controllers
 
                 if (success)
                 {
-                    HttpContext.Session.Add("token", token);
+                    HttpContext.Session.Add("token", loginInfo.token);
 
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    FormsAuthentication.SetAuthCookie(loginInfo.name, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
@@ -82,6 +81,49 @@ namespace IndignadoWeb.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult LogOnFB(string fb, string returnUrl)
+        {
+            ISessionService session = GetService<ISessionService>("http://localhost:8730/IndignadoServer/SessionService/");
+
+            bool success = true;
+            DTLoginInfo loginInfo = new DTLoginInfo();
+            DTTenantInfo tenantInfo = HttpContext.Session["tenantInfo"] as DTTenantInfo;
+            try
+            {
+                loginInfo = session.LoginFB(tenantInfo.id, fb);
+            }
+            catch (FaultException<LoginFault> e)
+            {
+                if (e.Detail.Type == DTLoginFaultType.FB_NOT_REGISTERED)
+                {
+                    HttpContext.Session.Add("FBtoken", fb);
+                    return RedirectToAction("Confirm", "Account");
+                }
+
+                ModelState.AddModelError("", e.Detail.Issue);
+                success = false;
+            }
+
+            if (success)
+            {
+                HttpContext.Session.Add("token", loginInfo.token);
+
+                FormsAuthentication.SetAuthCookie(loginInfo.name, true);
+                if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                    && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            // If we got this far, something failed, redisplay form
+            return View("LogOn");
+        }
+
         //
         // GET: /Account/LogOff
 
@@ -90,6 +132,7 @@ namespace IndignadoWeb.Controllers
             FormsAuthentication.SignOut();
 
             HttpContext.Session.Remove("token");
+            HttpContext.Session.Remove("FBtoken");
 
             return RedirectToAction("Index", "Home");
         }
@@ -130,8 +173,11 @@ namespace IndignadoWeb.Controllers
 
                 if (createStatus == DTUserCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
+                    LogOnModel logon = new LogOnModel();
+                    logon.UserName = model.UserName;
+                    logon.Password = model.Password;
+                    logon.RememberMe = false;
+                    return LogOn(logon, "");
                 }
                 else
                 {
@@ -143,6 +189,52 @@ namespace IndignadoWeb.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        public ActionResult Confirm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Confirm(RegisterExternalModel model)
+        {
+            if (HttpContext.Session["FBtoken"] != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    ISessionService session = GetService<ISessionService>("http://localhost:8730/IndignadoServer/SessionService/");
+
+                    DTTenantInfo tenantInfo = HttpContext.Session["tenantInfo"] as DTTenantInfo;
+
+                    // Attempt to register the user
+                    //MembershipCreateStatus createStatus;
+                    //Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
+                    DTRegisterFBModel user = new DTRegisterFBModel();
+                    user.idMovimiento = tenantInfo.id;
+                    user.latitud = model.Latitud;
+                    user.longitud = model.Longitud;
+                    user.token = HttpContext.Session["FBtoken"] as String;
+
+                    DTUserCreateStatus createStatus = session.RegisterFBUser(user);
+
+                    if (createStatus == DTUserCreateStatus.Success)
+                    {
+                        return LogOnFB(user.token, "");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", ErrorCodeToString(createStatus));
+                    }
+
+                    (session as ICommunicationObject).Close();
+                }
+
+                // If we got this far, something failed, redisplay form
+                return View(model);
+            }
+
+            return RedirectToAction("LogOn", "Account");
         }
 
         //

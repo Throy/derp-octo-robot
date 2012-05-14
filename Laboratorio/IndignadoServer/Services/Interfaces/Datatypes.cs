@@ -40,6 +40,12 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public String imagePath { get; set; }
+
+        [DataMember]
+        public int numberAttendants { get; set; }
+
+        [DataMember]
+        public int myAttendance { get; set; }
     }
 
     // Meeting Collection datatype
@@ -145,16 +151,25 @@ namespace IndignadoServer.Services
         public String description { get; set; }
 
         [DataMember]
-        public String link { get; set; }
+        public String urlLink { get; set; }
 
         [DataMember]
-        public String thumbnail { get; set; }
+        public String urlImage { get; set; }
+
+        [DataMember]
+        public String urlVideo { get; set; }
+
+        [DataMember]
+        public String urlThumb { get; set; }
 
         [DataMember]
         public DateTime date { get; set; }
 
         [DataMember]
         public int numberLikes { get; set; }
+
+        [DataMember]
+        public int iLikeIt { get; set; }
     }
 
     // Resource Collection datatype
@@ -187,6 +202,21 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public float longitud { get; set; }
+    }
+
+    public class DTRegisterFBModel
+    {
+        [DataMember]
+        public int idMovimiento { get; set; }
+
+        [DataMember]
+        public float latitud { get; set; }
+
+        [DataMember]
+        public float longitud { get; set; }
+
+        [DataMember]
+        public String token { get; set; }
     }
 
     // Summary:
@@ -243,6 +273,49 @@ namespace IndignadoServer.Services
         public Collection<DTRssSource> items { get; set; }
     }
 
+    // Login info datatype
+    [DataContract]
+    public class DTLoginInfo
+    {
+        public DTLoginInfo(String name, String token)
+        {
+            this.name = name;
+            this.token = token;
+        }
+
+        [DataMember]
+        public String name { get; set; }
+
+        [DataMember]
+        public String token { get; set; }
+    }
+
+    public enum DTLoginFaultType
+    {
+        // Unknown Username or Incorrect Password
+        UNKOWN_OR_INVALID = 0,
+        // El usuario de facebook no se encuentra registrado
+        FB_NOT_REGISTERED = 1
+    }
+
+    [DataContract]
+    public class LoginFault
+    {
+        public LoginFault(String issue, DTLoginFaultType type)
+        {
+            Issue = issue;
+            Type = type;
+        }
+
+        [DataMember]
+        public String Issue { get; set; }
+
+
+        [DataMember]
+        public DTLoginFaultType Type { get; set; }
+    }
+
+
 
     // **********
     // conversors
@@ -259,10 +332,12 @@ namespace IndignadoServer.Services
             dtMeeting.idMovement = meeting.idMovimiento;
             dtMeeting.name = meeting.titulo;
             dtMeeting.description = meeting.descripcion;
-            dtMeeting.locationLati = meeting.latitud;
-            dtMeeting.locationLong = meeting.longitud;
+            dtMeeting.locationLati = (float)meeting.latitud;
+            dtMeeting.locationLong = (float)meeting.longitud;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
             dtMeeting.imagePath = meeting.logo;
+            dtMeeting.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
+            dtMeeting.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
             return dtMeeting;
         }
 
@@ -272,8 +347,8 @@ namespace IndignadoServer.Services
             dtMovement.id = movement.id;
             dtMovement.name = movement.nombre;
             dtMovement.description = movement.descripcion;
-            dtMovement.locationLati = movement.latitud;
-            dtMovement.locationLong = movement.longitud;
+            dtMovement.locationLati = (float)movement.latitud;
+            dtMovement.locationLong = (float)movement.longitud;
             dtMovement.idLayout = movement.idLayout;
             return dtMovement;
         }
@@ -299,10 +374,13 @@ namespace IndignadoServer.Services
             dtResource.idUser = resource.idUsuario;
             dtResource.title = resource.titulo;
             dtResource.description = resource.descripcion;
-            dtResource.link = resource.link;
-            dtResource.thumbnail = resource.logo;
+            dtResource.urlLink = resource.urlLink;
+            dtResource.urlImage = resource.urlImage;
+            dtResource.urlVideo = resource.urlVideo;
+            dtResource.urlThumb = resource.urlThumb;
             dtResource.date = (resource.fecha == null) ? new DateTime() : resource.fecha.Value;
-            dtResource.numberLikes = 0;
+            dtResource.numberLikes = (resource.cantAprobaciones == null) ? 0 : resource.cantAprobaciones.Value;
+            dtResource.iLikeIt = (resource.meGusta == null) ? 0 : resource.meGusta.Value;
             return dtResource;
         }
     }
@@ -318,11 +396,12 @@ namespace IndignadoServer.Services
             meeting.idMovimiento = dtMeeting.idMovement;
             meeting.titulo = dtMeeting.name;
             meeting.descripcion = dtMeeting.description;
-            // *** ARREGLAR las coordenadas de la base de datos. ***
             meeting.latitud = dtMeeting.locationLati;
             meeting.longitud = dtMeeting.locationLong;
             meeting.minQuorum = dtMeeting.minQuorum;
             meeting.logo = dtMeeting.imagePath;
+            meeting.cantAsistencias = dtMeeting.numberAttendants;
+            meeting.miAsistencia = dtMeeting.myAttendance;
             return meeting;
         }
 
@@ -357,9 +436,13 @@ namespace IndignadoServer.Services
             resource.idUsuario = dtResource.idUser;
             resource.titulo = dtResource.title;
             resource.descripcion = dtResource.description;
-            resource.link = dtResource.link;
-            resource.logo = dtResource.thumbnail;
+            resource.urlLink = dtResource.urlLink;
+            resource.urlImage = dtResource.urlImage;
+            resource.urlVideo = dtResource.urlVideo;
+            resource.urlThumb = dtResource.urlThumb;
             resource.fecha = dtResource.date;
+            resource.cantAprobaciones = dtResource.numberLikes;
+            resource.meGusta = dtResource.iLikeIt;
             return resource;
         }
 

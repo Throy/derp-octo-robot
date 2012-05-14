@@ -23,9 +23,9 @@
   <Metadata>
     <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="7e44f730-77c3-4e2a-bd1e-36d3cfc195f9" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MovAdminService/?xsd=xsd0" />
     <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="5815bab8-d809-44e4-b3d4-e2afff9dfa07" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MovAdminService/?xsd=xsd1" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="ec06fe23-a18c-4b4f-b9ed-df1423105bf6" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MovAdminService/?xsd=xsd2" />
     <MetadataFile FileName="MovAdminService.wsdl" MetadataType="Wsdl" ID="0a8e065d-8c1c-40db-b30f-76d725cc435b" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MovAdminService/?wsdl" />
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="62d51e25-5236-421a-af0c-7ce77bf5d94c" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MovAdminService/?disco" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="ec06fe23-a18c-4b4f-b9ed-df1423105bf6" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MovAdminService/?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

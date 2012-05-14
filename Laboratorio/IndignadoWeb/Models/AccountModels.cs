@@ -76,4 +76,15 @@ namespace IndignadoWeb.Models
         [Display(Name = "Location - Longitude: ")]
         public float Longitud { get; set; }
     }
+
+    public class RegisterExternalModel
+    {
+        [Required]
+        [Display(Name = "Location - Latitude: ")]
+        public float Latitud { get; set; }
+
+        [Required]
+        [Display(Name = "Location - Longitude: ")]
+        public float Longitud { get; set; }
+    }
 }
