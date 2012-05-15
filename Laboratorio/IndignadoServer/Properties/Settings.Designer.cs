@@ -37,8 +37,8 @@ namespace IndignadoServer.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=BETTOSIACOVS-PC\\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Sec" +
-            "urity=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=" +
+            "True")]
         public string IndignadoDBConnectionString1 {
             get {
                 return ((string)(this["IndignadoDBConnectionString1"]));

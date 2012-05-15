@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="IndignadoDB" Class="IndignadoDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=BETTOSIACOVS-PC\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Aprobaciones" Member="Aprobaciones">
     <Type Name="Aprobacione">
       <Column Name="idRecurso" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />

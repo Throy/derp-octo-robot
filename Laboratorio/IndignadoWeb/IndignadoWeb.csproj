@@ -276,13 +276,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\MeetingsServiceReference\item.disco" />
-    <None Include="Service References\MeetingsServiceReference\configuration91.svcinfo" />
-    <None Include="Service References\MeetingsServiceReference\configuration.svcinfo" />
-    <None Include="Service References\MeetingsServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <None Include="Service References\MovAdminServiceReference\item.disco" />
     <None Include="Service References\MovAdminServiceReference\configuration91.svcinfo" />
     <None Include="Service References\MovAdminServiceReference\configuration.svcinfo" />
@@ -311,6 +304,13 @@
     <None Include="Service References\UsersServiceReference\configuration91.svcinfo" />
     <None Include="Service References\UsersServiceReference\configuration.svcinfo" />
     <None Include="Service References\UsersServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\MeetingsServiceReference\item.disco" />
+    <None Include="Service References\MeetingsServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\MeetingsServiceReference\configuration.svcinfo" />
+    <None Include="Service References\MeetingsServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -349,8 +349,6 @@
     <Content Include="Views\Shared\DisplayTemplates\DTMeeting.cshtml" />
     <Content Include="Views\Shared\_Default.cshtml" />
     <Content Include="Views\Home\MeetingCreate.cshtml" />
-    <Content Include="Views\Home\MovementCreate.cshtml" />
-    <Content Include="Views\Home\MovementsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMovement.cshtml" />
     <Content Include="Views\Home\MeetingsMap.cshtml" />
     <Content Include="Views\Home\MovementConfig.cshtml" />

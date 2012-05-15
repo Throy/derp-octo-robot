@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7e1d24ba-2e71-4203-b681-f3f855eb05c2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b9baddf7-651c-4373-936d-2492ac9d02f7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -21,11 +21,11 @@
     <MetadataSource Address="http://localhost:8730/IndignadoServer/MeetingsService/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="9a8cabb0-3e7d-43a3-b3f6-20560cf08165" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MeetingsService/?xsd=xsd1" />
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="0bd2cd19-a8cb-42d7-8400-9b4a0156a6a7" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MeetingsService/?disco" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="cdf622b7-63bc-49e2-acd8-5f6eeee3a8e9" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MeetingsService/?xsd=xsd2" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="4c7696fe-60e1-453a-b949-6ddcdf453249" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MeetingsService/?xsd=xsd0" />
-    <MetadataFile FileName="MeetingsService.wsdl" MetadataType="Wsdl" ID="d8065fab-cc28-4552-a49f-ec1fbff9964a" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MeetingsService/?wsdl" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="cbc7f938-6e4a-4585-a866-ad6dfefe9e65" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MeetingsService/?xsd=xsd1" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="9709d01d-d66c-4eaf-8d39-d51eae063b36" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MeetingsService/?disco" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="e53d357d-21cc-4b8f-823d-3c35a78fc568" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MeetingsService/?xsd=xsd2" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="f7ddb0a1-b57c-4f17-8efe-a59ea2337923" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MeetingsService/?xsd=xsd0" />
+    <MetadataFile FileName="MeetingsService.wsdl" MetadataType="Wsdl" ID="80f9e40b-6029-4584-9c51-2b939a1a8765" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/MeetingsService/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
