@@ -245,6 +245,7 @@ namespace IndignadoWeb.Controllers
                         dtMeeting.description = model.description;
                         dtMeeting.locationLati = model.locationLati;
                         dtMeeting.locationLong = model.locationLong;
+                        dtMeeting.date = model.date.ToString() + "-" + model.Hora.ToString() + ":" + model.Minutos.ToString();
                         dtMeeting.minQuorum = model.minQuorum;
                         
 

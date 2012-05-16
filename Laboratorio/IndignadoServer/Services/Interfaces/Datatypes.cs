@@ -45,6 +45,10 @@ namespace IndignadoServer.Services
         public String imagePath { get; set; }
 
         [DataMember]
+        public String date { get; set; }
+
+
+        [DataMember]
         public int myAttendance { get; set; }
     }
 
@@ -393,6 +397,7 @@ namespace IndignadoServer.Services
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
             dtMeeting.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
             dtMeeting.imagePath = meeting.logo;
+            dtMeeting.date = meeting.inicio.ToString();
             dtMeeting.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
             return dtMeeting;
         }
@@ -480,6 +485,7 @@ namespace IndignadoServer.Services
             meeting.cantAsistencias = dtMeeting.numberAttendants;
             meeting.miAsistencia = dtMeeting.myAttendance;
             meeting.logo = dtMeeting.imagePath;
+            meeting.inicio = dtMeeting.date;
             return meeting;
         }
 

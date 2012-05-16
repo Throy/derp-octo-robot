@@ -35,7 +35,16 @@ namespace IndignadoWeb.Models
         [Display(Name = "Minimum quorum: ")]
         public int minQuorum { get; set; }
 
-        
+        [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public String date { get; set; }
+
+        [Required]
+        public String Hora { get; set; }
+
+        [Required]
+        public String Minutos { get; set; }
+
         [Required]
         public HttpPostedFileWrapper ImageUploaded { get; set; }
 
