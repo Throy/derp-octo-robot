@@ -3,14 +3,15 @@
            
 <div>
     <h3><a href="@Html.DisplayFor(m => m.link)">@Html.DisplayFor(m => m.title)</a></h3>
+    
+    <!-- header -->
     <table border-style="none">
         <tr>
             <td valign="top">
+                @Html.Raw(HttpUtility.HtmlDecode(Model.description))
+                <br />
+                <br />
                 Date: @Html.DisplayFor(m => m.date)
-                <br />
-                D1: @Html.DisplayFor(m => m.description)
-                <br />
-                Description: @Html.Raw(HttpUtility.HtmlDecode(Model.description))
             </td>
             <td valign="top">
                 <img src="@Html.DisplayFor(m => m.image)" width="120px"/>

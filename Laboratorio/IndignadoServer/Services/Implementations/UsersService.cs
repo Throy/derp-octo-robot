@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
 using System.ServiceModel;
 using System.Text;
 using IndignadoServer.LinqDataContext;
@@ -30,6 +31,20 @@ namespace IndignadoServer.Services
 
             // return the collection
             return dtThemeCategoriesCol;
+        }
+        
+        // get interested in a theme category.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void getInterestedThemeCategory(DTThemeCategoryUsers dtThemeCategory)
+        {
+            ControllersHub.Instance.getIUsersController().getInterestedThemeCategory(DTToClass.DTToThemeCategoryUsers(dtThemeCategory));
+        }
+        
+        // get uninterested in a theme category.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void getUninterestedThemeCategory(DTThemeCategoryUsers dtThemeCategory)
+        {
+            ControllersHub.Instance.getIUsersController().getUninterestedThemeCategory(DTToClass.DTToThemeCategoryUsers(dtThemeCategory));
         }
     }
 }

@@ -12,5 +12,11 @@ namespace IndignadoServer.Controllers
     {
         // returns all theme categories.
         Collection<CategoriasTematica> getThemeCategoriesList();
+
+        // get interested in a theme category.
+        void getInterestedThemeCategory(CategoriasTematica themeCategory);
+
+        // get uninterested in a theme category.
+        void getUninterestedThemeCategory(CategoriasTematica themeCategory);
     }
 }
