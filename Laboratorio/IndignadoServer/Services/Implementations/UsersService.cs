@@ -26,7 +26,7 @@ namespace IndignadoServer.Services
             // add theme categories to the datatype collection
             foreach (CategoriasTematica themeCategory in themeCategoriesCol)
             {
-                dtThemeCategoriesCol.items.Add(ClassToDT.ThemeCategoryUsersToDT(themeCategory));
+                dtThemeCategoriesCol.items.Add(ClassToDT.ThemeCategoryToDTUsers(themeCategory));
             }
 
             // return the collection
@@ -37,14 +37,14 @@ namespace IndignadoServer.Services
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void getInterestedThemeCategory(DTThemeCategoryUsers dtThemeCategory)
         {
-            ControllersHub.Instance.getIUsersController().getInterestedThemeCategory(DTToClass.DTToThemeCategoryUsers(dtThemeCategory));
+            ControllersHub.Instance.getIUsersController().getInterestedThemeCategory(DTToClass.DTToThemeCategory(dtThemeCategory));
         }
         
         // get uninterested in a theme category.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void getUninterestedThemeCategory(DTThemeCategoryUsers dtThemeCategory)
         {
-            ControllersHub.Instance.getIUsersController().getUninterestedThemeCategory(DTToClass.DTToThemeCategoryUsers(dtThemeCategory));
+            ControllersHub.Instance.getIUsersController().getUninterestedThemeCategory(DTToClass.DTToThemeCategory(dtThemeCategory));
         }
     }
 }

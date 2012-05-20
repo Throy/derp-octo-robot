@@ -51,6 +51,9 @@ namespace IndignadoServer.LinqDataContext
     partial void InsertLayout(Layout instance);
     partial void UpdateLayout(Layout instance);
     partial void DeleteLayout(Layout instance);
+    partial void InsertMarcasInadecuado(MarcasInadecuado instance);
+    partial void UpdateMarcasInadecuado(MarcasInadecuado instance);
+    partial void DeleteMarcasInadecuado(MarcasInadecuado instance);
     partial void InsertMovimiento(Movimiento instance);
     partial void UpdateMovimiento(Movimiento instance);
     partial void DeleteMovimiento(Movimiento instance);
@@ -148,6 +151,14 @@ namespace IndignadoServer.LinqDataContext
 			get
 			{
 				return this.GetTable<Layout>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MarcasInadecuado> MarcasInadecuados
+		{
+			get
+			{
+				return this.GetTable<MarcasInadecuado>();
 			}
 		}
 		
@@ -388,6 +399,8 @@ namespace IndignadoServer.LinqDataContext
 		
 		private EntitySet<Interese> _Intereses;
 		
+		private EntitySet<MarcasInadecuado> _MarcasInadecuados;
+		
 		private EntityRef<Recurso> _Recurso;
 		
 		private EntitySet<UsuarioFacebook> _UsuarioFacebooks;
@@ -426,6 +439,7 @@ namespace IndignadoServer.LinqDataContext
 			this._Asistencias = new EntitySet<Asistencia>(new Action<Asistencia>(this.attach_Asistencias), new Action<Asistencia>(this.detach_Asistencias));
 			this._Convocatorias = new EntitySet<Convocatoria>(new Action<Convocatoria>(this.attach_Convocatorias), new Action<Convocatoria>(this.detach_Convocatorias));
 			this._Intereses = new EntitySet<Interese>(new Action<Interese>(this.attach_Intereses), new Action<Interese>(this.detach_Intereses));
+			this._MarcasInadecuados = new EntitySet<MarcasInadecuado>(new Action<MarcasInadecuado>(this.attach_MarcasInadecuados), new Action<MarcasInadecuado>(this.detach_MarcasInadecuados));
 			this._Recurso = default(EntityRef<Recurso>);
 			this._UsuarioFacebooks = new EntitySet<UsuarioFacebook>(new Action<UsuarioFacebook>(this.attach_UsuarioFacebooks), new Action<UsuarioFacebook>(this.detach_UsuarioFacebooks));
 			OnCreated();
@@ -703,6 +717,19 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_MarcasInadecuado", Storage="_MarcasInadecuados", ThisKey="id", OtherKey="idUsuario")]
+		public EntitySet<MarcasInadecuado> MarcasInadecuados
+		{
+			get
+			{
+				return this._MarcasInadecuados;
+			}
+			set
+			{
+				this._MarcasInadecuados.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Recurso", Storage="_Recurso", ThisKey="id", OtherKey="id", IsUnique=true, IsForeignKey=false)]
 		public Recurso Recurso
 		{
@@ -808,6 +835,18 @@ namespace IndignadoServer.LinqDataContext
 		}
 		
 		private void detach_Intereses(Interese entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
+		private void attach_MarcasInadecuados(MarcasInadecuado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_MarcasInadecuados(MarcasInadecuado entity)
 		{
 			this.SendPropertyChanging();
 			entity.Usuario = null;
@@ -1987,6 +2026,174 @@ namespace IndignadoServer.LinqDataContext
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MarcasInadecuados")]
+	public partial class MarcasInadecuado : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idRecurso;
+		
+		private int _idUsuario;
+		
+		private EntityRef<Usuario> _Usuario;
+		
+		private EntityRef<Recurso> _Recurso;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidRecursoChanging(int value);
+    partial void OnidRecursoChanged();
+    partial void OnidUsuarioChanging(int value);
+    partial void OnidUsuarioChanged();
+    #endregion
+		
+		public MarcasInadecuado()
+		{
+			this._Usuario = default(EntityRef<Usuario>);
+			this._Recurso = default(EntityRef<Recurso>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idRecurso", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idRecurso
+		{
+			get
+			{
+				return this._idRecurso;
+			}
+			set
+			{
+				if ((this._idRecurso != value))
+				{
+					if (this._Recurso.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidRecursoChanging(value);
+					this.SendPropertyChanging();
+					this._idRecurso = value;
+					this.SendPropertyChanged("idRecurso");
+					this.OnidRecursoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idUsuario
+		{
+			get
+			{
+				return this._idUsuario;
+			}
+			set
+			{
+				if ((this._idUsuario != value))
+				{
+					if (this._Usuario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._idUsuario = value;
+					this.SendPropertyChanged("idUsuario");
+					this.OnidUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_MarcasInadecuado", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.MarcasInadecuados.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.MarcasInadecuados.Add(this);
+						this._idUsuario = value.id;
+					}
+					else
+					{
+						this._idUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recurso_MarcasInadecuado", Storage="_Recurso", ThisKey="idRecurso", OtherKey="id", IsForeignKey=true)]
+		public Recurso Recurso
+		{
+			get
+			{
+				return this._Recurso.Entity;
+			}
+			set
+			{
+				Recurso previousValue = this._Recurso.Entity;
+				if (((previousValue != value) 
+							|| (this._Recurso.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Recurso.Entity = null;
+						previousValue.MarcasInadecuados.Remove(this);
+					}
+					this._Recurso.Entity = value;
+					if ((value != null))
+					{
+						value.MarcasInadecuados.Add(this);
+						this._idRecurso = value.id;
+					}
+					else
+					{
+						this._idRecurso = default(int);
+					}
+					this.SendPropertyChanged("Recurso");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Movimiento")]
 	public partial class Movimiento : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2468,7 +2675,13 @@ namespace IndignadoServer.LinqDataContext
 		
 		private System.Nullable<int> _meGusta;
 		
+		private System.Nullable<int> _yoMarqueInadecuado;
+		
+		private System.Nullable<int> _deshabilitado;
+		
 		private EntitySet<Aprobacione> _Aprobaciones;
+		
+		private EntitySet<MarcasInadecuado> _MarcasInadecuados;
 		
 		private EntityRef<Usuario> _Usuario;
 		
@@ -2500,11 +2713,16 @@ namespace IndignadoServer.LinqDataContext
     partial void OncantAprobacionesChanged();
     partial void OnmeGustaChanging(System.Nullable<int> value);
     partial void OnmeGustaChanged();
+    partial void OnyoMarqueInadecuadoChanging(System.Nullable<int> value);
+    partial void OnyoMarqueInadecuadoChanged();
+    partial void OndeshabilitadoChanging(System.Nullable<int> value);
+    partial void OndeshabilitadoChanged();
     #endregion
 		
 		public Recurso()
 		{
 			this._Aprobaciones = new EntitySet<Aprobacione>(new Action<Aprobacione>(this.attach_Aprobaciones), new Action<Aprobacione>(this.detach_Aprobaciones));
+			this._MarcasInadecuados = new EntitySet<MarcasInadecuado>(new Action<MarcasInadecuado>(this.attach_MarcasInadecuados), new Action<MarcasInadecuado>(this.detach_MarcasInadecuados));
 			this._Usuario = default(EntityRef<Usuario>);
 			OnCreated();
 		}
@@ -2753,6 +2971,46 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_yoMarqueInadecuado", DbType="Int")]
+		public System.Nullable<int> yoMarqueInadecuado
+		{
+			get
+			{
+				return this._yoMarqueInadecuado;
+			}
+			set
+			{
+				if ((this._yoMarqueInadecuado != value))
+				{
+					this.OnyoMarqueInadecuadoChanging(value);
+					this.SendPropertyChanging();
+					this._yoMarqueInadecuado = value;
+					this.SendPropertyChanged("yoMarqueInadecuado");
+					this.OnyoMarqueInadecuadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deshabilitado", DbType="Int")]
+		public System.Nullable<int> deshabilitado
+		{
+			get
+			{
+				return this._deshabilitado;
+			}
+			set
+			{
+				if ((this._deshabilitado != value))
+				{
+					this.OndeshabilitadoChanging(value);
+					this.SendPropertyChanging();
+					this._deshabilitado = value;
+					this.SendPropertyChanged("deshabilitado");
+					this.OndeshabilitadoChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recurso_Aprobacione", Storage="_Aprobaciones", ThisKey="id", OtherKey="idRecurso")]
 		public EntitySet<Aprobacione> Aprobaciones
 		{
@@ -2763,6 +3021,19 @@ namespace IndignadoServer.LinqDataContext
 			set
 			{
 				this._Aprobaciones.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recurso_MarcasInadecuado", Storage="_MarcasInadecuados", ThisKey="id", OtherKey="idRecurso")]
+		public EntitySet<MarcasInadecuado> MarcasInadecuados
+		{
+			get
+			{
+				return this._MarcasInadecuados;
+			}
+			set
+			{
+				this._MarcasInadecuados.Assign(value);
 			}
 		}
 		
@@ -2827,6 +3098,18 @@ namespace IndignadoServer.LinqDataContext
 		}
 		
 		private void detach_Aprobaciones(Aprobacione entity)
+		{
+			this.SendPropertyChanging();
+			entity.Recurso = null;
+		}
+		
+		private void attach_MarcasInadecuados(MarcasInadecuado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Recurso = this;
+		}
+		
+		private void detach_MarcasInadecuados(MarcasInadecuado entity)
 		{
 			this.SendPropertyChanging();
 			entity.Recurso = null;

@@ -49,14 +49,14 @@ namespace IndignadoServer.Services
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public void addThemeCategory(DTThemeCategoryMovAdmin dtThemeCategory)
         {
-            ControllersHub.Instance.getIMovAdminController().addThemeCategory(DTToClass.DTToThemeCategoryMovAdmin(dtThemeCategory));
+            ControllersHub.Instance.getIMovAdminController().addThemeCategory(DTToClass.DTToThemeCategory(dtThemeCategory));
         }
         
         // removes a current theme category.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public void removeThemeCategory(DTThemeCategoryMovAdmin dtThemeCategory)
         {
-            ControllersHub.Instance.getIMovAdminController().removeThemeCategory(DTToClass.DTToThemeCategoryMovAdmin(dtThemeCategory));
+            ControllersHub.Instance.getIMovAdminController().removeThemeCategory(DTToClass.DTToThemeCategory(dtThemeCategory));
         }
         
         // gets the theme categories.
@@ -72,7 +72,7 @@ namespace IndignadoServer.Services
             // add theme categories to the datatype collection
             foreach (CategoriasTematica themeCategory in themeCategoriesCol)
             {
-                dtThemeCategoriesCol.items.Add(ClassToDT.ThemeCategoryMovAdminToDT(themeCategory));
+                dtThemeCategoriesCol.items.Add(ClassToDT.ThemeCategoryToDTMovAdmin(themeCategory));
             }
 
             // return the collection

@@ -46,6 +46,7 @@ namespace IndignadoServer.Services
             }
 
             // add a sample resource
+            /*
             DTResource dtResource = new DTResource();
             dtResource.id = 0;
             dtResource.idUser = 1;
@@ -56,6 +57,7 @@ namespace IndignadoServer.Services
             dtResource.date = new System.DateTime (2012, 05, 24, 20, 38, 0);
             dtResource.numberLikes = 38;
             dtResourcesCol.items.Add(dtResource);
+            */
 
             // return the collection.
             return dtResourcesCol;
@@ -86,6 +88,20 @@ namespace IndignadoServer.Services
         public void unlikeResource(DTResource dtResource)
         {
             ControllersHub.Instance.getINewsResourcesController().unlikeResource(DTToClass.DTToResource(dtResource));
+        }
+
+        // mark a resource as inappropriate.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void markResourceInappropriate(DTResource dtResource)
+        {
+            ControllersHub.Instance.getINewsResourcesController().markResourceInappropriate(DTToClass.DTToResource(dtResource));
+        }
+        
+        // unmark a resource as inappropriate.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void unmarkResourceInappropriate(DTResource dtResource)
+        {
+            ControllersHub.Instance.getINewsResourcesController().unmarkResourceInappropriate(DTToClass.DTToResource(dtResource));
         }
     }
 }

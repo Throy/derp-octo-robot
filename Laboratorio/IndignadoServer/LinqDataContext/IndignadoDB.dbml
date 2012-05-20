@@ -25,6 +25,7 @@
       <Association Name="Usuario_Asistencia" Member="Asistencias" ThisKey="id" OtherKey="idUsuario" Type="Asistencia" />
       <Association Name="Usuario_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idAutor" Type="Convocatoria" />
       <Association Name="Usuario_Interese" Member="Intereses" ThisKey="id" OtherKey="idUsuario" Type="Interese" />
+      <Association Name="Usuario_MarcasInadecuado" Member="MarcasInadecuados" ThisKey="id" OtherKey="idUsuario" Type="MarcasInadecuado" />
       <Association Name="Usuario_Recurso" Member="Recurso" ThisKey="id" OtherKey="id" Type="Recurso" Cardinality="One" />
       <Association Name="Usuario_UsuarioFacebook" Member="UsuarioFacebooks" ThisKey="id" OtherKey="idUsuario" Type="UsuarioFacebook" />
     </Type>
@@ -84,6 +85,14 @@
       <Association Name="Layout_Movimiento" Member="Movimientos" ThisKey="id" OtherKey="idLayout" Type="Movimiento" />
     </Type>
   </Table>
+  <Table Name="dbo.MarcasInadecuados" Member="MarcasInadecuados">
+    <Type Name="MarcasInadecuado">
+      <Column Name="idRecurso" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Usuario_MarcasInadecuado" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Recurso_MarcasInadecuado" Member="Recurso" ThisKey="idRecurso" OtherKey="id" Type="Recurso" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Movimiento" Member="Movimientos">
     <Type Name="Movimiento">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -118,7 +127,10 @@
       <Column Name="urlThumb" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="cantAprobaciones" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="meGusta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="yoMarqueInadecuado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="deshabilitado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Recurso_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idRecurso" Type="Aprobacione" />
+      <Association Name="Recurso_MarcasInadecuado" Member="MarcasInadecuados" ThisKey="id" OtherKey="idRecurso" Type="MarcasInadecuado" />
       <Association Name="Usuario_Recurso" Member="Usuario" ThisKey="id" OtherKey="id" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>

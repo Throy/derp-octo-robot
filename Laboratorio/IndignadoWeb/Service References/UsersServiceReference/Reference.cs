@@ -62,7 +62,15 @@ namespace IndignadoWeb.UsersServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DTThemeCategoryUsers", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
     [System.SerializableAttribute()]
-    public partial class DTThemeCategoryUsers : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class DTThemeCategoryUsers : IndignadoWeb.UsersServiceReference.DTThemeCategory {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTThemeCategory", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(IndignadoWeb.UsersServiceReference.DTThemeCategoryUsers))]
+    public partial class DTThemeCategory : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;

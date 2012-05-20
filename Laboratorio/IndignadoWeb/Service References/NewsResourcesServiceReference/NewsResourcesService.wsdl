@@ -333,6 +333,82 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_INewsResourcesService_markResourceInappropriate_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_INewsResourcesService_markResourceInappropriate_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_INewsResourcesService_unmarkResourceInappropriate_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_INewsResourcesService_unmarkResourceInappropriate_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8730/IndignadoServer/NewsResourcesService/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -376,6 +452,18 @@
   <wsdl:message name="INewsResourcesService_unlikeResource_OutputMessage">
     <wsdl:part name="parameters" element="tns:unlikeResourceResponse" />
   </wsdl:message>
+  <wsdl:message name="INewsResourcesService_markResourceInappropriate_InputMessage">
+    <wsdl:part name="parameters" element="tns:markResourceInappropriate" />
+  </wsdl:message>
+  <wsdl:message name="INewsResourcesService_markResourceInappropriate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:markResourceInappropriateResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsResourcesService_unmarkResourceInappropriate_InputMessage">
+    <wsdl:part name="parameters" element="tns:unmarkResourceInappropriate" />
+  </wsdl:message>
+  <wsdl:message name="INewsResourcesService_unmarkResourceInappropriate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:unmarkResourceInappropriateResponse" />
+  </wsdl:message>
   <wsdl:portType name="INewsResourcesService">
     <wsdl:operation name="getNewsList">
       <wsdl:input wsaw:Action="http://tempuri.org/INewsResourcesService/getNewsList" message="tns:INewsResourcesService_getNewsList_InputMessage" />
@@ -400,6 +488,14 @@
     <wsdl:operation name="unlikeResource">
       <wsdl:input wsaw:Action="http://tempuri.org/INewsResourcesService/unlikeResource" message="tns:INewsResourcesService_unlikeResource_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/INewsResourcesService/unlikeResourceResponse" message="tns:INewsResourcesService_unlikeResource_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="markResourceInappropriate">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsResourcesService/markResourceInappropriate" message="tns:INewsResourcesService_markResourceInappropriate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsResourcesService/markResourceInappropriateResponse" message="tns:INewsResourcesService_markResourceInappropriate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="unmarkResourceInappropriate">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsResourcesService/unmarkResourceInappropriate" message="tns:INewsResourcesService_unmarkResourceInappropriate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsResourcesService/unmarkResourceInappropriateResponse" message="tns:INewsResourcesService_unmarkResourceInappropriate_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_INewsResourcesService" type="tns:INewsResourcesService">
@@ -468,6 +564,28 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_INewsResourcesService_unlikeResource_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="markResourceInappropriate">
+      <soap12:operation soapAction="http://tempuri.org/INewsResourcesService/markResourceInappropriate" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_INewsResourcesService_markResourceInappropriate_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_INewsResourcesService_markResourceInappropriate_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="unmarkResourceInappropriate">
+      <soap12:operation soapAction="http://tempuri.org/INewsResourcesService/unmarkResourceInappropriate" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_INewsResourcesService_unmarkResourceInappropriate_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_INewsResourcesService_unmarkResourceInappropriate_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

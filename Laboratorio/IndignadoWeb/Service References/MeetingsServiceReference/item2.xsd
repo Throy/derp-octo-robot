@@ -39,10 +39,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getThemeCategoriesList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getThemeCategoriesListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getThemeCategoriesListResult" nillable="true" type="q4:DTThemeCategoriesColMeetings" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="doAttendMeeting">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtMeeting" nillable="true" type="q4:DTMeeting" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtMeeting" nillable="true" type="q5:DTMeeting" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -54,7 +66,7 @@
   <xs:element name="unconfirmAttendMeeting">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtMeeting" nillable="true" type="q5:DTMeeting" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtMeeting" nillable="true" type="q6:DTMeeting" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -66,7 +78,7 @@
   <xs:element name="dontAttendMeeting">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtMeeting" nillable="true" type="q6:DTMeeting" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtMeeting" nillable="true" type="q7:DTMeeting" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

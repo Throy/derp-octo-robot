@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.ServiceModel;
 using IndignadoServer.LinqDataContext;
 using RssToolkit.Rss;
 
@@ -50,10 +52,23 @@ namespace IndignadoServer.Controllers
         // returns all resources.
         public Collection<Recurso> getResourcesList()
         {
-            // only get meetings from this movement.
+            // get this user's banned status.
+            bool userIsBanned = false;
+            IndignadoDBDataContext indignadoContextB = new IndignadoDBDataContext();
+            IEnumerable<bool> isBanneds = indignadoContextB.ExecuteQuery<bool>("SELECT banned FROM Usuarios WHERE (id = {0})", UserInfo.Id);
+            foreach (bool isBanned in isBanneds)
+            {
+                userIsBanned = isBanned;
+            }
+            if (userIsBanned)
+            {
+                throw new FaultException("This user is banned.");
+            }
+
+            // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0})", IdMovement);
+                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
 
             // create new resources collection.
             Collection<Recurso> recursosCol = new Collection<Recurso>();
@@ -76,6 +91,16 @@ namespace IndignadoServer.Controllers
                     }
                 }
 
+                // get own mark as inappropriate
+                if (UserInfo != null)
+                {
+                    IEnumerable<int> myMarksInappr = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM MarcasInadecuados WHERE (idRecurso = {0}) AND (idUsuario = {1})", resource.id, UserInfo.Id);
+                    foreach (int myMarkInappr in myMarksInappr)
+                    {
+                        resource.yoMarqueInadecuado = myMarkInappr;
+                    }
+                }
+
                 // add item to the collection
                 recursosCol.Add(resource);
             }
@@ -91,6 +116,7 @@ namespace IndignadoServer.Controllers
             // set internal and foreign ids
             resource.idUsuario = UserInfo.Id;
             resource.fecha = DateTime.UtcNow;
+            resource.deshabilitado = 0;
 
             indignadoContext.Recursos.InsertOnSubmit(resource);
             indignadoContext.SubmitChanges();
@@ -154,6 +180,87 @@ namespace IndignadoServer.Controllers
             {
                 IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
                 indignadoContext.ExecuteCommand("DELETE FROM Aprobaciones WHERE (idRecurso = {0}) AND (idUsuario = {1})", resource.id, UserInfo.Id);
+                indignadoContext.SubmitChanges();
+            }
+            catch (Exception error)
+            {
+            }
+        }
+        
+
+        // mark a resource as inappropriate.
+        public void markResourceInappropriate(Recurso resource)
+        {
+            // create a markInappropriate
+            MarcasInadecuado markInappropriate = new MarcasInadecuado();
+            markInappropriate.idRecurso = resource.id;
+            markInappropriate.idUsuario = UserInfo.Id;
+
+            try
+            {
+                // get database context.
+                IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+
+                // get the movement.
+                Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
+
+                // add markInappropriate to the database.
+                indignadoContext.MarcasInadecuados.InsertOnSubmit(markInappropriate);
+                indignadoContext.SubmitChanges();
+                indignadoContext = new IndignadoDBDataContext();
+
+                // get number of marks of the resource.
+                int numberMarksResource = 0;
+                IEnumerable<int> numbersMarksR = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM MarcasInadecuados WHERE (idRecurso = {0})", resource.id);
+                foreach (int numberMarksR in numbersMarksR)
+                {
+                    numberMarksResource = numberMarksR;
+                }
+
+                // if number of marks matches X, disable the resource.
+                if (numberMarksResource >= movement.maxMarcasInadecuadasRecursoX)
+                {
+                    indignadoContext.ExecuteQuery<int>("UPDATE Recursos SET deshabilitado = {0} WHERE id = {1}", 1, resource.id);
+                }
+
+                // get this resources's user id.
+                int thisUserId = -1;
+                IEnumerable<int> thisUsersID = indignadoContext.ExecuteQuery<int>("SELECT idUsuario FROM Recursos WHERE (id = {0})", resource.id);
+                foreach (int thisUserID in thisUsersID)
+                {
+                    thisUserId = thisUserID;
+                }
+
+                // get number of disabled resources published by this resources's user.
+                int numberMarksUser = 0;
+                IEnumerable<int> numbersMarksU = indignadoContext.ExecuteQuery<int>("SELECT COUNT(DISTINCT Recursos.id) FROM MarcasInadecuados LEFT JOIN Recursos ON (Recursos.id = MarcasInadecuados.idRecurso) WHERE (Recursos.idUsuario = {0})", thisUserId);
+                foreach (int numberMarksU in numbersMarksU)
+                {
+                    numberMarksUser = numberMarksU;
+                }
+
+                // if number of marks matches Z, ban the user.
+                if (numberMarksUser >= movement.maxRecursosInadecuadosUsuarioZ)
+                {
+                    indignadoContext.ExecuteQuery<int>("UPDATE Usuarios SET banned = {0} WHERE id = {1}", true, thisUserId);
+                }
+
+                // commit changes to the database.
+                indignadoContext.SubmitChanges();
+            }
+            catch (Exception error)
+            {
+            }
+        }
+        
+        // unmark a resource as inappropriate.
+        public void unmarkResourceInappropriate(Recurso resource)
+        {
+            // remove markInappropriate from the database.
+            try
+            {
+                IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+                indignadoContext.ExecuteCommand("DELETE FROM MarcasInadecuados WHERE (idRecurso = {0}) AND (idUsuario = {1})", resource.id, UserInfo.Id);
                 indignadoContext.SubmitChanges();
             }
             catch (Exception error)

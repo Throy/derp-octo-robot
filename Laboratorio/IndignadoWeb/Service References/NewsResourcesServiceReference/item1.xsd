@@ -75,4 +75,28 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="markResourceInappropriate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="resource" nillable="true" type="q7:DTResource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="markResourceInappropriateResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="unmarkResourceInappropriate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="resource" nillable="true" type="q8:DTResource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="unmarkResourceInappropriateResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

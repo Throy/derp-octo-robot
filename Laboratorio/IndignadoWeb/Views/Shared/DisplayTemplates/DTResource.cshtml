@@ -66,5 +66,22 @@
                 }
             </td>
         </tr>
+        <tr>
+            <td colspan="2">
+                <!-- likes -->
+                @using (Html.BeginForm(new { id = @Model.id }))
+                {
+                    if (@Model.myMarkInappr == 0)
+                    {
+                        <input type="submit" name="buttonMarkInappr" value="Mark as inappropriate" />
+                    }
+
+                    if (Model.myMarkInappr > 0)
+                    {
+                        <input type="submit" name="buttonUnmarkInappr" value="Unmark as inappropriate" />
+                    }
+                }
+            </td>
+        </tr>
     </table>
 </div>

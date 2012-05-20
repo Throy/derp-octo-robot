@@ -53,6 +53,26 @@ namespace IndignadoServer.Services
             return dtMeetingsCol;
         }
 
+        // returns all theme categories.
+        public DTThemeCategoriesColMeetings getThemeCategoriesList()
+        {
+            // create new theme categories datatype collection
+            DTThemeCategoriesColMeetings dtThemeCategoriesCol = new DTThemeCategoriesColMeetings();
+            dtThemeCategoriesCol.items = new Collection<DTThemeCategoryMeetings>();
+
+            // get theme categories from the controller
+            Collection<CategoriasTematica> themeCategoriesCol = ControllersHub.Instance.getIMeetingsController().getThemeCategoriesList();
+
+            // add theme categories to the datatype collection
+            foreach (CategoriasTematica themeCategory in themeCategoriesCol)
+            {
+                dtThemeCategoriesCol.items.Add(ClassToDT.ThemeCategoryToDTMeetings(themeCategory));
+            }
+
+            // return the collection
+            return dtThemeCategoriesCol;
+        }
+
         // do attend a meeting.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void doAttendMeeting(DTMeeting dtMeeting)

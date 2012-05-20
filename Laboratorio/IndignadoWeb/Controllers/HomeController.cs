@@ -13,6 +13,7 @@ using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.TestServiceReference;
 using System.ServiceModel.Security;
 using IndignadoWeb.UsersServiceReference;
+using System.Collections.Generic;
 
 namespace IndignadoWeb.Controllers
 {
@@ -222,22 +223,39 @@ namespace IndignadoWeb.Controllers
         // create meeting.
         public ActionResult MeetingCreate()
         {
-            /*
             try
             {
                 // check if the user is a registered user.
-                ISessionService serv = GetService<ISessionService>(HomeControllerConstants.urlSessionService);
-                serv.ValidateRegUser();
-            */
+                //IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+            
+                // initialize model
+                CreateMeetingModel model = new CreateMeetingModel();
+                //model.themeCategoriesMeeting = new DTThemeCategoriesColMeetings();
+                //model.themeCategoriesMov = serv.getThemeCategoriesList();
+
+                //SelectList codelist1 = new SelectList(;
+                //SelectList codelist2 = new SelectList (serv.getThemeCategoriesList().items);
+
+                /*
+
+                model.themeCategoriesId = new List<string> ();
+
+                DTThemeCategoriesColMeetings themeCats = serv.getThemeCategoriesList();
+
+                model.themeCategories = new List<SelectListItem> ();
+                foreach (DTThemeCategoryMeetings dtThemeCat in themeCats.items) {
+                    model.themeCategories.Add(new SelectListItem {Value = dtThemeCat.id.ToString(), Text = dtThemeCat.title});
+                }
+                 * */
+
                 // show form
-                return View();
-            /*
+                return View(model);
+            
             }
             catch (Exception error)
             {
                 return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
             }
-            */
         }
 
         // create meeting.
@@ -382,22 +400,29 @@ namespace IndignadoWeb.Controllers
         // shows all resources in a list.
         public ActionResult ResourcesList()
         {
-            // open service
-            INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+            try
+            {
+                // open service
+                INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
-            // get all news
-            ListResourcesModel listResourcesModel = new ListResourcesModel();
-            listResourcesModel.items = serv.getResourcesList();
+                // get all news
+                ListResourcesModel listResourcesModel = new ListResourcesModel();
+                listResourcesModel.items = serv.getResourcesList();
 
-            // close service
-            (serv as ICommunicationObject).Close();
+                // close service
+                (serv as ICommunicationObject).Close();
 
-            return View(listResourcesModel);
+                return View(listResourcesModel);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
         }
 
         // like / dislike resource.
         [HttpPost]
-        public ActionResult ResourcesList(string buttonLike, string buttonUnlike, int id)
+        public ActionResult ResourcesList(string buttonLike, string buttonUnlike, /*string buttonMarkInappr, string buttonUnmarkInappr, */int id)
         {
             try
             {
@@ -432,6 +457,40 @@ namespace IndignadoWeb.Controllers
 
                     return RedirectToAction(HomeControllerConstants.viewResourcesList);
                 }
+
+                /*
+                else if (buttonMarkInappr != null)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                    // mark resource as inappropriate
+                    DTResource dtResource = new DTResource();
+                    dtResource.id = id;
+                    serv.markResourceInappropriate(dtResource);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesList);
+                }
+
+                else if (buttonUnmarkInappr != null)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                    // unmark resource as inappropriate
+                    DTResource dtResource = new DTResource();
+                    dtResource.id = id;
+                    serv.unmarkResourceInappropriate(dtResource);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesList);
+                }
+                */
 
                 return View ();
             }

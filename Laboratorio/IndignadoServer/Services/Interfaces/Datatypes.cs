@@ -170,6 +170,9 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public int iLikeIt { get; set; }
+
+        [DataMember]
+        public int myMarkInappr { get; set; }
     }
 
     // Resource Collection datatype
@@ -317,7 +320,7 @@ namespace IndignadoServer.Services
 
     // ThemeCategory datatype
     [DataContract]
-    public class DTThemeCategoryMovAdmin
+    public class DTThemeCategory
     {
         [DataMember]
         public int id { get; set; }
@@ -333,6 +336,12 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public int myInterest { get; set; }
+    }
+
+    // ThemeCategory datatype
+    [DataContract]
+    public class DTThemeCategoryMovAdmin : DTThemeCategory
+    {
     }
 
     // ThemeCategories Collection datatype
@@ -345,22 +354,8 @@ namespace IndignadoServer.Services
 
     // ThemeCategory datatype
     [DataContract]
-    public class DTThemeCategoryUsers
+    public class DTThemeCategoryUsers : DTThemeCategory
     {
-        [DataMember]
-        public int id { get; set; }
-
-        [DataMember]
-        public int idMovement { get; set; }
-
-        [DataMember]
-        public String title { get; set; }
-
-        [DataMember]
-        public String description { get; set; }
-
-        [DataMember]
-        public int myInterest { get; set; }
     }
 
     // ThemeCategories Collection datatype
@@ -369,6 +364,20 @@ namespace IndignadoServer.Services
     {
         [DataMember]
         public Collection<DTThemeCategoryUsers> items { get; set; }
+    }
+
+    // ThemeCategory datatype
+    [DataContract]
+    public class DTThemeCategoryMeetings : DTThemeCategory
+    {
+    }
+
+    // ThemeCategories Collection datatype
+    [DataContract]
+    public class DTThemeCategoriesColMeetings
+    {
+        [DataMember]
+        public Collection<DTThemeCategoryMeetings> items { get; set; }
     }
 
 
@@ -437,28 +446,40 @@ namespace IndignadoServer.Services
             dtResource.date = (resource.fecha == null) ? new DateTime() : resource.fecha.Value;
             dtResource.numberLikes = (resource.cantAprobaciones == null) ? 0 : resource.cantAprobaciones.Value;
             dtResource.iLikeIt = (resource.meGusta == null) ? 0 : resource.meGusta.Value;
+            dtResource.myMarkInappr = (resource.yoMarqueInadecuado == null) ? 0 : resource.yoMarqueInadecuado.Value;
             return dtResource;
         }
 
-        public static DTThemeCategoryMovAdmin ThemeCategoryMovAdminToDT(CategoriasTematica themeCategory)
-        {
-            DTThemeCategoryMovAdmin dtThemeCategory = new DTThemeCategoryMovAdmin();
-            dtThemeCategory.id = themeCategory.id;
-            dtThemeCategory.idMovement = themeCategory.idMovimiento;
-            dtThemeCategory.title = themeCategory.titulo;
-            dtThemeCategory.description = themeCategory.descripcion;
-            dtThemeCategory.myInterest = (themeCategory.miInteres == null) ? 0 : themeCategory.miInteres.Value; ;
-            return dtThemeCategory;
-        }
-
-        public static DTThemeCategoryUsers ThemeCategoryUsersToDT(CategoriasTematica themeCategory)
+        public static DTThemeCategoryUsers ThemeCategoryToDTUsers(CategoriasTematica themeCategory)
         {
             DTThemeCategoryUsers dtThemeCategory = new DTThemeCategoryUsers();
             dtThemeCategory.id = themeCategory.id;
             dtThemeCategory.idMovement = themeCategory.idMovimiento;
             dtThemeCategory.title = themeCategory.titulo;
             dtThemeCategory.description = themeCategory.descripcion;
-            dtThemeCategory.myInterest = (themeCategory.miInteres == null) ? 0 : themeCategory.miInteres.Value; ;
+            dtThemeCategory.myInterest = (themeCategory.miInteres == null) ? 0 : themeCategory.miInteres.Value;
+            return dtThemeCategory;
+        }
+
+        public static DTThemeCategoryMovAdmin ThemeCategoryToDTMovAdmin(CategoriasTematica themeCategory)
+        {
+            DTThemeCategoryMovAdmin dtThemeCategory = new DTThemeCategoryMovAdmin();
+            dtThemeCategory.id = themeCategory.id;
+            dtThemeCategory.idMovement = themeCategory.idMovimiento;
+            dtThemeCategory.title = themeCategory.titulo;
+            dtThemeCategory.description = themeCategory.descripcion;
+            dtThemeCategory.myInterest = (themeCategory.miInteres == null) ? 0 : themeCategory.miInteres.Value;
+            return dtThemeCategory;
+        }
+
+        public static DTThemeCategoryMeetings ThemeCategoryToDTMeetings(CategoriasTematica themeCategory)
+        {
+            DTThemeCategoryMeetings dtThemeCategory = new DTThemeCategoryMeetings();
+            dtThemeCategory.id = themeCategory.id;
+            dtThemeCategory.idMovement = themeCategory.idMovimiento;
+            dtThemeCategory.title = themeCategory.titulo;
+            dtThemeCategory.description = themeCategory.descripcion;
+            dtThemeCategory.myInterest = (themeCategory.miInteres == null) ? 0 : themeCategory.miInteres.Value;
             return dtThemeCategory;
         }
     }
@@ -521,6 +542,7 @@ namespace IndignadoServer.Services
             resource.fecha = dtResource.date;
             resource.cantAprobaciones = dtResource.numberLikes;
             resource.meGusta = dtResource.iLikeIt;
+            resource.yoMarqueInadecuado = dtResource.myMarkInappr;
             return resource;
         }
 
@@ -541,18 +563,7 @@ namespace IndignadoServer.Services
             return user;
         }
 
-        public static CategoriasTematica DTToThemeCategoryMovAdmin(DTThemeCategoryMovAdmin dtThemeCategory)
-        {
-            CategoriasTematica themeCategory = new CategoriasTematica();
-            themeCategory.id = dtThemeCategory.id;
-            themeCategory.idMovimiento = dtThemeCategory.idMovement;
-            themeCategory.titulo = dtThemeCategory.title;
-            themeCategory.descripcion = dtThemeCategory.description;
-            themeCategory.miInteres = dtThemeCategory.myInterest;
-            return themeCategory;
-        }
-
-        public static CategoriasTematica DTToThemeCategoryUsers(DTThemeCategoryUsers dtThemeCategory)
+        public static CategoriasTematica DTToThemeCategory(DTThemeCategory dtThemeCategory)
         {
             CategoriasTematica themeCategory = new CategoriasTematica();
             themeCategory.id = dtThemeCategory.id;
