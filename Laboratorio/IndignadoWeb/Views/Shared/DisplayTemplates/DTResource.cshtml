@@ -9,65 +9,76 @@
         <tr>
             <td valign="top">
                 <!-- fields -->
-                D1: @Html.DisplayFor(m => m.description)
+                @Html.Raw(HttpUtility.HtmlDecode(Model.description))
                 <br />
-                Description: @Html.Raw(HttpUtility.HtmlDecode(Model.description))
                 <br />
+                Date: @Html.DisplayFor(m => m.date)
                 <br />
                 Internal ID: @Html.DisplayFor(m => m.id)
                 <br />
                 User: @Html.DisplayFor(m => m.idUser)
-                <br />
-                Date: @Html.DisplayFor(m => m.date)
-                <br />
-
-                <!-- thumbnail -->
-                Thumbnail: @Html.DisplayFor(m => m.urlThumb)
-                <br />
                 
                 <!-- image -->
                 @{
                     if ((@Model.urlImage != null) && (@Model.urlImage != ""))
                     {
                         <text>
-                            Image:
+                            <br />
                             <br />
                             <img src="@Html.DisplayFor(m => m.urlImage)" width="400" alt=""/>
-                            <br />
                         </text>
                     }
                 }
-                <br />
                 
                 <!-- video -->
                 @{
                     if ((@Model.urlVideo != null) && (@Model.urlVideo != ""))
                     {
                         <text>
-                            Video:
+                            <br />
                             <br />
                             <iframe src="@Html.DisplayFor(m => m.urlVideo)" frameborder="0" width="400" height="300"></iframe>
-                            <br />
                         </text>
                     }
                 }
-
-                Likes: @Html.DisplayFor(m => m.numberLikes)
-                <br />
-
-                <!-- like buttons -->
+            </td>
+            <td valign="top">
+                <!-- thumbnail -->
+                <img src="@Html.DisplayFor(m => m.urlThumb)" width="120px"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <!-- likes -->
                 @using (Html.BeginForm(new { id = @Model.id }))
                 {
+                    <text>Likes: </text> @Html.DisplayFor(m => m.numberLikes);
+                    
                     if (@Model.iLikeIt == 0)
                     {
                         <input type="submit" name="buttonLike" value="Like it" />
-                        <br />
                     }
 
                     if (Model.iLikeIt > 0)
                     {
                         <input type="submit" name="buttonUnlike" value="Unlike it" />
-                        <br />
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <!-- likes -->
+                @using (Html.BeginForm(new { id = @Model.id }))
+                {
+                    if (@Model.myMarkInappr == 0)
+                    {
+                        <input type="submit" name="buttonMarkInappr" value="Mark as inappropriate" />
+                    }
+
+                    if (Model.myMarkInappr > 0)
+                    {
+                        <input type="submit" name="buttonUnmarkInappr" value="Unmark as inappropriate" />
                     }
                 }
             </td>

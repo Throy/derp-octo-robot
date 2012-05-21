@@ -13,6 +13,7 @@ using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.TestServiceReference;
 using System.ServiceModel.Security;
 using IndignadoWeb.UsersServiceReference;
+using System.Collections.Generic;
 
 namespace IndignadoWeb.Controllers
 {
@@ -77,7 +78,23 @@ namespace IndignadoWeb.Controllers
             
             (serv as ICommunicationObject).Close();
 
-            return View("Index");
+            // show movement info
+            IMovAdminService serv2 = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+            // get movement
+            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv2.getMovement();
+
+            // close service
+            (serv2 as ICommunicationObject).Close();
+
+            // send the meeting to the model.
+            SingleMovementModel model = new SingleMovementModel();
+            model.name = movement.name;
+            model.description = movement.description;
+            model.locationLati = movement.locationLati;
+            model.locationLong = movement.locationLong;
+
+            return View(model);
         }
 
         public ActionResult About()
@@ -206,22 +223,39 @@ namespace IndignadoWeb.Controllers
         // create meeting.
         public ActionResult MeetingCreate()
         {
-            /*
             try
             {
                 // check if the user is a registered user.
-                ISessionService serv = GetService<ISessionService>(HomeControllerConstants.urlSessionService);
-                serv.ValidateRegUser();
-            */
+                //IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+            
+                // initialize model
+                CreateMeetingModel model = new CreateMeetingModel();
+                //model.themeCategoriesMeeting = new DTThemeCategoriesColMeetings();
+                //model.themeCategoriesMov = serv.getThemeCategoriesList();
+
+                //SelectList codelist1 = new SelectList(;
+                //SelectList codelist2 = new SelectList (serv.getThemeCategoriesList().items);
+
+                /*
+
+                model.themeCategoriesId = new List<string> ();
+
+                DTThemeCategoriesColMeetings themeCats = serv.getThemeCategoriesList();
+
+                model.themeCategories = new List<SelectListItem> ();
+                foreach (DTThemeCategoryMeetings dtThemeCat in themeCats.items) {
+                    model.themeCategories.Add(new SelectListItem {Value = dtThemeCat.id.ToString(), Text = dtThemeCat.title});
+                }
+                 * */
+
                 // show form
-                return View();
-            /*
+                return View(model);
+            
             }
             catch (Exception error)
             {
                 return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
             }
-            */
         }
 
         // create meeting.
@@ -247,19 +281,23 @@ namespace IndignadoWeb.Controllers
                         dtMeeting.locationLong = model.locationLong;
                         dtMeeting.date = model.date.ToString() + "-" + model.Hora.ToString() + ":" + model.Minutos.ToString();
                         dtMeeting.minQuorum = model.minQuorum;
-                        
 
-                        string fileName = Guid.NewGuid().ToString();
-                        string serverPath = Server.MapPath("~");
-                        string imagesPath = serverPath + "Content\\Images\\";
-                        string thumbPath = imagesPath + "Thumb\\";
-                        string fullPath = imagesPath + "Full\\";
+                        if (model.ImageUploaded != null)
+                        {
+                            string fileName = Guid.NewGuid().ToString();
+                            string serverPath = Server.MapPath("~");
+                            string imagesPath = serverPath + "Content\\Images\\";
+                            string thumbPath = imagesPath + "Thumb\\";
+                            string fullPath = imagesPath + "Full\\";
                 
-                        CreateMeetingModel.ResizeAndSave(thumbPath, fileName, model.ImageUploaded.InputStream, 80, true);
-                        CreateMeetingModel.ResizeAndSave(fullPath, fileName, model.ImageUploaded.InputStream, 600, true);
+                            CreateMeetingModel.ResizeAndSave(thumbPath, fileName, model.ImageUploaded.InputStream, 80, true);
+                            CreateMeetingModel.ResizeAndSave(fullPath, fileName, model.ImageUploaded.InputStream, 600, true);
 
-                        dtMeeting.imagePath = fileName + ".jpg";
+                            dtMeeting.imagePath = fileName + ".jpg";
+                        }
+
                         serv.createMeeting(dtMeeting);
+
                         // get all meetings
                         DTMeetingsCol meetings = serv.getMeetingsList();
 
@@ -282,37 +320,23 @@ namespace IndignadoWeb.Controllers
         // configure movement.
         public ActionResult MovementConfig()
         {
-            /*
-            try
-            {
-                // check if the user is a movement admin.
-                ISessionService serv1 = GetService<ISessionService>(HomeControllerConstants.urlSessionService);
-                serv1.ValidateMovAdmin();
-            */
-                // show configuration
-                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+            // show configuration
+            IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
 
-                // get movement
-                IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv.getMovement();
+            // get movement
+            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv.getMovement();
 
-                // close service
-                (serv as ICommunicationObject).Close();
+            // close service
+            (serv as ICommunicationObject).Close();
 
-                // send the meeting to the model.
-                SingleMovementModel model = new SingleMovementModel();
-                model.name = movement.name;
-                model.description = movement.description;
-                model.locationLati = movement.locationLati;
-                model.locationLong = movement.locationLong;
+            // send the meeting to the model.
+            SingleMovementModel model = new SingleMovementModel();
+            model.name = movement.name;
+            model.description = movement.description;
+            model.locationLati = movement.locationLati;
+            model.locationLong = movement.locationLong;
 
-                return View(model);
-            /*
-            }
-            catch (Exception error)
-            {
-                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
-            }
-            */
+            return View(model);
         }
 
         // configure movement.
@@ -342,9 +366,6 @@ namespace IndignadoWeb.Controllers
 
                     // open service
                     ISysAdminService serv2 = GetService<ISysAdminService>(HomeControllerConstants.urlSysAdminService);
-
-                    // get all movements
-                    DTMovementsCol movements = serv2.getMovementsList();
 
                     // close service
                     (serv2 as ICommunicationObject).Close();
@@ -380,22 +401,29 @@ namespace IndignadoWeb.Controllers
         // shows all resources in a list.
         public ActionResult ResourcesList()
         {
-            // open service
-            INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+            try
+            {
+                // open service
+                INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
-            // get all news
-            ListResourcesModel listResourcesModel = new ListResourcesModel();
-            listResourcesModel.items = serv.getResourcesList();
+                // get all news
+                ListResourcesModel listResourcesModel = new ListResourcesModel();
+                listResourcesModel.items = serv.getResourcesList();
 
-            // close service
-            (serv as ICommunicationObject).Close();
+                // close service
+                (serv as ICommunicationObject).Close();
 
-            return View(listResourcesModel);
+                return View(listResourcesModel);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
         }
 
         // like / dislike resource.
         [HttpPost]
-        public ActionResult ResourcesList(string buttonLike, string buttonUnlike, int id)
+        public ActionResult ResourcesList(string buttonLike, string buttonUnlike, /*string buttonMarkInappr, string buttonUnmarkInappr, */int id)
         {
             try
             {
@@ -430,6 +458,40 @@ namespace IndignadoWeb.Controllers
 
                     return RedirectToAction(HomeControllerConstants.viewResourcesList);
                 }
+
+                /*
+                else if (buttonMarkInappr != null)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                    // mark resource as inappropriate
+                    DTResource dtResource = new DTResource();
+                    dtResource.id = id;
+                    serv.markResourceInappropriate(dtResource);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesList);
+                }
+
+                else if (buttonUnmarkInappr != null)
+                {
+                    // open service
+                    INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                    // unmark resource as inappropriate
+                    DTResource dtResource = new DTResource();
+                    dtResource.id = id;
+                    serv.unmarkResourceInappropriate(dtResource);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesList);
+                }
+                */
 
                 return View ();
             }
@@ -674,40 +736,26 @@ namespace IndignadoWeb.Controllers
 
                 // button ImInterested
                 if (buttonImInterested != null)
-                {/*
-
-                    // like resource
-                    DTResource dtResource = new DTResource();
-                    dtResource.id = id;
-                    serv.likeResource(dtResource);
-
-                    // close service
-                    (serv as ICommunicationObject).Close();
-                  * */
-
-                    return RedirectToAction(HomeControllerConstants.viewThemeCategoriesList);
+                {
+                    // get interested
+                    DTThemeCategoryUsers dtThemeCategory = new DTThemeCategoryUsers();
+                    dtThemeCategory.id = id;
+                    serv.getInterestedThemeCategory(dtThemeCategory);
                 }
 
                 // button NotInterested
                 else if (buttonNotInterested != null)
                 {
-                    /*
-                    // open service
-                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
-
-                    // like resource
-                    DTResource dtResource = new DTResource();
-                    dtResource.id = id;
-                    serv.unlikeResource(dtResource);
-                     * */
-
-                    return RedirectToAction(HomeControllerConstants.viewThemeCategoriesList);
+                    // get interested
+                    DTThemeCategoryUsers dtThemeCategory = new DTThemeCategoryUsers();
+                    dtThemeCategory.id = id;
+                    serv.getUninterestedThemeCategory(dtThemeCategory);
                 }
 
                 // close service
                 (serv as ICommunicationObject).Close();
 
-                return View(model);
+                return RedirectToAction(HomeControllerConstants.viewThemeCategoriesList);
             }
             catch
             {

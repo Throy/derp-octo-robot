@@ -83,6 +83,25 @@ namespace IndignadoServer.Controllers
             
         }
 
+
+        // returns all theme categories.
+        public Collection<CategoriasTematica> getThemeCategoriesList()
+        {
+            // only get theme categories from this movement.
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<CategoriasTematica> themeCategoriesEnum = indignadoContext.ExecuteQuery<CategoriasTematica>("SELECT id, idMovimiento, titulo, descripcion FROM CategoriasTematicas WHERE idMovimiento = {0}", IdMovement);
+
+            Collection<CategoriasTematica> themeCategoriesCol = new Collection<CategoriasTematica>();
+            foreach (CategoriasTematica themeCategory in themeCategoriesEnum)
+            {
+                // add item to the collection
+                themeCategoriesCol.Add(themeCategory);
+            }
+
+            // return the collection
+            return themeCategoriesCol;
+        }
+
         // do attend a meeting.
         public void doAttendMeeting(Convocatoria meeting)
         {

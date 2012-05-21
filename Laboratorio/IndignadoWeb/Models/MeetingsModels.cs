@@ -9,6 +9,7 @@ using System.Web;
 using System.IO;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using IndignadoWeb.MeetingsServiceReference;
 
 namespace IndignadoWeb.Models
 {
@@ -44,6 +45,14 @@ namespace IndignadoWeb.Models
 
         [Required]
         public String Minutos { get; set; }
+
+        //public DTThemeCategoriesColMeetings themeCategories { get; set; }
+
+        //public IEnumerable<SelectListItem> themeCategories { get; set; }
+
+        //public List<SelectListItem> themeCategories { get; set; }
+
+        //public List<string> themeCategoriesId { get; set; }
 
         [Required]
         public HttpPostedFileWrapper ImageUploaded { get; set; }

@@ -27,5 +27,11 @@ namespace IndignadoServer.Controllers
 
         // unlikes a resource.
         void unlikeResource(Recurso resource);
+
+        // mark a resource as inappropriate.
+        void markResourceInappropriate(Recurso resource);
+        
+        // unmark a resource as inappropriate.
+        void unmarkResourceInappropriate(Recurso resource);
     }
 }

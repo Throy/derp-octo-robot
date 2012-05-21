@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
 using System.ServiceModel;
 using System.Text;
 using IndignadoServer.LinqDataContext;
@@ -25,11 +26,25 @@ namespace IndignadoServer.Services
             // add theme categories to the datatype collection
             foreach (CategoriasTematica themeCategory in themeCategoriesCol)
             {
-                dtThemeCategoriesCol.items.Add(ClassToDT.ThemeCategoryUsersToDT(themeCategory));
+                dtThemeCategoriesCol.items.Add(ClassToDT.ThemeCategoryToDTUsers(themeCategory));
             }
 
             // return the collection
             return dtThemeCategoriesCol;
+        }
+        
+        // get interested in a theme category.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void getInterestedThemeCategory(DTThemeCategoryUsers dtThemeCategory)
+        {
+            ControllersHub.Instance.getIUsersController().getInterestedThemeCategory(DTToClass.DTToThemeCategory(dtThemeCategory));
+        }
+        
+        // get uninterested in a theme category.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void getUninterestedThemeCategory(DTThemeCategoryUsers dtThemeCategory)
+        {
+            ControllersHub.Instance.getIUsersController().getUninterestedThemeCategory(DTToClass.DTToThemeCategory(dtThemeCategory));
         }
     }
 }

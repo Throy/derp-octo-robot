@@ -1,11 +1,59 @@
-﻿@{
-    ViewBag.Title = "Indignado Framework - Home Page";
+﻿<!-- model -->
+@model IndignadoWeb.Models.SingleMovementModel
+
+<!-- scripts -->
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<!-- page title -->
+@{
+    ViewBag.Title = Model.name + " - Home page";
 }
 
-<h2>@ViewBag.Message</h2>
-<p>
-    A like button, like option or recommend button is a feature in communication software such as social networking services, Internet forums, news websites and blogs where the user can express that he/she likes, enjoys or supports certain content. Internet services that feature like buttons usually display the quantity of users who liked each content, and may show a full or partial list of them. This is a quantitative alternative to other methods of expressing reaction to content, like writing a reply text.
-    <br /><br />
-    Like buttons as used by social networks on websites other than their own are often used as web bugs to track user activities for targeted advertising such as behavioral targeting combined with personally identifiable information (PII) and may be considered a breach of browser security and internet safety privacy concerns.
-    @ViewBag.Movimiento
-</p>
+<!-- scripts -->
+
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDMxElmlzDp8EFWG0el5fZxRrRzN3E3NRU&sensor=false">
+</script>
+
+<script type="text/javascript">
+    
+    
+    function googleMapsInitialize() {
+        // initialize map
+        var myOptions = {
+            center: new google.maps.LatLng(-32.8, -56),
+            zoom: 6,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        var infoWindow = new google.maps.InfoWindow({ content : "cargando..."});
+            
+        @{
+        String latitud = @Model.locationLati.ToString().Replace(",", ".");
+        String longitud = @Model.locationLong.ToString().Replace(",", ".");
+
+        <text>
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(@latitud, @longitud),
+                map: map
+            });
+        </text>
+        }
+    }
+</script>
+
+<!-- page content -->
+
+<h2>@Html.DisplayFor(m => m.name) - Home page</h2>
+
+<font size="3">@Html.DisplayFor(m => m.description)</font>
+<br />
+<br />
+
+<!-- page content -->
+
+<div id="map_canvas" style="width: 400px; height:300px ; margin-left:220px;border-style:outset; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA" ></div>
+
+<script type="text/javascript">googleMapsInitialize();</script>
+

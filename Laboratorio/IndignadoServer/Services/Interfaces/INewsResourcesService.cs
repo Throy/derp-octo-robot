@@ -29,5 +29,13 @@ namespace IndignadoServer.Services
         // unlikes a resource.
         [OperationContract]
         void unlikeResource(DTResource dtResource);
+
+        // mark a resource as inappropriate.
+        [OperationContract]
+        void markResourceInappropriate(DTResource resource);
+
+        // unmark a resource as inappropriate.
+        [OperationContract]
+        void unmarkResourceInappropriate(DTResource resource);
     }
 }

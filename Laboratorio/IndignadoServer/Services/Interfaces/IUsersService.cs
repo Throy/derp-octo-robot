@@ -13,5 +13,13 @@ namespace IndignadoServer.Services
         // returns all theme categories.
         [OperationContract]
         DTThemeCategoriesColUsers getThemeCategoriesList();
+        
+        // get interested in a theme category.
+        [OperationContract]
+        void getInterestedThemeCategory(DTThemeCategoryUsers dtThemeCategory);
+        
+        // get uninterested in a theme category.
+        [OperationContract]
+        void getUninterestedThemeCategory(DTThemeCategoryUsers dtThemeCategory);
     }
 }

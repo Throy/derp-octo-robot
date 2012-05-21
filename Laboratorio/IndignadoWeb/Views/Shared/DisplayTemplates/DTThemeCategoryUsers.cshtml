@@ -18,23 +18,12 @@
     {
         if (@Model.myInterest == 0)
         {
-            <input type="submit" name="buttonRemove" value="Remove theme category" />
-            <br />
+        <input type="submit" name="buttonImInterested" value="I'm interested" />
         }
 
-        else
+        if (Model.myInterest > 0)
         {
-            if (@Model.myInterest != 1)
-            {
-            <input type="submit" name="buttonImInterested" value="I'm interested" />
-            <br />
-            }
-
-            if (Model.myInterest != -1)
-            {
-            <input type="submit" name="buttonNotInterested" value="Not interested" />
-            <br />
-            }
+        <input type="submit" name="buttonNotInterested" value="Not interested" />
         }
     }
 </div>

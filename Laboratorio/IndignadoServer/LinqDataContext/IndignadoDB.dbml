@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="IndignadoDB" Class="IndignadoDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=BETTOSIACOVS-PC\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Aprobaciones" Member="Aprobaciones">
     <Type Name="Aprobacione">
       <Column Name="idRecurso" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -24,6 +24,8 @@
       <Association Name="Usuario_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idUsuario" Type="Aprobacione" />
       <Association Name="Usuario_Asistencia" Member="Asistencias" ThisKey="id" OtherKey="idUsuario" Type="Asistencia" />
       <Association Name="Usuario_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idAutor" Type="Convocatoria" />
+      <Association Name="Usuario_Interese" Member="Intereses" ThisKey="id" OtherKey="idUsuario" Type="Interese" />
+      <Association Name="Usuario_MarcasInadecuado" Member="MarcasInadecuados" ThisKey="id" OtherKey="idUsuario" Type="MarcasInadecuado" />
       <Association Name="Usuario_Recurso" Member="Recurso" ThisKey="id" OtherKey="id" Type="Recurso" Cardinality="One" />
       <Association Name="Usuario_UsuarioFacebook" Member="UsuarioFacebooks" ThisKey="id" OtherKey="idUsuario" Type="UsuarioFacebook" />
     </Type>
@@ -44,6 +46,7 @@
       <Column Name="titulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="miInteres" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CategoriasTematica_Interese" Member="Intereses" ThisKey="id" OtherKey="idCategoriaTematica" Type="Interese" />
       <Association Name="Movimiento_CategoriasTematica" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
     </Type>
   </Table>
@@ -67,11 +70,27 @@
       <Association Name="Movimiento_Convocatoria" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Intereses" Member="Intereses">
+    <Type Name="Interese">
+      <Column Name="idCategoriaTematica" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CategoriasTematica_Interese" Member="CategoriasTematica" ThisKey="idCategoriaTematica" OtherKey="id" Type="CategoriasTematica" IsForeignKey="true" />
+      <Association Name="Usuario_Interese" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Layouts" Member="Layouts">
     <Type Name="Layout">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="layoutFile" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Layout_Movimiento" Member="Movimientos" ThisKey="id" OtherKey="idLayout" Type="Movimiento" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MarcasInadecuados" Member="MarcasInadecuados">
+    <Type Name="MarcasInadecuado">
+      <Column Name="idRecurso" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Usuario_MarcasInadecuado" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Recurso_MarcasInadecuado" Member="Recurso" ThisKey="idRecurso" OtherKey="id" Type="Recurso" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Movimiento" Member="Movimientos">
@@ -108,7 +127,10 @@
       <Column Name="urlThumb" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="cantAprobaciones" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="meGusta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="yoMarqueInadecuado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="deshabilitado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Recurso_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idRecurso" Type="Aprobacione" />
+      <Association Name="Recurso_MarcasInadecuado" Member="MarcasInadecuados" ThisKey="id" OtherKey="idRecurso" Type="MarcasInadecuado" />
       <Association Name="Usuario_Recurso" Member="Usuario" ThisKey="id" OtherKey="id" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
