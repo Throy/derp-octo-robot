@@ -167,7 +167,7 @@ namespace IndignadoWeb.Controllers
                 user.latitud = model.Latitud;
                 user.longitud = model.Longitud;
                 user.mail = model.Email;
-                user.nombre = model.Name;
+                user.nombre = model.FullName;
 
                 DTUserCreateStatus createStatus = session.RegisterUser(user);
 
