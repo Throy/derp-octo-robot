@@ -46,8 +46,17 @@
       <Column Name="titulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="miInteres" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CategoriasTematica_CatTemasConvocatoria" Member="CatTemasConvocatorias" ThisKey="id" OtherKey="idCategoriaTematica" Type="CatTemasConvocatoria" />
       <Association Name="CategoriasTematica_Interese" Member="Intereses" ThisKey="id" OtherKey="idCategoriaTematica" Type="Interese" />
       <Association Name="Movimiento_CategoriasTematica" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CatTemasConvocatorias" Member="CatTemasConvocatorias">
+    <Type Name="CatTemasConvocatoria">
+      <Column Name="idCategoriaTematica" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idConvocatoria" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CategoriasTematica_CatTemasConvocatoria" Member="CategoriasTematica" ThisKey="idCategoriaTematica" OtherKey="id" Type="CategoriasTematica" IsForeignKey="true" />
+      <Association Name="Convocatoria_CatTemasConvocatoria" Member="Convocatoria" ThisKey="idConvocatoria" OtherKey="id" Type="Convocatoria" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Convocatorias" Member="Convocatorias">
@@ -66,6 +75,7 @@
       <Column Name="cantAsistencias" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="miAsistencia" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Convocatoria_Asistencia" Member="Asistencias" ThisKey="id" OtherKey="idConvocatoria" Type="Asistencia" />
+      <Association Name="Convocatoria_CatTemasConvocatoria" Member="CatTemasConvocatorias" ThisKey="id" OtherKey="idConvocatoria" Type="CatTemasConvocatoria" />
       <Association Name="Usuario_Convocatoria" Member="Usuario" ThisKey="idAutor" OtherKey="id" Type="Usuario" IsForeignKey="true" />
       <Association Name="Movimiento_Convocatoria" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
     </Type>

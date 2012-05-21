@@ -42,6 +42,9 @@ namespace IndignadoServer.LinqDataContext
     partial void InsertCategoriasTematica(CategoriasTematica instance);
     partial void UpdateCategoriasTematica(CategoriasTematica instance);
     partial void DeleteCategoriasTematica(CategoriasTematica instance);
+    partial void InsertCatTemasConvocatoria(CatTemasConvocatoria instance);
+    partial void UpdateCatTemasConvocatoria(CatTemasConvocatoria instance);
+    partial void DeleteCatTemasConvocatoria(CatTemasConvocatoria instance);
     partial void InsertConvocatoria(Convocatoria instance);
     partial void UpdateConvocatoria(Convocatoria instance);
     partial void DeleteConvocatoria(Convocatoria instance);
@@ -127,6 +130,14 @@ namespace IndignadoServer.LinqDataContext
 			get
 			{
 				return this.GetTable<CategoriasTematica>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CatTemasConvocatoria> CatTemasConvocatorias
+		{
+			get
+			{
+				return this.GetTable<CatTemasConvocatoria>();
 			}
 		}
 		
@@ -1073,6 +1084,8 @@ namespace IndignadoServer.LinqDataContext
 		
 		private System.Nullable<int> _miInteres;
 		
+		private EntitySet<CatTemasConvocatoria> _CatTemasConvocatorias;
+		
 		private EntitySet<Interese> _Intereses;
 		
 		private EntityRef<Movimiento> _Movimiento;
@@ -1095,6 +1108,7 @@ namespace IndignadoServer.LinqDataContext
 		
 		public CategoriasTematica()
 		{
+			this._CatTemasConvocatorias = new EntitySet<CatTemasConvocatoria>(new Action<CatTemasConvocatoria>(this.attach_CatTemasConvocatorias), new Action<CatTemasConvocatoria>(this.detach_CatTemasConvocatorias));
 			this._Intereses = new EntitySet<Interese>(new Action<Interese>(this.attach_Intereses), new Action<Interese>(this.detach_Intereses));
 			this._Movimiento = default(EntityRef<Movimiento>);
 			OnCreated();
@@ -1204,6 +1218,19 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CategoriasTematica_CatTemasConvocatoria", Storage="_CatTemasConvocatorias", ThisKey="id", OtherKey="idCategoriaTematica")]
+		public EntitySet<CatTemasConvocatoria> CatTemasConvocatorias
+		{
+			get
+			{
+				return this._CatTemasConvocatorias;
+			}
+			set
+			{
+				this._CatTemasConvocatorias.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CategoriasTematica_Interese", Storage="_Intereses", ThisKey="id", OtherKey="idCategoriaTematica")]
 		public EntitySet<Interese> Intereses
 		{
@@ -1271,6 +1298,18 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		private void attach_CatTemasConvocatorias(CatTemasConvocatoria entity)
+		{
+			this.SendPropertyChanging();
+			entity.CategoriasTematica = this;
+		}
+		
+		private void detach_CatTemasConvocatorias(CatTemasConvocatoria entity)
+		{
+			this.SendPropertyChanging();
+			entity.CategoriasTematica = null;
+		}
+		
 		private void attach_Intereses(Interese entity)
 		{
 			this.SendPropertyChanging();
@@ -1281,6 +1320,174 @@ namespace IndignadoServer.LinqDataContext
 		{
 			this.SendPropertyChanging();
 			entity.CategoriasTematica = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CatTemasConvocatorias")]
+	public partial class CatTemasConvocatoria : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idCategoriaTematica;
+		
+		private int _idConvocatoria;
+		
+		private EntityRef<CategoriasTematica> _CategoriasTematica;
+		
+		private EntityRef<Convocatoria> _Convocatoria;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidCategoriaTematicaChanging(int value);
+    partial void OnidCategoriaTematicaChanged();
+    partial void OnidConvocatoriaChanging(int value);
+    partial void OnidConvocatoriaChanged();
+    #endregion
+		
+		public CatTemasConvocatoria()
+		{
+			this._CategoriasTematica = default(EntityRef<CategoriasTematica>);
+			this._Convocatoria = default(EntityRef<Convocatoria>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idCategoriaTematica", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idCategoriaTematica
+		{
+			get
+			{
+				return this._idCategoriaTematica;
+			}
+			set
+			{
+				if ((this._idCategoriaTematica != value))
+				{
+					if (this._CategoriasTematica.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidCategoriaTematicaChanging(value);
+					this.SendPropertyChanging();
+					this._idCategoriaTematica = value;
+					this.SendPropertyChanged("idCategoriaTematica");
+					this.OnidCategoriaTematicaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idConvocatoria", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idConvocatoria
+		{
+			get
+			{
+				return this._idConvocatoria;
+			}
+			set
+			{
+				if ((this._idConvocatoria != value))
+				{
+					if (this._Convocatoria.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidConvocatoriaChanging(value);
+					this.SendPropertyChanging();
+					this._idConvocatoria = value;
+					this.SendPropertyChanged("idConvocatoria");
+					this.OnidConvocatoriaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CategoriasTematica_CatTemasConvocatoria", Storage="_CategoriasTematica", ThisKey="idCategoriaTematica", OtherKey="id", IsForeignKey=true)]
+		public CategoriasTematica CategoriasTematica
+		{
+			get
+			{
+				return this._CategoriasTematica.Entity;
+			}
+			set
+			{
+				CategoriasTematica previousValue = this._CategoriasTematica.Entity;
+				if (((previousValue != value) 
+							|| (this._CategoriasTematica.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CategoriasTematica.Entity = null;
+						previousValue.CatTemasConvocatorias.Remove(this);
+					}
+					this._CategoriasTematica.Entity = value;
+					if ((value != null))
+					{
+						value.CatTemasConvocatorias.Add(this);
+						this._idCategoriaTematica = value.id;
+					}
+					else
+					{
+						this._idCategoriaTematica = default(int);
+					}
+					this.SendPropertyChanged("CategoriasTematica");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convocatoria_CatTemasConvocatoria", Storage="_Convocatoria", ThisKey="idConvocatoria", OtherKey="id", IsForeignKey=true)]
+		public Convocatoria Convocatoria
+		{
+			get
+			{
+				return this._Convocatoria.Entity;
+			}
+			set
+			{
+				Convocatoria previousValue = this._Convocatoria.Entity;
+				if (((previousValue != value) 
+							|| (this._Convocatoria.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Convocatoria.Entity = null;
+						previousValue.CatTemasConvocatorias.Remove(this);
+					}
+					this._Convocatoria.Entity = value;
+					if ((value != null))
+					{
+						value.CatTemasConvocatorias.Add(this);
+						this._idConvocatoria = value.id;
+					}
+					else
+					{
+						this._idConvocatoria = default(int);
+					}
+					this.SendPropertyChanged("Convocatoria");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -1317,6 +1524,8 @@ namespace IndignadoServer.LinqDataContext
 		private System.Nullable<int> _miAsistencia;
 		
 		private EntitySet<Asistencia> _Asistencias;
+		
+		private EntitySet<CatTemasConvocatoria> _CatTemasConvocatorias;
 		
 		private EntityRef<Usuario> _Usuario;
 		
@@ -1357,6 +1566,7 @@ namespace IndignadoServer.LinqDataContext
 		public Convocatoria()
 		{
 			this._Asistencias = new EntitySet<Asistencia>(new Action<Asistencia>(this.attach_Asistencias), new Action<Asistencia>(this.detach_Asistencias));
+			this._CatTemasConvocatorias = new EntitySet<CatTemasConvocatoria>(new Action<CatTemasConvocatoria>(this.attach_CatTemasConvocatorias), new Action<CatTemasConvocatoria>(this.detach_CatTemasConvocatorias));
 			this._Usuario = default(EntityRef<Usuario>);
 			this._Movimiento = default(EntityRef<Movimiento>);
 			OnCreated();
@@ -1643,6 +1853,19 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convocatoria_CatTemasConvocatoria", Storage="_CatTemasConvocatorias", ThisKey="id", OtherKey="idConvocatoria")]
+		public EntitySet<CatTemasConvocatoria> CatTemasConvocatorias
+		{
+			get
+			{
+				return this._CatTemasConvocatorias;
+			}
+			set
+			{
+				this._CatTemasConvocatorias.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Usuario", ThisKey="idAutor", OtherKey="id", IsForeignKey=true)]
 		public Usuario Usuario
 		{
@@ -1738,6 +1961,18 @@ namespace IndignadoServer.LinqDataContext
 		}
 		
 		private void detach_Asistencias(Asistencia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Convocatoria = null;
+		}
+		
+		private void attach_CatTemasConvocatorias(CatTemasConvocatoria entity)
+		{
+			this.SendPropertyChanging();
+			entity.Convocatoria = this;
+		}
+		
+		private void detach_CatTemasConvocatorias(CatTemasConvocatoria entity)
 		{
 			this.SendPropertyChanging();
 			entity.Convocatoria = null;

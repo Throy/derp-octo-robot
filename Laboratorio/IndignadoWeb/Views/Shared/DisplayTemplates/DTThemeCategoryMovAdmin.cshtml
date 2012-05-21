@@ -6,11 +6,8 @@
     <h3>@Html.DisplayFor(m => m.title)</h3>
      
     <!-- fields -->
-    Internal ID: @Html.DisplayFor(m => m.id)
+     @Html.DisplayFor(m => m.description)
     <br />
-    Movement ID: @Html.DisplayFor(m => m.idMovement)
-    <br />
-    Description: @Html.DisplayFor(m => m.description)
     <br />
     
     <!-- interest buttons -->
@@ -18,23 +15,8 @@
     {
         if (@Model.myInterest == 0)
         {
-            <input type="submit" name="buttonRemove" value="Remove theme category" />
+            <input type="submit" name="buttonRemove" value="Remove" />
             <br />
-        }
-
-        else
-        {
-            if (@Model.myInterest != 1)
-            {
-            <input type="submit" name="buttonImInterested" value="I'm interested" />
-            <br />
-            }
-
-            if (Model.myInterest != -1)
-            {
-            <input type="submit" name="buttonNotInterested" value="Not interested" />
-            <br />
-            }
         }
     }
 </div>

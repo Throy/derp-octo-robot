@@ -15,7 +15,7 @@ namespace IndignadoServer.Controllers
          * */
 
         // creates a meeting
-        void createMeeting(Convocatoria meeting);
+        void createMeeting(Convocatoria meeting, Collection<CategoriasTematica> themeCategories);
 
         // returns all meetings
         Collection<Convocatoria> getMeetingsList();
@@ -25,6 +25,9 @@ namespace IndignadoServer.Controllers
         
         // returns all theme categories.
         Collection<CategoriasTematica> getThemeCategoriesList();
+        
+        // returns all theme categories of a meeting.
+        Collection<CategoriasTematica> getThemeCategoriesMeeting(Convocatoria meeting);
 
         // do attend a meeting.
         void doAttendMeeting(Convocatoria meeting);

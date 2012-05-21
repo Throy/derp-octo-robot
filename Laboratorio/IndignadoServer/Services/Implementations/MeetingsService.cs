@@ -30,7 +30,14 @@ namespace IndignadoServer.Services
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void createMeeting (DTMeeting dtMeeting)
         {
-            ControllersHub.Instance.getIMeetingsController().createMeeting(DTToClass.DTToMeeting(dtMeeting));
+            // create the theme categories collection.
+            Collection<CategoriasTematica> themeCategories = new Collection<CategoriasTematica>();
+            foreach (DTThemeCategoryMeetings dtThemeCat in dtMeeting.themeCategories) {
+                themeCategories.Add(DTToClass.DTToThemeCategory(dtThemeCat));
+            }
+            
+            // create the meeting.
+            ControllersHub.Instance.getIMeetingsController().createMeeting(DTToClass.DTToMeeting(dtMeeting), themeCategories);
         }
 
         // returns all meetings
@@ -43,10 +50,22 @@ namespace IndignadoServer.Services
             // get meetings from the controller
             Collection<Convocatoria> meetingsCol = ControllersHub.Instance.getIMeetingsController().getMeetingsList();
 
-            // add meetings to the datatype collection
+            // for each meeting, ...
             foreach (Convocatoria meeting in meetingsCol)
             {
-                dtMeetingsCol.items.Add (ClassToDT.MeetingToDT (meeting));
+                // convert to datatype
+                DTMeeting dtMeeting = ClassToDT.MeetingToDT(meeting);
+
+                // add theme categories.
+                Collection<CategoriasTematica> themeCats = ControllersHub.Instance.getIMeetingsController().getThemeCategoriesMeeting(meeting);
+                dtMeeting.themeCategories = new Collection<DTThemeCategoryMeetings>();
+                foreach (CategoriasTematica themeCat in themeCats)
+                {
+                    dtMeeting.themeCategories.Add(ClassToDT.ThemeCategoryToDTMeetings(themeCat));
+                }
+
+                // add meetings to the datatype collection.
+                dtMeetingsCol.items.Add(dtMeeting);
             }
 
             // return the collection
@@ -67,7 +86,19 @@ namespace IndignadoServer.Services
             // add meetings to the datatype collection
             foreach (Convocatoria meeting in meetingsCol)
             {
-                dtMeetingsCol.items.Add(ClassToDT.MeetingToDT(meeting));
+                // convert to datatype
+                DTMeeting dtMeeting = ClassToDT.MeetingToDT(meeting);
+
+                // add theme categories.
+                Collection<CategoriasTematica> themeCats = ControllersHub.Instance.getIMeetingsController().getThemeCategoriesMeeting(meeting);
+                dtMeeting.themeCategories = new Collection<DTThemeCategoryMeetings>();
+                foreach (CategoriasTematica themeCat in themeCats)
+                {
+                    dtMeeting.themeCategories.Add(ClassToDT.ThemeCategoryToDTMeetings(themeCat));
+                }
+
+                // add meetings to the datatype collection.
+                dtMeetingsCol.items.Add(dtMeeting);
             }
 
             // return the collection

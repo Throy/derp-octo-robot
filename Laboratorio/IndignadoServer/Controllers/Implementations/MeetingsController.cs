@@ -32,16 +32,36 @@ namespace IndignadoServer.Controllers
 
 
         // creates a meeting
-        public void createMeeting(Convocatoria meeting)
+        public void createMeeting(Convocatoria meeting, Collection<CategoriasTematica> themeCategories)
         {
             // create meeting and add it to the database
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
 
-            // set internal and foreign ids 
+            // set internal and foreign ids of the meeting.
             meeting.idMovimiento = IdMovement;
             meeting.idAutor = UserInfo.Id;
 
+            // add the meeting to the database.
             indignadoContext.Convocatorias.InsertOnSubmit(meeting);
+            indignadoContext.SubmitChanges();
+            indignadoContext = new IndignadoDBDataContext();
+
+            // remove current theme categories of the meeting.
+            indignadoContext.ExecuteCommand("DELETE FROM CatTemasConvocatorias WHERE (idConvocatoria = {0})", meeting.id);
+
+            // add all theme categories to the meeting.
+            foreach (CategoriasTematica themeCat in themeCategories)
+            {
+                // create a themeCatMeeting
+                CatTemasConvocatoria themeCatMeeting = new CatTemasConvocatoria();
+                themeCatMeeting.idCategoriaTematica = themeCat.id;
+                themeCatMeeting.idConvocatoria = meeting.id;
+
+                // add the themeCatMeeting to the database.
+                indignadoContext.CatTemasConvocatorias.InsertOnSubmit(themeCatMeeting);
+            }
+
+            // submit changes to the database.
             indignadoContext.SubmitChanges();
         }
 
@@ -130,6 +150,25 @@ namespace IndignadoServer.Controllers
             // only get theme categories from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<CategoriasTematica> themeCategoriesEnum = indignadoContext.ExecuteQuery<CategoriasTematica>("SELECT id, idMovimiento, titulo, descripcion FROM CategoriasTematicas WHERE idMovimiento = {0}", IdMovement);
+
+            Collection<CategoriasTematica> themeCategoriesCol = new Collection<CategoriasTematica>();
+            foreach (CategoriasTematica themeCategory in themeCategoriesEnum)
+            {
+                // add item to the collection
+                themeCategoriesCol.Add(themeCategory);
+            }
+
+            // return the collection
+            return themeCategoriesCol;
+        }
+
+        // returns all theme categories of a meeting.
+        public Collection<CategoriasTematica> getThemeCategoriesMeeting(Convocatoria meeting)
+        {
+            // only get theme categories from this movement.
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<CategoriasTematica> themeCategoriesEnum = indignadoContext.ExecuteQuery<CategoriasTematica>
+                ("SELECT CategoriasTematicas.id, idMovimiento, titulo, descripcion FROM CategoriasTematicas LEFT JOIN CatTemasConvocatorias ON (CatTemasConvocatorias.idCategoriaTematica = CategoriasTematicas.id) WHERE (CatTemasConvocatorias.idConvocatoria = {0})", meeting.id);
 
             Collection<CategoriasTematica> themeCategoriesCol = new Collection<CategoriasTematica>();
             foreach (CategoriasTematica themeCategory in themeCategoriesEnum)

@@ -48,6 +48,9 @@ namespace IndignadoServer.Services
         public DateTime dateEnd { get; set; }
 
         [DataMember]
+        public Collection<DTThemeCategoryMeetings> themeCategories { get; set; }
+
+        [DataMember]
         public int numberAttendants { get; set; }
 
         [DataMember]

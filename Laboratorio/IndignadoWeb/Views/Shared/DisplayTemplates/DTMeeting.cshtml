@@ -22,6 +22,18 @@
     Attendance: @Html.DisplayFor(m => m.numberAttendants)
     <br />
     
+    @{
+        if (@Model.themeCategories.Length >= 1) {
+            <br />
+            <p>
+                Theme categories:
+                <br />
+                @Html.DisplayFor(m => m.themeCategories)
+            </p>
+        }
+    }
+    
+
     <!-- attendance buttons -->
     @using (Html.BeginForm(new { id = @Model.id }))
     {

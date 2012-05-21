@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using System.Web.Mvc;
-using System.Web.Security;
 using System.Drawing;
-using System.Web;
-using System.IO;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using IndignadoWeb.MeetingsServiceReference;
+using System.IO;
+using System.Web;
+using System.Web.Mvc;
 
 namespace IndignadoWeb.Models
 {
@@ -58,9 +55,9 @@ namespace IndignadoWeb.Models
 
         //public IEnumerable<SelectListItem> themeCategories { get; set; }
 
-        //public List<SelectListItem> themeCategories { get; set; }
+        public Collection<SelectListItem> themeCategories { get; set; }
 
-        //public List<string> themeCategoriesId { get; set; }
+        public Collection<int> themeCategoriesId { get; set; }
 
         [Required]
         public HttpPostedFileWrapper ImageUploaded { get; set; }

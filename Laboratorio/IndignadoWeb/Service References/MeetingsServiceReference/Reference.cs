@@ -58,6 +58,9 @@ namespace IndignadoWeb.MeetingsServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int numberAttendantsField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.MeetingsServiceReference.DTThemeCategoryMeetings[] themeCategoriesField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -224,92 +227,15 @@ namespace IndignadoWeb.MeetingsServiceReference {
             }
         }
         
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DTMeetingsCol", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
-    [System.SerializableAttribute()]
-    public partial class DTMeetingsCol : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private IndignadoWeb.MeetingsServiceReference.DTMeeting[] itemsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public IndignadoWeb.MeetingsServiceReference.DTMeeting[] items {
+        public IndignadoWeb.MeetingsServiceReference.DTThemeCategoryMeetings[] themeCategories {
             get {
-                return this.itemsField;
+                return this.themeCategoriesField;
             }
             set {
-                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
-                    this.itemsField = value;
-                    this.RaisePropertyChanged("items");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DTThemeCategoriesColMeetings", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
-    [System.SerializableAttribute()]
-    public partial class DTThemeCategoriesColMeetings : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private IndignadoWeb.MeetingsServiceReference.DTThemeCategoryMeetings[] itemsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public IndignadoWeb.MeetingsServiceReference.DTThemeCategoryMeetings[] items {
-            get {
-                return this.itemsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
-                    this.itemsField = value;
-                    this.RaisePropertyChanged("items");
+                if ((object.ReferenceEquals(this.themeCategoriesField, value) != true)) {
+                    this.themeCategoriesField = value;
+                    this.RaisePropertyChanged("themeCategories");
                 }
             }
         }
@@ -427,6 +353,96 @@ namespace IndignadoWeb.MeetingsServiceReference {
                 if ((object.ReferenceEquals(this.titleField, value) != true)) {
                     this.titleField = value;
                     this.RaisePropertyChanged("title");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTMeetingsCol", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTMeetingsCol : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.MeetingsServiceReference.DTMeeting[] itemsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.MeetingsServiceReference.DTMeeting[] items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
+                    this.itemsField = value;
+                    this.RaisePropertyChanged("items");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTThemeCategoriesColMeetings", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTThemeCategoriesColMeetings : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.MeetingsServiceReference.DTThemeCategoryMeetings[] itemsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.MeetingsServiceReference.DTThemeCategoryMeetings[] items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
+                    this.itemsField = value;
+                    this.RaisePropertyChanged("items");
                 }
             }
         }

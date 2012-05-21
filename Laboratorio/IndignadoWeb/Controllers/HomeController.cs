@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
-using System.IO;
 using IndignadoWeb.Common;
 using IndignadoWeb.MeetingsServiceReference;
 using IndignadoWeb.Models;
@@ -11,9 +12,7 @@ using IndignadoWeb.NewsResourcesServiceReference;
 using IndignadoWeb.SessionServiceReference;
 using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.TestServiceReference;
-using System.ServiceModel.Security;
 using IndignadoWeb.UsersServiceReference;
-using System.Collections.Generic;
 
 namespace IndignadoWeb.Controllers
 {
@@ -311,29 +310,25 @@ namespace IndignadoWeb.Controllers
             try
             {
                 // check if the user is a registered user.
-                //IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+                IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
             
                 // initialize model
                 CreateMeetingModel model = new CreateMeetingModel();
                 model.dateBegin = DateTime.UtcNow.Date;
                 model.dateEnd = DateTime.UtcNow.Date;
-                //model.themeCategoriesMeeting = new DTThemeCategoriesColMeetings();
-                //model.themeCategoriesMov = serv.getThemeCategoriesList();
+                model.hoursBegin = 0;
+                model.hoursEnd = 0;
+                model.minutesBegin = 0;
+                model.minutesEnd = 0;
 
-                //SelectList codelist1 = new SelectList(;
-                //SelectList codelist2 = new SelectList (serv.getThemeCategoriesList().items);
-
-                /*
-
-                model.themeCategoriesId = new List<string> ();
+                model.themeCategoriesId = new Collection<int> ();
 
                 DTThemeCategoriesColMeetings themeCats = serv.getThemeCategoriesList();
 
-                model.themeCategories = new List<SelectListItem> ();
+                model.themeCategories = new Collection<SelectListItem>();
                 foreach (DTThemeCategoryMeetings dtThemeCat in themeCats.items) {
                     model.themeCategories.Add(new SelectListItem {Value = dtThemeCat.id.ToString(), Text = dtThemeCat.title});
                 }
-                 * */
 
                 // show form
                 return View(model);
@@ -375,6 +370,14 @@ namespace IndignadoWeb.Controllers
                         dtMeeting.dateEnd = new DateTime(model.dateEnd.Year, model.dateEnd.Month, model.dateEnd.Day, model.hoursEnd, model.minutesEnd, 0);
                             //model.date.ToString() + "-" + model.Hora.ToString() + ":" + model.Minutos.ToString(););
                         dtMeeting.minQuorum = model.minQuorum;
+
+                        dtMeeting.themeCategories = new DTThemeCategoryMeetings[model.themeCategoriesId.Count];
+                        for (int idx = 0; idx < model.themeCategoriesId.Count; idx += 1) {
+                            int idThemeCat = model.themeCategoriesId [idx];
+                            DTThemeCategoryMeetings dtThemeCat = new DTThemeCategoryMeetings();
+                            dtThemeCat.id = idThemeCat;
+                            dtMeeting.themeCategories[idx] = dtThemeCat;
+                        }
 
                         if (model.ImageUploaded != null)
                         {

@@ -14,27 +14,10 @@
       <xs:element minOccurs="0" name="myAttendance" type="xs:int" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="numberAttendants" type="xs:int" />
+      <xs:element minOccurs="0" name="themeCategories" nillable="true" type="tns:ArrayOfDTThemeCategoryMeetings" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTMeeting" nillable="true" type="tns:DTMeeting" />
-  <xs:complexType name="DTMeetingsCol">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTMeeting" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="DTMeetingsCol" nillable="true" type="tns:DTMeetingsCol" />
-  <xs:complexType name="ArrayOfDTMeeting">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTMeeting" nillable="true" type="tns:DTMeeting" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfDTMeeting" nillable="true" type="tns:ArrayOfDTMeeting" />
-  <xs:complexType name="DTThemeCategoriesColMeetings">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTThemeCategoryMeetings" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="DTThemeCategoriesColMeetings" nillable="true" type="tns:DTThemeCategoriesColMeetings" />
   <xs:complexType name="ArrayOfDTThemeCategoryMeetings">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DTThemeCategoryMeetings" nillable="true" type="tns:DTThemeCategoryMeetings" />
@@ -59,4 +42,22 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTThemeCategory" nillable="true" type="tns:DTThemeCategory" />
+  <xs:complexType name="DTMeetingsCol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTMeeting" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTMeetingsCol" nillable="true" type="tns:DTMeetingsCol" />
+  <xs:complexType name="ArrayOfDTMeeting">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTMeeting" nillable="true" type="tns:DTMeeting" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTMeeting" nillable="true" type="tns:ArrayOfDTMeeting" />
+  <xs:complexType name="DTThemeCategoriesColMeetings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTThemeCategoryMeetings" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTThemeCategoriesColMeetings" nillable="true" type="tns:DTThemeCategoriesColMeetings" />
 </xs:schema>
