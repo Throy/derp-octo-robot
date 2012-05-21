@@ -219,6 +219,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_getMeetingsListOnAttend_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_getMeetingsListOnAttend_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IMeetingsService_getThemeCategoriesList_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -396,6 +434,12 @@
   <wsdl:message name="IMeetingsService_getMeetingsList_OutputMessage">
     <wsdl:part name="parameters" element="tns:getMeetingsListResponse" />
   </wsdl:message>
+  <wsdl:message name="IMeetingsService_getMeetingsListOnAttend_InputMessage">
+    <wsdl:part name="parameters" element="tns:getMeetingsListOnAttend" />
+  </wsdl:message>
+  <wsdl:message name="IMeetingsService_getMeetingsListOnAttend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getMeetingsListOnAttendResponse" />
+  </wsdl:message>
   <wsdl:message name="IMeetingsService_getThemeCategoriesList_InputMessage">
     <wsdl:part name="parameters" element="tns:getThemeCategoriesList" />
   </wsdl:message>
@@ -432,6 +476,10 @@
     <wsdl:operation name="getMeetingsList">
       <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/getMeetingsList" message="tns:IMeetingsService_getMeetingsList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/getMeetingsListResponse" message="tns:IMeetingsService_getMeetingsList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getMeetingsListOnAttend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/getMeetingsListOnAttend" message="tns:IMeetingsService_getMeetingsListOnAttend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMeetingsService/getMeetingsListOnAttendResponse" message="tns:IMeetingsService_getMeetingsListOnAttend_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getThemeCategoriesList">
       <wsdl:input wsaw:Action="http://tempuri.org/IMeetingsService/getThemeCategoriesList" message="tns:IMeetingsService_getThemeCategoriesList_InputMessage" />
@@ -483,6 +531,17 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_getMeetingsList_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMeetingsListOnAttend">
+      <soap12:operation soapAction="http://tempuri.org/IMeetingsService/getMeetingsListOnAttend" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_getMeetingsListOnAttend_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMeetingsService_getMeetingsListOnAttend_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

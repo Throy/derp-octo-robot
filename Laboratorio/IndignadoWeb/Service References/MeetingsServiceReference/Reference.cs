@@ -454,6 +454,9 @@ namespace IndignadoWeb.MeetingsServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/getMeetingsList", ReplyAction="http://tempuri.org/IMeetingsService/getMeetingsListResponse")]
         IndignadoWeb.MeetingsServiceReference.DTMeetingsCol getMeetingsList();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/getMeetingsListOnAttend", ReplyAction="http://tempuri.org/IMeetingsService/getMeetingsListOnAttendResponse")]
+        IndignadoWeb.MeetingsServiceReference.DTMeetingsCol getMeetingsListOnAttend();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMeetingsService/getThemeCategoriesList", ReplyAction="http://tempuri.org/IMeetingsService/getThemeCategoriesListResponse")]
         IndignadoWeb.MeetingsServiceReference.DTThemeCategoriesColMeetings getThemeCategoriesList();
         
@@ -504,6 +507,10 @@ namespace IndignadoWeb.MeetingsServiceReference {
         
         public IndignadoWeb.MeetingsServiceReference.DTMeetingsCol getMeetingsList() {
             return base.Channel.getMeetingsList();
+        }
+        
+        public IndignadoWeb.MeetingsServiceReference.DTMeetingsCol getMeetingsListOnAttend() {
+            return base.Channel.getMeetingsListOnAttend();
         }
         
         public IndignadoWeb.MeetingsServiceReference.DTThemeCategoriesColMeetings getThemeCategoriesList() {

@@ -23,6 +23,7 @@ namespace IndignadoWeb.Controllers
         public const string viewLogOn = "LogOn";
         public const string viewMeetingCreate = "MeetingCreate";
         public const string viewMeetingsList = "MeetingsList";
+        public const string viewMeetingsListOnAttend = "MeetingsListOnAttend";
         public const string viewMeetingsMap = "MeetingsMap";
         public const string viewMovementConfig = "MovementConfig";
         public const string viewNewsList = "NewsList";
@@ -138,7 +139,7 @@ namespace IndignadoWeb.Controllers
             return View(meetings);
         }
 
-        // like resource.
+        // shows all meetings - change attendance.
         [HttpPost]
         public ActionResult MeetingsList(string buttonDoAttend, string buttonDontAttend, string buttonUnconfirmAttendance, int id)
         {
@@ -200,6 +201,90 @@ namespace IndignadoWeb.Controllers
             }
         }
 
+        // shows all meetings that the user will attend or didn't confirm.
+        public ActionResult MeetingsListOnAttend()
+        {
+            try
+            {
+                IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+
+                // get all meetings
+                DTMeetingsCol meetings = serv.getMeetingsListOnAttend();
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the meetings to the model.
+                return View(meetings);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
+        }
+
+        // shows all meetings that the user will attend or didn't confirm - change attendance.
+        [HttpPost]
+        public ActionResult MeetingsListOnAttend(string buttonDoAttend, string buttonDontAttend, string buttonUnconfirmAttendance, int id)
+        {
+            try
+            {
+                if (buttonDoAttend != null)
+                {
+                    // open service
+                    IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+
+                    // do attend
+                    DTMeeting dtMeeting = new DTMeeting();
+                    dtMeeting.id = id;
+                    serv.doAttendMeeting(dtMeeting);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewMeetingsListOnAttend);
+                }
+
+                else if (buttonDontAttend != null)
+                {
+                    // open service
+                    IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+
+                    // don't attend
+                    DTMeeting dtMeeting = new DTMeeting();
+                    dtMeeting.id = id;
+                    serv.dontAttendMeeting(dtMeeting);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewMeetingsListOnAttend);
+                }
+
+                else if (buttonUnconfirmAttendance != null)
+                {
+                    // open service
+                    IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+
+                    // unconfirm attendance
+                    DTMeeting dtMeeting = new DTMeeting();
+                    dtMeeting.id = id;
+                    serv.unconfirmAttendMeeting(dtMeeting);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewMeetingsListOnAttend);
+                }
+
+                return View();
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
+        }
+
         // shows all movements in a map.
         public ActionResult MeetingsMap()
         {
@@ -230,6 +315,8 @@ namespace IndignadoWeb.Controllers
             
                 // initialize model
                 CreateMeetingModel model = new CreateMeetingModel();
+                model.dateBegin = DateTime.UtcNow.Date;
+                model.dateEnd = DateTime.UtcNow.Date;
                 //model.themeCategoriesMeeting = new DTThemeCategoriesColMeetings();
                 //model.themeCategoriesMov = serv.getThemeCategoriesList();
 

@@ -53,6 +53,27 @@ namespace IndignadoServer.Services
             return dtMeetingsCol;
         }
 
+        // returns all meetings that the user will attend or didn't confirm.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public DTMeetingsCol getMeetingsListOnAttend()
+        {
+            // create new meetings datatype collection
+            DTMeetingsCol dtMeetingsCol = new DTMeetingsCol();
+            dtMeetingsCol.items = new Collection<DTMeeting>();
+
+            // get meetings from the controller
+            Collection<Convocatoria> meetingsCol = ControllersHub.Instance.getIMeetingsController().getMeetingsListOnAttend();
+
+            // add meetings to the datatype collection
+            foreach (Convocatoria meeting in meetingsCol)
+            {
+                dtMeetingsCol.items.Add(ClassToDT.MeetingToDT(meeting));
+            }
+
+            // return the collection
+            return dtMeetingsCol;
+        }
+
         // returns all theme categories.
         public DTThemeCategoriesColMeetings getThemeCategoriesList()
         {

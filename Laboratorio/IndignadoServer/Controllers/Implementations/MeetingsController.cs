@@ -83,6 +83,46 @@ namespace IndignadoServer.Controllers
             
         }
 
+        // returns all meetings that the user will attend or didn't confirm.
+        public Collection<Convocatoria> getMeetingsListOnAttend()
+        {
+            // only get meetings from this movement.
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>
+                ("SELECT Convocatorias.id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum, logo, fechaInicio, fechaFin FROM Convocatorias LEFT JOIN Asistencias ON (Asistencias.idConvocatoria = Convocatorias.id) WHERE idUsuario = {0}", UserInfo.Id);
+            
+            Collection<Convocatoria> meetingsCol = new Collection<Convocatoria>();
+            foreach (Convocatoria meeting in meetingsEnum)
+            {
+                // get number of attendants
+                IEnumerable<int> numbersAttendants = indignadoContext.ExecuteQuery<int>
+                    ("SELECT COUNT(*) FROM Asistencias WHERE (idConvocatoria = {0}) AND (hayAsistencia = 1)", meeting.id);
+                foreach (int numberAttendants in numbersAttendants)
+                {
+                    meeting.cantAsistencias = numberAttendants;
+                }
+
+                // get own attendance
+                meeting.miAsistencia = 0;
+                if (UserInfo != null)
+                {
+                    IEnumerable<int> myAttendances = indignadoContext.ExecuteQuery<int>("SELECT hayAsistencia FROM Asistencias WHERE (idConvocatoria = {0}) AND (idUsuario = {1})", meeting.id, UserInfo.Id);
+                    foreach (int myAttendance in myAttendances)
+                    {
+                        meeting.miAsistencia = myAttendance;
+                    }
+                }
+
+                // add item to the collection
+                meetingsCol.Add(meeting);
+            }
+
+            // return the collection
+            return meetingsCol;
+
+
+        }
+
 
         // returns all theme categories.
         public Collection<CategoriasTematica> getThemeCategoriesList()

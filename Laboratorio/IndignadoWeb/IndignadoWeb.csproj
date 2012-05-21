@@ -388,6 +388,7 @@
     <Content Include="Views\Shared\SysAdminLogOn.cshtml" />
     <Content Include="Views\SysAdmin\AccessDenied.cshtml" />
     <Content Include="Views\Home\MovementConfigSuccess.cshtml" />
+    <Content Include="Views\Home\MeetingsListOnAttend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

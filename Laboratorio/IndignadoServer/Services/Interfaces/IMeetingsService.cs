@@ -30,6 +30,10 @@ namespace IndignadoServer.Services
         // returns all meetings
         [OperationContract]
         DTMeetingsCol getMeetingsList();
+
+        // returns all meetings that the user will attend or didn't confirm.
+        [OperationContract]
+        DTMeetingsCol getMeetingsListOnAttend();
         
         // returns all theme categories.
         [OperationContract]
