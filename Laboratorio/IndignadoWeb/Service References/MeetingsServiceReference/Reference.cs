@@ -23,7 +23,10 @@ namespace IndignadoWeb.MeetingsServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string dateField;
+        private System.DateTime dateBeginField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime dateEndField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string descriptionField;
@@ -66,14 +69,27 @@ namespace IndignadoWeb.MeetingsServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string date {
+        public System.DateTime dateBegin {
             get {
-                return this.dateField;
+                return this.dateBeginField;
             }
             set {
-                if ((object.ReferenceEquals(this.dateField, value) != true)) {
-                    this.dateField = value;
-                    this.RaisePropertyChanged("date");
+                if ((this.dateBeginField.Equals(value) != true)) {
+                    this.dateBeginField = value;
+                    this.RaisePropertyChanged("dateBegin");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime dateEnd {
+            get {
+                return this.dateEndField;
+            }
+            set {
+                if ((this.dateEndField.Equals(value) != true)) {
+                    this.dateEndField = value;
+                    this.RaisePropertyChanged("dateEnd");
                 }
             }
         }

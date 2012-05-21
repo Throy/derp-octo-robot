@@ -1306,9 +1306,9 @@ namespace IndignadoServer.LinqDataContext
 		
 		private double _longitud;
 		
-		private string _inicio;
+		private System.Nullable<System.DateTime> _fechaInicio;
 		
-		private string _fin;
+		private System.Nullable<System.DateTime> _fechaFin;
 		
 		private System.Nullable<int> _minQuorum;
 		
@@ -1342,10 +1342,10 @@ namespace IndignadoServer.LinqDataContext
     partial void OnlatitudChanged();
     partial void OnlongitudChanging(double value);
     partial void OnlongitudChanged();
-    partial void OninicioChanging(string value);
-    partial void OninicioChanged();
-    partial void OnfinChanging(string value);
-    partial void OnfinChanged();
+    partial void OnfechaInicioChanging(System.Nullable<System.DateTime> value);
+    partial void OnfechaInicioChanged();
+    partial void OnfechaFinChanging(System.Nullable<System.DateTime> value);
+    partial void OnfechaFinChanged();
     partial void OnminQuorumChanging(System.Nullable<int> value);
     partial void OnminQuorumChanged();
     partial void OncantAsistenciasChanging(System.Nullable<int> value);
@@ -1530,42 +1530,42 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_inicio", DbType="VarChar(50)")]
-		public string inicio
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaInicio", DbType="DateTime")]
+		public System.Nullable<System.DateTime> fechaInicio
 		{
 			get
 			{
-				return this._inicio;
+				return this._fechaInicio;
 			}
 			set
 			{
-				if ((this._inicio != value))
+				if ((this._fechaInicio != value))
 				{
-					this.OninicioChanging(value);
+					this.OnfechaInicioChanging(value);
 					this.SendPropertyChanging();
-					this._inicio = value;
-					this.SendPropertyChanged("inicio");
-					this.OninicioChanged();
+					this._fechaInicio = value;
+					this.SendPropertyChanged("fechaInicio");
+					this.OnfechaInicioChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fin", DbType="VarChar(50)")]
-		public string fin
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaFin", DbType="DateTime")]
+		public System.Nullable<System.DateTime> fechaFin
 		{
 			get
 			{
-				return this._fin;
+				return this._fechaFin;
 			}
 			set
 			{
-				if ((this._fin != value))
+				if ((this._fechaFin != value))
 				{
-					this.OnfinChanging(value);
+					this.OnfechaFinChanging(value);
 					this.SendPropertyChanging();
-					this._fin = value;
-					this.SendPropertyChanged("fin");
-					this.OnfinChanged();
+					this._fechaFin = value;
+					this.SendPropertyChanged("fechaFin");
+					this.OnfechaFinChanged();
 				}
 			}
 		}

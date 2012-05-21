@@ -60,8 +60,8 @@
       <Column Name="logo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="latitud" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="longitud" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="inicio" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="fin" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="fechaInicio" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="fechaFin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="minQuorum" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="cantAsistencias" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="miAsistencia" Type="System.Int32" DbType="Int" CanBeNull="true" />

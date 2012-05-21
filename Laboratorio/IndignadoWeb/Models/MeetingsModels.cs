@@ -37,14 +37,22 @@ namespace IndignadoWeb.Models
         public int minQuorum { get; set; }
 
         [Required]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public String date { get; set; }
+        public DateTime dateBegin { get; set; }
 
         [Required]
-        public String Hora { get; set; }
+        public DateTime dateEnd { get; set; }
 
         [Required]
-        public String Minutos { get; set; }
+        public int hoursBegin { get; set; }
+
+        [Required]
+        public int hoursEnd { get; set; }
+
+        [Required]
+        public int minutesBegin { get; set; }
+
+        [Required]
+        public int minutesEnd { get; set; }
 
         //public DTThemeCategoriesColMeetings themeCategories { get; set; }
 

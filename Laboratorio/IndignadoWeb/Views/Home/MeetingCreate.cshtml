@@ -76,7 +76,7 @@
 
 <h2 >Create meeting</h2>
 
-<h4 style="font-style:italic; font-size: 90%">Seleccione la ubicacion de la meeting en el mapa:</h4>
+<font style="font-style:italic; font-size: 90%">Please locate the meeting location in the map.</font>
 
 <div id="map_canvas" style="width:400px; height:310px; float:left; margin-left:70px; border-style:outset; margin-top:2px; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA"></div>
 
@@ -126,14 +126,25 @@
                 @Html.TextBoxFor(m => m.minQuorum)
                 @Html.ValidationMessageFor(m => m.minQuorum)
             </div>
-            <label>Date</label>
+
+            <label>Beginning date</label>
             <div class="editor-field">
-                @Html.TextBoxFor(m => m.date, new { @class = "date", @readonly = "readonly" })
+                @Html.TextBoxFor(m => m.dateBegin, new { @class = "date", @readonly = "readonly" })
             </div>
             <div class="editor-field">
-            A las: <input name="Hora" id="Hora" style="width:20px" maxlength="2" onkeypress="return onlyNumbers(this,2);"/>:<input name="Minutos" style="width:20px" id="Minutos" maxlength="2" onkeypress="return onlyNumbers(this,2);"/> hs
+            Beginning time: <input name="hoursBegin" id="hoursBegin" style="width:20px" maxlength="2" onkeypress="return onlyNumbers(this,2);"/>:<input name="minutesBegin" id="minutesBegin" style="width:20px" maxlength="2" onkeypress="return onlyNumbers(this,2);"/> hs
             </div>
             <div >
+
+            <label>Ending date</label>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.dateEnd, new { @class = "date", @readonly = "readonly" })
+            </div>
+            <div class="editor-field">
+            Ending time: <input name="hoursEnd" id="hoursEnd" style="width:20px" maxlength="2"/>:<input name="minutesEnd" id="minutesEnd" style="width:20px" maxlength="2"/> hs
+            </div>
+            <div >
+
             <label>Logo</label>
                 <input name="ImageUploaded" id="ImageUploaded" type="file">
             </div>

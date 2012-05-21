@@ -39,14 +39,16 @@ namespace IndignadoServer.Services
         public int minQuorum { get; set; }
 
         [DataMember]
-        public int numberAttendants { get; set; }
-
-        [DataMember]
         public String imagePath { get; set; }
 
         [DataMember]
-        public String date { get; set; }
+        public DateTime dateBegin { get; set; }
 
+        [DataMember]
+        public DateTime dateEnd { get; set; }
+
+        [DataMember]
+        public int numberAttendants { get; set; }
 
         [DataMember]
         public int myAttendance { get; set; }
@@ -404,9 +406,10 @@ namespace IndignadoServer.Services
             dtMeeting.locationLati = (float)meeting.latitud;
             dtMeeting.locationLong = (float)meeting.longitud;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
-            dtMeeting.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
             dtMeeting.imagePath = meeting.logo;
-            dtMeeting.date = meeting.inicio == null ? new DateTime().ToString() : meeting.inicio.ToString();
+            dtMeeting.dateBegin = (meeting.fechaInicio == null) ? new DateTime() : meeting.fechaInicio.Value;
+            dtMeeting.dateEnd = (meeting.fechaFin == null) ? new DateTime() : meeting.fechaFin.Value;
+            dtMeeting.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
             dtMeeting.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
             return dtMeeting;
         }
@@ -503,10 +506,11 @@ namespace IndignadoServer.Services
             meeting.latitud = dtMeeting.locationLati;
             meeting.longitud = dtMeeting.locationLong;
             meeting.minQuorum = dtMeeting.minQuorum;
+            meeting.logo = dtMeeting.imagePath;
+            meeting.fechaInicio = dtMeeting.dateBegin;
+            meeting.fechaFin = dtMeeting.dateEnd;
             meeting.cantAsistencias = dtMeeting.numberAttendants;
             meeting.miAsistencia = dtMeeting.myAttendance;
-            meeting.logo = dtMeeting.imagePath;
-            meeting.inicio = dtMeeting.date;
             return meeting;
         }
 

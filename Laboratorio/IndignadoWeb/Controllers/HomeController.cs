@@ -267,7 +267,12 @@ namespace IndignadoWeb.Controllers
                 //if (ModelState.IsValid)
                 //{
                     if (ModelState.IsValidField("name") && ModelState.IsValidField("description") && ModelState.IsValidField("locationLati")
-                        && ModelState.IsValidField("locationLong") && ModelState.IsValidField("minQuorum"))
+                        && ModelState.IsValidField("locationLong") && ModelState.IsValidField("minQuorum")
+                        && (model.hoursBegin >= 0) && (model.hoursBegin < 60)
+                        && (model.hoursEnd >= 0) && (model.hoursEnd < 60)
+                        && (model.minutesBegin >= 0) && (model.minutesBegin < 60)
+                        && (model.minutesEnd >= 0) && (model.minutesEnd < 60)
+                        && ((model.dateBegin < model.dateEnd) || ((model.dateBegin == model.dateEnd) && ((model.hoursBegin < model.hoursEnd) || (model.hoursBegin == model.hoursEnd) && (model.minutesBegin <= model.minutesEnd)))))
                     {
                         IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
@@ -279,7 +284,9 @@ namespace IndignadoWeb.Controllers
                         dtMeeting.description = model.description;
                         dtMeeting.locationLati = model.locationLati;
                         dtMeeting.locationLong = model.locationLong;
-                        dtMeeting.date = model.date.ToString() + "-" + model.Hora.ToString() + ":" + model.Minutos.ToString();
+                        dtMeeting.dateBegin = new DateTime(model.dateBegin.Year, model.dateBegin.Month, model.dateBegin.Day, model.hoursBegin, model.minutesBegin, 0);
+                        dtMeeting.dateEnd = new DateTime(model.dateEnd.Year, model.dateEnd.Month, model.dateEnd.Day, model.hoursEnd, model.minutesEnd, 0);
+                            //model.date.ToString() + "-" + model.Hora.ToString() + ":" + model.Minutos.ToString(););
                         dtMeeting.minQuorum = model.minQuorum;
 
                         if (model.ImageUploaded != null)
