@@ -390,6 +390,7 @@
     <Content Include="Views\Home\MovementConfigSuccess.cshtml" />
     <Content Include="Views\Home\MeetingsListOnAttend.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTThemeCategoryMeetings.cshtml" />
+    <Content Include="Views\Home\MeetingsListOnInterest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

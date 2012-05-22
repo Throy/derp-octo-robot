@@ -29,8 +29,6 @@ namespace IndignadoServer.Controllers
             return meeting;
         }
 
-
-
         // creates a meeting
         public void createMeeting(Convocatoria meeting, Collection<CategoriasTematica> themeCategories)
         {
@@ -68,49 +66,36 @@ namespace IndignadoServer.Controllers
         // returns all meetings
         public Collection<Convocatoria> getMeetingsList()
         {
-            // only get meetings from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>("SELECT id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum, logo, fechaInicio, fechaFin FROM Convocatorias WHERE idMovimiento = {0}", IdMovement);
-
-            Collection<Convocatoria> meetingsCol = new Collection<Convocatoria>();
-            foreach (Convocatoria meeting in meetingsEnum)
-            {
-                // get number of attendants
-                IEnumerable<int> numbersAttendants = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM Asistencias WHERE (idConvocatoria = {0}) AND (hayAsistencia = 1)", meeting.id);
-                foreach (int numberAttendants in numbersAttendants)
-                {
-                    meeting.cantAsistencias = numberAttendants;
-                }
-
-                // get own attendance
-                meeting.miAsistencia = 0;
-                if (UserInfo != null)
-                {
-                    IEnumerable<int> myAttendances = indignadoContext.ExecuteQuery<int>("SELECT hayAsistencia FROM Asistencias WHERE (idConvocatoria = {0}) AND (idUsuario = {1})", meeting.id, UserInfo.Id);
-                    foreach (int myAttendance in myAttendances)
-                    {
-                        meeting.miAsistencia = myAttendance;
-                    }
-                }
-            
-                // add item to the collection
-                meetingsCol.Add(meeting);
-            }
-
-            // return the collection
-            return meetingsCol;
-
-            
+            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>
+                ("SELECT id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum, logo, fechaInicio, fechaFin FROM Convocatorias WHERE idMovimiento = {0}", IdMovement);
+            return toCollectionConvocatoria(meetingsEnum);
         }
 
         // returns all meetings that the user will attend or didn't confirm.
         public Collection<Convocatoria> getMeetingsListOnAttend()
         {
-            // only get meetings from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>
                 ("SELECT Convocatorias.id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum, logo, fechaInicio, fechaFin FROM Convocatorias LEFT JOIN Asistencias ON (Asistencias.idConvocatoria = Convocatorias.id) WHERE idUsuario = {0}", UserInfo.Id);
-            
+            return toCollectionConvocatoria(meetingsEnum);
+        }
+
+        // returns all meetings that the user is interested in.
+        // *** POR AHORA SOLO CONSIDERA CATEGORIAS TEMATICAS, NO CERCANIA GEOGRÁFICA ***
+        public Collection<Convocatoria> getMeetingsListOnInterest()
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>
+                ("SELECT Convocatorias.id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum, logo, fechaInicio, fechaFin FROM Convocatorias INNER JOIN (SELECT Convocatorias.id FROM Convocatorias LEFT JOIN CatTemasConvocatorias ON (CatTemasConvocatorias.idConvocatoria = Convocatorias.id) LEFT JOIN Intereses ON (Intereses.idCategoriaTematica = CatTemasConvocatorias.idCategoriaTematica) WHERE Intereses.idUsuario = {0} GROUP BY Convocatorias.id) ConvocatoriasInteres ON ConvocatoriasInteres.id = Convocatorias.id", UserInfo.Id);
+            return toCollectionConvocatoria(meetingsEnum);
+        }
+
+
+        // convert meetings enumerables to collections.
+        private Collection<Convocatoria> toCollectionConvocatoria(IEnumerable<Convocatoria> meetingsEnum)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             Collection<Convocatoria> meetingsCol = new Collection<Convocatoria>();
             foreach (Convocatoria meeting in meetingsEnum)
             {
@@ -126,7 +111,8 @@ namespace IndignadoServer.Controllers
                 meeting.miAsistencia = 0;
                 if (UserInfo != null)
                 {
-                    IEnumerable<int> myAttendances = indignadoContext.ExecuteQuery<int>("SELECT hayAsistencia FROM Asistencias WHERE (idConvocatoria = {0}) AND (idUsuario = {1})", meeting.id, UserInfo.Id);
+                    IEnumerable<int> myAttendances = indignadoContext.ExecuteQuery<int>
+                        ("SELECT hayAsistencia FROM Asistencias WHERE (idConvocatoria = {0}) AND (idUsuario = {1})", meeting.id, UserInfo.Id);
                     foreach (int myAttendance in myAttendances)
                     {
                         meeting.miAsistencia = myAttendance;
@@ -139,8 +125,6 @@ namespace IndignadoServer.Controllers
 
             // return the collection
             return meetingsCol;
-
-
         }
 
 
@@ -149,7 +133,8 @@ namespace IndignadoServer.Controllers
         {
             // only get theme categories from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            IEnumerable<CategoriasTematica> themeCategoriesEnum = indignadoContext.ExecuteQuery<CategoriasTematica>("SELECT id, idMovimiento, titulo, descripcion FROM CategoriasTematicas WHERE idMovimiento = {0}", IdMovement);
+            IEnumerable<CategoriasTematica> themeCategoriesEnum = indignadoContext.ExecuteQuery<CategoriasTematica>
+                ("SELECT id, idMovimiento, titulo, descripcion FROM CategoriasTematicas WHERE idMovimiento = {0}", IdMovement);
 
             Collection<CategoriasTematica> themeCategoriesCol = new Collection<CategoriasTematica>();
             foreach (CategoriasTematica themeCategory in themeCategoriesEnum)

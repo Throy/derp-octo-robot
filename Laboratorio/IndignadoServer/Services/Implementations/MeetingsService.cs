@@ -43,45 +43,29 @@ namespace IndignadoServer.Services
         // returns all meetings
         public DTMeetingsCol getMeetingsList()
         {
-            // create new meetings datatype collection
-            DTMeetingsCol dtMeetingsCol = new DTMeetingsCol();
-            dtMeetingsCol.items = new Collection<DTMeeting>();
-
-            // get meetings from the controller
-            Collection<Convocatoria> meetingsCol = ControllersHub.Instance.getIMeetingsController().getMeetingsList();
-
-            // for each meeting, ...
-            foreach (Convocatoria meeting in meetingsCol)
-            {
-                // convert to datatype
-                DTMeeting dtMeeting = ClassToDT.MeetingToDT(meeting);
-
-                // add theme categories.
-                Collection<CategoriasTematica> themeCats = ControllersHub.Instance.getIMeetingsController().getThemeCategoriesMeeting(meeting);
-                dtMeeting.themeCategories = new Collection<DTThemeCategoryMeetings>();
-                foreach (CategoriasTematica themeCat in themeCats)
-                {
-                    dtMeeting.themeCategories.Add(ClassToDT.ThemeCategoryToDTMeetings(themeCat));
-                }
-
-                // add meetings to the datatype collection.
-                dtMeetingsCol.items.Add(dtMeeting);
-            }
-
-            // return the collection
-            return dtMeetingsCol;
+            return MeetingsColToDT(ControllersHub.Instance.getIMeetingsController().getMeetingsList());
         }
 
         // returns all meetings that the user will attend or didn't confirm.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public DTMeetingsCol getMeetingsListOnAttend()
         {
+            return MeetingsColToDT (ControllersHub.Instance.getIMeetingsController().getMeetingsListOnAttend());
+        }
+
+        // returns all meetings that the user is interested in.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public DTMeetingsCol getMeetingsListOnInterest()
+        {
+            return MeetingsColToDT(ControllersHub.Instance.getIMeetingsController().getMeetingsListOnInterest());
+        }
+
+        // converts a meetings collection to a datatype.
+        public static DTMeetingsCol MeetingsColToDT(Collection<Convocatoria> meetingsCol)
+        {
             // create new meetings datatype collection
             DTMeetingsCol dtMeetingsCol = new DTMeetingsCol();
             dtMeetingsCol.items = new Collection<DTMeeting>();
-
-            // get meetings from the controller
-            Collection<Convocatoria> meetingsCol = ControllersHub.Instance.getIMeetingsController().getMeetingsListOnAttend();
 
             // add meetings to the datatype collection
             foreach (Convocatoria meeting in meetingsCol)

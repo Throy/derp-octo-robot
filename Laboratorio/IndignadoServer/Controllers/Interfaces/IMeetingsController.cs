@@ -23,6 +23,9 @@ namespace IndignadoServer.Controllers
         // returns all meetings that the user will attend or didn't confirm.
         Collection<Convocatoria> getMeetingsListOnAttend();
         
+        // returns all meetings that the user is interested in.
+        Collection<Convocatoria> getMeetingsListOnInterest();
+        
         // returns all theme categories.
         Collection<CategoriasTematica> getThemeCategoriesList();
         
