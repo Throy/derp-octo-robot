@@ -1,0 +1,37 @@
+﻿<!-- model -->
+@model IndignadoWeb.MovAdminServiceReference.DTUser
+           
+<div>
+    <!-- header -->
+    <h3>@Html.DisplayFor(m => m.id) - @Html.DisplayFor(m => m.username)</h3>
+    
+    <!-- fields -->
+    Full name: @Html.DisplayFor(m => m.fullName)
+    <br />
+    Mail: @Html.DisplayFor(m => m.mail)
+    <br />
+    Register date: @Html.DisplayFor(m => m.registerDate)
+    <br />
+    <br />
+
+    Resources marked as inappropriate: @Html.DisplayFor(m => m.numberResourcesMarkedInappr)
+    <br />
+    Resources disabled: @Html.DisplayFor(m => m.numberResourcesDisabled)
+    <br />
+    <br />
+
+    <!-- likes -->
+    @using (Html.BeginForm(new { id = @Model.id }))
+    {
+        if (! @Model.banned)
+        {
+            <input type="submit" name="buttonBan" value="Ban user" />
+        }
+
+        else
+        {
+            <text><b>User banned</b></text>
+            <input type="submit" name="buttonReallow" value="Reallow user" />
+        }
+    }
+</div>

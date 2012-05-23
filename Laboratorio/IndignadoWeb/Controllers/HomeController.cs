@@ -31,6 +31,7 @@ namespace IndignadoWeb.Controllers
         public const string viewResourcesList = "ResourcesList";
         public const string viewThemeCategoriesConfig = "ThemeCategoriesConfig";
         public const string viewThemeCategoriesList = "ThemeCategoriesList";
+        public const string viewUsersManage = "UsersManage";
 
         public const string urlMeetingsService = "http://localhost:8730/IndignadoServer/MeetingsService/";
         public const string urlMovAdminService = "http://localhost:8730/IndignadoServer/MovAdminService/";
@@ -605,7 +606,7 @@ namespace IndignadoWeb.Controllers
 
         // like / dislike resource.
         [HttpPost]
-        public ActionResult ResourcesList(string buttonLike, string buttonUnlike, /*string buttonMarkInappr, string buttonUnmarkInappr, */int id)
+        public ActionResult ResourcesList(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
         {
             try
             {
@@ -641,7 +642,6 @@ namespace IndignadoWeb.Controllers
                     return RedirectToAction(HomeControllerConstants.viewResourcesList);
                 }
 
-                /*
                 else if (buttonMarkInappr != null)
                 {
                     // open service
@@ -673,7 +673,6 @@ namespace IndignadoWeb.Controllers
 
                     return RedirectToAction(HomeControllerConstants.viewResourcesList);
                 }
-                */
 
                 return View ();
             }
@@ -942,6 +941,112 @@ namespace IndignadoWeb.Controllers
             catch
             {
                 return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
+        }
+
+        // manages the users.
+        public ActionResult UsersManage(UsersModel model, int? listType)
+        {
+            try
+            {
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                // get allowed users
+                if (listType == 1)
+                {
+                    model.listType = 1;
+                    model.users = serv.getUsersListAllowed();
+                }
+
+                // get banned users
+                else if (listType == 2)
+                {
+                    model.listType = 2;
+                    model.users = serv.getUsersListBanned();
+                }
+
+                // get everyone
+                else
+                {
+                    model.listType = 0;
+                    model.users = serv.getUsersListFull();
+                }
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the users to the model.
+                return View(model);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // manages the users - ban / reallow user.
+        [HttpPost]
+        public ActionResult UsersManage(string buttonShowEveryone, string buttonShowAllowed, string buttonShowBanned, string buttonBan, string buttonReallow, int id)
+        {
+            try
+            {
+                // show everyone.
+                if (buttonShowEveryone != null)
+                {
+                    return RedirectToAction(HomeControllerConstants.viewUsersManage, new { listType = 0 });
+                }
+
+                // show allowed users.
+                else if (buttonShowAllowed != null)
+                {
+                    return RedirectToAction(HomeControllerConstants.viewUsersManage, new { listType = 1 });
+                }
+
+                // show banned users.
+                else if (buttonShowBanned != null)
+                {
+                    return RedirectToAction(HomeControllerConstants.viewUsersManage, new { listType = 2 });
+                }
+
+                // ban user
+                else if (buttonBan != null)
+                {
+                    // open service
+                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                    // ban user
+                    DTUser dtUser = new DTUser();
+                    dtUser.id = id;
+                    //serv.banUser(dtUser);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewUsersManage);
+                }
+
+                // reallow user
+                else if (buttonReallow != null)
+                    {
+                        // open service
+                        IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                        // ban user
+                        DTUser dtUser = new DTUser();
+                        dtUser.id = id;
+                        //serv.reallowUser(dtUser);
+
+                        // close service
+                        (serv as ICommunicationObject).Close();
+
+                        return RedirectToAction(HomeControllerConstants.viewUsersManage);
+                    }
+
+                return View();
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
             }
         }
     }

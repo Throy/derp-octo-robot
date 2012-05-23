@@ -1,0 +1,51 @@
+﻿<!-- model -->
+@model IndignadoWeb.Models.UsersModel
+
+<!-- page title -->
+@{
+    ViewBag.Title = "Indignado Framework - Manage users";
+}
+
+<!-- page content -->
+
+<h2>Manage users</h2>
+
+@using (Html.BeginForm(new { id = 0 }))
+{
+        if (Model.listType == 0)
+        {
+            <text>
+                <b>Everyone</b>
+            </text>
+        }
+        else
+        {
+            <input type="submit" name="buttonShowEveryone" value="Show everyone" />
+        }
+        
+        if (Model.listType == 1)
+        {
+            <text>
+                <b>Allowed users</b>
+            </text>
+        }
+        else
+        {
+            <input type="submit" name="buttonShowAllowed" value="Show allowed" />
+        }
+        
+        if (Model.listType == 2)
+        {
+            <text>
+                <b>Banned users</b>
+            </text>
+        }
+        else
+        {
+            <input type="submit" name="buttonShowBanned" value="Show banned" />
+        }
+}
+
+<p>
+    @Html.DisplayFor(m => m.users.items)
+</p>

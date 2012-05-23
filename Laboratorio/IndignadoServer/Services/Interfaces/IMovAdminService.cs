@@ -42,5 +42,17 @@ namespace IndignadoServer.Services
         // gets the theme categories.
         [OperationContract]
         DTThemeCategoriesColMovAdmin listThemeCategories();
+
+        // returns all users.
+        [OperationContract]
+        DTUsersCol getUsersListFull();
+        
+        // returns all users allowed.
+        [OperationContract]
+        DTUsersCol getUsersListAllowed();
+
+        // returns all users banned.
+        [OperationContract]
+        DTUsersCol getUsersListBanned();
     }
 }

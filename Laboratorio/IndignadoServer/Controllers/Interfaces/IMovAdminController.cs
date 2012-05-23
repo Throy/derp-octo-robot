@@ -33,5 +33,14 @@ namespace IndignadoServer.Controllers
 
         // gets the theme categories.
         Collection<CategoriasTematica> listThemeCategories();
+        
+        // returns all users.
+        Collection<Usuario> getUsersListFull();
+        
+        // returns all users allowed.
+        Collection<Usuario> getUsersListAllowed();
+
+        // returns all users banned.
+        Collection<Usuario> getUsersListBanned();
     }
 }

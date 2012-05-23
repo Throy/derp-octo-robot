@@ -398,6 +398,10 @@ namespace IndignadoServer.LinqDataContext
 		
 		private System.Nullable<System.DateTime> _fechaRegistro;
 		
+		private System.Nullable<int> _cantRecursosMarcadosInadecuados;
+		
+		private System.Nullable<int> _cantRecursosDeshabilitados;
+		
 		private System.Nullable<bool> _banned;
 		
 		private short _privilegio;
@@ -438,6 +442,10 @@ namespace IndignadoServer.LinqDataContext
     partial void OnlongitudChanged();
     partial void OnfechaRegistroChanging(System.Nullable<System.DateTime> value);
     partial void OnfechaRegistroChanged();
+    partial void OncantRecursosMarcadosInadecuadosChanging(System.Nullable<int> value);
+    partial void OncantRecursosMarcadosInadecuadosChanged();
+    partial void OncantRecursosDeshabilitadosChanging(System.Nullable<int> value);
+    partial void OncantRecursosDeshabilitadosChanged();
     partial void OnbannedChanging(System.Nullable<bool> value);
     partial void OnbannedChanged();
     partial void OnprivilegioChanging(short value);
@@ -632,6 +640,46 @@ namespace IndignadoServer.LinqDataContext
 					this._fechaRegistro = value;
 					this.SendPropertyChanged("fechaRegistro");
 					this.OnfechaRegistroChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cantRecursosMarcadosInadecuados", DbType="Int")]
+		public System.Nullable<int> cantRecursosMarcadosInadecuados
+		{
+			get
+			{
+				return this._cantRecursosMarcadosInadecuados;
+			}
+			set
+			{
+				if ((this._cantRecursosMarcadosInadecuados != value))
+				{
+					this.OncantRecursosMarcadosInadecuadosChanging(value);
+					this.SendPropertyChanging();
+					this._cantRecursosMarcadosInadecuados = value;
+					this.SendPropertyChanged("cantRecursosMarcadosInadecuados");
+					this.OncantRecursosMarcadosInadecuadosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cantRecursosDeshabilitados", DbType="Int")]
+		public System.Nullable<int> cantRecursosDeshabilitados
+		{
+			get
+			{
+				return this._cantRecursosDeshabilitados;
+			}
+			set
+			{
+				if ((this._cantRecursosDeshabilitados != value))
+				{
+					this.OncantRecursosDeshabilitadosChanging(value);
+					this.SendPropertyChanging();
+					this._cantRecursosDeshabilitados = value;
+					this.SendPropertyChanged("cantRecursosDeshabilitados");
+					this.OncantRecursosDeshabilitadosChanged();
 				}
 			}
 		}

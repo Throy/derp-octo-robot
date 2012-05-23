@@ -78,6 +78,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\UsersModels.cs" />
     <Compile Include="Models\ThemeCategoriesModels.cs" />
     <Compile Include="Models\MeetingsModels.cs" />
     <Compile Include="Models\MovementsModels.cs" />
@@ -205,6 +206,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTThemeCategoriesColMovAdmin.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTUsersCol.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\MovAdminServiceReference\item.xsd">
@@ -391,6 +395,8 @@
     <Content Include="Views\Home\MeetingsListOnAttend.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTThemeCategoryMeetings.cshtml" />
     <Content Include="Views\Home\MeetingsListOnInterest.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTUser.cshtml" />
+    <Content Include="Views\Home\UsersManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

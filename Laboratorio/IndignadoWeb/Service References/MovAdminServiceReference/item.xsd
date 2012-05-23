@@ -97,4 +97,40 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getUsersListFull">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getUsersListFullResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListFullResult" nillable="true" type="q9:DTUsersCol" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getUsersListAllowed">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getUsersListAllowedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListAllowedResult" nillable="true" type="q10:DTUsersCol" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getUsersListBanned">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getUsersListBannedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListBannedResult" nillable="true" type="q11:DTUsersCol" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

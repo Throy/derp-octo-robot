@@ -78,5 +78,65 @@ namespace IndignadoServer.Services
             // return the collection
             return dtThemeCategoriesCol;
         }
+
+        // returns all users.
+        public DTUsersCol getUsersListFull()
+        {
+            // create new theme categories datatype collection
+            DTUsersCol dtUsersCol = new DTUsersCol();
+            dtUsersCol.items = new Collection<DTUser>();
+
+            // get users from the controller
+            Collection<Usuario> themeCategoriesCol = ControllersHub.Instance.getIMovAdminController().getUsersListFull();
+
+            // add users to the datatype collection
+            foreach (Usuario themeCategory in themeCategoriesCol)
+            {
+                dtUsersCol.items.Add(ClassToDT.UserToDT(themeCategory));
+            }
+
+            // return the collection
+            return dtUsersCol;
+        }
+
+        // returns all users allowed.
+        public DTUsersCol getUsersListAllowed()
+        {
+            // create new theme categories datatype collection
+            DTUsersCol dtUsersCol = new DTUsersCol();
+            dtUsersCol.items = new Collection<DTUser>();
+
+            // get users from the controller
+            Collection<Usuario> themeCategoriesCol = ControllersHub.Instance.getIMovAdminController().getUsersListAllowed();
+
+            // add users to the datatype collection
+            foreach (Usuario themeCategory in themeCategoriesCol)
+            {
+                dtUsersCol.items.Add(ClassToDT.UserToDT(themeCategory));
+            }
+
+            // return the collection
+            return dtUsersCol;
+        }
+
+        // returns all users banned.
+        public DTUsersCol getUsersListBanned()
+        {
+            // create new theme categories datatype collection
+            DTUsersCol dtUsersCol = new DTUsersCol();
+            dtUsersCol.items = new Collection<DTUser>();
+
+            // get users from the controller
+            Collection<Usuario> themeCategoriesCol = ControllersHub.Instance.getIMovAdminController().getUsersListBanned();
+
+            // add users to the datatype collection
+            foreach (Usuario themeCategory in themeCategoriesCol)
+            {
+                dtUsersCol.items.Add(ClassToDT.UserToDT(themeCategory));
+            }
+
+            // return the collection
+            return dtUsersCol;
+        }
     }
 }

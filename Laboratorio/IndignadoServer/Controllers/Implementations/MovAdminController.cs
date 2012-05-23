@@ -142,5 +142,65 @@ namespace IndignadoServer.Controllers
             // return the collection
             return themeCategoriesCol;
         }
+
+        // returns all users.
+        public Collection<Usuario> getUsersListFull()
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Usuario> usersEnum = indignadoContext.ExecuteQuery<Usuario>
+                ("SELECT * FROM Usuarios WHERE (idMovimiento = {0}) AND (privilegio = {1})", IdMovement, 0);
+            return toUsersCol(usersEnum);
+        }
+
+        // returns all users allowed.
+        public Collection<Usuario> getUsersListAllowed()
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Usuario> usersEnum = indignadoContext.ExecuteQuery<Usuario>
+                ("SELECT * FROM Usuarios WHERE (idMovimiento = {0}) AND (privilegio = {1}) AND (banned = {2})", IdMovement, 0, false);
+            return toUsersCol(usersEnum);
+        }
+
+        // returns all users banned.
+        public Collection<Usuario> getUsersListBanned()
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Usuario> usersEnum = indignadoContext.ExecuteQuery<Usuario>
+                ("SELECT * FROM Usuarios WHERE (idMovimiento = {0}) AND (privilegio = {1}) AND (banned = {2})", IdMovement, 0, true);
+            return toUsersCol(usersEnum);
+        }
+
+        // convert users enumerable to collection.
+        private Collection<Usuario> toUsersCol(IEnumerable<Usuario> usersEnum)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            Collection<Usuario> usersCol = new Collection<Usuario>();
+
+            // for each user in the enumerable, ...
+            foreach (Usuario user in usersEnum)
+            {
+                // get number of resources marked as inappropriate.
+                IEnumerable<int> numbersMarksInappropriateResources = indignadoContext.ExecuteQuery<int>
+                    ("SELECT COUNT(*) FROM (SELECT idRecurso FROM MarcasInadecuados GROUP BY idRecurso) RecursosMarcadosInadecuado LEFT JOIN Recursos ON Recursos.id = RecursosMarcadosInadecuado.idRecurso WHERE Recursos.idUsuario = {0}", user.id);
+                foreach (int numberMarksInappropriateResources in numbersMarksInappropriateResources)
+                {
+                    user.cantRecursosMarcadosInadecuados = numberMarksInappropriateResources;
+                }
+
+                // get number of disabled resources.
+                IEnumerable<int> numbersDisabledResources = indignadoContext.ExecuteQuery<int>
+                    ("SELECT COUNT(*) FROM Recursos WHERE (idUsuario = {0}) AND (deshabilitado = {1})", user.id, 1);
+                foreach (int numberDisabledResources in numbersDisabledResources)
+                {
+                    user.cantRecursosDeshabilitados = numberDisabledResources;
+                }
+
+                // add user to the collection.
+                usersCol.Add(user);
+            }
+
+            // return the users collection.
+            return usersCol;
+        }
     }
 }

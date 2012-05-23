@@ -389,6 +389,42 @@ namespace IndignadoServer.Services
         public Collection<DTThemeCategoryMeetings> items { get; set; }
     }
 
+    // User datatype
+    [DataContract]
+    public class DTUser
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public String username { get; set; }
+
+        [DataMember]
+        public String fullName { get; set; }
+
+        [DataMember]
+        public String mail { get; set; }
+
+        [DataMember]
+        public DateTime registerDate { get; set; }
+
+        [DataMember]
+        public int numberResourcesMarkedInappr { get; set; }
+
+        [DataMember]
+        public int numberResourcesDisabled { get; set; }
+
+        [DataMember]
+        public bool banned { get; set; }
+    }
+
+    // Users Collection datatype
+    [DataContract]
+    public class DTUsersCol
+    {
+        [DataMember]
+        public Collection<DTUser> items { get; set; }
+    }
 
 
     // **********
@@ -493,6 +529,20 @@ namespace IndignadoServer.Services
             dtThemeCategory.myInterest = (themeCategory.miInteres == null) ? 0 : themeCategory.miInteres.Value;
             return dtThemeCategory;
         }
+
+        public static DTUser UserToDT(Usuario user)
+        {
+            DTUser dtUser = new DTUser();
+            dtUser.id = user.id;
+            dtUser.username = user.apodo;
+            dtUser.fullName = user.nombre;
+            dtUser.mail = user.mail;
+            dtUser.registerDate = (user.fechaRegistro == null) ? new DateTime() : user.fechaRegistro.Value;
+            dtUser.numberResourcesMarkedInappr = (user.cantRecursosMarcadosInadecuados == null) ? 0 : user.cantRecursosMarcadosInadecuados.Value;
+            dtUser.numberResourcesDisabled = (user.cantRecursosDeshabilitados == null) ? 0 : user.cantRecursosDeshabilitados.Value;
+            dtUser.banned = (user.banned == null) ? false : user.banned.Value;
+            return dtUser;
+        }
     }
 
     // converts datatypes to classes
@@ -585,6 +635,20 @@ namespace IndignadoServer.Services
             themeCategory.descripcion = dtThemeCategory.description;
             themeCategory.miInteres = dtThemeCategory.myInterest;
             return themeCategory;
+        }
+
+        public static Usuario DTToUser(DTUser dtUser)
+        {
+            Usuario user = new Usuario();
+            user.id = dtUser.id;
+            user.apodo = dtUser.username;
+            user.nombre = dtUser.fullName;
+            user.mail = dtUser.mail;
+            user.fechaRegistro = dtUser.registerDate;
+            user.cantRecursosMarcadosInadecuados = dtUser.numberResourcesMarkedInappr;
+            user.cantRecursosDeshabilitados = dtUser.numberResourcesDisabled;
+            user.banned = dtUser.banned;
+            return user;
         }
     }
 
