@@ -78,6 +78,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ImageFile.cs" />
     <Compile Include="Models\UsersModels.cs" />
     <Compile Include="Models\ThemeCategoriesModels.cs" />
     <Compile Include="Models\MeetingsModels.cs" />
@@ -140,6 +141,11 @@
     <Content Include="Content\images\Thumb\23cbe05a-d032-41cb-9e42-09904c45d920.jpg" />
     <Content Include="Content\images\Thumb\a135a344-6a7a-42c6-a82f-cc725adeb09b.jpg" />
     <Content Include="Content\images\Thumb\e2267cc2-160a-4138-9338-2558a93779c2.jpg" />
+    <Content Include="Content\images\Thumb\meeting_default.jpg" />
+    <Content Include="Content\styles\forms.css" />
+    <Content Include="Content\styles\MeetingsList.css" />
+    <Content Include="Content\styles\menu.css" />
+    <Content Include="Content\styles\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -330,7 +336,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

@@ -474,7 +474,8 @@ namespace IndignadoWeb.Controllers
                             string fullPath = imagesPath + "Full\\";
                 
                             CreateMeetingModel.ResizeAndSave(thumbPath, fileName, model.ImageUploaded.InputStream, 80, true);
-                            CreateMeetingModel.ResizeAndSave(fullPath, fileName, model.ImageUploaded.InputStream, 600, true);
+                            CreateMeetingModel.ResizeAndSave(thumbPath, fileName + "_100", model.ImageUploaded.InputStream, 150, true);
+                            CreateMeetingModel.ResizeAndSave(fullPath, fileName, model.ImageUploaded.InputStream, 300, true);
 
                             dtMeeting.imagePath = fileName + ".jpg";
                         }

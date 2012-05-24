@@ -1,29 +1,29 @@
 ﻿<!-- model -->
 @model IndignadoWeb.MeetingsServiceReference.DTMeeting
            
-<div>
+<div class="MeetingList">
     <!-- header -->
-    <h3>@Html.DisplayFor(m => m.name)</h3>
+    <h3 class="Header">@Html.DisplayFor(m => m.name)</h3>
      
     <!-- fields -->
-    @Html.DisplayFor(m => m.description)
+    <span class="field" >Description: @Html.DisplayFor(m => m.description)</span>
     <br />
     <br />
-    Beginning date: @Html.DisplayFor(m => m.dateBegin)
+    <span class="field">Beginning date: @Html.DisplayFor(m => m.dateBegin)</span>
     <br />
-    Ending date: @Html.DisplayFor(m => m.dateEnd)
+    <span class="field">Ending date: @Html.DisplayFor(m => m.dateEnd)</span>
     <br />
-    Location - Latitude: @Html.DisplayFor(m => m.locationLati)
+    <span class="field">Location - Latitude: @Html.DisplayFor(m => m.locationLati)</span>
     <br />
-    Location - Longitude: @Html.DisplayFor(m => m.locationLong)
+    <span class="field">Location - Longitude: @Html.DisplayFor(m => m.locationLong)</span>
     <br />
-    Min quorum: @Html.DisplayFor(m => m.minQuorum)
+    <span class="field">Min quorum: @Html.DisplayFor(m => m.minQuorum)</span>
     <br />
-    Attendance: @Html.DisplayFor(m => m.numberAttendants)
+    <span class="field">Attendance: @Html.DisplayFor(m => m.numberAttendants)</span>
     <br />
     
     @{
-        if (@Model.themeCategories.Length >= 1) {
+        if (@Model.themeCategories != null && Model.themeCategories.Length >= 1) {
             <br />
             <p>
                 Theme categories:
@@ -39,17 +39,17 @@
     {
         if (@Model.myAttendance != 1)
         {
-            <input type="submit" name="buttonDoAttend" value="Do attend" />
+            <input class="boton-big-red MeetingButton" type="submit" name="buttonDoAttend" value="Do attend" />
         }
 
         if (Model.myAttendance != 0)
         {
-            <input type="submit" name="buttonDontAttend" value="Don't attend" />
+            <input class="boton-big-red MeetingButton" type="submit" name="buttonDontAttend" value="Don't attend" />
         }
 
         if (Model.myAttendance != -1)
         {
-            <input type="submit" name="buttonUnconfirmAttendance" value="Unconfirm attendance" />
+            <input class="boton-big-red MeetingButton" type="submit" name="buttonUnconfirmAttendance" value="Unconfirm attendance" />
         }
     }
 </div>
