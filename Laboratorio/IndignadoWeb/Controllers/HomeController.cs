@@ -1018,7 +1018,7 @@ namespace IndignadoWeb.Controllers
                     // ban user
                     DTUser dtUser = new DTUser();
                     dtUser.id = id;
-                    //serv.banUser(dtUser);
+                    serv.banUser(dtUser);
 
                     // close service
                     (serv as ICommunicationObject).Close();
@@ -1028,20 +1028,20 @@ namespace IndignadoWeb.Controllers
 
                 // reallow user
                 else if (buttonReallow != null)
-                    {
-                        // open service
-                        IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+                {
+                    // open service
+                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
 
-                        // ban user
-                        DTUser dtUser = new DTUser();
-                        dtUser.id = id;
-                        //serv.reallowUser(dtUser);
+                    // ban user
+                    DTUser dtUser = new DTUser();
+                    dtUser.id = id;
+                    serv.reallowUser(dtUser);
 
-                        // close service
-                        (serv as ICommunicationObject).Close();
+                    // close service
+                    (serv as ICommunicationObject).Close();
 
-                        return RedirectToAction(HomeControllerConstants.viewUsersManage);
-                    }
+                    return RedirectToAction(HomeControllerConstants.viewUsersManage);
+                }
 
                 return View();
             }

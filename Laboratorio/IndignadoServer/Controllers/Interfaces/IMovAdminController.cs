@@ -42,5 +42,11 @@ namespace IndignadoServer.Controllers
 
         // returns all users banned.
         Collection<Usuario> getUsersListBanned();
+
+        // bans a user.
+        void banUser(Usuario user);
+
+        // reallows a user.
+        void reallowUser(Usuario user);
     }
 }

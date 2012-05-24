@@ -233,7 +233,8 @@ namespace IndignadoServer.Controllers
 
                 // get number of disabled resources published by this resources's user.
                 int numberMarksUser = 0;
-                IEnumerable<int> numbersMarksU = indignadoContext.ExecuteQuery<int>("SELECT COUNT(DISTINCT Recursos.id) FROM MarcasInadecuados LEFT JOIN Recursos ON (Recursos.id = MarcasInadecuados.idRecurso) WHERE (Recursos.idUsuario = {0})", thisUserId);
+                IEnumerable<int> numbersMarksU = indignadoContext.ExecuteQuery<int>
+                    ("SELECT COUNT(*) FROM Recursos WHERE (idUsuario = {0}) AND (deshabilitado = {1})", thisUserId, 1);
                 foreach (int numberMarksU in numbersMarksU)
                 {
                     numberMarksUser = numberMarksU;

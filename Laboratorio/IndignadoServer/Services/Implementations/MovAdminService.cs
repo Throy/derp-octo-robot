@@ -138,5 +138,19 @@ namespace IndignadoServer.Services
             // return the collection
             return dtUsersCol;
         }
+
+        // bans a user.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
+        public void banUser(DTUser user)
+        {
+            ControllersHub.Instance.getIMovAdminController().banUser(DTToClass.DTToUser (user));
+        }
+
+        // reallows a user.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
+        public void reallowUser(DTUser user)
+        {
+            ControllersHub.Instance.getIMovAdminController().reallowUser(DTToClass.DTToUser(user));
+        }
     }
 }

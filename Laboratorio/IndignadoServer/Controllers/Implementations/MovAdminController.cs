@@ -202,5 +202,19 @@ namespace IndignadoServer.Controllers
             // return the users collection.
             return usersCol;
         }
+
+        // bans a user.
+        public void banUser(Usuario user)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            indignadoContext.ExecuteCommand("UPDATE Usuarios SET banned = {0} WHERE id = {1}", 1, user.id);
+        }
+
+        // reallows a user.
+        public void reallowUser(Usuario user)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            indignadoContext.ExecuteCommand("UPDATE Usuarios SET banned = {0} WHERE id = {1}", 0, user.id);
+        }
     }
 }

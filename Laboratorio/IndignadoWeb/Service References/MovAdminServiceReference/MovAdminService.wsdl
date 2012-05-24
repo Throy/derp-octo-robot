@@ -523,6 +523,82 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_banUser_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_banUser_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_reallowUser_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_reallowUser_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8730/IndignadoServer/MovAdminService/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -596,6 +672,18 @@
   <wsdl:message name="IMovAdminService_getUsersListBanned_OutputMessage">
     <wsdl:part name="parameters" element="tns:getUsersListBannedResponse" />
   </wsdl:message>
+  <wsdl:message name="IMovAdminService_banUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:banUser" />
+  </wsdl:message>
+  <wsdl:message name="IMovAdminService_banUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:banUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMovAdminService_reallowUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:reallowUser" />
+  </wsdl:message>
+  <wsdl:message name="IMovAdminService_reallowUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:reallowUserResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMovAdminService">
     <wsdl:operation name="getMovement">
       <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/getMovement" message="tns:IMovAdminService_getMovement_InputMessage" />
@@ -640,6 +728,14 @@
     <wsdl:operation name="getUsersListBanned">
       <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/getUsersListBanned" message="tns:IMovAdminService_getUsersListBanned_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMovAdminService/getUsersListBannedResponse" message="tns:IMovAdminService_getUsersListBanned_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="banUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/banUser" message="tns:IMovAdminService_banUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMovAdminService/banUserResponse" message="tns:IMovAdminService_banUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="reallowUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/reallowUser" message="tns:IMovAdminService_reallowUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMovAdminService/reallowUserResponse" message="tns:IMovAdminService_reallowUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IMovAdminService" type="tns:IMovAdminService">
@@ -763,6 +859,28 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_getUsersListBanned_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="banUser">
+      <soap12:operation soapAction="http://tempuri.org/IMovAdminService/banUser" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_banUser_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_banUser_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reallowUser">
+      <soap12:operation soapAction="http://tempuri.org/IMovAdminService/reallowUser" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_reallowUser_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_reallowUser_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

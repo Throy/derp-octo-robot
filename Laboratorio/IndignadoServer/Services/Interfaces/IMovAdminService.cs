@@ -54,5 +54,13 @@ namespace IndignadoServer.Services
         // returns all users banned.
         [OperationContract]
         DTUsersCol getUsersListBanned();
+
+        // bans a user.
+        [OperationContract]
+        void banUser(DTUser user);
+
+        // reallows a user.
+        [OperationContract]
+        void reallowUser(DTUser user);
     }
 }

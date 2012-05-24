@@ -133,4 +133,28 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="banUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q12:DTUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="banUserResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="reallowUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q13:DTUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="reallowUserResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

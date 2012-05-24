@@ -644,6 +644,12 @@ namespace IndignadoWeb.MovAdminServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getUsersListBanned", ReplyAction="http://tempuri.org/IMovAdminService/getUsersListBannedResponse")]
         IndignadoWeb.MovAdminServiceReference.DTUsersCol getUsersListBanned();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/banUser", ReplyAction="http://tempuri.org/IMovAdminService/banUserResponse")]
+        void banUser(IndignadoWeb.MovAdminServiceReference.DTUser user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/reallowUser", ReplyAction="http://tempuri.org/IMovAdminService/reallowUserResponse")]
+        void reallowUser(IndignadoWeb.MovAdminServiceReference.DTUser user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -715,6 +721,14 @@ namespace IndignadoWeb.MovAdminServiceReference {
         
         public IndignadoWeb.MovAdminServiceReference.DTUsersCol getUsersListBanned() {
             return base.Channel.getUsersListBanned();
+        }
+        
+        public void banUser(IndignadoWeb.MovAdminServiceReference.DTUser user) {
+            base.Channel.banUser(user);
+        }
+        
+        public void reallowUser(IndignadoWeb.MovAdminServiceReference.DTUser user) {
+            base.Channel.reallowUser(user);
         }
     }
 }
