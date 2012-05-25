@@ -4,6 +4,7 @@ using IndignadoServer.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.ServiceModel;
 
 namespace IndignadoServer.Controllers
 {
@@ -75,6 +76,23 @@ namespace IndignadoServer.Controllers
             catch (Exception error)
             {
             }
+        }
+
+        // returns the data of the user.
+        public Usuario getUser()
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Usuario> usersEnum = indignadoContext.ExecuteQuery<Usuario>
+                ("SELECT * FROM Usuarios WHERE (id = {0})", UserInfo.Id);
+            return usersEnum.First();
+        }
+
+
+        // updates the data of the user.
+        public void setUser(Usuario user)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            indignadoContext.ExecuteCommand("UPDATE Usuarios SET nombre = {0}, mail = {1}, latitud = {2}, longitud = {3} WHERE id = {4}", user.nombre, user.mail, user.latitud, user.longitud, UserInfo.Id);
         }
     }
 }

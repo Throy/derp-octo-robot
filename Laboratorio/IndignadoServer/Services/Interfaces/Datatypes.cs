@@ -409,6 +409,12 @@ namespace IndignadoServer.Services
         public DateTime registerDate { get; set; }
 
         [DataMember]
+        public float locationLati { get; set; }
+
+        [DataMember]
+        public float locationLong { get; set; }
+
+        [DataMember]
         public int numberResourcesMarkedInappr { get; set; }
 
         [DataMember]
@@ -418,12 +424,24 @@ namespace IndignadoServer.Services
         public bool banned { get; set; }
     }
 
-    // Users Collection datatype
+    // User datatype - MovAdminController
     [DataContract]
-    public class DTUsersCol
+    public class DTUser_MovAdmin: DTUser
+    {
+    }
+
+    // Users Collection datatype - MovAdminController
+    [DataContract]
+    public class DTUsersCol_MovAdmin
     {
         [DataMember]
-        public Collection<DTUser> items { get; set; }
+        public Collection<DTUser_MovAdmin> items { get; set; }
+    }
+
+    // User datatype - UsersController
+    [DataContract]
+    public class DTUser_Users : DTUser
+    {
     }
 
 
@@ -530,14 +548,32 @@ namespace IndignadoServer.Services
             return dtThemeCategory;
         }
 
-        public static DTUser UserToDT(Usuario user)
+        public static DTUser_MovAdmin UserToDT_MovAdmin(Usuario user)
         {
-            DTUser dtUser = new DTUser();
+            DTUser_MovAdmin dtUser = new DTUser_MovAdmin();
             dtUser.id = user.id;
             dtUser.username = user.apodo;
             dtUser.fullName = user.nombre;
             dtUser.mail = user.mail;
             dtUser.registerDate = (user.fechaRegistro == null) ? new DateTime() : user.fechaRegistro.Value;
+            dtUser.locationLati = (float)user.latitud;
+            dtUser.locationLong = (float)user.longitud;
+            dtUser.numberResourcesMarkedInappr = (user.cantRecursosMarcadosInadecuados == null) ? 0 : user.cantRecursosMarcadosInadecuados.Value;
+            dtUser.numberResourcesDisabled = (user.cantRecursosDeshabilitados == null) ? 0 : user.cantRecursosDeshabilitados.Value;
+            dtUser.banned = (user.banned == null) ? false : user.banned.Value;
+            return dtUser;
+        }
+
+        public static DTUser_Users UserToDT_Users(Usuario user)
+        {
+            DTUser_Users dtUser = new DTUser_Users();
+            dtUser.id = user.id;
+            dtUser.username = user.apodo;
+            dtUser.fullName = user.nombre;
+            dtUser.mail = user.mail;
+            dtUser.registerDate = (user.fechaRegistro == null) ? new DateTime() : user.fechaRegistro.Value;
+            dtUser.locationLati = (float)user.latitud;
+            dtUser.locationLong = (float)user.longitud;
             dtUser.numberResourcesMarkedInappr = (user.cantRecursosMarcadosInadecuados == null) ? 0 : user.cantRecursosMarcadosInadecuados.Value;
             dtUser.numberResourcesDisabled = (user.cantRecursosDeshabilitados == null) ? 0 : user.cantRecursosDeshabilitados.Value;
             dtUser.banned = (user.banned == null) ? false : user.banned.Value;
@@ -645,6 +681,8 @@ namespace IndignadoServer.Services
             user.nombre = dtUser.fullName;
             user.mail = dtUser.mail;
             user.fechaRegistro = dtUser.registerDate;
+            user.latitud = dtUser.locationLati;
+            user.longitud = dtUser.locationLong;
             user.cantRecursosMarcadosInadecuados = dtUser.numberResourcesMarkedInappr;
             user.cantRecursosDeshabilitados = dtUser.numberResourcesDisabled;
             user.banned = dtUser.banned;

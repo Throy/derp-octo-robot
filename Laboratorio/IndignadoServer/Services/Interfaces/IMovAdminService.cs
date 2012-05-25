@@ -45,22 +45,22 @@ namespace IndignadoServer.Services
 
         // returns all users.
         [OperationContract]
-        DTUsersCol getUsersListFull();
+        DTUsersCol_MovAdmin getUsersListFull();
         
         // returns all users allowed.
         [OperationContract]
-        DTUsersCol getUsersListAllowed();
+        DTUsersCol_MovAdmin getUsersListAllowed();
 
         // returns all users banned.
         [OperationContract]
-        DTUsersCol getUsersListBanned();
+        DTUsersCol_MovAdmin getUsersListBanned();
 
         // bans a user.
         [OperationContract]
-        void banUser(DTUser user);
+        void banUser(DTUser_MovAdmin user);
 
         // reallows a user.
         [OperationContract]
-        void reallowUser(DTUser user);
+        void reallowUser(DTUser_MovAdmin user);
     }
 }

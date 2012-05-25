@@ -31,6 +31,7 @@ namespace IndignadoWeb.Controllers
         public const string viewResourcesList = "ResourcesList";
         public const string viewThemeCategoriesConfig = "ThemeCategoriesConfig";
         public const string viewThemeCategoriesList = "ThemeCategoriesList";
+        public const string viewUserConfig = "UserConfig";
         public const string viewUsersManage = "UsersManage";
 
         public const string urlMeetingsService = "http://localhost:8730/IndignadoServer/MeetingsService/";
@@ -373,16 +374,25 @@ namespace IndignadoWeb.Controllers
         // shows all movements in a map.
         public ActionResult MeetingsMap()
         {
+            // get movement
+            IMovAdminService serv2 = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv2.getMovement();
+            (serv2 as ICommunicationObject).Close();
+
+            // open service
             IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
-            // get all meetings
-            DTMeetingsCol meetings = serv.getMeetingsList();
+            // initialize model
+            MeetingsMapModel model = new MeetingsMapModel();
+            model.meetings = serv.getMeetingsList();
+            model.locationLati = movement.locationLati;
+            model.locationLong = movement.locationLong;
 
             // close service
             (serv as ICommunicationObject).Close();
 
             // send the meetings to the model.
-            return View(meetings);
+            return View(model);
         }
         public ActionResult ShowImage(String pathImg)
         {
@@ -1021,7 +1031,7 @@ namespace IndignadoWeb.Controllers
                     IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
 
                     // ban user
-                    DTUser dtUser = new DTUser();
+                    DTUser_MovAdmin dtUser = new DTUser_MovAdmin();
                     dtUser.id = id;
                     serv.banUser(dtUser);
 
@@ -1038,7 +1048,7 @@ namespace IndignadoWeb.Controllers
                     IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
 
                     // ban user
-                    DTUser dtUser = new DTUser();
+                    DTUser_MovAdmin dtUser = new DTUser_MovAdmin();
                     dtUser.id = id;
                     serv.reallowUser(dtUser);
 
@@ -1051,6 +1061,64 @@ namespace IndignadoWeb.Controllers
                 return View();
             }
             catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+
+        // configure user.
+        public ActionResult UserConfig()
+        {
+            // show configuration
+            IUsersService serv = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+
+            // get movement
+            DTUser_Users movement = serv.getUser();
+
+            // close service
+            (serv as ICommunicationObject).Close();
+
+            // send the meeting to the model.
+            UserConfigModel model = new UserConfigModel();
+            model.fullName = movement.fullName;
+            model.mail = movement.mail;
+            model.locationLati = movement.locationLati;
+            model.locationLong = movement.locationLong;
+
+            return View(model);
+        }
+
+        // configure user.
+        [HttpPost]
+        public ActionResult UserConfig(UserConfigModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    // open service
+                    IUsersService serv = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+
+                    // update user config
+                    DTUser_Users dtUser = new DTUser_Users();
+                    dtUser.fullName = model.fullName;
+                    dtUser.mail = model.mail;
+                    dtUser.locationLati = model.locationLati;
+                    dtUser.locationLong = model.locationLong;
+                    serv.setUser(dtUser);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    // send the movements to the model.
+                    return View(model);
+                }
+
+                // If we got this far, something failed, redisplay form
+                return RedirectToAction(HomeControllerConstants.viewUserConfig);
+            }
+            catch
             {
                 return RedirectToAction(HomeControllerConstants.viewAccessDenied);
             }

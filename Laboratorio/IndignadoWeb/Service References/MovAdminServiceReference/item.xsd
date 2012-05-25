@@ -105,7 +105,7 @@
   <xs:element name="getUsersListFullResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListFullResult" nillable="true" type="q9:DTUsersCol" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListFullResult" nillable="true" type="q9:DTUsersCol_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -117,7 +117,7 @@
   <xs:element name="getUsersListAllowedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListAllowedResult" nillable="true" type="q10:DTUsersCol" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListAllowedResult" nillable="true" type="q10:DTUsersCol_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -129,14 +129,14 @@
   <xs:element name="getUsersListBannedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListBannedResult" nillable="true" type="q11:DTUsersCol" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListBannedResult" nillable="true" type="q11:DTUsersCol_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="banUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q12:DTUser" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q12:DTUser_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -148,7 +148,7 @@
   <xs:element name="reallowUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q13:DTUser" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q13:DTUser_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

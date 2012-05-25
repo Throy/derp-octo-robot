@@ -408,15 +408,15 @@ namespace IndignadoWeb.MovAdminServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DTUsersCol", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUsersCol_MovAdmin", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
     [System.SerializableAttribute()]
-    public partial class DTUsersCol : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class DTUsersCol_MovAdmin : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private IndignadoWeb.MovAdminServiceReference.DTUser[] itemsField;
+        private IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin[] itemsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -429,7 +429,7 @@ namespace IndignadoWeb.MovAdminServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public IndignadoWeb.MovAdminServiceReference.DTUser[] items {
+        public IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin[] items {
             get {
                 return this.itemsField;
             }
@@ -453,8 +453,16 @@ namespace IndignadoWeb.MovAdminServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUser_MovAdmin", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTUser_MovAdmin : IndignadoWeb.MovAdminServiceReference.DTUser {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DTUser", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin))]
     public partial class DTUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -468,6 +476,12 @@ namespace IndignadoWeb.MovAdminServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float locationLatiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float locationLongField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string mailField;
@@ -529,6 +543,32 @@ namespace IndignadoWeb.MovAdminServiceReference {
                 if ((this.idField.Equals(value) != true)) {
                     this.idField = value;
                     this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float locationLati {
+            get {
+                return this.locationLatiField;
+            }
+            set {
+                if ((this.locationLatiField.Equals(value) != true)) {
+                    this.locationLatiField = value;
+                    this.RaisePropertyChanged("locationLati");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float locationLong {
+            get {
+                return this.locationLongField;
+            }
+            set {
+                if ((this.locationLongField.Equals(value) != true)) {
+                    this.locationLongField = value;
+                    this.RaisePropertyChanged("locationLong");
                 }
             }
         }
@@ -637,19 +677,19 @@ namespace IndignadoWeb.MovAdminServiceReference {
         IndignadoWeb.MovAdminServiceReference.DTThemeCategoriesColMovAdmin listThemeCategories();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getUsersListFull", ReplyAction="http://tempuri.org/IMovAdminService/getUsersListFullResponse")]
-        IndignadoWeb.MovAdminServiceReference.DTUsersCol getUsersListFull();
+        IndignadoWeb.MovAdminServiceReference.DTUsersCol_MovAdmin getUsersListFull();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getUsersListAllowed", ReplyAction="http://tempuri.org/IMovAdminService/getUsersListAllowedResponse")]
-        IndignadoWeb.MovAdminServiceReference.DTUsersCol getUsersListAllowed();
+        IndignadoWeb.MovAdminServiceReference.DTUsersCol_MovAdmin getUsersListAllowed();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getUsersListBanned", ReplyAction="http://tempuri.org/IMovAdminService/getUsersListBannedResponse")]
-        IndignadoWeb.MovAdminServiceReference.DTUsersCol getUsersListBanned();
+        IndignadoWeb.MovAdminServiceReference.DTUsersCol_MovAdmin getUsersListBanned();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/banUser", ReplyAction="http://tempuri.org/IMovAdminService/banUserResponse")]
-        void banUser(IndignadoWeb.MovAdminServiceReference.DTUser user);
+        void banUser(IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/reallowUser", ReplyAction="http://tempuri.org/IMovAdminService/reallowUserResponse")]
-        void reallowUser(IndignadoWeb.MovAdminServiceReference.DTUser user);
+        void reallowUser(IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -711,23 +751,23 @@ namespace IndignadoWeb.MovAdminServiceReference {
             return base.Channel.listThemeCategories();
         }
         
-        public IndignadoWeb.MovAdminServiceReference.DTUsersCol getUsersListFull() {
+        public IndignadoWeb.MovAdminServiceReference.DTUsersCol_MovAdmin getUsersListFull() {
             return base.Channel.getUsersListFull();
         }
         
-        public IndignadoWeb.MovAdminServiceReference.DTUsersCol getUsersListAllowed() {
+        public IndignadoWeb.MovAdminServiceReference.DTUsersCol_MovAdmin getUsersListAllowed() {
             return base.Channel.getUsersListAllowed();
         }
         
-        public IndignadoWeb.MovAdminServiceReference.DTUsersCol getUsersListBanned() {
+        public IndignadoWeb.MovAdminServiceReference.DTUsersCol_MovAdmin getUsersListBanned() {
             return base.Channel.getUsersListBanned();
         }
         
-        public void banUser(IndignadoWeb.MovAdminServiceReference.DTUser user) {
+        public void banUser(IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin user) {
             base.Channel.banUser(user);
         }
         
-        public void reallowUser(IndignadoWeb.MovAdminServiceReference.DTUser user) {
+        public void reallowUser(IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin user) {
             base.Channel.reallowUser(user);
         }
     }

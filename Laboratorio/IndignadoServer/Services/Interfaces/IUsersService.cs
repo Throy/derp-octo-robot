@@ -21,5 +21,13 @@ namespace IndignadoServer.Services
         // get uninterested in a theme category.
         [OperationContract]
         void getUninterestedThemeCategory(DTThemeCategoryUsers dtThemeCategory);
+
+        // returns the data of the user.
+        [OperationContract]
+        DTUser_Users getUser();
+
+        // updates the data of the user.
+        [OperationContract]
+        void setUser(DTUser_Users dtUser);
     }
 }

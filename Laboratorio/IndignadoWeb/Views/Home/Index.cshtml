@@ -22,7 +22,7 @@
     function googleMapsInitialize() {
         // initialize map
         var myOptions = {
-            center: new google.maps.LatLng(-32.8, -56),
+            center: new google.maps.LatLng(@Model.locationLati.ToString().Replace(",", "."), @Model.locationLong.ToString().Replace(",", ".")),
             zoom: 6,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };

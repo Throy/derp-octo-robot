@@ -80,11 +80,11 @@ namespace IndignadoServer.Services
         }
 
         // returns all users.
-        public DTUsersCol getUsersListFull()
+        public DTUsersCol_MovAdmin getUsersListFull()
         {
             // create new theme categories datatype collection
-            DTUsersCol dtUsersCol = new DTUsersCol();
-            dtUsersCol.items = new Collection<DTUser>();
+            DTUsersCol_MovAdmin dtUsersCol = new DTUsersCol_MovAdmin();
+            dtUsersCol.items = new Collection<DTUser_MovAdmin>();
 
             // get users from the controller
             Collection<Usuario> themeCategoriesCol = ControllersHub.Instance.getIMovAdminController().getUsersListFull();
@@ -92,7 +92,7 @@ namespace IndignadoServer.Services
             // add users to the datatype collection
             foreach (Usuario themeCategory in themeCategoriesCol)
             {
-                dtUsersCol.items.Add(ClassToDT.UserToDT(themeCategory));
+                dtUsersCol.items.Add(ClassToDT.UserToDT_MovAdmin(themeCategory));
             }
 
             // return the collection
@@ -100,11 +100,11 @@ namespace IndignadoServer.Services
         }
 
         // returns all users allowed.
-        public DTUsersCol getUsersListAllowed()
+        public DTUsersCol_MovAdmin getUsersListAllowed()
         {
             // create new theme categories datatype collection
-            DTUsersCol dtUsersCol = new DTUsersCol();
-            dtUsersCol.items = new Collection<DTUser>();
+            DTUsersCol_MovAdmin dtUsersCol = new DTUsersCol_MovAdmin();
+            dtUsersCol.items = new Collection<DTUser_MovAdmin>();
 
             // get users from the controller
             Collection<Usuario> themeCategoriesCol = ControllersHub.Instance.getIMovAdminController().getUsersListAllowed();
@@ -112,7 +112,7 @@ namespace IndignadoServer.Services
             // add users to the datatype collection
             foreach (Usuario themeCategory in themeCategoriesCol)
             {
-                dtUsersCol.items.Add(ClassToDT.UserToDT(themeCategory));
+                dtUsersCol.items.Add(ClassToDT.UserToDT_MovAdmin(themeCategory));
             }
 
             // return the collection
@@ -120,11 +120,11 @@ namespace IndignadoServer.Services
         }
 
         // returns all users banned.
-        public DTUsersCol getUsersListBanned()
+        public DTUsersCol_MovAdmin getUsersListBanned()
         {
             // create new theme categories datatype collection
-            DTUsersCol dtUsersCol = new DTUsersCol();
-            dtUsersCol.items = new Collection<DTUser>();
+            DTUsersCol_MovAdmin dtUsersCol = new DTUsersCol_MovAdmin();
+            dtUsersCol.items = new Collection<DTUser_MovAdmin>();
 
             // get users from the controller
             Collection<Usuario> themeCategoriesCol = ControllersHub.Instance.getIMovAdminController().getUsersListBanned();
@@ -132,7 +132,7 @@ namespace IndignadoServer.Services
             // add users to the datatype collection
             foreach (Usuario themeCategory in themeCategoriesCol)
             {
-                dtUsersCol.items.Add(ClassToDT.UserToDT(themeCategory));
+                dtUsersCol.items.Add(ClassToDT.UserToDT_MovAdmin(themeCategory));
             }
 
             // return the collection
@@ -141,14 +141,14 @@ namespace IndignadoServer.Services
 
         // bans a user.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
-        public void banUser(DTUser user)
+        public void banUser(DTUser_MovAdmin user)
         {
             ControllersHub.Instance.getIMovAdminController().banUser(DTToClass.DTToUser (user));
         }
 
         // reallows a user.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
-        public void reallowUser(DTUser user)
+        public void reallowUser(DTUser_MovAdmin user)
         {
             ControllersHub.Instance.getIMovAdminController().reallowUser(DTToClass.DTToUser(user));
         }

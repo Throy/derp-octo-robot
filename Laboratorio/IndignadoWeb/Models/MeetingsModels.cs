@@ -7,9 +7,21 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using IndignadoWeb.MeetingsServiceReference;
 
 namespace IndignadoWeb.Models
 {
+    // model for meetings map
+
+    public class MeetingsMapModel
+    {
+        public DTMeetingsCol meetings { get; set; }
+
+        public float locationLati { get; set; }
+
+        public float locationLong { get; set; }
+    }
+
     // model for Create meeting
 
     public class CreateMeetingModel

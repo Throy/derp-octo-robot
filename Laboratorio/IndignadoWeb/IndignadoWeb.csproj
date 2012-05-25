@@ -214,7 +214,7 @@
     <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTThemeCategoriesColMovAdmin.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTUsersCol.datasource">
+    <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTUsersCol_MovAdmin.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\MovAdminServiceReference\item.xsd">
@@ -315,6 +315,9 @@
     <None Include="Service References\UsersServiceReference\IndignadoWeb.UsersServiceReference.DTThemeCategoriesColUsers.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\UsersServiceReference\IndignadoWeb.UsersServiceReference.DTUser_Users.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\UsersServiceReference\item.disco" />
     <None Include="Service References\UsersServiceReference\configuration91.svcinfo" />
     <None Include="Service References\UsersServiceReference\configuration.svcinfo" />
@@ -402,6 +405,7 @@
     <Content Include="Views\Home\MeetingsListOnInterest.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTUser.cshtml" />
     <Content Include="Views\Home\UsersManage.cshtml" />
+    <Content Include="Views\Home\UserConfig.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

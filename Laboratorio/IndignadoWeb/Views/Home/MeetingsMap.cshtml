@@ -1,5 +1,5 @@
 ﻿<!-- model -->
-@model IndignadoWeb.MeetingsServiceReference.DTMeetingsCol
+@model IndignadoWeb.Models.MeetingsMapModel
 
 <!-- page title -->
 @{
@@ -14,12 +14,11 @@
 </script>
 
 <script type="text/javascript">
-    
-    
+    // execture on view initialize
     function googleMapsInitialize() {
         // initialize map
         var myOptions = {
-            center: new google.maps.LatLng(-32.8, -56),
+            center: new google.maps.LatLng(@Model.locationLati.ToString().Replace(",", "."), @Model.locationLong.ToString().Replace(",", ".")),
             zoom: 6,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -27,7 +26,7 @@
         var infoWindow = new google.maps.InfoWindow({ content : "cargando..."});
         @{int i = 0; }
         
-        @foreach (var item in Model.items)
+        @foreach (var item in Model.meetings.items)
         {
             String latitud = item.locationLati.ToString().Replace(",", ".");
             String longitud = item.locationLong.ToString().Replace(",", ".");

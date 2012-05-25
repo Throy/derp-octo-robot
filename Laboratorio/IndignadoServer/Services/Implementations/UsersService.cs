@@ -46,5 +46,19 @@ namespace IndignadoServer.Services
         {
             ControllersHub.Instance.getIUsersController().getUninterestedThemeCategory(DTToClass.DTToThemeCategory(dtThemeCategory));
         }
+
+        // returns the data of the user.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public DTUser_Users getUser()
+        {
+            return ClassToDT.UserToDT_Users (ControllersHub.Instance.getIUsersController().getUser());
+        }
+
+        // updates the data of the user.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void setUser(DTUser_Users dtUser)
+        {
+            ControllersHub.Instance.getIUsersController().setUser(DTToClass.DTToUser(dtUser));
+        }
     }
 }

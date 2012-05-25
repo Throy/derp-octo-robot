@@ -18,5 +18,11 @@ namespace IndignadoServer.Controllers
 
         // get uninterested in a theme category.
         void getUninterestedThemeCategory(CategoriasTematica themeCategory);
+
+        // returns the data of the user.
+        Usuario getUser();
+        
+        // updates the data of the user.
+        void setUser(Usuario user);
     }
 }

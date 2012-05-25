@@ -12,11 +12,32 @@ namespace IndignadoWeb.Models
 
     public class UsersModel
     {
-        public DTUsersCol users { get; set; }
+        public DTUsersCol_MovAdmin users { get; set; }
 
         // 0: show everyone.
         // 1: show allowed users.
         // 2: show banned users.
         public int listType { get; set; }
+    }
+
+    // model for User config
+
+    public class UserConfigModel
+    {
+        [Required]
+        [Display(Name = "Full name: ")]
+        public String fullName { get; set; }
+
+        [Required]
+        [Display(Name = "Email address")]
+        public String mail { get; set; }
+
+        [Required]
+        [Display(Name = "Location - Latitude: ")]
+        public float locationLati { get; set; }
+
+        [Required]
+        [Display(Name = "Location - Longitude: ")]
+        public float locationLong { get; set; }
     }
 }
