@@ -395,8 +395,9 @@ namespace IndignadoWeb.Controllers
         {
             try
             {
-                // check if the user is a registered user.
-                IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+                // get movement
+                IMovAdminService serv2 = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+                IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv2.getMovement();
             
                 // initialize model
                 CreateMeetingModel model = new CreateMeetingModel();
@@ -406,9 +407,13 @@ namespace IndignadoWeb.Controllers
                 model.hoursEnd = 0;
                 model.minutesBegin = 0;
                 model.minutesEnd = 0;
+                model.locationLati = movement.locationLati;
+                model.locationLong = movement.locationLong;
 
+                // get theme categories
                 model.themeCategoriesId = new Collection<int> ();
 
+                IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
                 DTThemeCategoriesColMeetings themeCats = serv.getThemeCategoriesList();
 
                 model.themeCategories = new Collection<SelectListItem>();

@@ -53,9 +53,17 @@
                 }
             }
         }
+        //add default marker
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(parseFloat (document.getElementById("locationLati").value.replace(",",".")), parseFloat (document.getElementById("locationLong").value.replace(",","."))),
+            map: map
+        });
+        markersArray.push(marker);
+        document.getElementById("locationLong").value = marker.getPosition().lng().toString();
+        document.getElementById("locationLati").value = marker.getPosition().lat().toString();
     }
     function placeMarker(location) {
-    map.clearOverlays();
+        map.clearOverlays();
         var marker = new google.maps.Marker({
             position: location,
             map: map
@@ -81,9 +89,6 @@
 </p>
 
 <div id="map_canvas" style="width:400px; height:310px; float:left; margin-left:70px; border-style:outset; margin-top:2px; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA"></div>
-
-<script type="text/javascript"> googleMapsInitialize();</script>
-
 
 <form action="/Home/MeetingCreate" method="post" enctype="multipart/form-data">
     @Html.ValidationSummary(true, "Some fields have errors, please fix them.")
@@ -159,4 +164,4 @@
     </div>
 </form>
 
-
+<script type="text/javascript">googleMapsInitialize();</script>
