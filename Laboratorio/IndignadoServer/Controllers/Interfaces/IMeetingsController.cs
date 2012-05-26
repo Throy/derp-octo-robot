@@ -8,12 +8,6 @@ namespace IndignadoServer.Controllers
         // returns a meeting by its id.
         Convocatoria getMeeting(int idMeeting);
 
-        // adds a meeting
-        /*
-        [OperationContract]
-        void addEmptyMeeting();
-         * */
-
         // creates a meeting
         void createMeeting(Convocatoria meeting, Collection<CategoriasTematica> themeCategories);
 

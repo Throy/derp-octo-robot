@@ -459,7 +459,7 @@ namespace IndignadoServer.Services
             dtMeeting.id = meeting.id;
             dtMeeting.idMovement = meeting.idMovimiento;
             dtMeeting.name = meeting.titulo;
-            dtMeeting.description = meeting.descripcion;
+            dtMeeting.description = meeting.descripcion + " ";
             dtMeeting.locationLati = (float)meeting.latitud;
             dtMeeting.locationLong = (float)meeting.longitud;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;

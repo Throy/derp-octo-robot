@@ -369,7 +369,6 @@
     <Content Include="Views\SysAdmin\MovementCreate.cshtml" />
     <Content Include="Views\SysAdmin\MovementsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMovement.cshtml" />
-    <Content Include="Views\Home\MeetingsMap.cshtml" />
     <Content Include="Views\Home\MovementConfig.cshtml" />
     <Content Include="Views\Home\NewsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTRssItem.cshtml" />

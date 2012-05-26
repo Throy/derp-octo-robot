@@ -129,16 +129,25 @@ namespace IndignadoWeb.Controllers
         // shows all meetings.
         public ActionResult MeetingsList()
         {
+            // get movement
+            IMovAdminService serv2 = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv2.getMovement();
+            (serv2 as ICommunicationObject).Close();
+
+            // open service
             IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
-            // get all meetings
-            DTMeetingsCol meetings = serv.getMeetingsList();
+            // initialize model
+            MeetingsMapModel model = new MeetingsMapModel();
+            model.meetings = serv.getMeetingsList();
+            model.locationLati = movement.locationLati;
+            model.locationLong = movement.locationLong;
 
             // close service
             (serv as ICommunicationObject).Close();
 
             // send the meetings to the model.
-            return View(meetings);
+            return View(model);
         }
 
         // shows all meetings - change attendance.
@@ -208,16 +217,25 @@ namespace IndignadoWeb.Controllers
         {
             try
             {
+                // get user
+                IUsersService serv2 = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+                DTUser_Users user = serv2.getUser();
+                (serv2 as ICommunicationObject).Close();
+
+                // open service
                 IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
-                // get all meetings
-                DTMeetingsCol meetings = serv.getMeetingsListOnAttend();
+                // initialize model
+                MeetingsMapModel model = new MeetingsMapModel();
+                model.meetings = serv.getMeetingsListOnAttend();
+                model.locationLati = user.locationLati;
+                model.locationLong = user.locationLong;
 
                 // close service
                 (serv as ICommunicationObject).Close();
 
                 // send the meetings to the model.
-                return View(meetings);
+                return View(model);
             }
             catch (Exception error)
             {
@@ -292,16 +310,25 @@ namespace IndignadoWeb.Controllers
         {
             try
             {
+                // get user
+                IUsersService serv2 = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+                DTUser_Users user = serv2.getUser();
+                (serv2 as ICommunicationObject).Close();
+
+                // open service
                 IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
-                // get all meetings
-                DTMeetingsCol meetings = serv.getMeetingsListOnInterest();
+                // initialize model
+                MeetingsMapModel model = new MeetingsMapModel();
+                model.meetings = serv.getMeetingsListOnInterest();
+                model.locationLati = user.locationLati;
+                model.locationLong = user.locationLong;
 
                 // close service
                 (serv as ICommunicationObject).Close();
 
                 // send the meetings to the model.
-                return View(meetings);
+                return View(model);
             }
             catch (Exception error)
             {
@@ -384,7 +411,7 @@ namespace IndignadoWeb.Controllers
 
             // initialize model
             MeetingsMapModel model = new MeetingsMapModel();
-            model.meetings = serv.getMeetingsList();
+            model.meetings = serv.getMeetingsListOnInterest();
             model.locationLati = movement.locationLati;
             model.locationLong = movement.locationLong;
 
@@ -394,6 +421,7 @@ namespace IndignadoWeb.Controllers
             // send the meetings to the model.
             return View(model);
         }
+
         public ActionResult ShowImage(String pathImg)
         {
             var file = Server.MapPath(pathImg);
