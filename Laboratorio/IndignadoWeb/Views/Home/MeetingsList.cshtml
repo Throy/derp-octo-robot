@@ -8,8 +8,14 @@
 
 <!-- page content -->
 
-<h2>Meetings list</h2>
+<h2 style="text-align:center">Meetings list</h2>
 
 <p>
     @Html.DisplayFor(m => m.items)
 </p>
+@{
+    if (Model.items.Count() > 10){
+        <div><span>Anterior</span></div> <div><span>Siguiente</span></div>
+    }
+}
+    

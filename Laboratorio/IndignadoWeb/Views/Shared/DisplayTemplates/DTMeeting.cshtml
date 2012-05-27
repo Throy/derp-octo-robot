@@ -1,55 +1,96 @@
 ﻿<!-- model -->
 @model IndignadoWeb.MeetingsServiceReference.DTMeeting
            
-<div class="MeetingList">
-    <!-- header -->
-    <h3 class="Header">@Html.DisplayFor(m => m.name)</h3>
-     
-    <!-- fields -->
-    <span class="field" >Description: @Html.DisplayFor(m => m.description)</span>
-    <br />
-    <br />
-    <span class="field">Beginning date: @Html.DisplayFor(m => m.dateBegin)</span>
-    <br />
-    <span class="field">Ending date: @Html.DisplayFor(m => m.dateEnd)</span>
-    <br />
-    <span class="field">Location - Latitude: @Html.DisplayFor(m => m.locationLati)</span>
-    <br />
-    <span class="field">Location - Longitude: @Html.DisplayFor(m => m.locationLong)</span>
-    <br />
-    <span class="field">Min quorum: @Html.DisplayFor(m => m.minQuorum)</span>
-    <br />
-    <span class="field">Attendance: @Html.DisplayFor(m => m.numberAttendants)</span>
-    <br />
-    
-    @{
-        if (@Model.themeCategories != null && Model.themeCategories.Length >= 1) {
-            <br />
-            <p>
-                Theme categories:
-                <br />
-                @Html.DisplayFor(m => m.themeCategories)
-            </p>
+<script src="/Scripts/jquery-1.5.1.js" type="text/javascript"></script>
+<script src="/Scripts/jquery-ui-1.8.11.js" type="text/javascript"></script>
+<script  type="text/javascript">
+    function ampliar(id) {
+        if ($("#" + id.toString() + "sign").text() == "+") {
+            $("#" + id.toString() + "sign").text("-");
+            $("." + id.toString() + "sign").css("margin-left", "10px");
+            $("." + id.toString() + "signdiv").css("width", "25px");
+            $("." + id.toString() + "s").css("overflow", "auto");
+            $("." + id.toString() + "s").css("height", "220");
+            $("." + id.toString() + "m").css("height", "370px");
+            $("." + id.toString() + "h").show();
+        }
+        else {
+            $("#" + id.toString() + "sign").text("+");
+            $("." + id.toString() + "sign").css("margin-left", "16px");
+            $("." + id.toString() + "signdiv").css("width", "38px");
+            $("." + id.toString() + "s").css("overflow", "hidden");
+            $("." + id.toString() + "s").css("height", "90");
+            $("." + id.toString() + "m").css("height", "215px");
+            $("." + id.toString() + "h").hide();
         }
     }
-    
+</script>
+<div class="MeetingList @Model.id.ToString().Insert(Model.id.ToString().Count(), "m")">
+    <!-- header -->
 
+    <h3 class="Header">@Html.DisplayFor(m => m.name)</h3>
+    
+    <div class="ampliar @Model.id.ToString().Insert(Model.id.ToString().Count(),"signdiv")" onclick="ampliar(@Model.id);">
+         <label class="ampliarText @Model.id.ToString().Insert(Model.id.ToString().Count(), "sign")" id="@Model.id.ToString().Insert(Model.id.ToString().Count(), "sign")">
+            +
+         </label> 
+    </div>
+
+    <img class="image" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null) ? @Model.imagePath.ToString() : "meeting_default.jpg"))" alt="Image" />
+
+    <div class="scrollable @Model.id.ToString().Insert(Model.id.ToString().Count(),"s")">
+        <table class="list" border="0" rules="none">
+            <!-- fields -->
+            <tr class="field"><td class="field"><span>Description: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.description)</div></td></tr>
+    
+            <tr class="field"><td class="field"><span>Beginning date: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.dateBegin)</div></td></tr>
+    
+            <tr class="field"><td class="field"><span>Ending date: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.dateEnd)</div></td></tr>
+        </table>
+        <div class="hide @Model.id.ToString().Insert(Model.id.ToString().Count(), "h")">
+            <table class="list" border="0" rules="none">
+                <tr class="field"><td class="field"><span>Location - Latitude: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.locationLati)</div></td></tr>
+    
+                <tr class="field"><td class="field"><span>Location - Longitude: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.locationLong)</div></td></tr>
+    
+                <tr class="field"><td class="field"><span>Min quorum: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.minQuorum)</div></td></tr>
+    
+                <tr class="field"><td class="field"><span>Attendance: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.numberAttendants)</div></td></tr>
+    
+            </table>
+    
+            @{
+                if (@Model.themeCategories != null && Model.themeCategories.Length >= 1) {
+                    <br />
+                    <div class="tableCategories">
+                        Categories:
+                        <br />
+                        @Html.DisplayFor(m => m.themeCategories)
+                    </div>
+                }
+            }
+        </div>
+    </div>
     <!-- attendance buttons -->
+    <div class="MeetingButton">
     @using (Html.BeginForm(new { id = @Model.id }))
     {
+        
         if (@Model.myAttendance != 1)
         {
-            <input class="boton-big-red MeetingButton" type="submit" name="buttonDoAttend" value="Do attend" />
+            <input class="boton-big-red" type="submit" name="buttonDoAttend" value="Do attend" />
         }
 
         if (Model.myAttendance != 0)
         {
-            <input class="boton-big-red MeetingButton" type="submit" name="buttonDontAttend" value="Don't attend" />
+            <input class="boton-big-red" type="submit" name="buttonDontAttend" value="Don't attend" />
         }
 
         if (Model.myAttendance != -1)
         {
-            <input class="boton-big-red MeetingButton" type="submit" name="buttonUnconfirmAttendance" value="Unconfirm attendance" />
+            <input class="boton-big-red" type="submit" name="buttonUnconfirmAttendance" value="Unconfirm attendance" />
         }
+        
     }
+    </div>
 </div>

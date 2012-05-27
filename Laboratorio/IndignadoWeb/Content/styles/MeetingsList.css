@@ -1,0 +1,95 @@
+﻿.MeetingList
+{
+    position:relative;
+    margin-left:40px;
+    margin-bottom:10px;
+    width: 700px;
+    height:215px;
+    font-family:Comic Sans MS;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    border-style:outset; 
+    border-width:2px; 
+    border-color:Gray;
+    box-shadow:0 1px 2px #aaa; 
+    -moz-box-shadow:0 2px 3px #AAAAAA
+}
+
+.MeetingButton
+{
+    position: absolute;
+    bottom:0;
+    
+    margin-left: 256px;
+    margin-bottom:10px;
+}
+
+.Header
+{
+    text-align:center;
+}
+
+.field
+{
+    margin-left:15px;
+    border-style:none;
+}
+
+.fieldvalue
+{
+     text-align:center;
+     margin-right:25px;
+     height:10px;
+     
+ }
+ .list
+ {
+     margin-left:20px;
+     width:500px;
+     border-style:none;
+     float:left;
+ }
+ .image
+ {
+     margin-left:20px;
+     float:left;
+ }
+ .tableCategories
+ {
+     text-align:center;
+     margin-right:90px;
+ }
+ .hide
+ {
+     display:none;
+ }
+ .scrollable
+ {
+    height:90px;
+    /* overflow:auto;    */
+ }
+ .ampliar
+ {
+    position: absolute;
+    bottom:0;
+    right:0;
+    height:15px;
+    width:38px;
+    margin-right:333px;
+    margin-bottom:58px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background-color:#997777;/*#e3701b;*/
+}
+.ampliarText
+{
+    position:relative;
+    font-size:90%;
+    vertical-align:middle;
+    margin-left:16px;
+    padding-bottom:18px;
+    color:White;
+    
+}
