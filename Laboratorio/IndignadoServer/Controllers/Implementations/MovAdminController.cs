@@ -174,6 +174,8 @@ namespace IndignadoServer.Controllers
         private Collection<Usuario> toUsersCol(IEnumerable<Usuario> usersEnum)
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+
+            // create new users collection.
             Collection<Usuario> usersCol = new Collection<Usuario>();
 
             // for each user in the enumerable, ...
@@ -215,6 +217,75 @@ namespace IndignadoServer.Controllers
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             indignadoContext.ExecuteCommand("UPDATE Usuarios SET banned = {0} WHERE id = {1}", 0, user.id);
+        }
+
+        // returns all resources.
+        public Collection<Recurso> getResourcesListAll()
+        {
+            // get all resources from this movement.
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
+                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE Usuarios.idMovimiento = {0}", IdMovement);
+            return toResourcesCol(resourcesEnum);
+        }
+
+        // returns all resources enabled.
+        public Collection<Recurso> getResourcesListEnabled()
+        {
+            // get all resources from this movement.
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
+                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
+            return toResourcesCol(resourcesEnum);
+        }
+
+        // returns all resources disabled.
+        public Collection<Recurso> getResourcesListDisabled()
+        {
+            // get all resources from this movement.
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
+                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 1);
+            return toResourcesCol(resourcesEnum);
+        }
+
+        // convert users enumerable to collection.
+        private Collection<Recurso> toResourcesCol(IEnumerable<Recurso> resourcesEnum)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+
+            // create new resources collection.
+            Collection<Recurso> recursosCol = new Collection<Recurso>();
+
+            // for each resource in the enumerable, ...
+            foreach (Recurso resource in resourcesEnum)
+            {
+                // get number of likes
+                IEnumerable<int> numbersLikes = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM Aprobaciones WHERE idRecurso = {0}", resource.id);
+                foreach (int numberLikes in numbersLikes)
+                {
+                    resource.cantAprobaciones = numberLikes;
+                }
+
+                // add item to the collection
+                recursosCol.Add(resource);
+            }
+
+            return recursosCol;
+        }
+
+        // bans a resource.
+        public void disableResource(Recurso resource)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            indignadoContext.ExecuteCommand("UPDATE Recursos SET deshabilitado = {0} WHERE id = {1}", 1, resource.id);
+        }
+
+        // reallows a resource.
+        public void enableResource(Recurso resource)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            indignadoContext.ExecuteCommand("UPDATE Recursos SET deshabilitado = {0} WHERE id = {1}", 0, resource.id);
         }
     }
 }

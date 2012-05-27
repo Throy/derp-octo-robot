@@ -208,6 +208,9 @@
     <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTMovement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTResourcesCol_MovAdmin.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTRssSourcesCol1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -227,10 +230,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\MovAdminServiceReference\MovAdminService.wsdl" />
-    <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTResource.datasource">
+    <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol_NewsResources.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol.datasource">
+    <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SessionServiceReference\IndignadoWeb.SessionServiceReference.DTLoginInfo.datasource">
@@ -369,12 +372,11 @@
     <Content Include="Views\SysAdmin\MovementCreate.cshtml" />
     <Content Include="Views\SysAdmin\MovementsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMovement.cshtml" />
-    <Content Include="Views\Home\MeetingsMap.cshtml" />
     <Content Include="Views\Home\MovementConfig.cshtml" />
     <Content Include="Views\Home\NewsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTRssItem.cshtml" />
     <Content Include="Views\Home\ResourcesList.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\DTResource.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTResource_NewsResources.cshtml" />
     <Content Include="Views\Home\ResourceShare.cshtml" />
     <Content Include="Views\Home\AccessDenied.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTRssSource.cshtml" />
@@ -406,6 +408,8 @@
     <Content Include="Views\Shared\DisplayTemplates\DTUser.cshtml" />
     <Content Include="Views\Home\UsersManage.cshtml" />
     <Content Include="Views\Home\UserConfig.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTResource_MovAdmin.cshtml" />
+    <Content Include="Views\Home\ResourcesManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

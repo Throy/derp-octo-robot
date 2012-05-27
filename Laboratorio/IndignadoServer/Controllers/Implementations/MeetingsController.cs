@@ -8,6 +8,13 @@ namespace IndignadoServer.Controllers
 {
     class MeetingsController : IndignadoController, IMeetingsController
     {
+        // ********************
+        // controller constants
+        // ********************
+
+        // maximum distance from a user that makes a meeting interesting, measured in km.
+        const float maxDistanceInterest = 20.0F;
+
         // ******************
         // controller methods
         // ******************
@@ -86,9 +93,66 @@ namespace IndignadoServer.Controllers
         public Collection<Convocatoria> getMeetingsListOnInterest()
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>
+
+            // get meetings by theme category.
+            IEnumerable<Convocatoria> meetingsEnumByThemeCat = indignadoContext.ExecuteQuery<Convocatoria>
                 ("SELECT Convocatorias.id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum, logo, fechaInicio, fechaFin FROM Convocatorias INNER JOIN (SELECT Convocatorias.id FROM Convocatorias LEFT JOIN CatTemasConvocatorias ON (CatTemasConvocatorias.idConvocatoria = Convocatorias.id) LEFT JOIN Intereses ON (Intereses.idCategoriaTematica = CatTemasConvocatorias.idCategoriaTematica) WHERE Intereses.idUsuario = {0} GROUP BY Convocatorias.id) ConvocatoriasInteres ON ConvocatoriasInteres.id = Convocatorias.id", UserInfo.Id);
-            return toCollectionConvocatoria(meetingsEnum);
+            Collection<Convocatoria> meetingsCol = toCollectionConvocatoria(meetingsEnumByThemeCat);
+
+            // add meetings by location
+            IEnumerable<Convocatoria> meetingsEnumAll = indignadoContext.ExecuteQuery<Convocatoria>
+                ("SELECT id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum, logo, fechaInicio, fechaFin FROM Convocatorias WHERE idMovimiento = {0}", IdMovement);
+
+            // get the user's location
+            float latiUserRadians = 0.0F;
+            float longUserRadians = 0.0F;
+            IEnumerable<Usuario> usuarios = indignadoContext.ExecuteQuery<Usuario>
+                ("SELECT * FROM Usuarios WHERE (id = {0})", UserInfo.Id);
+            foreach (Usuario usuario in usuarios)
+            {
+                latiUserRadians = (float) (usuario.latitud * Math.PI / 180);
+                longUserRadians = (float) (usuario.longitud * Math.PI / 180);
+            }
+
+            foreach (Convocatoria meeting in meetingsEnumAll)
+            {
+                if (! meetingsCol.Any(m => m.id == meeting.id))
+                {
+
+                    float latiMeetingRadians = (float)(meeting.latitud * Math.PI / 180);
+                    float longMeetingRadians = (float)(meeting.longitud * Math.PI / 180);
+                    if (6378 * Math.Acos
+                        (Math.Sin(latiUserRadians) * Math.Sin(latiMeetingRadians)
+                        + Math.Cos(latiUserRadians) * Math.Cos(latiMeetingRadians) * Math.Cos(longUserRadians - longMeetingRadians)) < maxDistanceInterest)
+                    {
+                        // get number of attendants
+                        IEnumerable<int> numbersAttendants = indignadoContext.ExecuteQuery<int>
+                            ("SELECT COUNT(*) FROM Asistencias WHERE (idConvocatoria = {0}) AND (hayAsistencia = 1)", meeting.id);
+                        foreach (int numberAttendants in numbersAttendants)
+                        {
+                            meeting.cantAsistencias = numberAttendants;
+                        }
+
+                        // get own attendance
+                        meeting.miAsistencia = 0;
+                        if (UserInfo != null)
+                        {
+                            IEnumerable<int> myAttendances = indignadoContext.ExecuteQuery<int>
+                                ("SELECT hayAsistencia FROM Asistencias WHERE (idConvocatoria = {0}) AND (idUsuario = {1})", meeting.id, UserInfo.Id);
+                            foreach (int myAttendance in myAttendances)
+                            {
+                                meeting.miAsistencia = myAttendance;
+                            }
+                        }
+
+                        // add item to the collection
+                        meetingsCol.Add(meeting);
+                    }
+                }
+            }
+
+            // return the collection.
+            return meetingsCol;
         }
 
 

@@ -169,15 +169,15 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DTResourcesCol", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTResourcesCol_NewsResources", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
     [System.SerializableAttribute()]
-    public partial class DTResourcesCol : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class DTResourcesCol_NewsResources : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private IndignadoWeb.NewsResourcesServiceReference.DTResource[] itemsField;
+        private IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources[] itemsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -190,7 +190,7 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public IndignadoWeb.NewsResourcesServiceReference.DTResource[] items {
+        public IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources[] items {
             get {
                 return this.itemsField;
             }
@@ -214,8 +214,16 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTResource_NewsResources", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTResource_NewsResources : IndignadoWeb.NewsResourcesServiceReference.DTResource {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DTResource", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources))]
     public partial class DTResource : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -226,6 +234,9 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string descriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int disabledField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int iLikeItField;
@@ -289,6 +300,19 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
                 if ((object.ReferenceEquals(this.descriptionField, value) != true)) {
                     this.descriptionField = value;
                     this.RaisePropertyChanged("description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int disabled {
+            get {
+                return this.disabledField;
+            }
+            set {
+                if ((this.disabledField.Equals(value) != true)) {
+                    this.disabledField = value;
+                    this.RaisePropertyChanged("disabled");
                 }
             }
         }
@@ -441,25 +465,25 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         IndignadoWeb.NewsResourcesServiceReference.DTRssItemsCol getNewsList();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/getResourcesList", ReplyAction="http://tempuri.org/INewsResourcesService/getResourcesListResponse")]
-        IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol getResourcesList();
+        IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol_NewsResources getResourcesList();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/createResource", ReplyAction="http://tempuri.org/INewsResourcesService/createResourceResponse")]
-        void createResource(IndignadoWeb.NewsResourcesServiceReference.DTResource dtResource);
+        void createResource(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources dtResource);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/getResourceData", ReplyAction="http://tempuri.org/INewsResourcesService/getResourceDataResponse")]
-        IndignadoWeb.NewsResourcesServiceReference.DTResource getResourceData(string link);
+        IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources getResourceData(string link);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/likeResource", ReplyAction="http://tempuri.org/INewsResourcesService/likeResourceResponse")]
-        void likeResource(IndignadoWeb.NewsResourcesServiceReference.DTResource dtResource);
+        void likeResource(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources dtResource);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/unlikeResource", ReplyAction="http://tempuri.org/INewsResourcesService/unlikeResourceResponse")]
-        void unlikeResource(IndignadoWeb.NewsResourcesServiceReference.DTResource dtResource);
+        void unlikeResource(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources dtResource);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/markResourceInappropriate", ReplyAction="http://tempuri.org/INewsResourcesService/markResourceInappropriateResponse")]
-        void markResourceInappropriate(IndignadoWeb.NewsResourcesServiceReference.DTResource resource);
+        void markResourceInappropriate(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources resource);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/unmarkResourceInappropriate", ReplyAction="http://tempuri.org/INewsResourcesService/unmarkResourceInappropriateResponse")]
-        void unmarkResourceInappropriate(IndignadoWeb.NewsResourcesServiceReference.DTResource resource);
+        void unmarkResourceInappropriate(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources resource);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -493,31 +517,31 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
             return base.Channel.getNewsList();
         }
         
-        public IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol getResourcesList() {
+        public IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol_NewsResources getResourcesList() {
             return base.Channel.getResourcesList();
         }
         
-        public void createResource(IndignadoWeb.NewsResourcesServiceReference.DTResource dtResource) {
+        public void createResource(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources dtResource) {
             base.Channel.createResource(dtResource);
         }
         
-        public IndignadoWeb.NewsResourcesServiceReference.DTResource getResourceData(string link) {
+        public IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources getResourceData(string link) {
             return base.Channel.getResourceData(link);
         }
         
-        public void likeResource(IndignadoWeb.NewsResourcesServiceReference.DTResource dtResource) {
+        public void likeResource(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources dtResource) {
             base.Channel.likeResource(dtResource);
         }
         
-        public void unlikeResource(IndignadoWeb.NewsResourcesServiceReference.DTResource dtResource) {
+        public void unlikeResource(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources dtResource) {
             base.Channel.unlikeResource(dtResource);
         }
         
-        public void markResourceInappropriate(IndignadoWeb.NewsResourcesServiceReference.DTResource resource) {
+        public void markResourceInappropriate(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources resource) {
             base.Channel.markResourceInappropriate(resource);
         }
         
-        public void unmarkResourceInappropriate(IndignadoWeb.NewsResourcesServiceReference.DTResource resource) {
+        public void unmarkResourceInappropriate(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources resource) {
             base.Channel.unmarkResourceInappropriate(resource);
         }
     }

@@ -12,30 +12,30 @@ namespace IndignadoServer.Services
 
         // returns all resources.
         [OperationContract]
-        DTResourcesCol getResourcesList();
+        DTResourcesCol_NewsResources getResourcesList();
 
         // creates a resource.
         [OperationContract]
-        void createResource (DTResource dtResource);
+        void createResource (DTResource_NewsResources dtResource);
 
         // gets resource data from the link.
         [OperationContract]
-        DTResource getResourceData(string link);
+        DTResource_NewsResources getResourceData(string link);
 
         // likes a resource.
         [OperationContract]
-        void likeResource(DTResource dtResource);
+        void likeResource(DTResource_NewsResources dtResource);
 
         // unlikes a resource.
         [OperationContract]
-        void unlikeResource(DTResource dtResource);
+        void unlikeResource(DTResource_NewsResources dtResource);
 
         // mark a resource as inappropriate.
         [OperationContract]
-        void markResourceInappropriate(DTResource resource);
+        void markResourceInappropriate(DTResource_NewsResources resource);
 
         // unmark a resource as inappropriate.
         [OperationContract]
-        void unmarkResourceInappropriate(DTResource resource);
+        void unmarkResourceInappropriate(DTResource_NewsResources resource);
     }
 }

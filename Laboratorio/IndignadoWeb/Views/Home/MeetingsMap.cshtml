@@ -19,7 +19,7 @@
         // initialize map
         var myOptions = {
             center: new google.maps.LatLng(@Model.locationLati.ToString().Replace(",", "."), @Model.locationLong.ToString().Replace(",", ".")),
-            zoom: 6,
+            zoom: 10,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);

@@ -152,5 +152,79 @@ namespace IndignadoServer.Services
         {
             ControllersHub.Instance.getIMovAdminController().reallowUser(DTToClass.DTToUser(user));
         }
+
+        // returns all resources.
+        public DTResourcesCol_MovAdmin getResourcesListAll()
+        {
+            // get resources datatypes.
+            Collection<Recurso> recursosCol = ControllersHub.Instance.getIMovAdminController().getResourcesListAll();
+
+            // create new resources datatypes collection.
+            DTResourcesCol_MovAdmin dtResourcesCol = new DTResourcesCol_MovAdmin();
+            dtResourcesCol.items = new Collection<DTResource_MovAdmin>();
+
+            // add meetings to the datatypes collection.
+            foreach (Recurso resource in recursosCol)
+            {
+                dtResourcesCol.items.Add(ClassToDT.ResourceToDT_MovAdmin(resource));
+            }
+
+            // return the collection.
+            return dtResourcesCol;
+        }
+
+        // returns all resources enabled.
+        public DTResourcesCol_MovAdmin getResourcesListEnabled()
+        {
+            // get resources datatypes.
+            Collection<Recurso> recursosCol = ControllersHub.Instance.getIMovAdminController().getResourcesListEnabled();
+
+            // create new resources datatypes collection.
+            DTResourcesCol_MovAdmin dtResourcesCol = new DTResourcesCol_MovAdmin();
+            dtResourcesCol.items = new Collection<DTResource_MovAdmin>();
+
+            // add meetings to the datatypes collection.
+            foreach (Recurso resource in recursosCol)
+            {
+                dtResourcesCol.items.Add(ClassToDT.ResourceToDT_MovAdmin(resource));
+            }
+
+            // return the collection.
+            return dtResourcesCol;
+        }
+
+        // returns all resources disabled.
+        public DTResourcesCol_MovAdmin getResourcesListDisabled()
+        {
+            // get resources datatypes.
+            Collection<Recurso> recursosCol = ControllersHub.Instance.getIMovAdminController().getResourcesListDisabled();
+
+            // create new resources datatypes collection.
+            DTResourcesCol_MovAdmin dtResourcesCol = new DTResourcesCol_MovAdmin();
+            dtResourcesCol.items = new Collection<DTResource_MovAdmin>();
+
+            // add meetings to the datatypes collection.
+            foreach (Recurso resource in recursosCol)
+            {
+                dtResourcesCol.items.Add(ClassToDT.ResourceToDT_MovAdmin(resource));
+            }
+
+            // return the collection.
+            return dtResourcesCol;
+        }
+
+        // bans a resource.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
+        public void disableResource(DTResource_MovAdmin resource)
+        {
+            ControllersHub.Instance.getIMovAdminController().disableResource(DTToClass.DTToResource(resource));
+        }
+
+        // reallows a resource.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
+        public void enableResource(DTResource_MovAdmin resource)
+        {
+            ControllersHub.Instance.getIMovAdminController().enableResource(DTToClass.DTToResource(resource));
+        }
     }
 }

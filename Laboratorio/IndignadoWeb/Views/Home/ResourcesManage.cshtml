@@ -1,0 +1,51 @@
+﻿<!-- model -->
+@model IndignadoWeb.Models.ManageResourcesModel
+
+<!-- page title -->
+@{
+    ViewBag.Title = "Indignado Framework - Manage resources";
+}
+
+<!-- page content -->
+
+<h2>Manage resources</h2>
+
+@using (Html.BeginForm(new { id = 0 }))
+{
+        if (Model.listType == 0)
+        {
+            <text>
+                <b>All resources</b>
+            </text>
+        }
+        else
+        {
+            <input type="submit" name="buttonShowAll" value="Show all" />
+        }
+        
+        if (Model.listType == 1)
+        {
+            <text>
+                <b>Enabled resources</b>
+            </text>
+        }
+        else
+        {
+            <input type="submit" name="buttonShowEnabled" value="Show enabled" />
+        }
+        
+        if (Model.listType == 2)
+        {
+            <text>
+                <b>Disabled resources</b>
+            </text>
+        }
+        else
+        {
+            <input type="submit" name="buttonShowDisabled" value="Show disabled" />
+        }
+}
+
+<p>
+    @Html.DisplayFor(m => m.resources.items)
+</p>

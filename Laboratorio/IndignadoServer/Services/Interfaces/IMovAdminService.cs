@@ -62,5 +62,25 @@ namespace IndignadoServer.Services
         // reallows a user.
         [OperationContract]
         void reallowUser(DTUser_MovAdmin user);
+
+        // returns all resources.
+        [OperationContract]
+        DTResourcesCol_MovAdmin getResourcesListAll();
+
+        // returns all resources enabled.
+        [OperationContract]
+        DTResourcesCol_MovAdmin getResourcesListEnabled();
+
+        // returns all resources disabled.
+        [OperationContract]
+        DTResourcesCol_MovAdmin getResourcesListDisabled();
+
+        // bans a resource.
+        [OperationContract]
+        void enableResource(DTResource_MovAdmin resource);
+
+        // reallows a resource.
+        [OperationContract]
+        void disableResource(DTResource_MovAdmin resource);
     }
 }
