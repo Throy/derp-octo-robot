@@ -126,8 +126,23 @@ namespace IndignadoWeb.Controllers
             // send the meeting to the model.
             return View(meeting);
         }
+        // shows all meetings.
+        public ActionResult MeetingsList()
+        {
+            IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+
+            // get all meetings
+            DTMeetingsCol meetings = serv.getMeetingsList();
+
+            // close service
+            (serv as ICommunicationObject).Close();
+
+            // send the meetings to the model.
+            return View(meetings);
+        }
 
         // shows all meetings.
+        /*No compila y no se que mierda quisieron hacer aca
         public ActionResult MeetingsList()
         {
             // get movement
@@ -150,7 +165,7 @@ namespace IndignadoWeb.Controllers
             // send the meetings to the model.
             return View(model);
         }
-
+        */
         // shows all meetings - change attendance.
         [HttpPost]
         public ActionResult MeetingsList(string buttonDoAttend, string buttonDontAttend, string buttonUnconfirmAttendance, int id)
