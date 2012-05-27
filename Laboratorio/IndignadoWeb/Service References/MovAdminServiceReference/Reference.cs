@@ -648,6 +648,296 @@ namespace IndignadoWeb.MovAdminServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTResourcesCol_MovAdmin", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTResourcesCol_MovAdmin : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin[] itemsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin[] items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
+                    this.itemsField = value;
+                    this.RaisePropertyChanged("items");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTResource_MovAdmin", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTResource_MovAdmin : IndignadoWeb.MovAdminServiceReference.DTResource {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTResource", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin))]
+    public partial class DTResource : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime dateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string descriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int disabledField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int iLikeItField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idUserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int myMarkInapprField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int numberLikesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string titleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string urlImageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string urlLinkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string urlThumbField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string urlVideoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime date {
+            get {
+                return this.dateField;
+            }
+            set {
+                if ((this.dateField.Equals(value) != true)) {
+                    this.dateField = value;
+                    this.RaisePropertyChanged("date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.descriptionField, value) != true)) {
+                    this.descriptionField = value;
+                    this.RaisePropertyChanged("description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int disabled {
+            get {
+                return this.disabledField;
+            }
+            set {
+                if ((this.disabledField.Equals(value) != true)) {
+                    this.disabledField = value;
+                    this.RaisePropertyChanged("disabled");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int iLikeIt {
+            get {
+                return this.iLikeItField;
+            }
+            set {
+                if ((this.iLikeItField.Equals(value) != true)) {
+                    this.iLikeItField = value;
+                    this.RaisePropertyChanged("iLikeIt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idUser {
+            get {
+                return this.idUserField;
+            }
+            set {
+                if ((this.idUserField.Equals(value) != true)) {
+                    this.idUserField = value;
+                    this.RaisePropertyChanged("idUser");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int myMarkInappr {
+            get {
+                return this.myMarkInapprField;
+            }
+            set {
+                if ((this.myMarkInapprField.Equals(value) != true)) {
+                    this.myMarkInapprField = value;
+                    this.RaisePropertyChanged("myMarkInappr");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int numberLikes {
+            get {
+                return this.numberLikesField;
+            }
+            set {
+                if ((this.numberLikesField.Equals(value) != true)) {
+                    this.numberLikesField = value;
+                    this.RaisePropertyChanged("numberLikes");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string title {
+            get {
+                return this.titleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.titleField, value) != true)) {
+                    this.titleField = value;
+                    this.RaisePropertyChanged("title");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string urlImage {
+            get {
+                return this.urlImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.urlImageField, value) != true)) {
+                    this.urlImageField = value;
+                    this.RaisePropertyChanged("urlImage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string urlLink {
+            get {
+                return this.urlLinkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.urlLinkField, value) != true)) {
+                    this.urlLinkField = value;
+                    this.RaisePropertyChanged("urlLink");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string urlThumb {
+            get {
+                return this.urlThumbField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.urlThumbField, value) != true)) {
+                    this.urlThumbField = value;
+                    this.RaisePropertyChanged("urlThumb");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string urlVideo {
+            get {
+                return this.urlVideoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.urlVideoField, value) != true)) {
+                    this.urlVideoField = value;
+                    this.RaisePropertyChanged("urlVideo");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MovAdminServiceReference.IMovAdminService")]
     public interface IMovAdminService {
@@ -690,6 +980,21 @@ namespace IndignadoWeb.MovAdminServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/reallowUser", ReplyAction="http://tempuri.org/IMovAdminService/reallowUserResponse")]
         void reallowUser(IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getResourcesListAll", ReplyAction="http://tempuri.org/IMovAdminService/getResourcesListAllResponse")]
+        IndignadoWeb.MovAdminServiceReference.DTResourcesCol_MovAdmin getResourcesListAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getResourcesListEnabled", ReplyAction="http://tempuri.org/IMovAdminService/getResourcesListEnabledResponse")]
+        IndignadoWeb.MovAdminServiceReference.DTResourcesCol_MovAdmin getResourcesListEnabled();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getResourcesListDisabled", ReplyAction="http://tempuri.org/IMovAdminService/getResourcesListDisabledResponse")]
+        IndignadoWeb.MovAdminServiceReference.DTResourcesCol_MovAdmin getResourcesListDisabled();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/enableResource", ReplyAction="http://tempuri.org/IMovAdminService/enableResourceResponse")]
+        void enableResource(IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin resource);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/disableResource", ReplyAction="http://tempuri.org/IMovAdminService/disableResourceResponse")]
+        void disableResource(IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin resource);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -769,6 +1074,26 @@ namespace IndignadoWeb.MovAdminServiceReference {
         
         public void reallowUser(IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin user) {
             base.Channel.reallowUser(user);
+        }
+        
+        public IndignadoWeb.MovAdminServiceReference.DTResourcesCol_MovAdmin getResourcesListAll() {
+            return base.Channel.getResourcesListAll();
+        }
+        
+        public IndignadoWeb.MovAdminServiceReference.DTResourcesCol_MovAdmin getResourcesListEnabled() {
+            return base.Channel.getResourcesListEnabled();
+        }
+        
+        public IndignadoWeb.MovAdminServiceReference.DTResourcesCol_MovAdmin getResourcesListDisabled() {
+            return base.Channel.getResourcesListDisabled();
+        }
+        
+        public void enableResource(IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin resource) {
+            base.Channel.enableResource(resource);
+        }
+        
+        public void disableResource(IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin resource) {
+            base.Channel.disableResource(resource);
         }
     }
 }

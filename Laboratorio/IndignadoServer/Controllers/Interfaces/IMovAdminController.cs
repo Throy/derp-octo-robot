@@ -48,5 +48,20 @@ namespace IndignadoServer.Controllers
 
         // reallows a user.
         void reallowUser(Usuario user);
+
+        // returns all resources.
+        Collection<Recurso> getResourcesListAll();
+
+        // returns all resources enabled.
+        Collection<Recurso> getResourcesListEnabled();
+
+        // returns all resources disabled.
+        Collection<Recurso> getResourcesListDisabled();
+
+        // disable a resource.
+        void disableResource(Recurso resource);
+
+        // enable a resource.
+        void enableResource(Recurso resource);
     }
 }

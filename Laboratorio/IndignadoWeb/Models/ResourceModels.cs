@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
 using IndignadoWeb.NewsResourcesServiceReference;
+using IndignadoWeb.MovAdminServiceReference;
 
 namespace IndignadoWeb.Models
 {
@@ -35,9 +36,24 @@ namespace IndignadoWeb.Models
 
     public class ListResourcesModel
     {
-        public DTResourcesCol items { get; set; }
+        public DTResourcesCol_NewsResources items { get; set; }
 
         [Display(Name = "ID: ")]
         public int id { get; set; }
+    }
+
+    // model for Manage resources
+
+    public class ManageResourcesModel
+    {
+        public DTResourcesCol_MovAdmin resources { get; set; }
+
+        [Display(Name = "ID: ")]
+        public int id { get; set; }
+
+        // 0: show all resources.
+        // 1: show enabled resources.
+        // 2: show disabled resources.
+        public int listType { get; set; }
     }
 }

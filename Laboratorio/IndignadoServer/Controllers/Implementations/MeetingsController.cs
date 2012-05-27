@@ -13,7 +13,7 @@ namespace IndignadoServer.Controllers
         // ********************
 
         // maximum distance from a user that makes a meeting interesting, measured in km.
-        const float maxDistanceInterest = 50.0F;
+        const float maxDistanceInterest = 20.0F;
 
         // ******************
         // controller methods

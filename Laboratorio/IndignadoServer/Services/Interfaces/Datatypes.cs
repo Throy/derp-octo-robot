@@ -182,14 +182,38 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public int myMarkInappr { get; set; }
+
+        [DataMember]
+        public int disabled { get; set; }
+    }
+    
+
+    // Resource datatype - NewsResources
+    [DataContract]
+    public class DTResource_NewsResources : DTResource
+    {
     }
 
-    // Resource Collection datatype
+    // Resource Collection datatype - NewsResources
     [DataContract]
-    public class DTResourcesCol
+    public class DTResourcesCol_NewsResources
     {
         [DataMember]
-        public Collection<DTResource> items { get; set; }
+        public Collection<DTResource_NewsResources> items { get; set; }
+    }
+
+    // Resource datatype - MovAdmin
+    [DataContract]
+    public class DTResource_MovAdmin : DTResource
+    {
+    }
+
+    // Resource Collection datatype - MovAdmin
+    [DataContract]
+    public class DTResourcesCol_MovAdmin
+    {
+        [DataMember]
+        public Collection<DTResource_MovAdmin> items { get; set; }
     }
 
     public class DTRegisterModel
@@ -497,9 +521,9 @@ namespace IndignadoServer.Services
             return dtRssItem;
         }
 
-        public static DTResource ResourceToDT(Recurso resource)
+        public static DTResource_NewsResources ResourceToDT_NewsResources(Recurso resource)
         {
-            DTResource dtResource = new DTResource();
+            DTResource_NewsResources dtResource = new DTResource_NewsResources();
             dtResource.id = resource.id;
             dtResource.idUser = resource.idUsuario;
             dtResource.title = resource.titulo;
@@ -512,6 +536,26 @@ namespace IndignadoServer.Services
             dtResource.numberLikes = (resource.cantAprobaciones == null) ? 0 : resource.cantAprobaciones.Value;
             dtResource.iLikeIt = (resource.meGusta == null) ? 0 : resource.meGusta.Value;
             dtResource.myMarkInappr = (resource.yoMarqueInadecuado == null) ? 0 : resource.yoMarqueInadecuado.Value;
+            dtResource.disabled = (resource.deshabilitado == null) ? 0 : resource.deshabilitado.Value;
+            return dtResource;
+        }
+
+        public static DTResource_MovAdmin ResourceToDT_MovAdmin(Recurso resource)
+        {
+            DTResource_MovAdmin dtResource = new DTResource_MovAdmin();
+            dtResource.id = resource.id;
+            dtResource.idUser = resource.idUsuario;
+            dtResource.title = resource.titulo;
+            dtResource.description = resource.descripcion;
+            dtResource.urlLink = resource.urlLink;
+            dtResource.urlImage = resource.urlImage;
+            dtResource.urlVideo = resource.urlVideo;
+            dtResource.urlThumb = resource.urlThumb;
+            dtResource.date = (resource.fecha == null) ? new DateTime() : resource.fecha.Value;
+            dtResource.numberLikes = (resource.cantAprobaciones == null) ? 0 : resource.cantAprobaciones.Value;
+            dtResource.iLikeIt = (resource.meGusta == null) ? 0 : resource.meGusta.Value;
+            dtResource.myMarkInappr = (resource.yoMarqueInadecuado == null) ? 0 : resource.yoMarqueInadecuado.Value;
+            dtResource.disabled = (resource.deshabilitado == null) ? 0 : resource.deshabilitado.Value;
             return dtResource;
         }
 
@@ -642,6 +686,7 @@ namespace IndignadoServer.Services
             resource.cantAprobaciones = dtResource.numberLikes;
             resource.meGusta = dtResource.iLikeIt;
             resource.yoMarqueInadecuado = dtResource.myMarkInappr;
+            resource.deshabilitado = dtResource.disabled;
             return resource;
         }
 

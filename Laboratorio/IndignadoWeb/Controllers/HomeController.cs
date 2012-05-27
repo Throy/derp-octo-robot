@@ -33,6 +33,7 @@ namespace IndignadoWeb.Controllers
         public const string viewThemeCategoriesList = "ThemeCategoriesList";
         public const string viewUserConfig = "UserConfig";
         public const string viewUsersManage = "UsersManage";
+        public const string viewResourcesManage = "ResourcesManage";
 
         public const string urlMeetingsService = "http://localhost:8730/IndignadoServer/MeetingsService/";
         public const string urlMovAdminService = "http://localhost:8730/IndignadoServer/MovAdminService/";
@@ -660,7 +661,7 @@ namespace IndignadoWeb.Controllers
                     INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
                     // like resource
-                    DTResource dtResource = new DTResource();
+                    DTResource_NewsResources dtResource = new DTResource_NewsResources();
                     dtResource.id = id;
                     serv.likeResource(dtResource);
 
@@ -676,7 +677,7 @@ namespace IndignadoWeb.Controllers
                     INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
                     // like resource
-                    DTResource dtResource = new DTResource();
+                    DTResource_NewsResources dtResource = new DTResource_NewsResources();
                     dtResource.id = id;
                     serv.unlikeResource(dtResource);
 
@@ -692,7 +693,7 @@ namespace IndignadoWeb.Controllers
                     INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
                     // mark resource as inappropriate
-                    DTResource dtResource = new DTResource();
+                    DTResource_NewsResources dtResource = new DTResource_NewsResources();
                     dtResource.id = id;
                     serv.markResourceInappropriate(dtResource);
 
@@ -708,7 +709,7 @@ namespace IndignadoWeb.Controllers
                     INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
                     // unmark resource as inappropriate
-                    DTResource dtResource = new DTResource();
+                    DTResource_NewsResources dtResource = new DTResource_NewsResources();
                     dtResource.id = id;
                     serv.unmarkResourceInappropriate(dtResource);
 
@@ -762,7 +763,7 @@ namespace IndignadoWeb.Controllers
                         INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
                         // create new meeting
-                        DTResource dtResource = new DTResource();
+                        DTResource_NewsResources dtResource = new DTResource_NewsResources();
                         dtResource.id = -1;
                         dtResource.idUser = -1;
                         dtResource.title = model.title;
@@ -791,7 +792,7 @@ namespace IndignadoWeb.Controllers
                     INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
                 
                     // get data
-                    DTResource dtResource = serv.getResourceData(model.urlLink);
+                    DTResource_NewsResources dtResource = serv.getResourceData(model.urlLink);
                     model.title = dtResource.title;
                     model.description = dtResource.description;
                     model.urlThumb = dtResource.urlThumb;
@@ -1094,7 +1095,6 @@ namespace IndignadoWeb.Controllers
             }
         }
 
-
         // configure user.
         public ActionResult UserConfig()
         {
@@ -1147,6 +1147,112 @@ namespace IndignadoWeb.Controllers
                 return RedirectToAction(HomeControllerConstants.viewUserConfig);
             }
             catch
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // manages the resources.
+        public ActionResult ResourcesManage(ManageResourcesModel model, int? listType)
+        {
+            try
+            {
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                // get enabled resources
+                if (listType == 1)
+                {
+                    model.listType = 1;
+                    model.resources = serv.getResourcesListEnabled();
+                }
+
+                // get disabled resources
+                else if (listType == 2)
+                {
+                    model.listType = 2;
+                    model.resources = serv.getResourcesListDisabled();
+                }
+
+                // get all resources
+                else
+                {
+                    model.listType = 0;
+                    model.resources = serv.getResourcesListAll();
+                }
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the users to the model.
+                return View(model);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // manages the users - ban / reallow user.
+        [HttpPost]
+        public ActionResult ResourcesManage(string buttonShowAll, string buttonShowEnabled, string buttonShowDisabled, string buttonDisable, string buttonEnable, int id)
+        {
+            try
+            {
+                // show everyone.
+                if (buttonShowAll != null)
+                {
+                    return RedirectToAction(HomeControllerConstants.viewResourcesManage, new { listType = 0 });
+                }
+
+                // show enabled resources.
+                else if (buttonShowEnabled != null)
+                {
+                    return RedirectToAction(HomeControllerConstants.viewResourcesManage, new { listType = 1 });
+                }
+
+                // show disabled resources.
+                else if (buttonShowDisabled != null)
+                {
+                    return RedirectToAction(HomeControllerConstants.viewResourcesManage, new { listType = 2 });
+                }
+
+                // disable resource
+                else if (buttonDisable != null)
+                {
+                    // open service
+                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                    // ban user
+                    DTResource_MovAdmin dtResource = new DTResource_MovAdmin();
+                    dtResource.id = id;
+                    serv.disableResource(dtResource);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesManage);
+                }
+
+                // enable resource
+                else if (buttonEnable != null)
+                {
+                    // open service
+                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                    // ban user
+                    DTResource_MovAdmin dtResource = new DTResource_MovAdmin();
+                    dtResource.id = id;
+                    serv.enableResource(dtResource);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewResourcesManage);
+                }
+
+                return View();
+            }
+            catch (Exception error)
             {
                 return RedirectToAction(HomeControllerConstants.viewAccessDenied);
             }
