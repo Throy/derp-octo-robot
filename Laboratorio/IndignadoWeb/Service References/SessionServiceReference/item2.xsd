@@ -3,6 +3,8 @@
   <xs:import schemaLocation="http://localhost:8730/IndignadoServer/SessionService/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="DTLoginInfo">
     <xs:sequence>
+      <xs:element minOccurs="0" name="isMovAdmin" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isSysAdmin" type="xs:boolean" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="token" nillable="true" type="xs:string" />
     </xs:sequence>

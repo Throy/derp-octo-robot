@@ -61,6 +61,7 @@ namespace IndignadoWeb.Controllers
                 if (success)
                 {
                     HttpContext.Session.Add("token", loginInfo.token);
+                    HttpContext.Session.Add("loginInfo", loginInfo);
 
                     FormsAuthentication.SetAuthCookie(loginInfo.name, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
@@ -131,8 +132,7 @@ namespace IndignadoWeb.Controllers
         {
             FormsAuthentication.SignOut();
 
-            HttpContext.Session.Remove("token");
-            HttpContext.Session.Remove("FBtoken");
+            HttpContext.Session.Clear();
 
             return RedirectToAction("Index", "Home");
         }
