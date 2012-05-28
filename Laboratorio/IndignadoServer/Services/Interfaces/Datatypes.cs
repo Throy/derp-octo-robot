@@ -154,6 +154,9 @@ namespace IndignadoServer.Services
         public int idUser { get; set; }
 
         [DataMember]
+        public String username { get; set; }
+
+        [DataMember]
         public String title { get; set; }
 
         [DataMember]
@@ -179,6 +182,9 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public int iLikeIt { get; set; }
+
+        [DataMember]
+        public int numberMarksInappr { get; set; }
 
         [DataMember]
         public int myMarkInappr { get; set; }
@@ -476,6 +482,17 @@ namespace IndignadoServer.Services
     {
     }
 
+    // User Details datatype - MovAdminController
+    [DataContract]
+    public class DTUserDetails_MovAdmin
+    {
+        [DataMember]
+        public DTUser_MovAdmin user { get; set; }
+
+        [DataMember]
+        public Collection<DTResource_MovAdmin> resources { get; set; }
+    }
+
 
     // **********
     // conversors
@@ -534,6 +551,7 @@ namespace IndignadoServer.Services
             DTResource_NewsResources dtResource = new DTResource_NewsResources();
             dtResource.id = resource.id;
             dtResource.idUser = resource.idUsuario;
+            dtResource.username = resource.apodoUsuario;
             dtResource.title = resource.titulo;
             dtResource.description = resource.descripcion;
             dtResource.urlLink = resource.urlLink;
@@ -543,6 +561,7 @@ namespace IndignadoServer.Services
             dtResource.date = (resource.fecha == null) ? new DateTime() : resource.fecha.Value;
             dtResource.numberLikes = (resource.cantAprobaciones == null) ? 0 : resource.cantAprobaciones.Value;
             dtResource.iLikeIt = (resource.meGusta == null) ? 0 : resource.meGusta.Value;
+            dtResource.numberMarksInappr = (resource.cantMarcasInadecuado == null) ? 0 : resource.cantMarcasInadecuado.Value;
             dtResource.myMarkInappr = (resource.yoMarqueInadecuado == null) ? 0 : resource.yoMarqueInadecuado.Value;
             dtResource.disabled = (resource.deshabilitado == null) ? 0 : resource.deshabilitado.Value;
             return dtResource;
@@ -553,6 +572,7 @@ namespace IndignadoServer.Services
             DTResource_MovAdmin dtResource = new DTResource_MovAdmin();
             dtResource.id = resource.id;
             dtResource.idUser = resource.idUsuario;
+            dtResource.username = resource.apodoUsuario;
             dtResource.title = resource.titulo;
             dtResource.description = resource.descripcion;
             dtResource.urlLink = resource.urlLink;
@@ -562,6 +582,7 @@ namespace IndignadoServer.Services
             dtResource.date = (resource.fecha == null) ? new DateTime() : resource.fecha.Value;
             dtResource.numberLikes = (resource.cantAprobaciones == null) ? 0 : resource.cantAprobaciones.Value;
             dtResource.iLikeIt = (resource.meGusta == null) ? 0 : resource.meGusta.Value;
+            dtResource.numberMarksInappr = (resource.cantMarcasInadecuado == null) ? 0 : resource.cantMarcasInadecuado.Value;
             dtResource.myMarkInappr = (resource.yoMarqueInadecuado == null) ? 0 : resource.yoMarqueInadecuado.Value;
             dtResource.disabled = (resource.deshabilitado == null) ? 0 : resource.deshabilitado.Value;
             return dtResource;
@@ -684,6 +705,7 @@ namespace IndignadoServer.Services
             Recurso resource = new Recurso();
             resource.id = dtResource.id;
             resource.idUsuario = dtResource.idUser;
+            resource.apodoUsuario = dtResource.username;
             resource.titulo = dtResource.title;
             resource.descripcion = dtResource.description;
             resource.urlLink = dtResource.urlLink;
@@ -693,6 +715,7 @@ namespace IndignadoServer.Services
             resource.fecha = dtResource.date;
             resource.cantAprobaciones = dtResource.numberLikes;
             resource.meGusta = dtResource.iLikeIt;
+            resource.cantMarcasInadecuado = dtResource.numberMarksInappr;
             resource.yoMarqueInadecuado = dtResource.myMarkInappr;
             resource.deshabilitado = dtResource.disabled;
             return resource;

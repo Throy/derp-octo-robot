@@ -34,6 +34,9 @@ namespace IndignadoServer.Controllers
         // gets the theme categories.
         Collection<CategoriasTematica> listThemeCategories();
         
+        // returns all the data of the user.
+        Usuario getUser(Usuario user);
+        
         // returns all users.
         Collection<Usuario> getUsersListFull();
         
@@ -57,6 +60,9 @@ namespace IndignadoServer.Controllers
 
         // returns all resources disabled.
         Collection<Recurso> getResourcesListDisabled();
+
+        // returns all resources published by the given user.
+        Collection<Recurso> getResourcesListUser(Usuario user);
 
         // disable a resource.
         void disableResource(Recurso resource);

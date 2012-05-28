@@ -20,16 +20,30 @@ namespace IndignadoServer.Controllers
         public Collection<RssItem> getNewsList()
         {
             // Java, esto es para vos.
-            /*
+            
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<RssFeed> fuentesEnum = indignadoContext.ExecuteQuery<RssFeed>("SELECT idMovimiento, url, tag FROM RssFeeds WHERE idMovimiento = {0}", IdMovement);
-            
+
+            Collection<RssItem> rssItemsCol = new Collection<RssItem>();
+            Collection<List<RssItem>> ColRssLists = new Collection<List<RssItem>>();
             foreach (RssFeed source in fuentesEnum)
             {
                 List<RssItem> rssItemsList = RssDocument.Load(new System.Uri(source.url)).Channel.Items;
-            }
-            */
+                ColRssLists.Add(rssItemsList);
 
+            }
+
+            for (int j = 0; j < 10 ; j++)
+            {
+                List<RssItem> rssItemsList = ColRssLists[j % ColRssLists.Count];
+                if (rssItemsList.Count > j){
+                    rssItemsCol.Add(rssItemsList[j]);
+                }
+            }
+            
+
+
+            /*
             // get feeds from the source.
             List<RssItem> rssItemsList1 = RssDocument.Load(new System.Uri("http://180.com.uy/feed.php")).Channel.Items;
             List<RssItem> rssItemsList2 = RssDocument.Load(new System.Uri("http://www.montevideo.com.uy/anxml.aspx?59")).Channel.Items;
@@ -45,6 +59,9 @@ namespace IndignadoServer.Controllers
                 rssItemsCol.Add(rssItemsList3[idx]);
                 rssItemsCol.Add(rssItemsList4[idx]);
             }
+            */
+
+
 
             return rssItemsCol;
         }
@@ -68,7 +85,7 @@ namespace IndignadoServer.Controllers
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
 
             // create new resources collection.
             Collection<Recurso> recursosCol = new Collection<Recurso>();

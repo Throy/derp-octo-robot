@@ -32,6 +32,7 @@ namespace IndignadoWeb.Controllers
         public const string viewThemeCategoriesConfig = "ThemeCategoriesConfig";
         public const string viewThemeCategoriesList = "ThemeCategoriesList";
         public const string viewUserConfig = "UserConfig";
+        public const string viewUserDetails = "UserDetails";
         public const string viewUsersManage = "UsersManage";
         public const string viewResourcesManage = "ResourcesManage";
 
@@ -1266,6 +1267,117 @@ namespace IndignadoWeb.Controllers
                 }
 
                 return View();
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // shows the user details.
+        public ActionResult UserDetails(UserDetailsModel model, int? id)
+        {
+            try
+            {
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                if ((model.userId == 0) && (id.HasValue))
+                {
+                    model.userId = id.Value;
+                }
+
+                // get user details.
+                DTUser_MovAdmin dtUser = new DTUser_MovAdmin();
+                dtUser.id = model.userId;
+                model.userDetails = serv.getUserDetails(dtUser);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the users to the model.
+                return View(model);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // shows the user details - ban / reallow user, disable / enable resource.
+        [HttpPost]
+        public ActionResult UserDetails(string buttonBan, string buttonReallow, string buttonDisable, string buttonEnable, UserDetailsModel model, int id)
+        {
+            try
+            {
+                // ban user
+                if (buttonBan != null)
+                {
+                    // open service
+                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                    // ban user
+                    DTUser_MovAdmin dtUser = new DTUser_MovAdmin();
+                    dtUser.id = id;
+                    serv.banUser(dtUser);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewUserDetails, new { id = id });
+                }
+
+                // reallow user
+                else if (buttonReallow != null)
+                {
+                    // open service
+                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                    // ban user
+                    DTUser_MovAdmin dtUser = new DTUser_MovAdmin();
+                    dtUser.id = id;
+                    serv.reallowUser(dtUser);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewUserDetails, new { id = id });
+                }
+
+                // disable resource
+                else if (buttonDisable != null)
+                {
+                    // open service
+                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                    // ban user
+                    DTResource_MovAdmin dtResource = new DTResource_MovAdmin();
+                    dtResource.id = id;
+                    serv.disableResource(dtResource);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewUserDetails, new { id = model.userId });
+                }
+
+                // enable resource
+                else if (buttonEnable != null)
+                {
+                    // open service
+                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                    // enable resource
+                    DTResource_MovAdmin dtResource = new DTResource_MovAdmin();
+                    dtResource.id = id;
+                    serv.enableResource(dtResource);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction(HomeControllerConstants.viewUserDetails, new { id = model.userId });
+                }
+
+                return View(model);
             }
             catch (Exception error)
             {
