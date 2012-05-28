@@ -30,39 +30,20 @@ namespace IndignadoServer.Controllers
             {
                 List<RssItem> rssItemsList = RssDocument.Load(new System.Uri(source.url)).Channel.Items;
                 ColRssLists.Add(rssItemsList);
-
+                if (ColRssLists.Count > 10)
+                {
+                    break;
+                }
             }
 
             for (int j = 0; j < 10 ; j++)
             {
                 List<RssItem> rssItemsList = ColRssLists[j % ColRssLists.Count];
-                if (rssItemsList.Count > j){
-                    rssItemsCol.Add(rssItemsList[j]);
+                if (rssItemsList.Count > (j / ColRssLists.Count))
+                {
+                    rssItemsCol.Add(rssItemsList[j / ColRssLists.Count]);
                 }
             }
-            
-
-
-            /*
-            // get feeds from the source.
-            List<RssItem> rssItemsList1 = RssDocument.Load(new System.Uri("http://180.com.uy/feed.php")).Channel.Items;
-            List<RssItem> rssItemsList2 = RssDocument.Load(new System.Uri("http://www.montevideo.com.uy/anxml.aspx?59")).Channel.Items;
-            List<RssItem> rssItemsList3 = RssDocument.Load(new System.Uri("http://www.elobservador.com.uy/rss/nacional/")).Channel.Items;
-            List<RssItem> rssItemsList4 = RssDocument.Load(new System.Uri("http://cnnespanol.cnn.com/feed/")).Channel.Items;
-            
-            // create new rss items collection.
-            Collection<RssItem> rssItemsCol = new Collection<RssItem>();
-            for (int idx = 0; idx < 4; idx += 1)
-            {
-                rssItemsCol.Add(rssItemsList1[idx]);
-                rssItemsCol.Add(rssItemsList2[idx]);
-                rssItemsCol.Add(rssItemsList3[idx]);
-                rssItemsCol.Add(rssItemsList4[idx]);
-            }
-            */
-
-
-
             return rssItemsCol;
         }
 
