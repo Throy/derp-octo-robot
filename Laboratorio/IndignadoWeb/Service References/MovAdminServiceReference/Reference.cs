@@ -408,58 +408,6 @@ namespace IndignadoWeb.MovAdminServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DTUsersCol_MovAdmin", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
-    [System.SerializableAttribute()]
-    public partial class DTUsersCol_MovAdmin : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin[] itemsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin[] items {
-            get {
-                return this.itemsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
-                    this.itemsField = value;
-                    this.RaisePropertyChanged("items");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DTUser_MovAdmin", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
-    [System.SerializableAttribute()]
-    public partial class DTUser_MovAdmin : IndignadoWeb.MovAdminServiceReference.DTUser {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DTUser", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin))]
@@ -650,15 +598,25 @@ namespace IndignadoWeb.MovAdminServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DTResourcesCol_MovAdmin", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUser_MovAdmin", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
     [System.SerializableAttribute()]
-    public partial class DTResourcesCol_MovAdmin : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class DTUser_MovAdmin : IndignadoWeb.MovAdminServiceReference.DTUser {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUserDetails_MovAdmin", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTUserDetails_MovAdmin : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin[] itemsField;
+        private IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin[] resourcesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin userField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -671,14 +629,27 @@ namespace IndignadoWeb.MovAdminServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin[] items {
+        public IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin[] resources {
             get {
-                return this.itemsField;
+                return this.resourcesField;
             }
             set {
-                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
-                    this.itemsField = value;
-                    this.RaisePropertyChanged("items");
+                if ((object.ReferenceEquals(this.resourcesField, value) != true)) {
+                    this.resourcesField = value;
+                    this.RaisePropertyChanged("resources");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin user {
+            get {
+                return this.userField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.userField, value) != true)) {
+                    this.userField = value;
+                    this.RaisePropertyChanged("user");
                 }
             }
         }
@@ -735,6 +706,9 @@ namespace IndignadoWeb.MovAdminServiceReference {
         private int numberLikesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int numberMarksInapprField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string titleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -748,6 +722,9 @@ namespace IndignadoWeb.MovAdminServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string urlVideoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string usernameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -864,6 +841,19 @@ namespace IndignadoWeb.MovAdminServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int numberMarksInappr {
+            get {
+                return this.numberMarksInapprField;
+            }
+            set {
+                if ((this.numberMarksInapprField.Equals(value) != true)) {
+                    this.numberMarksInapprField = value;
+                    this.RaisePropertyChanged("numberMarksInappr");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string title {
             get {
                 return this.titleField;
@@ -928,6 +918,109 @@ namespace IndignadoWeb.MovAdminServiceReference {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
+                    this.usernameField = value;
+                    this.RaisePropertyChanged("username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUsersCol_MovAdmin", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTUsersCol_MovAdmin : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin[] itemsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin[] items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
+                    this.itemsField = value;
+                    this.RaisePropertyChanged("items");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTResourcesCol_MovAdmin", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTResourcesCol_MovAdmin : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin[] itemsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin[] items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
+                    this.itemsField = value;
+                    this.RaisePropertyChanged("items");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -965,6 +1058,9 @@ namespace IndignadoWeb.MovAdminServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/listThemeCategories", ReplyAction="http://tempuri.org/IMovAdminService/listThemeCategoriesResponse")]
         IndignadoWeb.MovAdminServiceReference.DTThemeCategoriesColMovAdmin listThemeCategories();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getUserDetails", ReplyAction="http://tempuri.org/IMovAdminService/getUserDetailsResponse")]
+        IndignadoWeb.MovAdminServiceReference.DTUserDetails_MovAdmin getUserDetails(IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin dtUser);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getUsersListFull", ReplyAction="http://tempuri.org/IMovAdminService/getUsersListFullResponse")]
         IndignadoWeb.MovAdminServiceReference.DTUsersCol_MovAdmin getUsersListFull();
@@ -1054,6 +1150,10 @@ namespace IndignadoWeb.MovAdminServiceReference {
         
         public IndignadoWeb.MovAdminServiceReference.DTThemeCategoriesColMovAdmin listThemeCategories() {
             return base.Channel.listThemeCategories();
+        }
+        
+        public IndignadoWeb.MovAdminServiceReference.DTUserDetails_MovAdmin getUserDetails(IndignadoWeb.MovAdminServiceReference.DTUser_MovAdmin dtUser) {
+            return base.Channel.getUserDetails(dtUser);
         }
         
         public IndignadoWeb.MovAdminServiceReference.DTUsersCol_MovAdmin getUsersListFull() {

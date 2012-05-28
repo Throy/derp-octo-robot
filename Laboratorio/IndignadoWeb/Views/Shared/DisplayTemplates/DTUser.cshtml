@@ -3,7 +3,7 @@
            
 <div>
     <!-- header -->
-    <h3>@Html.DisplayFor(m => m.id) - @Html.DisplayFor(m => m.username)</h3>
+    <h3>@Html.ActionLink(@Html.DisplayFor(m => m.id) + " - " + @Html.DisplayFor(m => m.username), "UserDetails", new { id = @Model.id })</h3>
     
     <!-- fields -->
     Full name: @Html.DisplayFor(m => m.fullName)
@@ -20,7 +20,7 @@
     <br />
     <br />
 
-    <!-- likes -->
+    <!-- ban / reallow -->
     @using (Html.BeginForm(new { id = @Model.id }))
     {
         if (! @Model.banned)

@@ -217,6 +217,9 @@
     <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTThemeCategoriesColMovAdmin.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTUserDetails_MovAdmin.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTUsersCol_MovAdmin.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -410,6 +413,7 @@
     <Content Include="Views\Home\UserConfig.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTResource_MovAdmin.cshtml" />
     <Content Include="Views\Home\ResourcesManage.cshtml" />
+    <Content Include="Views\Home\UserDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -40,4 +40,16 @@ namespace IndignadoWeb.Models
         [Display(Name = "Location - Longitude: ")]
         public float locationLong { get; set; }
     }
+
+    // model for User details
+
+    public class UserDetailsModel
+    {
+        public DTUserDetails_MovAdmin userDetails { get; set; }
+
+        [Display(Name = "User ID: ")]
+        public int userId { get; set; }
+
+        public int id { get; set; }
+    }
 }

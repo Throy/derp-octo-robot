@@ -254,6 +254,9 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         private int numberLikesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int numberMarksInapprField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string titleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -267,6 +270,9 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string urlVideoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string usernameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -383,6 +389,19 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int numberMarksInappr {
+            get {
+                return this.numberMarksInapprField;
+            }
+            set {
+                if ((this.numberMarksInapprField.Equals(value) != true)) {
+                    this.numberMarksInapprField = value;
+                    this.RaisePropertyChanged("numberMarksInappr");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string title {
             get {
                 return this.titleField;
@@ -443,6 +462,19 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
                 if ((object.ReferenceEquals(this.urlVideoField, value) != true)) {
                     this.urlVideoField = value;
                     this.RaisePropertyChanged("urlVideo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
+                    this.usernameField = value;
+                    this.RaisePropertyChanged("username");
                 }
             }
         }

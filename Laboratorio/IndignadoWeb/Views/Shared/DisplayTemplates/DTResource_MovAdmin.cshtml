@@ -14,11 +14,11 @@
                 <br />
                 Date: @Html.DisplayFor(m => m.date)
                 <br />
-                Internal ID: @Html.DisplayFor(m => m.id)
-                <br />
-                User: @Html.DisplayFor(m => m.idUser)
+                User: @Html.DisplayFor(m => m.username)
                 <br />
                 Likes: @Html.DisplayFor(m => m.numberLikes)
+                <br />
+                Marks as inappropriate: @Html.DisplayFor(m => m.numberMarksInappr)
                 
                 <!-- image -->
                 @{
@@ -51,8 +51,8 @@
         </tr>
         <tr>
             <td colspan="2">
-                <!-- likes -->
-                @using (Html.BeginForm(new { id = @Model.id }))
+                <!-- enable / disable -->
+                @using (Html.BeginForm(new { id = @Model.id, userId = @Model.idUser }))
                 {
                     if (@Model.disabled == 0)
                     {

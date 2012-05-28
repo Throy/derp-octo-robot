@@ -1,0 +1,21 @@
+﻿<!-- model -->
+@model IndignadoWeb.Models.UserDetailsModel
+
+<!-- page title -->
+@{
+    ViewBag.Title = "Indignado Framework - User details - " + @Model.userDetails.user.username;
+}
+
+<!-- page content -->
+
+<h2>User data</h2>
+
+<p>
+    @Html.DisplayFor(m => m.userDetails.user)
+</p>
+
+<h2>Resources published</h2>
+
+<p>
+    @Html.DisplayFor(m => m.userDetails.resources)
+</p>
