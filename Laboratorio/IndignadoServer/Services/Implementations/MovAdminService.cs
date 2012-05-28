@@ -80,6 +80,28 @@ namespace IndignadoServer.Services
         }
 
         // returns all users.
+        public DTUserDetails_MovAdmin getUserDetails(DTUser_MovAdmin dtUser)
+        {
+            // get user object
+            Usuario user = DTToClass.DTToUser(dtUser);
+
+            // create user details
+            DTUserDetails_MovAdmin userDetails = new DTUserDetails_MovAdmin();
+            userDetails.user = ClassToDT.UserToDT_MovAdmin(ControllersHub.Instance.getIMovAdminController().getUser(user));
+            userDetails.resources = new Collection<DTResource_MovAdmin>();
+
+            // get resources.
+            Collection<Recurso> resourcesCol = ControllersHub.Instance.getIMovAdminController().getResourcesListUser(user);
+            foreach (Recurso resource in resourcesCol)
+            {
+                userDetails.resources.Add(ClassToDT.ResourceToDT_MovAdmin(resource));
+            }
+
+            // return the datatype.
+            return userDetails;
+        }
+
+        // returns all users.
         public DTUsersCol_MovAdmin getUsersListFull()
         {
             // create new theme categories datatype collection

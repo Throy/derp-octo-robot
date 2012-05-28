@@ -143,6 +143,31 @@ namespace IndignadoServer.Controllers
             return themeCategoriesCol;
         }
 
+        // returns all the data of the user.
+        public Usuario getUser(Usuario user)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            Usuario userFull = indignadoContext.Usuarios.SingleOrDefault(u => (u.id == user.id));
+
+            // get number of resources marked as inappropriate.
+            IEnumerable<int> numbersMarksInappropriateResources = indignadoContext.ExecuteQuery<int>
+                ("SELECT COUNT(*) FROM (SELECT idRecurso FROM MarcasInadecuados GROUP BY idRecurso) RecursosMarcadosInadecuado LEFT JOIN Recursos ON Recursos.id = RecursosMarcadosInadecuado.idRecurso WHERE Recursos.idUsuario = {0}", userFull.id);
+            foreach (int numberMarksInappropriateResources in numbersMarksInappropriateResources)
+            {
+                userFull.cantRecursosMarcadosInadecuados = numberMarksInappropriateResources;
+            }
+
+            // get number of disabled resources.
+            IEnumerable<int> numbersDisabledResources = indignadoContext.ExecuteQuery<int>
+                ("SELECT COUNT(*) FROM Recursos WHERE (idUsuario = {0}) AND (deshabilitado = {1})", userFull.id, 1);
+            foreach (int numberDisabledResources in numbersDisabledResources)
+            {
+                userFull.cantRecursosDeshabilitados = numberDisabledResources;
+            }
+
+            return userFull;
+        }
+
         // returns all users.
         public Collection<Usuario> getUsersListFull()
         {
@@ -225,7 +250,7 @@ namespace IndignadoServer.Controllers
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE Usuarios.idMovimiento = {0}", IdMovement);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuario.apodo, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE Usuarios.idMovimiento = {0}", IdMovement);
             return toResourcesCol(resourcesEnum);
         }
 
@@ -235,7 +260,7 @@ namespace IndignadoServer.Controllers
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
             return toResourcesCol(resourcesEnum);
         }
 
@@ -245,7 +270,16 @@ namespace IndignadoServer.Controllers
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 1);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 1);
+            return toResourcesCol(resourcesEnum);
+        }
+
+        // returns all resources published by the given user.
+        public Collection<Recurso> getResourcesListUser(Usuario user)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE Usuarios.id = {0}", user.id);
             return toResourcesCol(resourcesEnum);
         }
 
@@ -267,6 +301,13 @@ namespace IndignadoServer.Controllers
                     resource.cantAprobaciones = numberLikes;
                 }
 
+                // get number of marks as inappropriate
+                IEnumerable<int> numbersMarksInappropriate = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM MarcasInadecuados WHERE idRecurso = {0}", resource.id);
+                foreach (int numberMarksInappropriate in numbersMarksInappropriate)
+                {
+                    resource.cantMarcasInadecuado = numberMarksInappropriate;
+                }
+                
                 // add item to the collection
                 recursosCol.Add(resource);
             }

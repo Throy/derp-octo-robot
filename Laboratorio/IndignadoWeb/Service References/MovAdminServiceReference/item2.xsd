@@ -60,18 +60,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfDTThemeCategoryMovAdmin" nillable="true" type="tns:ArrayOfDTThemeCategoryMovAdmin" />
-  <xs:complexType name="DTUsersCol_MovAdmin">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTUser_MovAdmin" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="DTUsersCol_MovAdmin" nillable="true" type="tns:DTUsersCol_MovAdmin" />
-  <xs:complexType name="ArrayOfDTUser_MovAdmin">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTUser_MovAdmin" nillable="true" type="tns:DTUser_MovAdmin" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfDTUser_MovAdmin" nillable="true" type="tns:ArrayOfDTUser_MovAdmin" />
   <xs:complexType name="DTUser_MovAdmin">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:DTUser">
@@ -95,12 +83,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTUser" nillable="true" type="tns:DTUser" />
-  <xs:complexType name="DTResourcesCol_MovAdmin">
+  <xs:complexType name="DTUserDetails_MovAdmin">
     <xs:sequence>
-      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTResource_MovAdmin" />
+      <xs:element minOccurs="0" name="resources" nillable="true" type="tns:ArrayOfDTResource_MovAdmin" />
+      <xs:element minOccurs="0" name="user" nillable="true" type="tns:DTUser_MovAdmin" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="DTResourcesCol_MovAdmin" nillable="true" type="tns:DTResourcesCol_MovAdmin" />
+  <xs:element name="DTUserDetails_MovAdmin" nillable="true" type="tns:DTUserDetails_MovAdmin" />
   <xs:complexType name="ArrayOfDTResource_MovAdmin">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DTResource_MovAdmin" nillable="true" type="tns:DTResource_MovAdmin" />
@@ -125,12 +114,32 @@
       <xs:element minOccurs="0" name="idUser" type="xs:int" />
       <xs:element minOccurs="0" name="myMarkInappr" type="xs:int" />
       <xs:element minOccurs="0" name="numberLikes" type="xs:int" />
+      <xs:element minOccurs="0" name="numberMarksInappr" type="xs:int" />
       <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="urlImage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="urlLink" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="urlThumb" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="urlVideo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTResource" nillable="true" type="tns:DTResource" />
+  <xs:complexType name="DTUsersCol_MovAdmin">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTUser_MovAdmin" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTUsersCol_MovAdmin" nillable="true" type="tns:DTUsersCol_MovAdmin" />
+  <xs:complexType name="ArrayOfDTUser_MovAdmin">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTUser_MovAdmin" nillable="true" type="tns:DTUser_MovAdmin" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTUser_MovAdmin" nillable="true" type="tns:ArrayOfDTUser_MovAdmin" />
+  <xs:complexType name="DTResourcesCol_MovAdmin">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTResource_MovAdmin" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTResourcesCol_MovAdmin" nillable="true" type="tns:DTResourcesCol_MovAdmin" />
 </xs:schema>

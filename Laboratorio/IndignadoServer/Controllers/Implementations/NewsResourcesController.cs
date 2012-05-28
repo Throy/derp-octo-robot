@@ -68,7 +68,7 @@ namespace IndignadoServer.Controllers
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
 
             // create new resources collection.
             Collection<Recurso> recursosCol = new Collection<Recurso>();

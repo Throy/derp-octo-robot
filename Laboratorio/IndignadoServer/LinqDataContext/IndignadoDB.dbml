@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="IndignadoDB" Class="IndignadoDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=BETTOSIACOVS-PC\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Aprobaciones" Member="Aprobaciones">
     <Type Name="Aprobacione">
       <Column Name="idRecurso" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -129,6 +129,7 @@
     <Type Name="Recurso">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="apodoUsuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="titulo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -139,6 +140,7 @@
       <Column Name="urlThumb" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="cantAprobaciones" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="meGusta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cantMarcasInadecuado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="yoMarqueInadecuado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="deshabilitado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Recurso_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idRecurso" Type="Aprobacione" />

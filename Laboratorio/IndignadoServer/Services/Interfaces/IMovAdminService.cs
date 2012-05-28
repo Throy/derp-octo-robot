@@ -45,6 +45,10 @@ namespace IndignadoServer.Services
 
         // returns all users.
         [OperationContract]
+        DTUserDetails_MovAdmin getUserDetails(DTUser_MovAdmin dtUser);
+
+        // returns all users.
+        [OperationContract]
         DTUsersCol_MovAdmin getUsersListFull();
         
         // returns all users allowed.
