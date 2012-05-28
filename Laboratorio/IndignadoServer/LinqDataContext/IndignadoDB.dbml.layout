@@ -80,119 +80,119 @@
         <elementListCompartment Id="d95d4e69-6400-4c53-af26-8aa86f0cab34" absoluteBounds="5.6400000000000006, 14.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3 : 14.0593082682292); (3 : 17.8469962565104); (3.44791916666667 : 17.8469962565104 : JumpStart); (3.61458583333333 : 17.8469962565104 : JumpEnd); (8.875 : 17.8469962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3 : 14.0593082682292); (3 : 17.8469962565104); (3.44791916666667 : 17.8469962565104 : JumpStart); (3.61458583333333 : 17.8469962565104 : JumpEnd); (8.875 : 17.8469962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Usuario/Usuario_Aprobacione" />
       <nodes>
         <classShapeMoniker Id="ea0a8ee2-ad22-4c88-b6ed-66eecccc1cda" />
         <classShapeMoniker Id="48d501e1-1b59-450a-910a-95b0bb362575" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.6875 : 10.75); (3.6875 : 10.3862939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.6875 : 10.75); (3.6875 : 10.3862939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Usuario/Usuario_Asistencia" />
       <nodes>
         <classShapeMoniker Id="ea0a8ee2-ad22-4c88-b6ed-66eecccc1cda" />
         <classShapeMoniker Id="eeb5f418-ef56-4e6f-b806-257202f773f1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(12.5 : 8.7499995); (9.31778599475331 : 8.7499995); (9.31778599475331 : 9.375)]" manuallyRouted="true" fixedFrom="Algorithm" fixedTo="Caller">
+    <associationConnector edgePoints="[(12.5 : 8.7499995); (9.31778599475331 : 8.7499995); (9.31778599475331 : 9.375)]" manuallyRouted="true" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/CategoriasTematica/CategoriasTematica_CatTemasConvocatoria" />
       <nodes>
         <classShapeMoniker Id="78fc39f6-026c-4d0d-a75d-f48ce53108ec" />
         <classShapeMoniker Id="418478f2-8766-4a69-8d45-3df8a2dbff3f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.2500005 : 7.18430826822917); (6.2500005 : 9.69314697265625); (5.375 : 9.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6.2500005 : 7.18430826822917); (6.2500005 : 9.69314697265625); (5.375 : 9.69314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Convocatoria/Convocatoria_Asistencia" />
       <nodes>
         <classShapeMoniker Id="3c4b40b0-14e2-44a1-bbd1-730057a98e18" />
         <classShapeMoniker Id="eeb5f418-ef56-4e6f-b806-257202f773f1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.71875275 : 7.18430826822917); (6.71875275 : 10.5088932291667); (8.625 : 10.5088932291667)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6.71875275 : 7.18430826822917); (6.71875275 : 10.5088932291667); (8.625 : 10.5088932291667)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Convocatoria/Convocatoria_CatTemasConvocatoria" />
       <nodes>
         <classShapeMoniker Id="3c4b40b0-14e2-44a1-bbd1-730057a98e18" />
         <classShapeMoniker Id="418478f2-8766-4a69-8d45-3df8a2dbff3f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.65625 : 10.75); (2.65625 : 5.52965413411458); (5.125 : 5.52965413411458)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.65625 : 10.75); (2.65625 : 5.52965413411458); (5.125 : 5.52965413411458)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Usuario/Usuario_Convocatoria" />
       <nodes>
         <classShapeMoniker Id="ea0a8ee2-ad22-4c88-b6ed-66eecccc1cda" />
         <classShapeMoniker Id="3c4b40b0-14e2-44a1-bbd1-730057a98e18" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(13.5 : 9.89589680989583); (13.5 : 12.3469962565104); (6.75 : 12.3469962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(13.5 : 9.89589680989583); (13.5 : 12.3469962565104); (6.75 : 12.3469962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/CategoriasTematica/CategoriasTematica_Interese" />
       <nodes>
         <classShapeMoniker Id="78fc39f6-026c-4d0d-a75d-f48ce53108ec" />
         <classShapeMoniker Id="40214e51-1a87-4570-9534-751f17c7620e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4 : 12.3469962565104); (4.75 : 12.3469962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4 : 12.3469962565104); (4.75 : 12.3469962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Usuario/Usuario_Interese" />
       <nodes>
         <classShapeMoniker Id="ea0a8ee2-ad22-4c88-b6ed-66eecccc1cda" />
         <classShapeMoniker Id="40214e51-1a87-4570-9534-751f17c7620e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5312525 : 14.0593082682292); (3.5312525 : 21.0969962565104); (4.625 : 21.0969962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.5312525 : 14.0593082682292); (3.5312525 : 21.0969962565104); (4.625 : 21.0969962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Usuario/Usuario_MarcasInadecuado" />
       <nodes>
         <classShapeMoniker Id="ea0a8ee2-ad22-4c88-b6ed-66eecccc1cda" />
         <classShapeMoniker Id="41f2d9f6-1122-4817-8a54-8095762ae475" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(13.5 : 6.8670068359375); (13.5 : 8.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(13.5 : 6.8670068359375); (13.5 : 8.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Movimiento/Movimiento_CategoriasTematica" />
       <nodes>
         <classShapeMoniker Id="08fa586f-25b3-4a4d-a1bd-f6d33052406c" />
         <classShapeMoniker Id="78fc39f6-026c-4d0d-a75d-f48ce53108ec" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(12.5 : 5.37100341796875); (7.125 : 5.37100341796875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(12.5 : 5.37100341796875); (7.125 : 5.37100341796875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Movimiento/Movimiento_Convocatoria" />
       <nodes>
         <classShapeMoniker Id="08fa586f-25b3-4a4d-a1bd-f6d33052406c" />
         <classShapeMoniker Id="3c4b40b0-14e2-44a1-bbd1-730057a98e18" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(16.625 : 5.72199625651042); (14.5 : 5.72199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(16.625 : 5.72199625651042); (14.5 : 5.72199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Layout/Layout_Movimiento" />
       <nodes>
         <classShapeMoniker Id="e31a9f61-c867-4fd4-a4fa-304eb5952bcb" />
         <classShapeMoniker Id="08fa586f-25b3-4a4d-a1bd-f6d33052406c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(9.5 : 19.375); (9.5 : 18.4439925130208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(9.5 : 19.375); (9.5 : 18.4439925130208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Recurso/Recurso_Aprobacione" />
       <nodes>
         <classShapeMoniker Id="2cc34e34-6368-4533-9fd0-85213d682c6d" />
         <classShapeMoniker Id="48d501e1-1b59-450a-910a-95b0bb362575" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.125 : 21.0969962565104); (6.625 : 21.0969962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.125 : 21.0969962565104); (6.625 : 21.0969962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Recurso/Recurso_MarcasInadecuado" />
       <nodes>
         <classShapeMoniker Id="2cc34e34-6368-4533-9fd0-85213d682c6d" />
         <classShapeMoniker Id="41f2d9f6-1122-4817-8a54-8095762ae475" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.4687475 : 14.0593082682292); (2.4687475 : 22.5088525390625); (8.125 : 22.5088525390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.4687475 : 14.0593082682292); (2.4687475 : 22.5088525390625); (8.125 : 22.5088525390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Usuario/Usuario_Recurso" />
       <nodes>
         <classShapeMoniker Id="ea0a8ee2-ad22-4c88-b6ed-66eecccc1cda" />
         <classShapeMoniker Id="2cc34e34-6368-4533-9fd0-85213d682c6d" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(14.5 : 4.19314697265625); (18.375 : 4.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14.5 : 4.19314697265625); (18.375 : 4.19314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Movimiento/Movimiento_RssFeed" />
       <nodes>
         <classShapeMoniker Id="08fa586f-25b3-4a4d-a1bd-f6d33052406c" />
         <classShapeMoniker Id="a12385f1-fde0-4557-a229-23a711449899" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4 : 13.5032457565104); (7.21875 : 13.5032457565104); (7.21875 : 14)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4 : 13.5032457565104); (7.21875 : 13.5032457565104); (7.21875 : 14)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/IndignadoDBDataContext/Usuario/Usuario_UsuarioFacebook" />
       <nodes>
         <classShapeMoniker Id="ea0a8ee2-ad22-4c88-b6ed-66eecccc1cda" />

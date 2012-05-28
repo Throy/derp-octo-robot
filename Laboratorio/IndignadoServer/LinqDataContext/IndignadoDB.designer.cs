@@ -72,7 +72,7 @@ namespace IndignadoServer.LinqDataContext
     #endregion
 		
 		public IndignadoDBDataContext() : 
-				base(global::IndignadoServer.Properties.Settings.Default.IndignadoDBConnectionString2, mappingSource)
+				base(global::IndignadoServer.Properties.Settings.Default.IndignadoDBConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
