@@ -20,16 +20,30 @@ namespace IndignadoServer.Controllers
         public Collection<RssItem> getNewsList()
         {
             // Java, esto es para vos.
-            /*
+            
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<RssFeed> fuentesEnum = indignadoContext.ExecuteQuery<RssFeed>("SELECT idMovimiento, url, tag FROM RssFeeds WHERE idMovimiento = {0}", IdMovement);
-            
+
+            Collection<RssItem> rssItemsCol = new Collection<RssItem>();
+            Collection<List<RssItem>> ColRssLists = new Collection<List<RssItem>>();
             foreach (RssFeed source in fuentesEnum)
             {
                 List<RssItem> rssItemsList = RssDocument.Load(new System.Uri(source.url)).Channel.Items;
-            }
-            */
+                ColRssLists.Add(rssItemsList);
 
+            }
+
+            for (int j = 0; j < 10 ; j++)
+            {
+                List<RssItem> rssItemsList = ColRssLists[j % ColRssLists.Count];
+                if (rssItemsList.Count > j){
+                    rssItemsCol.Add(rssItemsList[j]);
+                }
+            }
+            
+
+
+            /*
             // get feeds from the source.
             List<RssItem> rssItemsList1 = RssDocument.Load(new System.Uri("http://180.com.uy/feed.php")).Channel.Items;
             List<RssItem> rssItemsList2 = RssDocument.Load(new System.Uri("http://www.montevideo.com.uy/anxml.aspx?59")).Channel.Items;
@@ -45,6 +59,9 @@ namespace IndignadoServer.Controllers
                 rssItemsCol.Add(rssItemsList3[idx]);
                 rssItemsCol.Add(rssItemsList4[idx]);
             }
+            */
+
+
 
             return rssItemsCol;
         }
