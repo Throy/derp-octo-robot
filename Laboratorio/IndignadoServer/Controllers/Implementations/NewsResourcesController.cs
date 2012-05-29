@@ -51,6 +51,7 @@ namespace IndignadoServer.Controllers
         public Collection<Recurso> getResourcesList()
         {
             // get this user's banned status.
+            /* Mejor hacemos que el chekeo de si esta baneado se haga al hacer login
             bool userIsBanned = false;
             IndignadoDBDataContext indignadoContextB = new IndignadoDBDataContext();
             IEnumerable<bool> isBanneds = indignadoContextB.ExecuteQuery<bool>("SELECT banned FROM Usuarios WHERE (id = {0})", UserInfo.Id);
@@ -61,7 +62,7 @@ namespace IndignadoServer.Controllers
             if (userIsBanned)
             {
                 throw new FaultException("This user is banned.");
-            }
+            }*/
 
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
