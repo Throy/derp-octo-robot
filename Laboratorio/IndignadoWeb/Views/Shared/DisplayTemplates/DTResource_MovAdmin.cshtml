@@ -14,7 +14,7 @@
                 <br />
                 Date: @Html.DisplayFor(m => m.date)
                 <br />
-                User: @Html.DisplayFor(m => m.username)
+                User: @Html.ActionLink("" + @Html.DisplayFor(m => m.username), "UserDetails", new { id = @Model.idUser })
                 <br />
                 Likes: @Html.DisplayFor(m => m.numberLikes)
                 <br />
