@@ -1,33 +1,34 @@
 ﻿.MeetingList
 {
     position:relative;
-    margin-left:40px;
-    margin-bottom:10px;
-    width: 700px;
+    margin-left:20px;
+    margin-bottom:20px;
+    width: 740px;
     height:215px;
     font-family:Comic Sans MS;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
-    border-radius: 15px;
+    border-radius:15px;
     border-style:outset; 
-    border-width:2px; 
+    border-width:0.0px; 
+    border-top-width:1px;
     border-color:Gray;
     box-shadow:0 1px 2px #aaa; 
-    -moz-box-shadow:0 2px 3px #AAAAAA
+    -moz-box-shadow:0 1px 2px #AAAAAA;
 }
 
 .MeetingButton
 {
     position: absolute;
     bottom:0;
-    
     margin-left: 256px;
     margin-bottom:10px;
 }
 
 .Header
 {
-    text-align:center;
+    text-align:left;
+    margin-left:60px;
 }
 
 .field
@@ -52,7 +53,7 @@
  }
  .image
  {
-     margin-left:20px;
+     margin-left:50px;
      float:left;
  }
  .tableCategories
@@ -67,6 +68,7 @@
  .scrollable
  {
     height:90px;
+    margin-left:20px;
     /* overflow:auto;    */
  }
  .ampliar
@@ -76,7 +78,7 @@
     right:0;
     height:15px;
     width:38px;
-    margin-right:333px;
+    margin-right:373px;
     margin-bottom:58px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
