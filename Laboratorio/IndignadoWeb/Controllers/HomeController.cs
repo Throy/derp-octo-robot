@@ -536,8 +536,8 @@ namespace IndignadoWeb.Controllers
                         // close service
                         (serv as ICommunicationObject).Close();
 
-                        // send the meetings to the model.
-                        return View(HomeControllerConstants.viewMeetingsList, meetings);
+                        // show the meetings list
+                        return RedirectToAction(HomeControllerConstants.viewMeetingsList);
                     }
 
                 // If we got this far, something failed, redisplay form
