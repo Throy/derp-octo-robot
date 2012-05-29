@@ -4,8 +4,8 @@
     margin-left:20px;
     margin-bottom:20px;
     width: 740px;
-    height:215px;
-    font-family:Comic Sans MS;
+    height:165px;
+    font-family:Verdana;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     border-radius:15px;
@@ -21,20 +21,22 @@
 {
     position: absolute;
     bottom:0;
-    margin-left: 256px;
+    right:0;
+    margin-right:70px;
     margin-bottom:10px;
 }
 
 .Header
 {
     text-align:left;
-    margin-left:60px;
+    margin-left:70px;
 }
 
 .field
 {
     margin-left:15px;
     border-style:none;
+    font-size:90%;
 }
 
 .fieldvalue
@@ -59,7 +61,7 @@
  .tableCategories
  {
      text-align:center;
-     margin-right:90px;
+     margin-right:140px;
  }
  .hide
  {
@@ -71,15 +73,35 @@
     margin-left:20px;
     /* overflow:auto;    */
  }
+ .BeginDateValue
+ {
+    position: absolute;
+    top:0;
+    right:0;
+    margin-right:20px;
+    margin-top:3px;
+    font-size:80%;
+    color:Gray;
+ }
+ .BeginDateField
+ {
+    position: absolute;
+    top:0;
+    font-size:85%;
+    right:0;
+    margin-top:2px;
+    margin-right:90px;
+    color:Gray;
+ }
  .ampliar
  {
     position: absolute;
     bottom:0;
     right:0;
-    height:15px;
-    width:38px;
-    margin-right:373px;
-    margin-bottom:58px;
+    height:13px;
+    width:28px;
+    margin-right:380px;
+    margin-bottom:10px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     border-radius: 15px;
@@ -88,10 +110,11 @@
 .ampliarText
 {
     position:relative;
-    font-size:90%;
+    font-size:80%;
     vertical-align:middle;
-    margin-left:16px;
+    margin-left:9px;
     padding-bottom:18px;
+    font-weight:bold;
     color:White;
     
 }

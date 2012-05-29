@@ -10,17 +10,17 @@
             $("." + id.toString() + "sign").css("margin-left", "10px");
             $("." + id.toString() + "signdiv").css("width", "25px");
             $("." + id.toString() + "s").css("overflow", "auto");
-            $("." + id.toString() + "s").css("height", "220");
+            $("." + id.toString() + "s").css("height", "220px");
             $("." + id.toString() + "m").css("height", "370px");
             $("." + id.toString() + "h").show();
         }
         else {
             $("#" + id.toString() + "sign").text("+");
-            $("." + id.toString() + "sign").css("margin-left", "16px");
-            $("." + id.toString() + "signdiv").css("width", "38px");
+            $("." + id.toString() + "sign").css("margin-left", "9px");
+            $("." + id.toString() + "signdiv").css("width", "28px");
             $("." + id.toString() + "s").css("overflow", "hidden");
             $("." + id.toString() + "s").css("height", "90");
-            $("." + id.toString() + "m").css("height", "215px");
+            $("." + id.toString() + "m").css("height", "165px");
             $("." + id.toString() + "h").hide();
         }
     }
@@ -36,16 +36,19 @@
          </label> 
     </div>
 
-    <img class="image" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null) ? @Model.imagePath.ToString() : "meeting_default.jpg"))" alt="Image" />
+    <span class="BeginDateField">Begining:</span><div class="fieldvalue field BeginDateValue"><span>@Model.dateBegin.ToShortDateString()</span></div>
+
+    <img class="image" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null) ? @Model.imagePath.ToString().Replace(".jpg","_90.jpg") : "meeting_default.jpg"))" alt="Image" />
 
     <div class="scrollable @Model.id.ToString().Insert(Model.id.ToString().Count(),"s")">
         <table class="list" border="0" rules="none">
             <!-- fields -->
             <tr class="field"><td class="field"><span>Description: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.description)</div></td></tr>
+            
+            <tr class="field"><td class="field"><span>Attendance: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.numberAttendants)</div></td></tr>
+
+            <tr class="field"><td class="field"><span>Ending date: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.dateEnd)</div></td></tr>    
     
-            <tr class="field"><td class="field"><span>Beginning date: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.dateBegin)</div></td></tr>
-    
-            <tr class="field"><td class="field"><span>Ending date: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.dateEnd)</div></td></tr>
         </table>
         <div class="hide @Model.id.ToString().Insert(Model.id.ToString().Count(), "h")">
             <table class="list" border="0" rules="none">
@@ -53,9 +56,7 @@
     
                 <tr class="field"><td class="field"><span>Location - Longitude: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.locationLong)</div></td></tr>
     
-                <tr class="field"><td class="field"><span>Min quorum: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.minQuorum)</div></td></tr>
-    
-                <tr class="field"><td class="field"><span>Attendance: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.numberAttendants)</div></td></tr>
+                <tr class="field"><td class="field"><span>Min quorum: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.minQuorum)</div></td></tr>    
     
             </table>
     
