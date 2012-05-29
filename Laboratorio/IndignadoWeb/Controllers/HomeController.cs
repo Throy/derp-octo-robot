@@ -70,19 +70,6 @@ namespace IndignadoWeb.Controllers
          
         public ActionResult Index(DTTenantInfo tenantInfo)
         {
-            ITestService serv = GetService<ITestService>(HomeControllerConstants.urlTestService);
-                
-            if (HttpContext.Session["token"] != null)
-            {   
-                ViewBag.Message = serv.PingUsers("Pancho");
-            }
-            else
-            {
-                ViewBag.Message = serv.PingUsers("DonNadie");
-            }
-            
-            (serv as ICommunicationObject).Close();
-
             // show movement info
             IMovAdminService serv2 = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
 
@@ -92,12 +79,28 @@ namespace IndignadoWeb.Controllers
             // close service
             (serv2 as ICommunicationObject).Close();
 
+            INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
             // send the meeting to the model.
-            SingleMovementModel model = new SingleMovementModel();
-            model.name = movement.name;
-            model.description = movement.description;
-            model.locationLati = movement.locationLati;
-            model.locationLong = movement.locationLong;
+            HomeModel model = new HomeModel();
+            model.movement = movement;
+            model.resources = serv.getResourcesList();
+
+            // close service
+            (serv as ICommunicationObject).Close();
+
+            // open service
+            IMeetingsService serv3 = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
+
+            model.meetings = new MeetingsMapModel();
+            model.meetings.meetings = serv3.getMeetingsList();
+            model.meetings.locationLati = movement.locationLati;
+            model.meetings.locationLong = movement.locationLong;
+
+            // close service
+            (serv3 as ICommunicationObject).Close();
+
+            
 
             return View(model);
         }

@@ -342,3 +342,11 @@ div#title
 {
     width: 6em;
 }
+
+.shadowH2 {
+    background: url("../images/shadowh.png") right bottom no-repeat;
+    margin: 0 0 15px 5px;
+    padding-left: 15px;
+    clear:both;
+    font-weight:normal;
+}

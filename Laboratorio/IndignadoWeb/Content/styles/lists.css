@@ -127,3 +127,17 @@
     line-height:26px;
     text-align: left;
 }
+
+.btn1:hover {
+    cursor:pointer;
+    background: #e6e3e2;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+}
+
+.btn1 {
+    background: none;
+    border:none;
+    color:#6946ac;
+}

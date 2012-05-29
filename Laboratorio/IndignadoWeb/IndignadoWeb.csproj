@@ -78,6 +78,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\ImageFile.cs" />
     <Compile Include="Models\UsersModels.cs" />
     <Compile Include="Models\ThemeCategoriesModels.cs" />
@@ -414,6 +415,7 @@
     <Content Include="Views\Shared\DisplayTemplates\DTResource_MovAdmin.cshtml" />
     <Content Include="Views\Home\ResourcesManage.cshtml" />
     <Content Include="Views\Home\UserDetails.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTMeetingSmall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
