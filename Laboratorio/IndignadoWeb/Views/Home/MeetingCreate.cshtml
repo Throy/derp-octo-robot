@@ -19,14 +19,13 @@
 </script>
 
 <script type="text/javascript">
-    function onlyNumbers(id, limit) {
-        
-        if (event.keyCode >= 48 && event.keyCode <= 58) {
-            return true;
+    function numbersOnly(evt) {
+        evt = (evt) ? evt : window.event
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false
         }
-        else
-            event.keyCode = 8;
-        return false;
+        return true
     }
 </script>
 
@@ -88,7 +87,7 @@
 <font style="font-style:italic; font-size: 90%">Please locate the meeting location in the map.</font>
 </p>
 
-<div id="map_canvas" style="width:400px; height:310px; float:left; margin-left:70px; border-style:outset; margin-top:2px; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA"></div>
+<div id="map_canvas" style="width:400px; height:400px; float:left; margin-left:20px; border-style:outset; margin-top:2px; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA"></div>
 
 <form action="/Home/MeetingCreate" method="post" enctype="multipart/form-data">
     @Html.ValidationSummary(true, "Some fields have errors, please fix them.")
@@ -134,32 +133,34 @@
                 @Html.ValidationMessageFor(m => m.minQuorum)
             </div>
 
-            <label>Beginning date</label>
-            <div class="editor-field">
+            <label style=" float:left; margin-right:100px">Beginning date</label>
+            <div class="editor-field" style="float:left" >
                 @Html.TextBoxFor(m => m.dateBegin, new { @class = "date", @readonly = "readonly" })
             </div>
-            <div class="editor-field">
-            Beginning time: <input name="hoursBegin" id="hoursBegin" style="width:20px" maxlength="2" onkeypress="return onlyNumbers(this,2);"/> h <input name="minutesBegin" id="minutesBegin" style="width:20px" maxlength="2" onkeypress="return onlyNumbers(this,2);"/> min
+            <div class="editor-field" style="float:left">
+            <input name="hoursBegin" id="hoursBegin" style="width:20px; margin-left:5px;" maxlength="2" onkeypress="return numbersOnly(event);"/> h <input name="minutesBegin" id="minutesBegin" style="width:20px" maxlength="2" onkeypress="return numbersOnly(event);"/> min
             </div>
 
-            <label>Ending date</label>
-            <div class="editor-field">
+            <label style=" float:left; margin-right:150px">Ending date</label>
+            <div class="editor-field" style="float:left">
                 @Html.TextBoxFor(m => m.dateEnd, new { @class = "date", @readonly = "readonly" })
             </div>
-            <div class="editor-field">
-            Ending time: <input name="hoursEnd" id="hoursEnd" style="width:20px" maxlength="2"/> h <input name="minutesEnd" id="minutesEnd" style="width:20px" maxlength="2"/> min
+            <div class="editor-field" style="float:left">
+            <input name="hoursEnd" id="hoursEnd" style="width:20px; margin-left:5px;" onkeypress="return numbersOnly(event);" maxlength="2"/> h <input  name="minutesEnd" id="minutesEnd" style="width:20px" maxlength="2" onkeypress="return numbersOnly(event);"/> min
             </div>
             
+            <label style="margin-bottom:5px; float:left; margin-right:70px">Theme Categories</label>
             <div>
-	            @Html.ListBoxFor(m => m.themeCategoriesId, Model.themeCategories);
+                @Html.ListBoxFor(m => m.themeCategoriesId, Model.themeCategories)
             </div>
 
-            <label>Logo</label>
+            <label style="margin-top:15px">Logo</label>
                 <input name="ImageUploaded" id="ImageUploaded" type="file">
-            </div>
             <p>
-                <input class="boton-big-red" style="height:30px; margin-top:10px" type="submit" name="buttonCreate" value="Create meeting" />
+                <input class="boton-big-red" style="height:30px;  margin-top:20px" type="submit" name="buttonCreate" value="Create meeting" />
             </p>
+            </div>
+            
         </fieldset>
     </div>
 </form>

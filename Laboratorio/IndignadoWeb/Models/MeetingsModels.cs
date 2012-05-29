@@ -45,22 +45,22 @@ namespace IndignadoWeb.Models
         [Display(Name = "Minimum quorum: ")]
         public int minQuorum { get; set; }
 
-        [Required]
+        
         public DateTime dateBegin { get; set; }
 
-        [Required]
+        
         public DateTime dateEnd { get; set; }
 
-        [Required]
+        
         public int hoursBegin { get; set; }
 
-        [Required]
+        
         public int hoursEnd { get; set; }
 
-        [Required]
+        
         public int minutesBegin { get; set; }
 
-        [Required]
+        
         public int minutesEnd { get; set; }
 
         //public DTThemeCategoriesColMeetings themeCategories { get; set; }

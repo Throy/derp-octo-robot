@@ -328,6 +328,11 @@ div#title
     margin: 0.5em 0;
 }
 
+.date
+{
+    width:70px;
+}
+
 .text-box
 {
     width: 30em;

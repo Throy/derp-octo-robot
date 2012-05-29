@@ -502,14 +502,19 @@ namespace IndignadoWeb.Controllers
                             //model.date.ToString() + "-" + model.Hora.ToString() + ":" + model.Minutos.ToString(););
                         dtMeeting.minQuorum = model.minQuorum;
 
-                        dtMeeting.themeCategories = new DTThemeCategoryMeetings[model.themeCategoriesId.Count];
-                        for (int idx = 0; idx < model.themeCategoriesId.Count; idx += 1) {
-                            int idThemeCat = model.themeCategoriesId [idx];
-                            DTThemeCategoryMeetings dtThemeCat = new DTThemeCategoryMeetings();
-                            dtThemeCat.id = idThemeCat;
-                            dtMeeting.themeCategories[idx] = dtThemeCat;
+                        if (model.themeCategoriesId == null)
+                            dtMeeting.themeCategories = null;
+                        else
+                        {
+                            dtMeeting.themeCategories = new DTThemeCategoryMeetings[model.themeCategoriesId.Count];
+                            for (int idx = 0; idx < model.themeCategoriesId.Count; idx += 1)
+                            {
+                                int idThemeCat = model.themeCategoriesId[idx];
+                                DTThemeCategoryMeetings dtThemeCat = new DTThemeCategoryMeetings();
+                                dtThemeCat.id = idThemeCat;
+                                dtMeeting.themeCategories[idx] = dtThemeCat;
+                            }
                         }
-
                         if (model.ImageUploaded != null)
                         {
                             string fileName = Guid.NewGuid().ToString();
@@ -519,7 +524,7 @@ namespace IndignadoWeb.Controllers
                             string fullPath = imagesPath + "Full\\";
                 
                             CreateMeetingModel.ResizeAndSave(thumbPath, fileName, model.ImageUploaded.InputStream, 80, true);
-                            CreateMeetingModel.ResizeAndSave(thumbPath, fileName + "_100", model.ImageUploaded.InputStream, 150, true);
+                            CreateMeetingModel.ResizeAndSave(thumbPath, fileName + "_90", model.ImageUploaded.InputStream, 90, true);
                             CreateMeetingModel.ResizeAndSave(fullPath, fileName, model.ImageUploaded.InputStream, 300, true);
 
                             dtMeeting.imagePath = fileName + ".jpg";
