@@ -1,85 +1,91 @@
 ﻿<!-- model -->
 @model IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources
            
-<div>
-    <!-- header -->
-    <h3><a href="@Html.DisplayFor(m => m.urlLink)">@Html.DisplayFor(m => m.title)</a></h3>
-    
-    <table border-style="none">
-        <tr>
-            <td valign="top">
-                <!-- fields -->
-                @Html.Raw(HttpUtility.HtmlDecode(Model.description))
-                <br />
-                <br />
-                Date: @Html.DisplayFor(m => m.date)
-                <br />
-                User: @Html.DisplayFor(m => m.username)
-                
-                <!-- image -->
-                @{
-                    if ((@Model.urlImage != null) && (@Model.urlImage != ""))
-                    {
-                        <text>
-                            <br />
-                            <br />
-                            <img src="@Html.DisplayFor(m => m.urlImage)" width="400" alt=""/>
-                        </text>
-                    }
-                }
-                
-                <!-- video -->
-                @{
-                    if ((@Model.urlVideo != null) && (@Model.urlVideo != ""))
-                    {
-                        <text>
-                            <br />
-                            <br />
-                            <iframe src="@Html.DisplayFor(m => m.urlVideo)" frameborder="0" width="400" height="300"></iframe>
-                        </text>
-                    }
-                }
-            </td>
-            <td valign="top">
-                <!-- thumbnail -->
-                <img src="@Html.DisplayFor(m => m.urlThumb)" width="120px"/>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <!-- likes -->
-                @using (Html.BeginForm(new { id = @Model.id }))
-                {
-                    <text>Likes: </text> @Html.DisplayFor(m => m.numberLikes);
+<li class="item" style="width:620px;">
+    <div class="shadowl">
+        <div class="shadowr">
+            <div class="int">
+                <!-- header -->
+                <div class="title">
+                    <h3><a href="@Html.DisplayFor(m => m.urlLink)">@Html.DisplayFor(m => m.title)</a></h3>
+                </div>
+
+                <div class="body">
+                    <!-- fields -->
+                    @Html.Raw(HttpUtility.HtmlDecode(Model.description))
                     
-                    if (@Model.iLikeIt == 0)
+                
+                    <!-- image -->
+                    @if ((@Model.urlImage != null) && (@Model.urlImage != ""))
                     {
-                        <input type="submit" name="buttonLike" value="Like it" />
+                            <div class="img">
+                                <img src="@Html.DisplayFor(m => m.urlImage)" width="400" alt=""/>
+                            </div>
+                    }
+                
+                    <!-- video -->
+                    @{
+                        if ((@Model.urlVideo != null) && (@Model.urlVideo != ""))
+                        {
+                            <text>
+                                <br />
+                                <br />
+                                <iframe style="margin:0 110px" src="@Html.DisplayFor(m => m.urlVideo)" frameborder="0" width="400" height="300"></iframe>
+                            </text>
+                        }
                     }
 
-                    if (Model.iLikeIt > 0)
+                    @if ((@Model.urlThumb != null) && (@Model.urlThumb != ""))
                     {
-                        <input type="submit" name="buttonUnlike" value="Unlike it" />
+                        <td valign="top">
+                            <!-- thumbnail -->
+                            <img src="@Html.DisplayFor(m => m.urlThumb)" width="120px"/>
+                        </td>
                     }
-                }
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <!-- likes -->
-                @using (Html.BeginForm(new { id = @Model.id }))
-                {
-                    if (@Model.myMarkInappr == 0)
-                    {
-                        <input type="submit" name="buttonMarkInappr" value="Mark as inappropriate" />
-                    }
+                    <div class="likes">
+                        <!-- likes -->
+                        @using (Html.BeginForm(new { id = @Model.id }))
+                        {
+                            <text>Likes: </text> @Html.DisplayFor(m => m.numberLikes);
+                    
+                            if (@Model.iLikeIt == 0)
+                            {
+                                <input type="submit" class="likebtn" name="buttonLike" value="Like" />
+                            }
 
-                    if (Model.myMarkInappr > 0)
-                    {
-                        <input type="submit" name="buttonUnmarkInappr" value="Unmark as inappropriate" />
-                    }
-                }
-            </td>
-        </tr>
-    </table>
-</div>
+                            if (Model.iLikeIt > 0)
+                            {
+                                <input type="submit" class="likebtn2"  name="buttonUnlike" value="Unlike" />
+                            }
+                        }
+                    </div>
+
+                    
+                    <div class="clear"></div>
+                    <div class="footer">
+                        Date: @Html.DisplayFor(m => m.date)
+                        <div class="user">
+                            by @Html.ActionLink("" + @Html.DisplayFor(m => m.username), "UserDetails", new { id = @Model.idUser })
+                        </div>
+                        <div class="report">
+                            <!-- report -->
+                            @using (Html.BeginForm(new { id = @Model.id }))
+                            {
+                                if (@Model.myMarkInappr == 0)
+                                {
+                                    <input type="submit" class="reportbtn" name="buttonMarkInappr" value="Mark as inappropriate" />
+                                }
+
+                                if (Model.myMarkInappr > 0)
+                                {
+                                    <input type="submit" class="reportbtn" name="buttonUnmarkInappr" value="Unmark as inappropriate" />
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+<br />

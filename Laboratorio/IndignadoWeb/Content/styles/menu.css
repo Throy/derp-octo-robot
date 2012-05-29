@@ -1,7 +1,6 @@
 /* 
     Document   : menu
-    Created on : 09/09/2011, 01:42:46 AM
-    Author     : Sleaze
+    Author     : Grupo 9
     Description:
         
 */
@@ -147,6 +146,8 @@
     border: 1px solid #e1deca;
     border-bottom:none;
     border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
 }
 
 #menu ul li:hover .logonbtn a {
@@ -173,4 +174,6 @@
     border: 1px solid #e1deca;
     border-bottom:none;
     border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
 }

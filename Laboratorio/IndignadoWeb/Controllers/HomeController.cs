@@ -628,6 +628,7 @@ namespace IndignadoWeb.Controllers
         }
 
         // shows all news in a list.
+        [OutputCache(Duration = 60, VaryByParam = "none")]
         public ActionResult NewsList()
         {
             // open service
@@ -802,7 +803,7 @@ namespace IndignadoWeb.Controllers
                 }
 
                 // button get data from link
-                else if (buttonGetData != null)
+                else if (buttonGetData != null && model.urlLink != null)
                 {
                     // open service
                     INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);

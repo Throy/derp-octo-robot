@@ -536,9 +536,12 @@ namespace IndignadoServer.Services
         {
             DTRssItem dtRssItem = new DTRssItem();
             dtRssItem.title = rssItem.Title;
-            dtRssItem.description = Regex.Replace(rssItem.Description, @"</?(a|img|div|p|strong) ?[^>]*?>", string.Empty);
+            //dtRssItem.description = Regex.Replace(rssItem.Description, @"</?(a|img|div|p|strong) ?[^>]*?>", string.Empty);
+            // Le puse para que quite todas las tags, sino quedaba el br y me movia todo de lugar
+            dtRssItem.description = Regex.Replace(rssItem.Description, "<(.|\\n)*?>", string.Empty);
             dtRssItem.link = (rssItem.Link == null) ? "" : rssItem.Link;
-            dtRssItem.image = Regex.Match(rssItem.Description, @"<img[^>]*/>").Value;
+            // Le agregue jpg para que no capture unos gifs transparentes que no mostraban nada
+            dtRssItem.image = Regex.Match(rssItem.Description, @"<img[^>]*jpg.*?/>").Value;
             dtRssItem.image = (dtRssItem.image == null) ? null : Regex.Match(dtRssItem.image, @"src\=\"".*?\""").Value;
             dtRssItem.image = (dtRssItem.image == null) || (dtRssItem.image.Length < 5) ? null : dtRssItem.image.Substring(5);
             dtRssItem.image = (dtRssItem.image == null) || (dtRssItem.image.Length < 5) ? null : dtRssItem.image.Substring (0, dtRssItem.image.Length - 1);

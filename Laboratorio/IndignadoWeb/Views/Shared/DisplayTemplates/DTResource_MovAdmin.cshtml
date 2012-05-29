@@ -44,10 +44,13 @@
                     }
                 }
             </td>
-            <td valign="top">
-                <!-- thumbnail -->
-                <img src="@Html.DisplayFor(m => m.urlThumb)" width="120px"/>
-            </td>
+            @if ((@Model.urlThumb != null) && (@Model.urlThumb != ""))
+            {
+                <td valign="top">
+                    <!-- thumbnail -->
+                    <img src="@Html.DisplayFor(m => m.urlThumb)" width="120px"/>
+                </td>
+            }
         </tr>
         <tr>
             <td colspan="2">

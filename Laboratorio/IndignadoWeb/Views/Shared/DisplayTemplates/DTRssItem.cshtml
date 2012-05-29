@@ -1,22 +1,30 @@
 ﻿<!-- model -->
 @model IndignadoWeb.NewsResourcesServiceReference.DTRssItem
            
-<div>
-    <h3><a href="@Html.DisplayFor(m => m.link)">@Html.DisplayFor(m => m.title)</a></h3>
+<li class="item">
+    <div class="shadowl">
+        <div class="shadowr">
+            <a class="int" href="@Html.DisplayFor(m => m.link)">
+                <div class="title">
+                    <h3>@Html.DisplayFor(m => m.title)</h3>
+                </div>
+                <!-- header -->
     
-    <!-- header -->
-    <table border-style="none">
-        <tr>
-            <td valign="top">
-                @Html.Raw(HttpUtility.HtmlDecode(Model.description))
-                <br />
-                <br />
-                Date: @Html.DisplayFor(m => m.date)
-            </td>
-            <td valign="top">
-                <img src="@Html.DisplayFor(m => m.image)" width="120px"/>
-            </td>
-        </tr>
-    </table>
-    <br />
-</div>
+                <div class="body">
+                    @if ((@Model.image != null) && (@Model.image != "")) {
+                        <div class="img">
+                            <img src="@Html.DisplayFor(m => m.image)" width="120px"/>
+                        </div>
+                    }
+                    <div class="desc">
+                        @Html.Raw(HttpUtility.HtmlDecode(Model.description))     
+                    </div>
+                    <div class="footer">
+                        Date: @Html.DisplayFor(m => m.date)
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</li>
+<br />

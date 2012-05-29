@@ -23,7 +23,7 @@
 @using (Html.BeginForm(new { id = 0 }))
 {
     @Html.ValidationSummary(true, "Some fields have errors, please fix them.")
-    <div>
+    <div class="reg-box big-red">
         <fieldset>
             <div class="editor-label">
                 @Html.LabelFor(m => m.newItem.title)
@@ -40,7 +40,7 @@
                 @Html.ValidationMessageFor(m => m.newItem.description)
             </div>
             <p>
-                <input type="submit" name="buttonAdd" value="Add" />
+                <input type="submit" class="boton-big-red" name="buttonAdd" value="Add" />
             </p>
         </fieldset>
     </div>
