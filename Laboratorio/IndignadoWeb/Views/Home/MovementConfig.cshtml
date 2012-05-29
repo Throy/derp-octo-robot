@@ -1,19 +1,93 @@
 ﻿<!-- model -->
 @model IndignadoWeb.Models.SingleMovementModel
-
-<!-- scripts -->
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-
+           
 <!-- page title -->
 @{
     ViewBag.Title = "Indignado Framework - Configure movement";
 }
 
+<!-- scripts -->
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="../../Scripts/jquery-1.5.1.js" type="text/javascript"></script>
+<script src="../../Scripts/jquery-ui-1.8.11.js" type="text/javascript"></script>
+<link href="../../Content/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    $(document).ready(function () { $('.date').datepicker({ dateFormat: "dd/mm/yy" }); });   
+</script>
+
+
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDMxElmlzDp8EFWG0el5fZxRrRzN3E3NRU&sensor=false">
+</script>
+
+<script type="text/javascript">
+    function onlyNumbers(id, limit) {
+
+        if (event.keyCode >= 48 && event.keyCode <= 58) {
+            return true;
+        }
+        else
+            event.keyCode = 8;
+        return false;
+    }
+</script>
+
+<script type="text/javascript">
+    var map;
+    var markersArray = [];
+    function googleMapsInitialize() {
+        // initialize map
+        var myOptions = {
+            center: new google.maps.LatLng(@Model.locationLati.ToString().Replace(",", "."), @Model.locationLong.ToString().Replace(",", ".")),
+            zoom: 6,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        // setting the function that will respond onclick (create a marker)
+        google.maps.event.addListener(map, 'click', function (event) {
+            placeMarker(event.latLng);
+        });
+        // Delete Markers Function
+        google.maps.Map.prototype.clearOverlays = function () {
+            if (markersArray) {
+                for (var i = 0; i < markersArray.length; i++) {
+                    markersArray[i].setMap(null);
+                }
+            }
+        }
+        //add default marker
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(@Model.locationLati.ToString().Replace(",", "."), @Model.locationLong.ToString().Replace(",", ".")),
+            map: map
+        });
+        markersArray.push(marker);
+        document.getElementById("locationLong").value = marker.getPosition().lng().toString();
+        document.getElementById("locationLati").value = marker.getPosition().lat().toString();
+    }
+    function placeMarker(location) {
+        map.clearOverlays();
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+        markersArray.push(marker);
+        document.getElementById("locationLong").value = marker.getPosition().lng().toString();
+        document.getElementById("locationLati").value = marker.getPosition().lat().toString();
+    }
+
+ </script>
+
 <!-- page content -->
 
 <h2>Configure movement</h2>
 
+<p>
+<div id="map_canvas" style="width:400px; height:310px; float:left; margin-left:70px; border-style:outset; margin-top:2px; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA"></div>
+</p>
+
+<p>
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true, "Some fields have errors, please fix them.")
@@ -57,3 +131,7 @@
         </fieldset>
     </div>
 }
+</p>
+
+
+<script type="text/javascript">googleMapsInitialize();</script>
