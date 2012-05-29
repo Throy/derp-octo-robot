@@ -50,6 +50,16 @@ namespace IndignadoWeb.Common
                 ViewResult view = filterContext.Result as ViewResult;
                 view.MasterName = _tenantInfo.layoutFile;
                 view.ViewBag.TenantInfo = _tenantInfo;
+                if (filterContext.HttpContext.Session["loginInfo"] != null)
+                {
+                    view.ViewBag.UserIsMovAdmin = (filterContext.HttpContext.Session["loginInfo"] as DTLoginInfo).isMovAdmin;
+                    view.ViewBag.UserIsSysAdmin = (filterContext.HttpContext.Session["loginInfo"] as DTLoginInfo).isSysAdmin;
+                }
+                else
+                {
+                    view.ViewBag.UserIsMovAdmin = false;
+                    view.ViewBag.UserIsSysAdmin = false;
+                }
             }
         }
 

@@ -17,7 +17,7 @@
 
 <div id="contenedor">
     <div id="menu">
-        <ul>
+        <ul style="width:300px;">
             <li class="outer"><span class="menubtn">@Html.ActionLink("Home", "Index", "SysAdmin")</span></li>
             
             <!-- system admin -->
@@ -29,11 +29,16 @@
             </li>
             
         </ul>                
-        <span class="menufecha">
+        <span class="menulogon">
+            <ul>
             @if(Request.IsAuthenticated) {
-                <text>Welcome <strong>@User.Identity.Name</strong>!
-                [ @Html.ActionLink("Log Off", "LogOff", "SysAdmin") ]</text>
+                <li class="outer" style="position:relative; "><span class="userbtn"><a>@User.Identity.Name</a></span>
+                    <ul style="width:100%">
+                        <li class="menuitm">@Html.ActionLink("Logout", "LogOff", "SysAdmin")</li>
+                    </ul>
+                </li>
             }
+            </ul>
         </span>                   
     </div>
 </div>

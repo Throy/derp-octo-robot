@@ -75,7 +75,7 @@ namespace IndignadoServer
    
             // Create a new principal for this identity 
             GenericPrincipal newPrincipal = new GenericPrincipal(newIdentity, roles); 
-            const String PrincipalKey = "Principal"; 
+            const String PrincipalKey= "Principal"; 
    
             // Store the new principal in the context 
             evaluationContext.Properties[PrincipalKey] = newPrincipal; 
@@ -90,7 +90,7 @@ namespace IndignadoServer
             private set;
         } 
  
- 
+  
         public ClaimSet Issuer 
         { 
             get; 

@@ -35,21 +35,20 @@
             
             <!-- news resources -->
             <li class="outer"><span class="menubtn"><a>NewsResources</a></span>
-                <ul>
+                <ul style="width:114px">
                     <li class="menuitm">@Html.ActionLink("List news", "NewsList", "Home")</li>
                     <li class="menuitm">@Html.ActionLink("List resources", "ResourcesList", "Home")</li>
                     <li class="menuitm">@Html.ActionLink("Share resource", "ResourceShare", "Home")</li>
                 </ul>
             </li>
             
-            <!-- user -->
-            <li class="outer"><span class="menubtn"><a>Users</a></span>
-                <ul>
-                    <li class="menuitm">@Html.ActionLink("Configure user", "UserConfig", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("List theme categories", "ThemeCategoriesList", "Home")</li>
-                </ul>
-            </li>
             
+            <!-- about -->
+            <li class="outer"><span class="menubtn">@Html.ActionLink("About", "About", "Home")</span></li>
+        </ul>                
+        <span class="menulogon">
+            <ul>
+            @if(ViewBag.UserIsMovAdmin) {
             <!-- movement admin -->
             <li class="outer"><span class="menubtn"><a>MovAdmin</a></span>
                 <ul>
@@ -60,12 +59,10 @@
                     <li class="menuitm">@Html.ActionLink("Manage users", "UsersManage", "Home")</li>
                 </ul>
             </li>
+            }
             
-            <!-- about -->
-            <li class="outer"><span class="menubtn">@Html.ActionLink("About", "About", "Home")</span></li>
-        </ul>                
-        <span class="menufecha">
-             @Html.Partial("_LogOnPartial")
+            @Html.Partial("_LogOnPartial")
+            </ul>
         </span>                   
       </div>
 </div>

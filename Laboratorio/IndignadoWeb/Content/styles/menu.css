@@ -30,6 +30,7 @@
     padding: 0;
     margin: 0;
     height: 41px;
+    position:relative;
 }
 
 .outer {
@@ -38,7 +39,7 @@
 }
 
 #menu ul li ul {
-    float: left;
+    position: absolute;
     background-position: 0 -10px;
     background-color: #fff;
     padding-top:5px;
@@ -111,4 +112,65 @@
     font-family: Arial, sans-serif;
     padding: 0 10px;
     z-index: 20;
+}
+
+
+.menulogon{
+	float:right;
+}
+
+#menu ul li:hover .userbtn a {
+    background: url(../images/menubtn.png) top left repeat-x;
+    cursor:pointer;
+    text-decoration:none;
+    background-color: #5d5747;
+    background-position: 0 29px;
+    height:34px;
+    border:none;
+    color:#fff;
+    padding: 1px 25px;
+}
+
+.userbtn a, .userbtn a:visited {
+    position:relative;
+    float:right;
+    background: url(../images/menudown.png) right 12px no-repeat;
+    background-color: #ffffee;
+    font-size:13px;
+    color:#4e3125;
+    height:28px;
+    line-height:28px;
+    font-family: Arial, sans-serif;
+    padding: 0 24px;
+    margin-top:3px; 
+    z-index: 20;    
+    border: 1px solid #e1deca;
+    border-bottom:none;
+    border-radius: 5px 5px 0 0;
+}
+
+#menu ul li:hover .logonbtn a {
+    cursor:pointer;
+    text-decoration:none;
+    background-color: #5d5747;
+    border:none;
+    color:#fff;
+    padding: 1px 25px;
+}
+
+.logonbtn a, .logonbtn a:visited {
+    position:relative;
+    float:right;
+    background-color: #ffffee;
+    font-size:13px;
+    color:#4e3125;
+    height:28px;
+    line-height:28px;
+    font-family: Arial, sans-serif;
+    padding: 0 24px;
+    margin-top:3px; 
+    z-index: 20;    
+    border: 1px solid #e1deca;
+    border-bottom:none;
+    border-radius: 5px 5px 0 0;
 }

@@ -319,10 +319,12 @@ namespace IndignadoServer.Services
     [DataContract]
     public class DTLoginInfo
     {
-        public DTLoginInfo(String name, String token)
+        public DTLoginInfo(String name, String token, bool isMovAdmin, bool isSysAdmin)
         {
             this.name = name;
             this.token = token;
+            this.isMovAdmin = isMovAdmin;
+            this.isSysAdmin = isSysAdmin;
         }
 
         [DataMember]
@@ -330,6 +332,12 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public String token { get; set; }
+
+        [DataMember]
+        public bool isMovAdmin { get; set; }
+
+        [DataMember]
+        public bool isSysAdmin { get; set; }
     }
 
     public enum DTLoginFaultType
