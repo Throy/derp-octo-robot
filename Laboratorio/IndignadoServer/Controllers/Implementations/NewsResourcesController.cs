@@ -50,36 +50,36 @@ namespace IndignadoServer.Controllers
         // returns all resources.
         public Collection<Recurso> getResourcesList()
         {
-            // get this user's banned status.
-            /* Mejor hacemos que el chekeo de si esta baneado se haga al hacer login
-            bool userIsBanned = false;
-            IndignadoDBDataContext indignadoContextB = new IndignadoDBDataContext();
-            IEnumerable<bool> isBanneds = indignadoContextB.ExecuteQuery<bool>("SELECT banned FROM Usuarios WHERE (id = {0})", UserInfo.Id);
-            foreach (bool isBanned in isBanneds)
-            {
-                userIsBanned = isBanned;
-            }
-            if (userIsBanned)
-            {
-                throw new FaultException("This user is banned.");
-            }*/
-
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) ORDER BY Recursos.id DESC", IdMovement, 0);
+            Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
+            return toResourcesCol(recursosEnum, movement.maxUltimosRecursosM);
+        }
+
+        // returns the top ranked resources.
+        public Collection<Recurso> getResourcesListTopRanked()
+        {
+            // get top ranked resources from this movement.
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) ORDER BY CantAprobaciones.cantAprobaciones DESC, Recursos.id DESC", IdMovement, 0);
+            Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
+            return toResourcesCol(recursosEnum, movement.maxRecursosPopularesN);
+        }
+
+        // converts a resources enumerable to a collection.
+        private Collection<Recurso> toResourcesCol(IEnumerable<Recurso> recursosEnum, int numberItems)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
 
             // create new resources collection.
             Collection<Recurso> recursosCol = new Collection<Recurso>();
+
+            // for each resource, ...
             foreach (Recurso resource in recursosEnum)
             {
-                // get number of likes
-                IEnumerable<int> numbersLikes = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM Aprobaciones WHERE idRecurso = {0}", resource.id);
-                foreach (int numberLikes in numbersLikes)
-                {
-                    resource.cantAprobaciones = numberLikes;
-                }
-
                 // get own like
                 if (UserInfo != null)
                 {
@@ -102,6 +102,12 @@ namespace IndignadoServer.Controllers
 
                 // add item to the collection
                 recursosCol.Add(resource);
+
+                // stop at the desired number of items.
+                if (recursosCol.Count >= numberItems)
+                {
+                    break;
+                }
             }
 
             return recursosCol;

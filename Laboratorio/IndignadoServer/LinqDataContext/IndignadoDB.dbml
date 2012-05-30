@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="IndignadoDB" Class="IndignadoDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Aprobaciones" Member="Aprobaciones">
-    <Type Name="Aprobacione">
-      <Column Name="idRecurso" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Usuario_Aprobacione" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
-      <Association Name="Recurso_Aprobacione" Member="Recurso" ThisKey="idRecurso" OtherKey="id" Type="Recurso" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Usuarios" Member="Usuarios">
     <Type Name="Usuario">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -21,7 +13,7 @@
       <Column Name="fechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="cantRecursosMarcadosInadecuados" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="cantRecursosDeshabilitados" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="banned" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="banned" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="privilegio" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
       <Association Name="Usuario_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idUsuario" Type="Aprobacione" />
       <Association Name="Usuario_Asistencia" Member="Asistencias" ThisKey="id" OtherKey="idUsuario" Type="Asistencia" />
@@ -30,6 +22,14 @@
       <Association Name="Usuario_MarcasInadecuado" Member="MarcasInadecuados" ThisKey="id" OtherKey="idUsuario" Type="MarcasInadecuado" />
       <Association Name="Usuario_Recurso" Member="Recurso" ThisKey="id" OtherKey="id" Type="Recurso" Cardinality="One" />
       <Association Name="Usuario_UsuarioFacebook" Member="UsuarioFacebooks" ThisKey="id" OtherKey="idUsuario" Type="UsuarioFacebook" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Aprobaciones" Member="Aprobaciones">
+    <Type Name="Aprobacione">
+      <Column Name="idRecurso" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Usuario_Aprobacione" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Recurso_Aprobacione" Member="Recurso" ThisKey="idRecurso" OtherKey="id" Type="Recurso" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Asistencias" Member="Asistencias">
@@ -115,10 +115,10 @@
       <Column Name="descripcion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="latitud" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="longitud" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="maxMarcasInadecuadasRecursoX" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="maxRecursosInadecuadosUsuarioZ" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="maxRecursosPopularesN" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="maxUltimosRecursosM" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="maxMarcasInadecuadasRecursoX" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="maxRecursosInadecuadosUsuarioZ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="maxRecursosPopularesN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="maxUltimosRecursosM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Movimiento_CategoriasTematica" Member="CategoriasTematicas" ThisKey="id" OtherKey="idMovimiento" Type="CategoriasTematica" />
       <Association Name="Movimiento_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idMovimiento" Type="Convocatoria" />
       <Association Name="Movimiento_RssFeed" Member="RssFeeds" ThisKey="id" OtherKey="idMovimiento" Type="RssFeed" />

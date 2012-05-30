@@ -29,6 +29,7 @@ namespace IndignadoWeb.Controllers
         public const string viewNewsList = "NewsList";
         public const string viewResourceShare = "ResourceShare";
         public const string viewResourcesList = "ResourcesList";
+        public const string viewResourcesListTopRanked = "ResourcesListTopRanked";
         public const string viewResourcesManage = "ResourcesManage";
         public const string viewRssSourcesConfig = "RssSourcesConfig";
         public const string viewThemeCategoriesConfig = "ThemeCategoriesConfig";
@@ -660,9 +661,45 @@ namespace IndignadoWeb.Controllers
             }
         }
 
+        // shows the top ranked resources in a list.
+        public ActionResult ResourcesListTopRanked()
+        {
+            try
+            {
+                // open service
+                INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                // get all news
+                ListResourcesModel listResourcesModel = new ListResourcesModel();
+                listResourcesModel.items = serv.getResourcesListTopRanked();
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                return View(listResourcesModel);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
+        }
+
         // like / dislike resource.
         [HttpPost]
         public ActionResult ResourcesList(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
+        {
+            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id);
+        }
+
+        // like / dislike resource.
+        [HttpPost]
+        public ActionResult ResourcesListTopRanked(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
+        {
+            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id);
+        }
+
+        // like / dislike resource.
+        public ActionResult ResourcesListGeneric(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
         {
             try
             {

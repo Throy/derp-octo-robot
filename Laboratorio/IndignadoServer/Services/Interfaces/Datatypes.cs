@@ -348,7 +348,9 @@ namespace IndignadoServer.Services
         // Unknown Username or Incorrect Password
         UNKOWN_OR_INVALID = 0,
         // El usuario de facebook no se encuentra registrado
-        FB_NOT_REGISTERED = 1
+        FB_NOT_REGISTERED = 1,
+        // El usuario de está deshabilitado
+        BANNED = 2
     }
 
     [DataContract]
@@ -639,7 +641,7 @@ namespace IndignadoServer.Services
             dtUser.locationLong = (float)user.longitud;
             dtUser.numberResourcesMarkedInappr = (user.cantRecursosMarcadosInadecuados == null) ? 0 : user.cantRecursosMarcadosInadecuados.Value;
             dtUser.numberResourcesDisabled = (user.cantRecursosDeshabilitados == null) ? 0 : user.cantRecursosDeshabilitados.Value;
-            dtUser.banned = (user.banned == null) ? false : user.banned.Value;
+            dtUser.banned = user.banned;
             return dtUser;
         }
 
@@ -655,7 +657,7 @@ namespace IndignadoServer.Services
             dtUser.locationLong = (float)user.longitud;
             dtUser.numberResourcesMarkedInappr = (user.cantRecursosMarcadosInadecuados == null) ? 0 : user.cantRecursosMarcadosInadecuados.Value;
             dtUser.numberResourcesDisabled = (user.cantRecursosDeshabilitados == null) ? 0 : user.cantRecursosDeshabilitados.Value;
-            dtUser.banned = (user.banned == null) ? false : user.banned.Value;
+            dtUser.banned = user.banned;
             return dtUser;
         }
 

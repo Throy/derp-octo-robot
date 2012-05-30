@@ -16,6 +16,9 @@ namespace IndignadoServer.Controllers
         // returns all resources.
         Collection<Recurso> getResourcesList();
 
+        // returns the top ranked resources.
+        Collection<Recurso> getResourcesListTopRanked();
+
         // creates a resource.
         void createResource(Recurso resource);
         

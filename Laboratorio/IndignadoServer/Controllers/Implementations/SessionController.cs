@@ -45,10 +45,16 @@ namespace IndignadoServer.Controllers
                                            u.contraseña != noPass &&
                                            (u.privilegio & IndignadoServer.Roles.SysAdminMask) == IndignadoServer.Roles.SysAdminMask));
 
+            // usuario inexistente o contraseña incorrecta.
             if (user == null)
             {
-                // si no lo encontro
-                throw new FaultException<LoginFault>(new LoginFault("Unknown Username or Incorrect Password", DTLoginFaultType.UNKOWN_OR_INVALID));
+                throw new FaultException<LoginFault>(new LoginFault("Unknown username or incorrect password", DTLoginFaultType.UNKOWN_OR_INVALID));
+            }
+
+            // usuario deshabilitado.
+            if (user.banned)
+            {
+                throw new FaultException<LoginFault>(new LoginFault("The user is banned, please contact the movement administrator.", DTLoginFaultType.BANNED));
             }
 
             String token = GenerateToken();
