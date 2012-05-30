@@ -13,7 +13,7 @@
                     <div class="img" style="float:left;">
                         <img class="image" style="margin:0;" width="64px" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null) ? @Model.imagePath.ToString() : "meeting_default.jpg"))" alt="Image" />
                     </div>
-                    <div class="title" style="float:left; width:200px">
+                    <div class="title" style="float:left; width:248px">
                         <h3 style="margin-bottom:0;">@Html.DisplayFor(m => m.name)</h3>
                     </div>
                     <div style="float:left;">
@@ -55,7 +55,7 @@
                         </div>
                     </div>*@
 
-                    <div class="likes">
+                    <div class="likes" style="clear:left;">
                         @using (Html.BeginForm(new { id = @Model.id }))
                         {
         
