@@ -72,12 +72,14 @@
     <Compile Include="Common\LinkExtensions.cs" />
     <Compile Include="Common\MultiTenanActionFilter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SysAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ChatModels.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\ImageFile.cs" />
     <Compile Include="Models\UsersModels.cs" />
