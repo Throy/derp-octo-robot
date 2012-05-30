@@ -502,6 +502,18 @@ namespace IndignadoServer.Services
         public Collection<DTResource_MovAdmin> resources { get; set; }
     }
 
+    [DataContract]
+    public class DTChatMessage
+    {
+        [DataMember]
+        public int from { get; set; }
+
+        [DataMember]
+        public String message { get; set; }
+
+        [DataMember]
+        public int room { get; set; }
+    }
 
     // **********
     // conversors
@@ -665,6 +677,17 @@ namespace IndignadoServer.Services
             return dtUser;
         }
 
+
+
+        public static DTChatMessage MessageToDT(ChatMessage m)
+        {
+            DTChatMessage result = new DTChatMessage();
+            result.from = m.Sender;
+            result.message = m.Message;
+            result.room = m.Room;
+            return result;
+        }
+
         public static DTRssSource RssSourceToDT(RssFeed rssSource)
         {
             DTRssSource dtRssSource = new DTRssSource();
@@ -672,6 +695,7 @@ namespace IndignadoServer.Services
             dtRssSource.tag = rssSource.tag;
             dtRssSource.title = rssSource.titulo;
             return dtRssSource;
+
         }
     }
 
@@ -794,6 +818,7 @@ namespace IndignadoServer.Services
             rssSource.titulo = dtRssSource.title;
             return rssSource;
         }
+
     }
 
 }

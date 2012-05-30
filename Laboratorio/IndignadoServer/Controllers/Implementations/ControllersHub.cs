@@ -16,6 +16,7 @@ namespace IndignadoServer.Controllers
         private static IMovAdminController _iMovAdminController;
         private static INewsResourcesController _iNewsResourcesController;
         private static IUsersController _iUsersController;
+        private static IChatsController _iChatsController;
         // ...
 
         private ControllersHub()
@@ -36,6 +37,7 @@ namespace IndignadoServer.Controllers
                     _iMovAdminController = new MovAdminController();
                     _iNewsResourcesController = new NewsResourcesController();
                     _iUsersController = new UsersController();
+                    _iChatsController = new ChatsController();
                 }
                 return _instance;
             }
@@ -77,6 +79,13 @@ namespace IndignadoServer.Controllers
         {
             return _iUsersController;
         }
+
+        // returns an instance of the IUsersController.
+        public IChatsController getIChatsController()
+        {
+            return _iChatsController;
+        }
+
 
         /*
         // returns an instance of the IBlablaController.
