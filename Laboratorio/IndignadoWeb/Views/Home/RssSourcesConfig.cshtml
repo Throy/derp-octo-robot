@@ -16,6 +16,7 @@
 
 <p>
     @Html.DisplayFor(m => m.items.items)
+    <br />
 </p>
 
 <h2>Add RSS sources</h2>
@@ -32,6 +33,7 @@
                 @Html.TextBoxFor(m => m.newItem.url)
                 @Html.ValidationMessageFor(m => m.newItem.url)
             </div>
+
             <div class="editor-label">
                 @Html.LabelFor(m => m.newItem.tag)
             </div>
@@ -39,9 +41,17 @@
                 @Html.TextBoxFor(m => m.newItem.tag)
                 @Html.ValidationMessageFor(m => m.newItem.tag)
             </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.newItem.title)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.newItem.title)
+                @Html.ValidationMessageFor(m => m.newItem.title)
+            </div>
+
             <p>
                 <input type="submit" class="boton-big-red" name="buttonAdd" value="Add source" />
-                <input type="submit" class="boton-big-red" name="buttonRemove" value="Remove source" />
             </p>
         </fieldset>
     </div>

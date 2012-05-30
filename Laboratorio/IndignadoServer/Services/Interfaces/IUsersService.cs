@@ -10,6 +10,10 @@ namespace IndignadoServer.Services
     [ServiceContract]
     public interface IUsersService
     {
+        // gets the user's movement.
+        [OperationContract]
+        DTMovement getMovement();
+
         // returns all theme categories.
         [OperationContract]
         DTThemeCategoriesColUsers getThemeCategoriesList();

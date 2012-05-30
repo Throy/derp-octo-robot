@@ -14,6 +14,10 @@ namespace IndignadoServer.Services
         [OperationContract]
         DTResourcesCol_NewsResources getResourcesList();
 
+        // returns the top ranked resources.
+        [OperationContract]
+        DTResourcesCol_NewsResources getResourcesListTopRanked();
+
         // creates a resource.
         [OperationContract]
         void createResource (DTResource_NewsResources dtResource);

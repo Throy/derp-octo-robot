@@ -499,6 +499,9 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/getResourcesList", ReplyAction="http://tempuri.org/INewsResourcesService/getResourcesListResponse")]
         IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol_NewsResources getResourcesList();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/getResourcesListTopRanked", ReplyAction="http://tempuri.org/INewsResourcesService/getResourcesListTopRankedResponse")]
+        IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol_NewsResources getResourcesListTopRanked();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/createResource", ReplyAction="http://tempuri.org/INewsResourcesService/createResourceResponse")]
         void createResource(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources dtResource);
         
@@ -551,6 +554,10 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         
         public IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol_NewsResources getResourcesList() {
             return base.Channel.getResourcesList();
+        }
+        
+        public IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol_NewsResources getResourcesListTopRanked() {
+            return base.Channel.getResourcesListTopRanked();
         }
         
         public void createResource(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources dtResource) {

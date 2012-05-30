@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8730/IndignadoServer/UsersService/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" />
+  <xs:element name="getMovement">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getMovementResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getMovementResult" nillable="true" type="q1:DTMovement" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="getThemeCategoriesList">
     <xs:complexType>
       <xs:sequence />
@@ -9,14 +21,14 @@
   <xs:element name="getThemeCategoriesListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getThemeCategoriesListResult" nillable="true" type="q1:DTThemeCategoriesColUsers" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getThemeCategoriesListResult" nillable="true" type="q2:DTThemeCategoriesColUsers" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="getInterestedThemeCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtThemeCategory" nillable="true" type="q2:DTThemeCategoryUsers" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtThemeCategory" nillable="true" type="q3:DTThemeCategoryUsers" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -28,7 +40,7 @@
   <xs:element name="getUninterestedThemeCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtThemeCategory" nillable="true" type="q3:DTThemeCategoryUsers" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtThemeCategory" nillable="true" type="q4:DTThemeCategoryUsers" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -45,14 +57,14 @@
   <xs:element name="getUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUserResult" nillable="true" type="q4:DTUser_Users" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUserResult" nillable="true" type="q5:DTUser_Users" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="setUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtUser" nillable="true" type="q5:DTUser_Users" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtUser" nillable="true" type="q6:DTUser_Users" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

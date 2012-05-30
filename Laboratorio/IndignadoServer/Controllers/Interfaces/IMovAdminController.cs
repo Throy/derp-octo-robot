@@ -17,10 +17,10 @@ namespace IndignadoServer.Controllers
         void setMovement(Movimiento dtMovement);
 
         // adds a new rss resource.
-        void addRssSource(String url, String tag);
+        void addRssSource(RssFeed rssSource);
 
         // removes a current rss resource.
-        void removeRssSource(String url, String tag);
+        void removeRssSource(RssFeed rssSource);
 
         // gets the rss resources.
         DTRssSourcesCol listRssSources();

@@ -14,6 +14,23 @@ namespace IndignadoServer.Controllers
         // controller methods
         // ******************
 
+        // gets the user's movement.
+        public Movimiento getMovement()
+        {
+            // get movement from database
+            Movimiento movement;
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            try
+            {
+                movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
+            }
+            catch
+            {
+                movement = null;
+            }
+            return movement;
+        }
+
         // returns all theme categories.
         public Collection<CategoriasTematica> getThemeCategoriesList()
         {

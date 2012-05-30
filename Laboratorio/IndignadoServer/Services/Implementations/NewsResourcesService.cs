@@ -49,6 +49,26 @@ namespace IndignadoServer.Services
             return dtResourcesCol;
         }
 
+        // returns the top ranked resources.
+        public DTResourcesCol_NewsResources getResourcesListTopRanked()
+        {
+            // get resources datatypes.
+            Collection<Recurso> recursosCol = ControllersHub.Instance.getINewsResourcesController().getResourcesListTopRanked();
+
+            // create new resources datatypes collection.
+            DTResourcesCol_NewsResources dtResourcesCol = new DTResourcesCol_NewsResources();
+            dtResourcesCol.items = new Collection<DTResource_NewsResources>();
+
+            // add meetings to the datatypes collection.
+            foreach (Recurso resource in recursosCol)
+            {
+                dtResourcesCol.items.Add(ClassToDT.ResourceToDT_NewsResources(resource));
+            }
+
+            // return the collection.
+            return dtResourcesCol;
+        }
+
         // creates a resource.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void createResource (DTResource_NewsResources dtResource)

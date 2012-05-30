@@ -1,5 +1,5 @@
 ﻿<!-- model -->
-@model IndignadoWeb.Models.SingleMovementModel
+@model IndignadoWeb.Models.HomeModel
 
 <!-- scripts -->
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
@@ -7,53 +7,91 @@
 
 <!-- page title -->
 @{
-    ViewBag.Title = Model.name + " - Home page - powered by Indignado Framework";
+    ViewBag.Title = Model.movement.name + " - Home page - powered by Indignado Framework";
 }
 
-<!-- scripts -->
+<h2>@Html.DisplayFor(m => m.movement.name) - Home page</h2>
+
+<font size="3">@Html.DisplayFor(m => m.movement.description)</font>
+<br />
+<br />
+
 
 <script type="text/javascript"
     src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDMxElmlzDp8EFWG0el5fZxRrRzN3E3NRU&sensor=false">
 </script>
 
 <script type="text/javascript">
-    
-    
+    // execture on view initialize
     function googleMapsInitialize() {
         // initialize map
         var myOptions = {
-            center: new google.maps.LatLng(@Model.locationLati.ToString().Replace(",", "."), @Model.locationLong.ToString().Replace(",", ".")),
-            zoom: 6,
+            center: new google.maps.LatLng(@Model.meetings.locationLati.ToString().Replace(",", "."), @Model.meetings.locationLong.ToString().Replace(",", ".")),
+            zoom: 10,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
         var infoWindow = new google.maps.InfoWindow({ content : "cargando..."});
-            
-        @{
-        String latitud = @Model.locationLati.ToString().Replace(",", ".");
-        String longitud = @Model.locationLong.ToString().Replace(",", ".");
+        @{int i = 0; }
+        
+        @foreach (var item in Model.meetings.meetings.items)
+        {
+            String latitud = item.locationLati.ToString().Replace(",", ".");
+            String longitud = item.locationLong.ToString().Replace(",", ".");
 
-        <text>
+            if (i == 0)
+            {<text> var </text>}
+            <text> markerContent =  "<div style=\"border-width:2px; padding-left:5px; border-color:Black; border-style:dashed; width:290px; height:130px; margin-top:6px;\" >"
+                                        + "<h4 style =\"font-size:90%; text-align:center\"><u> Convocatoria</u></h4>" 
+                                         + "<img alt=\"No Image\" style=\"float:left; margin-top:-3px; margin-right:6px; border-style:outset; border-width:2px; border-color:Gray;\" src=\"@Url.Content("~/Content/Images/Thumb/" + ((item.imagePath != null) ? item.imagePath.ToString() : ""))\" />"
+                                        + "<h4 style =\" font-size:75%\"> Nombre: @item.name.ToString()</h4>"  
+                                        + "<h4 style =\" font-size:75%\"> Descripción: @item.description.ToString()</h4>" 
+                                        + "<h4 style =\" font-size:75%\"> Comienzo: @item.dateBegin </h4>"
+                                        + "</div>" ;
+            </text> 
+            if (i == 0)
+            {<text> var </text>}
+            
+            <text> 
+            
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(@latitud, @longitud),
-                map: map
+                map: map,
+                html: markerContent
             });
-        </text>
+            
+            google.maps.event.addListener(marker, 'click', function() {
+                                infoWindow.setContent(this.html);
+                                infoWindow.open(map, this);
+                                });
+            
+            </text>
+            i++;
         }
     }
 </script>
 
 <!-- page content -->
 
-<h2>@Html.DisplayFor(m => m.name) - Home page</h2>
+<br />
+<h2 class="shadowH2">Meetings</h2>
 
-<font size="3">@Html.DisplayFor(m => m.description)</font>
+<div id="map_canvas" style="float:left; width: 400px; height:300px ; margin-left:10px; margin-bottom:20px; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA" ></div>
+
+<ul class="list1" style="margin:0; position:relative; float:right;">
+    @for (int h = 0; h < Model.meetings.meetings.items.Length; h++)
+    {
+        @Html.DisplayFor(m => m.meetings.meetings.items[h], "DTMeetingSmall");
+    }
+</ul>
+
+<div class="clear"></div>
 <br />
 <br />
+<h2 class="shadowH2">Resources</h2>
 
-<!-- page content -->
+<ul class="list1" style="margin:0 80px;">
+    @Html.DisplayFor(m => m.resources.items)
+</ul>
 
-<div id="map_canvas" style="width: 400px; height:300px ; margin-left:220px;border-style:outset; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA" ></div>
-
-<script type="text/javascript">googleMapsInitialize();</script>
-
+<script type="text/javascript">    googleMapsInitialize();</script>

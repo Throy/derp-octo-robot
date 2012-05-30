@@ -1,6 +1,6 @@
 ﻿<!-- model -->
 @model IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources
-           
+
 <li class="item" style="width:620px;">
     <div class="shadowl">
         <div class="shadowr">
@@ -42,20 +42,24 @@
                             <img src="@Html.DisplayFor(m => m.urlThumb)" width="120px"/>
                         </td>
                     }
+                    
                     <div class="likes">
                         <!-- likes -->
                         @using (Html.BeginForm(new { id = @Model.id }))
                         {
                             <text>Likes: </text> @Html.DisplayFor(m => m.numberLikes);
-                    
-                            if (@Model.iLikeIt == 0)
+                            
+                            if (ViewBag.UserIsRegUser)
                             {
-                                <input type="submit" class="likebtn" name="buttonLike" value="Like" />
-                            }
+                                if (@Model.iLikeIt == 0)
+                                {
+                                    <input type="submit" class="likebtn" name="buttonLike" value="Like" />
+                                }
 
-                            if (Model.iLikeIt > 0)
-                            {
-                                <input type="submit" class="likebtn2"  name="buttonUnlike" value="Unlike" />
+                                if (@Model.iLikeIt > 0)
+                                {
+                                    <input type="submit" class="likebtn2"  name="buttonUnlike" value="Unlike" />
+                                }
                             }
                         }
                     </div>
@@ -67,6 +71,9 @@
                         <div class="user">
                             by @Html.ActionLink("" + @Html.DisplayFor(m => m.username), "UserDetails", new { id = @Model.idUser })
                         </div>
+                        
+                        @if (ViewBag.UserIsRegUser)
+                        {
                         <div class="report">
                             <!-- report -->
                             @using (Html.BeginForm(new { id = @Model.id }))
@@ -82,6 +89,7 @@
                                 }
                             }
                         </div>
+                        }
                     </div>
                 </div>
             </div>

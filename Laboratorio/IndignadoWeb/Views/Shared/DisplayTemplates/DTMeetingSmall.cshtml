@@ -1,0 +1,93 @@
+﻿<!-- model -->
+@model IndignadoWeb.MeetingsServiceReference.DTMeeting
+
+
+<li class="item" style="width:350px;">
+    <div class="shadowl">
+        <div class="shadowr">
+            <div class="int">
+
+                
+
+                <div class="body">
+                    <div class="img" style="float:left;">
+                        <img class="image" style="margin:0;" width="64px" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null) ? @Model.imagePath.ToString() : "meeting_default.jpg"))" alt="Image" />
+                    </div>
+                    <div class="title" style="float:left; width:200px">
+                        <h3 style="margin-bottom:0;">@Html.DisplayFor(m => m.name)</h3>
+                    </div>
+                    <div style="float:left;">
+                        @Html.DisplayFor(m => m.description)
+                    </div>
+
+                    @*
+                    <div class="scrollable @Model.id.ToString().Insert(Model.id.ToString().Count(),"s")">
+                        <table class="list" border="0" rules="none">
+                            <!-- fields -->
+                            <tr class="field"><td class="field"><span>Description: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.description)</div></td></tr>
+    
+                            <tr class="field"><td class="field"><span>Beginning date: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.dateBegin)</div></td></tr>
+    
+                            <tr class="field"><td class="field"><span>Ending date: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.dateEnd)</div></td></tr>
+                        </table>
+                        <div class="hide @Model.id.ToString().Insert(Model.id.ToString().Count(), "h")">
+                            <table class="list" border="0" rules="none">
+                                <tr class="field"><td class="field"><span>Location - Latitude: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.locationLati)</div></td></tr>
+    
+                                <tr class="field"><td class="field"><span>Location - Longitude: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.locationLong)</div></td></tr>
+    
+                                <tr class="field"><td class="field"><span>Min quorum: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.minQuorum)</div></td></tr>
+    
+                                <tr class="field"><td class="field"><span>Attendance: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.numberAttendants)</div></td></tr>
+    
+                            </table>
+    
+                            @{
+                                if (@Model.themeCategories != null && Model.themeCategories.Length >= 1) {
+                                    <br />
+                                    <div class="tableCategories">
+                                        Categories:
+                                        <br />
+                                        @Html.DisplayFor(m => m.themeCategories)
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>*@
+                    
+                    @if (ViewBag.UserIsRegUser)
+                    {
+                    <div class="likes">
+                        @using (Html.BeginForm(new { id = @Model.id }))
+                        {
+
+                            if (@Model.myAttendance != 1)
+                            {
+                                <input class="btn1" type="submit" name="buttonDoAttend" value="Do attend" />
+                            }
+
+                            if (Model.myAttendance != 0)
+                            {
+                                <input class="btn1" type="submit" name="buttonDontAttend" value="Don't attend" />
+                            }
+
+                            if (Model.myAttendance != -1)
+                            {
+                                <input class="btn1" type="submit" name="buttonUnconfirmAttendance" value="Unconfirm attendance" />
+                            }
+
+                        }
+                    </div>
+                    }
+                        
+                    <div class="clear"></div>
+                    <div class="footer">
+                        Beginning: @Html.DisplayFor(m => m.dateBegin)
+                        <br />
+                        End: @Html.DisplayFor(m => m.dateEnd)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>

@@ -151,6 +151,9 @@ namespace IndignadoWeb.MovAdminServiceReference {
         private string tagField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string titleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string urlField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -172,6 +175,19 @@ namespace IndignadoWeb.MovAdminServiceReference {
                 if ((object.ReferenceEquals(this.tagField, value) != true)) {
                     this.tagField = value;
                     this.RaisePropertyChanged("tag");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string title {
+            get {
+                return this.titleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.titleField, value) != true)) {
+                    this.titleField = value;
+                    this.RaisePropertyChanged("title");
                 }
             }
         }
