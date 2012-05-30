@@ -31,13 +31,13 @@ namespace IndignadoServer.Services
         // adds a new rss resource.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public void addRssSource(DTRssSource dtRssSource){
-            ControllersHub.Instance.getIMovAdminController().addRssSource(dtRssSource.url,dtRssSource.tag);
+            ControllersHub.Instance.getIMovAdminController().addRssSource(DTToClass.DTToRssSource(dtRssSource));
         }
 
         // removes a current rss resource.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public void removeRssSource(DTRssSource dtRssSource){
-            ControllersHub.Instance.getIMovAdminController().removeRssSource(dtRssSource.url,dtRssSource.tag);
+            ControllersHub.Instance.getIMovAdminController().removeRssSource(DTToClass.DTToRssSource(dtRssSource));
         }
 
         // gets the rss resources.

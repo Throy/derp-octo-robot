@@ -3459,6 +3459,8 @@ namespace IndignadoServer.LinqDataContext
 		
 		private string _tag;
 		
+		private string _titulo;
+		
 		private EntityRef<Movimiento> _Movimiento;
 		
     #region Extensibility Method Definitions
@@ -3471,6 +3473,8 @@ namespace IndignadoServer.LinqDataContext
     partial void OnidMovimientoChanged();
     partial void OntagChanging(string value);
     partial void OntagChanged();
+    partial void OntituloChanging(string value);
+    partial void OntituloChanged();
     #endregion
 		
 		public RssFeed()
@@ -3539,6 +3543,26 @@ namespace IndignadoServer.LinqDataContext
 					this._tag = value;
 					this.SendPropertyChanged("tag");
 					this.OntagChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_titulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string titulo
+		{
+			get
+			{
+				return this._titulo;
+			}
+			set
+			{
+				if ((this._titulo != value))
+				{
+					this.OntituloChanging(value);
+					this.SendPropertyChanging();
+					this._titulo = value;
+					this.SendPropertyChanged("titulo");
+					this.OntituloChanged();
 				}
 			}
 		}

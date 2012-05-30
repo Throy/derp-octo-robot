@@ -29,12 +29,13 @@ namespace IndignadoWeb.Controllers
         public const string viewNewsList = "NewsList";
         public const string viewResourceShare = "ResourceShare";
         public const string viewResourcesList = "ResourcesList";
+        public const string viewResourcesManage = "ResourcesManage";
+        public const string viewRssSourcesConfig = "RssSourcesConfig";
         public const string viewThemeCategoriesConfig = "ThemeCategoriesConfig";
         public const string viewThemeCategoriesList = "ThemeCategoriesList";
         public const string viewUserConfig = "UserConfig";
         public const string viewUserDetails = "UserDetails";
         public const string viewUsersManage = "UsersManage";
-        public const string viewResourcesManage = "ResourcesManage";
 
         public const string urlMeetingsService = "http://localhost:8730/IndignadoServer/MeetingsService/";
         public const string urlMovAdminService = "http://localhost:8730/IndignadoServer/MovAdminService/";
@@ -841,7 +842,7 @@ namespace IndignadoWeb.Controllers
 
         // configures the rss sources.
         [HttpPost]
-        public ActionResult RssSourcesConfig(string buttonAdd, string buttonRemove, RssSourcesModel model)
+        public ActionResult RssSourcesConfig(string buttonAdd, string buttonRemove, RssSourcesModel model, string url, string tag)
         {
             try
             {
@@ -860,19 +861,14 @@ namespace IndignadoWeb.Controllers
                 // button Remove
                 else if (buttonRemove != null)
                 {
-                    if (model.newItem != null)
-                    {
-                        serv.removeRssSource(model.newItem);
-                    }
+                    DTRssSource dtRssSource = new DTRssSource();
+                    dtRssSource.url = url;
+                    dtRssSource.tag = tag;
+                    serv.removeRssSource(dtRssSource);
                 }
 
                 // show rss sources
-                model.items = serv.listRssSources();
-
-                // close service
-                (serv as ICommunicationObject).Close();
-
-                return View(model);
+                return RedirectToAction(HomeControllerConstants.viewRssSourcesConfig);
             }
             catch
             {

@@ -305,6 +305,9 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public String tag { get; set; }
+
+        [DataMember]
+        public String title { get; set; }
     }
 
     // RssSources Collection datatype
@@ -655,6 +658,15 @@ namespace IndignadoServer.Services
             dtUser.banned = (user.banned == null) ? false : user.banned.Value;
             return dtUser;
         }
+
+        public static DTRssSource RssSourceToDT(RssFeed rssSource)
+        {
+            DTRssSource dtRssSource = new DTRssSource();
+            dtRssSource.url = rssSource.url;
+            dtRssSource.tag = rssSource.tag;
+            dtRssSource.title = rssSource.titulo;
+            return dtRssSource;
+        }
     }
 
     // converts datatypes to classes
@@ -766,6 +778,15 @@ namespace IndignadoServer.Services
             user.cantRecursosDeshabilitados = dtUser.numberResourcesDisabled;
             user.banned = dtUser.banned;
             return user;
+        }
+
+        public static RssFeed DTToRssSource(DTRssSource dtRssSource)
+        {
+            RssFeed rssSource = new RssFeed();
+            rssSource.url = dtRssSource.url;
+            rssSource.tag = dtRssSource.tag;
+            rssSource.titulo = dtRssSource.title;
+            return rssSource;
         }
     }
 

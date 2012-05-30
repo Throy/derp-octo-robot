@@ -153,6 +153,7 @@
       <Column Name="url" Type="System.String" DbType="NChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="tag" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="titulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Movimiento_RssFeed" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
     </Type>
   </Table>
