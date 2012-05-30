@@ -677,7 +677,7 @@ namespace IndignadoServer.Services
             return dtUser;
         }
 
-<<<<<<< HEAD
+
 
         public static DTChatMessage MessageToDT(ChatMessage m)
         {
@@ -686,7 +686,8 @@ namespace IndignadoServer.Services
             result.message = m.Message;
             result.room = m.Room;
             return result;
-=======
+        }
+
         public static DTRssSource RssSourceToDT(RssFeed rssSource)
         {
             DTRssSource dtRssSource = new DTRssSource();
@@ -694,7 +695,7 @@ namespace IndignadoServer.Services
             dtRssSource.tag = rssSource.tag;
             dtRssSource.title = rssSource.titulo;
             return dtRssSource;
->>>>>>> e80b8cfe1cb2bb4090dc7e79ee0ce0d6e0faaea9
+
         }
     }
 
@@ -808,9 +809,6 @@ namespace IndignadoServer.Services
             user.banned = dtUser.banned;
             return user;
         }
-<<<<<<< HEAD
-        
-=======
 
         public static RssFeed DTToRssSource(DTRssSource dtRssSource)
         {
@@ -820,7 +818,7 @@ namespace IndignadoServer.Services
             rssSource.titulo = dtRssSource.title;
             return rssSource;
         }
->>>>>>> e80b8cfe1cb2bb4090dc7e79ee0ce0d6e0faaea9
+
     }
 
 }
