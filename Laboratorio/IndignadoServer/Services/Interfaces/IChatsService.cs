@@ -7,11 +7,19 @@ using System.Text;
 
 namespace IndignadoServer.Services
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IChatsService" in both code and config file together.
     [ServiceContract]
     public interface IChatsService
     {
         [OperationContract]
-        void DoWork();
+        int initChat(int userinviting, int user);
+
+        [OperationContract]
+        void closeChat(int user, int room);
+
+        [OperationContract]
+        void sendMesage(int user, int room , String message);
+
+        [OperationContract]
+        List<DTChatMessage> checkMessages(int user);
     }
 }
