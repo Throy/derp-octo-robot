@@ -52,11 +52,13 @@ namespace IndignadoWeb.Common
                 view.ViewBag.TenantInfo = _tenantInfo;
                 if (filterContext.HttpContext.Session["loginInfo"] != null)
                 {
+                    view.ViewBag.UserIsRegUser = (filterContext.HttpContext.Session["loginInfo"] as DTLoginInfo).isRegUser;
                     view.ViewBag.UserIsMovAdmin = (filterContext.HttpContext.Session["loginInfo"] as DTLoginInfo).isMovAdmin;
                     view.ViewBag.UserIsSysAdmin = (filterContext.HttpContext.Session["loginInfo"] as DTLoginInfo).isSysAdmin;
                 }
                 else
                 {
+                    view.ViewBag.UserIsRegUser = false;
                     view.ViewBag.UserIsMovAdmin = false;
                     view.ViewBag.UserIsSysAdmin = false;
                 }

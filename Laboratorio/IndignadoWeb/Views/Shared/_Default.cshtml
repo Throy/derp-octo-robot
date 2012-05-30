@@ -33,40 +33,45 @@
             <!-- meetings -->
             <li class="outer"><span class="menubtn"><a>Meetings</a></span>
                 <ul>
-                    <li class="menuitm">@Html.ActionLink("Create meeting", "MeetingCreate", "Home")</li>
+                    @if (ViewBag.UserIsRegUser)
+                    {
+                        <li class="menuitm">@Html.ActionLink("Create meeting", "MeetingCreate", "Home")</li>
+                    }
                     <li class="menuitm">@Html.ActionLink("Meetings list", "MeetingsList", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("Meetings list on attendance", "MeetingsListOnAttend", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("Meetings list on interest", "MeetingsListOnInterest", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("Meetings map", "MeetingsMap", "Home")</li>
+                    @if (ViewBag.UserIsRegUser)
+                    {
+                        <li class="menuitm">@Html.ActionLink("Meetings list on attendance", "MeetingsListOnAttend", "Home")</li>
+                        <li class="menuitm">@Html.ActionLink("Meetings list on interest", "MeetingsListOnInterest", "Home")</li>
+                    }
                 </ul>
             </li>
             
             <!-- news resources -->
-            <li class="outer"><span class="menubtn"><a>NewsResources</a></span>
-                <ul style="width:114px">
+            <li class="outer"><span class="menubtn"><a>News and resources</a></span>
+                <ul style="width:180px">
                     <li class="menuitm">@Html.ActionLink("List news", "NewsList", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("List resources", "ResourcesList", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("Share resource", "ResourceShare", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("List recent resources", "ResourcesList", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("List top resources", "ResourcesListTopRanked", "Home")</li>
+                    @if (ViewBag.UserIsRegUser)
+                    {
+                        <li class="menuitm">@Html.ActionLink("Share resource", "ResourceShare", "Home")</li>
+                    }
                 </ul>
             </li>
-            
-            
-            <!-- about -->
-            <li class="outer"><span class="menubtn">@Html.ActionLink("About", "About", "Home")</span></li>
         </ul>                
         <span class="menulogon">
             <ul>
             @if(ViewBag.UserIsMovAdmin) {
-            <!-- movement admin -->
-            <li class="outer"><span class="menubtn"><a>MovAdmin</a></span>
-                <ul>
-                    <li class="menuitm">@Html.ActionLink("Configure movement", "MovementConfig", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("Configure RSS sources", "RssSourcesConfig", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("Configure theme categories", "ThemeCategoriesConfig", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("Manage resources", "ResourcesManage", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("Manage users", "UsersManage", "Home")</li>
-                </ul>
-            </li>
+                <!-- movement admin -->
+                <li class="outer"><span class="menubtn"><a>Movement admin</a></span>
+                    <ul>
+                        <li class="menuitm">@Html.ActionLink("Configure movement", "MovementConfig", "Home")</li>
+                        <li class="menuitm">@Html.ActionLink("Configure RSS sources", "RssSourcesConfig", "Home")</li>
+                        <li class="menuitm">@Html.ActionLink("Configure theme categories", "ThemeCategoriesConfig", "Home")</li>
+                        <li class="menuitm">@Html.ActionLink("Manage resources", "ResourcesManage", "Home")</li>
+                        <li class="menuitm">@Html.ActionLink("Manage users", "UsersManage", "Home")</li>
+                    </ul>
+                </li>
             }
             
             @Html.Partial("_LogOnPartial")

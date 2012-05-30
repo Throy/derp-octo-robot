@@ -321,6 +321,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\UsersServiceReference\IndignadoWeb.UsersServiceReference.DTMovement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\UsersServiceReference\IndignadoWeb.UsersServiceReference.DTThemeCategoriesColUsers.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -418,6 +421,7 @@
     <Content Include="Views\Home\ResourcesManage.cshtml" />
     <Content Include="Views\Home\UserDetails.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMeetingSmall.cshtml" />
+    <Content Include="Views\Home\ResourcesListTopRanked.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

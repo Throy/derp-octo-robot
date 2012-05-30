@@ -72,26 +72,31 @@
             }
         </div>
     </div>
+
     <!-- attendance buttons -->
-    <div class="MeetingButton">
-    @using (Html.BeginForm(new { id = @Model.id }))
+    
+    @if (ViewBag.UserIsRegUser)
     {
-        
-        if (@Model.myAttendance != 1)
+        <div class="MeetingButton">
+        @using (Html.BeginForm(new { id = @Model.id }))
         {
-            <input class="boton-big-red" type="submit" name="buttonDoAttend" value="Do attend" />
-        }
 
-        if (Model.myAttendance != 0)
-        {
-            <input class="boton-big-red" type="submit" name="buttonDontAttend" value="Don't attend" />
-        }
+            if (@Model.myAttendance != 1)
+            {
+                <input class="boton-big-red" type="submit" name="buttonDoAttend" value="Do attend" />
+            }
 
-        if (Model.myAttendance != -1)
-        {
-            <input class="boton-big-red" type="submit" name="buttonUnconfirmAttendance" value="Unconfirm attendance" />
+            if (Model.myAttendance != 0)
+            {
+                <input class="boton-big-red" type="submit" name="buttonDontAttend" value="Don't attend" />
+            }
+
+            if (Model.myAttendance != -1)
+            {
+                <input class="boton-big-red" type="submit" name="buttonUnconfirmAttendance" value="Unconfirm attendance" />
+            }
+
         }
-        
+        </div>
     }
-    </div>
 </div>

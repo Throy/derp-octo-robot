@@ -38,30 +38,28 @@ namespace IndignadoServer.Controllers
         }
 
         // adds a new rss resource.
-        public void addRssSource(String url, String tag){
+        public void addRssSource(RssFeed rssSource)
+        {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            RssFeed rssFeed = new RssFeed();
-            rssFeed.url = url;
-            rssFeed.tag = tag;
-            rssFeed.idMovimiento = IdMovement;
-     
-            indignadoContext.RssFeeds.InsertOnSubmit(rssFeed);
+            rssSource.idMovimiento = IdMovement;
+
+            indignadoContext.RssFeeds.InsertOnSubmit(rssSource);
             indignadoContext.SubmitChanges();
         }
 
         // removes a current rss resource.
-        public void removeRssSource(String url, String tag)
+        public void removeRssSource(RssFeed rssSource)
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
 
             try {
-                if (tag == null)
+                if (rssSource.tag == null)
                 {
-                    indignadoContext.ExecuteCommand("DELETE FROM RssFeeds WHERE url = {0} AND idMovimiento = {1} ", url, IdMovement);
+                    indignadoContext.ExecuteCommand("DELETE FROM RssFeeds WHERE url = {0} AND idMovimiento = {1} ", rssSource.url, IdMovement);
                 }
                 else
                 {
-                    indignadoContext.ExecuteCommand("DELETE FROM RssFeeds WHERE url = {0} AND tag = {1} AND idMovimiento = {2}  ", url, tag, IdMovement);
+                    indignadoContext.ExecuteCommand("DELETE FROM RssFeeds WHERE url = {0} AND tag = {1} AND idMovimiento = {2}  ", rssSource.url, rssSource.tag, IdMovement);
                 }
             
             }
@@ -75,12 +73,13 @@ namespace IndignadoServer.Controllers
             DTRssSourcesCol result = new DTRssSourcesCol();
             result.items = new Collection<DTRssSource>();
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            IEnumerable<RssFeed> ressEnum = indignadoContext.ExecuteQuery<RssFeed>("SELECT url,idMovimiento,tag FROM RssFeeds WHERE idMovimiento = {0}", IdMovement);
+            IEnumerable<RssFeed> ressEnum = indignadoContext.ExecuteQuery<RssFeed>("SELECT * FROM RssFeeds WHERE idMovimiento = {0}", IdMovement);
             foreach (RssFeed rss in ressEnum)
             {
                 DTRssSource dtRss = new DTRssSource();
                 dtRss.tag = rss.tag;
                 dtRss.url = rss.url;
+                dtRss.title = rss.titulo;
                 result.items.Add(dtRss);
             }
             return result;

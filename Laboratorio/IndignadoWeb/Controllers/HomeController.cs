@@ -13,6 +13,7 @@ using IndignadoWeb.SessionServiceReference;
 using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.TestServiceReference;
 using IndignadoWeb.UsersServiceReference;
+using System.Diagnostics;
 
 namespace IndignadoWeb.Controllers
 {
@@ -29,12 +30,14 @@ namespace IndignadoWeb.Controllers
         public const string viewNewsList = "NewsList";
         public const string viewResourceShare = "ResourceShare";
         public const string viewResourcesList = "ResourcesList";
+        public const string viewResourcesListTopRanked = "ResourcesListTopRanked";
+        public const string viewResourcesManage = "ResourcesManage";
+        public const string viewRssSourcesConfig = "RssSourcesConfig";
         public const string viewThemeCategoriesConfig = "ThemeCategoriesConfig";
         public const string viewThemeCategoriesList = "ThemeCategoriesList";
         public const string viewUserConfig = "UserConfig";
         public const string viewUserDetails = "UserDetails";
         public const string viewUsersManage = "UsersManage";
-        public const string viewResourcesManage = "ResourcesManage";
 
         public const string urlMeetingsService = "http://localhost:8730/IndignadoServer/MeetingsService/";
         public const string urlMovAdminService = "http://localhost:8730/IndignadoServer/MovAdminService/";
@@ -70,15 +73,12 @@ namespace IndignadoWeb.Controllers
          
         public ActionResult Index(DTTenantInfo tenantInfo)
         {
-            // show movement info
-            IMovAdminService serv2 = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
-
-            // get movement
-            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv2.getMovement();
-
-            // close service
+            // get movement info
+            IUsersService serv2 = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+            IndignadoWeb.UsersServiceReference.DTMovement movement = serv2.getMovement();
             (serv2 as ICommunicationObject).Close();
 
+            // open service
             INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
             // send the meeting to the model.
@@ -92,6 +92,7 @@ namespace IndignadoWeb.Controllers
             // open service
             IMeetingsService serv3 = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
 
+            // add the meetings and central location to the model
             model.meetings = new MeetingsMapModel();
             model.meetings.meetings = serv3.getMeetingsList();
             model.meetings.locationLati = movement.locationLati;
@@ -99,8 +100,6 @@ namespace IndignadoWeb.Controllers
 
             // close service
             (serv3 as ICommunicationObject).Close();
-
-            
 
             return View(model);
         }
@@ -135,8 +134,8 @@ namespace IndignadoWeb.Controllers
         public ActionResult MeetingsList()
         {
             // get movement
-            IMovAdminService serv2 = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
-            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv2.getMovement();
+            IUsersService serv2 = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+            IndignadoWeb.UsersServiceReference.DTMovement movement = serv2.getMovement();
             (serv2 as ICommunicationObject).Close();
 
             // open service
@@ -407,8 +406,8 @@ namespace IndignadoWeb.Controllers
         public ActionResult MeetingsMap()
         {
             // get movement
-            IMovAdminService serv2 = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
-            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv2.getMovement();
+            IUsersService serv2 = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+            IndignadoWeb.UsersServiceReference.DTMovement movement = serv2.getMovement();
             (serv2 as ICommunicationObject).Close();
 
             // open service
@@ -438,9 +437,15 @@ namespace IndignadoWeb.Controllers
         {
             try
             {
+                // check if the user is a registered user.
+                IUsersService servValidate = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+                DTUser_Users dtUser = servValidate.getUser();
+                (servValidate as ICommunicationObject).Close();
+
                 // get movement
-                IMovAdminService serv2 = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
-                IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv2.getMovement();
+                IUsersService serv2 = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+                IndignadoWeb.UsersServiceReference.DTMovement movement = serv2.getMovement();
+                (serv2 as ICommunicationObject).Close();
             
                 // initialize model
                 CreateMeetingModel model = new CreateMeetingModel();
@@ -557,23 +562,25 @@ namespace IndignadoWeb.Controllers
         // configure movement.
         public ActionResult MovementConfig()
         {
-            // show configuration
-            IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+            try {
+                // get movement configuration
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+                IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv.getMovement();
+                (serv as ICommunicationObject).Close();
 
-            // get movement
-            IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv.getMovement();
+                // send the meeting to the model.
+                SingleMovementModel model = new SingleMovementModel();
+                model.name = movement.name;
+                model.description = movement.description;
+                model.locationLati = movement.locationLati;
+                model.locationLong = movement.locationLong;
 
-            // close service
-            (serv as ICommunicationObject).Close();
-
-            // send the meeting to the model.
-            SingleMovementModel model = new SingleMovementModel();
-            model.name = movement.name;
-            model.description = movement.description;
-            model.locationLati = movement.locationLati;
-            model.locationLong = movement.locationLong;
-
-            return View(model);
+                return View(model);
+            }
+            catch
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
         }
 
         // configure movement.
@@ -659,9 +666,45 @@ namespace IndignadoWeb.Controllers
             }
         }
 
+        // shows the top ranked resources in a list.
+        public ActionResult ResourcesListTopRanked()
+        {
+            try
+            {
+                // open service
+                INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                // get all news
+                ListResourcesModel listResourcesModel = new ListResourcesModel();
+                listResourcesModel.items = serv.getResourcesListTopRanked();
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                return View(listResourcesModel);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
+        }
+
         // like / dislike resource.
         [HttpPost]
         public ActionResult ResourcesList(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
+        {
+            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id);
+        }
+
+        // like / dislike resource.
+        [HttpPost]
+        public ActionResult ResourcesListTopRanked(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
+        {
+            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id);
+        }
+
+        // like / dislike resource.
+        public ActionResult ResourcesListGeneric(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
         {
             try
             {
@@ -740,23 +783,19 @@ namespace IndignadoWeb.Controllers
         // create resource.
         public ActionResult ResourceShare(ShareResourceModel model)
         {
-            /*
-            try
-            {
+            try{
                 // check if the user is a registered user.
-                ISessionService serv = GetService<ISessionService>(HomeControllerConstants.urlSessionService);
-                serv.ValidateRegUser();
-            */
+                IUsersService servValidate = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+                DTUser_Users dtUser = servValidate.getUser();
+                (servValidate as ICommunicationObject).Close();
 
                 // show form
-                return View(model);
-            /*
+                return View();
             }
             catch (Exception error)
             {
                 return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
             }
-            */
         }
 
         // create resource.
@@ -825,23 +864,29 @@ namespace IndignadoWeb.Controllers
         // configures the rss sources.
         public ActionResult RssSourcesConfig()
         {
-            // open service
-            IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+            try {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
 
-            // initialize model
-            RssSourcesModel model = new RssSourcesModel();
-            model.newItem = new DTRssSource();
-            model.items = serv.listRssSources();
+                // initialize model
+                RssSourcesModel model = new RssSourcesModel();
+                model.newItem = new DTRssSource();
+                model.items = serv.listRssSources();
 
-            // close service
-            (serv as ICommunicationObject).Close();
+                // close service
+                (serv as ICommunicationObject).Close();
 
-            return View(model);
+                return View(model);
+            }
+            catch
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
         }
 
         // configures the rss sources.
         [HttpPost]
-        public ActionResult RssSourcesConfig(string buttonAdd, string buttonRemove, RssSourcesModel model)
+        public ActionResult RssSourcesConfig(string buttonAdd, string buttonRemove, RssSourcesModel model, string url, string tag)
         {
             try
             {
@@ -860,19 +905,14 @@ namespace IndignadoWeb.Controllers
                 // button Remove
                 else if (buttonRemove != null)
                 {
-                    if (model.newItem != null)
-                    {
-                        serv.removeRssSource(model.newItem);
-                    }
+                    DTRssSource dtRssSource = new DTRssSource();
+                    dtRssSource.url = url;
+                    dtRssSource.tag = tag;
+                    serv.removeRssSource(dtRssSource);
                 }
 
                 // show rss sources
-                model.items = serv.listRssSources();
-
-                // close service
-                (serv as ICommunicationObject).Close();
-
-                return View(model);
+                return RedirectToAction(HomeControllerConstants.viewRssSourcesConfig);
             }
             catch
             {
@@ -947,18 +987,30 @@ namespace IndignadoWeb.Controllers
         // shows all theme categories in a list.
         public ActionResult ThemeCategoriesList()
         {
-            IUsersService serv = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+            try
+            {
+                // check if the user is a registered user.
+                IUsersService servValidate = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+                DTUser_Users dtUser = servValidate.getUser();
+                (servValidate as ICommunicationObject).Close();
 
-            // initialize model
-            ThemeCategoriesListModel model = new ThemeCategoriesListModel();
-            model.newItem = new DTThemeCategoryUsers();
-            model.items = serv.getThemeCategoriesList();
+                IUsersService serv = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
 
-            // close service
-            (serv as ICommunicationObject).Close();
+                // initialize model
+                ThemeCategoriesListModel model = new ThemeCategoriesListModel();
+                model.newItem = new DTThemeCategoryUsers();
+                model.items = serv.getThemeCategoriesList();
 
-            // send the meetings to the model.
-            return View(model);
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the meetings to the model.
+                return View(model);
+            }
+            catch
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
         }
 
         // shows all theme categories in a list
@@ -1108,23 +1160,29 @@ namespace IndignadoWeb.Controllers
         // configure user.
         public ActionResult UserConfig()
         {
-            // show configuration
-            IUsersService serv = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+            try{
+                // show configuration
+                IUsersService serv = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
 
-            // get movement
-            DTUser_Users movement = serv.getUser();
+                // get movement
+                DTUser_Users user = serv.getUser();
 
-            // close service
-            (serv as ICommunicationObject).Close();
+                // close service
+                (serv as ICommunicationObject).Close();
 
-            // send the meeting to the model.
-            UserConfigModel model = new UserConfigModel();
-            model.fullName = movement.fullName;
-            model.mail = movement.mail;
-            model.locationLati = movement.locationLati;
-            model.locationLong = movement.locationLong;
+                // send the user to the model.
+                UserConfigModel model = new UserConfigModel();
+                model.fullName = user.fullName;
+                model.mail = user.mail;
+                model.locationLati = user.locationLati;
+                model.locationLong = user.locationLong;
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
         }
 
         // configure user.

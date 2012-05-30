@@ -2,8 +2,18 @@
 @model IndignadoWeb.MovAdminServiceReference.DTRssSource
            
 <div>
-     Tag: @Html.DisplayFor(m => m.tag)
+    <!-- header -->
+    <h3>@Html.DisplayFor(m => m.title)</h3>
+     
+    <!-- fields -->
+    Tag: @Html.DisplayFor(m => m.tag)
     <br />
-     URL: @Html.DisplayFor(m => m.url)
+    URL: <a href="@Html.DisplayFor(m => m.url)">@Html.DisplayFor(m => m.url)</a>
     <br />
+    
+    <!-- remove button -->
+    @using (Html.BeginForm(new { url = @Model.url, tag = @Model.tag }))
+    {
+        <input type="submit" class="boton-big-red" name="buttonRemove" value="Remove source" />
+    }
 </div>

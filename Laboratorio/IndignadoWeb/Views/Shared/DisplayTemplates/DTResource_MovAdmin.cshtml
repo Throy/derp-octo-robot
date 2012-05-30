@@ -1,74 +1,80 @@
 ﻿<!-- model -->
 @model IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin
-           
-<div>
-    <!-- header -->
-    <h3><a href="@Html.DisplayFor(m => m.urlLink)">@Html.DisplayFor(m => m.title)</a></h3>
-    
-    <table border-style="none">
-        <tr>
-            <td valign="top">
-                <!-- fields -->
-                @Html.Raw(HttpUtility.HtmlDecode(Model.description))
-                <br />
-                <br />
-                Date: @Html.DisplayFor(m => m.date)
-                <br />
-                User: @Html.ActionLink("" + @Html.DisplayFor(m => m.username), "UserDetails", new { id = @Model.idUser })
-                <br />
-                Likes: @Html.DisplayFor(m => m.numberLikes)
-                <br />
-                Marks as inappropriate: @Html.DisplayFor(m => m.numberMarksInappr)
+
+<li class="item" style="width:620px;">
+    <div class="shadowl">
+        <div class="shadowr">
+            <div class="int">
+                <!-- header -->
+                <div class="title">
+                    <h3><a href="@Html.DisplayFor(m => m.urlLink)">@Html.DisplayFor(m => m.title)</a></h3>
+                </div>
+
+                <div class="body">
+                    <!-- fields -->
+                    @Html.Raw(HttpUtility.HtmlDecode(Model.description))
                 
-                <!-- image -->
-                @{
-                    if ((@Model.urlImage != null) && (@Model.urlImage != ""))
+                    <!-- image -->
+                    @if ((@Model.urlImage != null) && (@Model.urlImage != ""))
                     {
-                        <text>
-                            <br />
-                            <br />
+                        <div class="img">
                             <img src="@Html.DisplayFor(m => m.urlImage)" width="400" alt=""/>
-                        </text>
+                        </div>
                     }
-                }
                 
-                <!-- video -->
-                @{
-                    if ((@Model.urlVideo != null) && (@Model.urlVideo != ""))
-                    {
-                        <text>
-                            <br />
-                            <br />
-                            <iframe src="@Html.DisplayFor(m => m.urlVideo)" frameborder="0" width="400" height="300"></iframe>
-                        </text>
-                    }
-                }
-            </td>
-            @if ((@Model.urlThumb != null) && (@Model.urlThumb != ""))
-            {
-                <td valign="top">
-                    <!-- thumbnail -->
-                    <img src="@Html.DisplayFor(m => m.urlThumb)" width="120px"/>
-                </td>
-            }
-        </tr>
-        <tr>
-            <td colspan="2">
-                <!-- enable / disable -->
-                @using (Html.BeginForm(new { id = @Model.id, userId = @Model.idUser }))
-                {
-                    if (@Model.disabled == 0)
-                    {
-                        <input type="submit" name="buttonDisable" value="Disable resource" />
+                    <!-- video -->
+                    @{
+                        if ((@Model.urlVideo != null) && (@Model.urlVideo != ""))
+                        {
+                            <text>
+                                <br />
+                                <br />
+                                <iframe style="margin:0 20px" src="@Html.DisplayFor(m => m.urlVideo)" frameborder="0" width="560" height="315"></iframe>
+                            </text>
+                        }
                     }
 
-                    else
+                    @if ((@Model.urlThumb != null) && (@Model.urlThumb != ""))
                     {
-                        <text><b>Resource disabled</b></text>
-                        <input type="submit" name="buttonEnable" value="Enable resource" />
+                        <td valign="top">
+                            <!-- thumbnail -->
+                            <img src="@Html.DisplayFor(m => m.urlThumb)" width="120px"/>
+                        </td>
                     }
-                }
-            </td>
-        </tr>
-    </table>
-</div>
+                    <div class="likes">
+                        Likes: @Html.DisplayFor(m => m.numberLikes)
+                        <br />
+                        Marks as inappropriate: @Html.DisplayFor(m => m.numberMarksInappr)
+                    </div>
+                    
+                    <div class="clear"></div>
+                    <div class="footer">
+                        Date: @Html.DisplayFor(m => m.date)
+
+                        <div class="user">
+                            by @Html.ActionLink("" + @Html.DisplayFor(m => m.username), "UserDetails", new { id = @Model.idUser })
+                        </div>
+
+                        <div class="report">
+                            <!-- enable / disable -->
+                            @using (Html.BeginForm(new { id = @Model.id, userId = @Model.idUser }))
+                            {
+                                if (@Model.disabled == 0)
+                                {
+                                    <input type="submit" class="boton-big-red" name="buttonDisable" value="Disable resource" />
+                                }
+
+                                else
+                                {
+                                    <text><b>Resource disabled</b></text>
+                                    <input type="submit" class="boton-big-red" name="buttonEnable" value="Enable resource" />
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+<br />

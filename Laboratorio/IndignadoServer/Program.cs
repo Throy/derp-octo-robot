@@ -19,6 +19,7 @@ namespace IndignadoServer
             ServiceHost _svcHostSysAdmin = null;
             ServiceHost _svcHostNewsResources = null;
             ServiceHost _svcHostUsers = null;
+            ServiceHost _svcHostChats = null;
             
             try
             {
@@ -32,6 +33,7 @@ namespace IndignadoServer
                 _svcHostSysAdmin = LoadSysAdminService();
                 _svcHostNewsResources = LoadNewsResourcesService();
                 _svcHostUsers = LoadUsersService();
+                _svcHostChats = LoadChatService();
 
                 // work!
                 
@@ -63,6 +65,10 @@ namespace IndignadoServer
                 if (_svcHostSysAdmin != null)
                 {
                     _svcHostSysAdmin.Close();
+                }
+                if (_svcHostChats != null)
+                {
+                    _svcHostChats.Close();
                 }
             }
         }
@@ -231,6 +237,29 @@ namespace IndignadoServer
             catch (Exception ex)
             {
                 Console.WriteLine("\nError at loading UsersService. ");
+                Console.WriteLine("Exception : " + ex.Message);
+                throw ex;
+            }
+
+            return svcHost;
+        }
+
+        private static ServiceHost LoadChatService()
+        {
+            ServiceHost svcHost = null;
+            try
+            {
+                Console.Write("Loading ChatService ... ");
+
+                // Create Service Host.
+                svcHost = new ServiceHost(typeof(ChatsService));
+                svcHost.Open();
+
+                Console.WriteLine("Done!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\nError at loading ChatsService. ");
                 Console.WriteLine("Exception : " + ex.Message);
                 throw ex;
             }

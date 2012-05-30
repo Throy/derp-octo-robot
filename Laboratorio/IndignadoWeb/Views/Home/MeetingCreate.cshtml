@@ -60,6 +60,10 @@
         markersArray.push(marker);
         document.getElementById("locationLong").value = marker.getPosition().lng().toString();
         document.getElementById("locationLati").value = marker.getPosition().lat().toString();
+        document.getElementById("hoursBegin").value = 0;
+        document.getElementById("hoursEnd").value = 0;
+        document.getElementById("minutesBegin").value = 0;
+        document.getElementById("minutesEnd").value = 0;
     }
     function placeMarker(location) {
         map.clearOverlays();

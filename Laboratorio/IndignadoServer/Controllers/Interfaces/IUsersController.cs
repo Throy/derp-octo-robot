@@ -10,6 +10,9 @@ namespace IndignadoServer.Controllers
 {
     interface IUsersController
     {
+        // gets the admin's movement.
+        Movimiento getMovement();
+
         // returns all theme categories.
         Collection<CategoriasTematica> getThemeCategoriesList();
 

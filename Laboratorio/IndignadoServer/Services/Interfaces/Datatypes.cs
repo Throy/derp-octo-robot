@@ -305,6 +305,9 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public String tag { get; set; }
+
+        [DataMember]
+        public String title { get; set; }
     }
 
     // RssSources Collection datatype
@@ -319,10 +322,11 @@ namespace IndignadoServer.Services
     [DataContract]
     public class DTLoginInfo
     {
-        public DTLoginInfo(String name, String token, bool isMovAdmin, bool isSysAdmin)
+        public DTLoginInfo(String name, String token, bool isRegUser, bool isMovAdmin, bool isSysAdmin)
         {
             this.name = name;
             this.token = token;
+            this.isRegUser = isRegUser;
             this.isMovAdmin = isMovAdmin;
             this.isSysAdmin = isSysAdmin;
         }
@@ -332,6 +336,9 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public String token { get; set; }
+
+        [DataMember]
+        public bool isRegUser { get; set; }
 
         [DataMember]
         public bool isMovAdmin { get; set; }
@@ -345,7 +352,9 @@ namespace IndignadoServer.Services
         // Unknown Username or Incorrect Password
         UNKOWN_OR_INVALID = 0,
         // El usuario de facebook no se encuentra registrado
-        FB_NOT_REGISTERED = 1
+        FB_NOT_REGISTERED = 1,
+        // El usuario de está deshabilitado
+        BANNED = 2
     }
 
     [DataContract]
@@ -493,6 +502,18 @@ namespace IndignadoServer.Services
         public Collection<DTResource_MovAdmin> resources { get; set; }
     }
 
+    [DataContract]
+    public class DTChatMessage
+    {
+        [DataMember]
+        public int from { get; set; }
+
+        [DataMember]
+        public String message { get; set; }
+
+        [DataMember]
+        public int room { get; set; }
+    }
 
     // **********
     // conversors
@@ -636,7 +657,7 @@ namespace IndignadoServer.Services
             dtUser.locationLong = (float)user.longitud;
             dtUser.numberResourcesMarkedInappr = (user.cantRecursosMarcadosInadecuados == null) ? 0 : user.cantRecursosMarcadosInadecuados.Value;
             dtUser.numberResourcesDisabled = (user.cantRecursosDeshabilitados == null) ? 0 : user.cantRecursosDeshabilitados.Value;
-            dtUser.banned = (user.banned == null) ? false : user.banned.Value;
+            dtUser.banned = user.banned;
             return dtUser;
         }
 
@@ -652,8 +673,28 @@ namespace IndignadoServer.Services
             dtUser.locationLong = (float)user.longitud;
             dtUser.numberResourcesMarkedInappr = (user.cantRecursosMarcadosInadecuados == null) ? 0 : user.cantRecursosMarcadosInadecuados.Value;
             dtUser.numberResourcesDisabled = (user.cantRecursosDeshabilitados == null) ? 0 : user.cantRecursosDeshabilitados.Value;
-            dtUser.banned = (user.banned == null) ? false : user.banned.Value;
+            dtUser.banned = user.banned;
             return dtUser;
+        }
+
+<<<<<<< HEAD
+
+        public static DTChatMessage MessageToDT(ChatMessage m)
+        {
+            DTChatMessage result = new DTChatMessage();
+            result.from = m.Sender;
+            result.message = m.Message;
+            result.room = m.Room;
+            return result;
+=======
+        public static DTRssSource RssSourceToDT(RssFeed rssSource)
+        {
+            DTRssSource dtRssSource = new DTRssSource();
+            dtRssSource.url = rssSource.url;
+            dtRssSource.tag = rssSource.tag;
+            dtRssSource.title = rssSource.titulo;
+            return dtRssSource;
+>>>>>>> e80b8cfe1cb2bb4090dc7e79ee0ce0d6e0faaea9
         }
     }
 
@@ -767,6 +808,19 @@ namespace IndignadoServer.Services
             user.banned = dtUser.banned;
             return user;
         }
+<<<<<<< HEAD
+        
+=======
+
+        public static RssFeed DTToRssSource(DTRssSource dtRssSource)
+        {
+            RssFeed rssSource = new RssFeed();
+            rssSource.url = dtRssSource.url;
+            rssSource.tag = dtRssSource.tag;
+            rssSource.titulo = dtRssSource.title;
+            return rssSource;
+        }
+>>>>>>> e80b8cfe1cb2bb4090dc7e79ee0ce0d6e0faaea9
     }
 
 }

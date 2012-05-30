@@ -30,12 +30,12 @@ namespace IndignadoServer.LinqDataContext
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAprobacione(Aprobacione instance);
-    partial void UpdateAprobacione(Aprobacione instance);
-    partial void DeleteAprobacione(Aprobacione instance);
     partial void InsertUsuario(Usuario instance);
     partial void UpdateUsuario(Usuario instance);
     partial void DeleteUsuario(Usuario instance);
+    partial void InsertAprobacione(Aprobacione instance);
+    partial void UpdateAprobacione(Aprobacione instance);
+    partial void DeleteAprobacione(Aprobacione instance);
     partial void InsertAsistencia(Asistencia instance);
     partial void UpdateAsistencia(Asistencia instance);
     partial void DeleteAsistencia(Asistencia instance);
@@ -101,19 +101,19 @@ namespace IndignadoServer.LinqDataContext
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Aprobacione> Aprobaciones
-		{
-			get
-			{
-				return this.GetTable<Aprobacione>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Usuario> Usuarios
 		{
 			get
 			{
 				return this.GetTable<Usuario>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Aprobacione> Aprobaciones
+		{
+			get
+			{
+				return this.GetTable<Aprobacione>();
 			}
 		}
 		
@@ -206,174 +206,6 @@ namespace IndignadoServer.LinqDataContext
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Aprobaciones")]
-	public partial class Aprobacione : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idRecurso;
-		
-		private int _idUsuario;
-		
-		private EntityRef<Usuario> _Usuario;
-		
-		private EntityRef<Recurso> _Recurso;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidRecursoChanging(int value);
-    partial void OnidRecursoChanged();
-    partial void OnidUsuarioChanging(int value);
-    partial void OnidUsuarioChanged();
-    #endregion
-		
-		public Aprobacione()
-		{
-			this._Usuario = default(EntityRef<Usuario>);
-			this._Recurso = default(EntityRef<Recurso>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idRecurso", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int idRecurso
-		{
-			get
-			{
-				return this._idRecurso;
-			}
-			set
-			{
-				if ((this._idRecurso != value))
-				{
-					if (this._Recurso.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidRecursoChanging(value);
-					this.SendPropertyChanging();
-					this._idRecurso = value;
-					this.SendPropertyChanged("idRecurso");
-					this.OnidRecursoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int idUsuario
-		{
-			get
-			{
-				return this._idUsuario;
-			}
-			set
-			{
-				if ((this._idUsuario != value))
-				{
-					if (this._Usuario.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._idUsuario = value;
-					this.SendPropertyChanged("idUsuario");
-					this.OnidUsuarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Aprobacione", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
-		public Usuario Usuario
-		{
-			get
-			{
-				return this._Usuario.Entity;
-			}
-			set
-			{
-				Usuario previousValue = this._Usuario.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuario.Entity = null;
-						previousValue.Aprobaciones.Remove(this);
-					}
-					this._Usuario.Entity = value;
-					if ((value != null))
-					{
-						value.Aprobaciones.Add(this);
-						this._idUsuario = value.id;
-					}
-					else
-					{
-						this._idUsuario = default(int);
-					}
-					this.SendPropertyChanged("Usuario");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recurso_Aprobacione", Storage="_Recurso", ThisKey="idRecurso", OtherKey="id", IsForeignKey=true)]
-		public Recurso Recurso
-		{
-			get
-			{
-				return this._Recurso.Entity;
-			}
-			set
-			{
-				Recurso previousValue = this._Recurso.Entity;
-				if (((previousValue != value) 
-							|| (this._Recurso.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Recurso.Entity = null;
-						previousValue.Aprobaciones.Remove(this);
-					}
-					this._Recurso.Entity = value;
-					if ((value != null))
-					{
-						value.Aprobaciones.Add(this);
-						this._idRecurso = value.id;
-					}
-					else
-					{
-						this._idRecurso = default(int);
-					}
-					this.SendPropertyChanged("Recurso");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Usuarios")]
 	public partial class Usuario : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -402,7 +234,7 @@ namespace IndignadoServer.LinqDataContext
 		
 		private System.Nullable<int> _cantRecursosDeshabilitados;
 		
-		private System.Nullable<bool> _banned;
+		private bool _banned;
 		
 		private short _privilegio;
 		
@@ -446,7 +278,7 @@ namespace IndignadoServer.LinqDataContext
     partial void OncantRecursosMarcadosInadecuadosChanged();
     partial void OncantRecursosDeshabilitadosChanging(System.Nullable<int> value);
     partial void OncantRecursosDeshabilitadosChanged();
-    partial void OnbannedChanging(System.Nullable<bool> value);
+    partial void OnbannedChanging(bool value);
     partial void OnbannedChanged();
     partial void OnprivilegioChanging(short value);
     partial void OnprivilegioChanged();
@@ -684,8 +516,8 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_banned", DbType="Bit")]
-		public System.Nullable<bool> banned
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_banned", DbType="Bit NOT NULL")]
+		public bool banned
 		{
 			get
 			{
@@ -921,6 +753,174 @@ namespace IndignadoServer.LinqDataContext
 		{
 			this.SendPropertyChanging();
 			entity.Usuario = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Aprobaciones")]
+	public partial class Aprobacione : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idRecurso;
+		
+		private int _idUsuario;
+		
+		private EntityRef<Usuario> _Usuario;
+		
+		private EntityRef<Recurso> _Recurso;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidRecursoChanging(int value);
+    partial void OnidRecursoChanged();
+    partial void OnidUsuarioChanging(int value);
+    partial void OnidUsuarioChanged();
+    #endregion
+		
+		public Aprobacione()
+		{
+			this._Usuario = default(EntityRef<Usuario>);
+			this._Recurso = default(EntityRef<Recurso>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idRecurso", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idRecurso
+		{
+			get
+			{
+				return this._idRecurso;
+			}
+			set
+			{
+				if ((this._idRecurso != value))
+				{
+					if (this._Recurso.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidRecursoChanging(value);
+					this.SendPropertyChanging();
+					this._idRecurso = value;
+					this.SendPropertyChanged("idRecurso");
+					this.OnidRecursoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idUsuario
+		{
+			get
+			{
+				return this._idUsuario;
+			}
+			set
+			{
+				if ((this._idUsuario != value))
+				{
+					if (this._Usuario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._idUsuario = value;
+					this.SendPropertyChanged("idUsuario");
+					this.OnidUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Aprobacione", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.Aprobaciones.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.Aprobaciones.Add(this);
+						this._idUsuario = value.id;
+					}
+					else
+					{
+						this._idUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recurso_Aprobacione", Storage="_Recurso", ThisKey="idRecurso", OtherKey="id", IsForeignKey=true)]
+		public Recurso Recurso
+		{
+			get
+			{
+				return this._Recurso.Entity;
+			}
+			set
+			{
+				Recurso previousValue = this._Recurso.Entity;
+				if (((previousValue != value) 
+							|| (this._Recurso.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Recurso.Entity = null;
+						previousValue.Aprobaciones.Remove(this);
+					}
+					this._Recurso.Entity = value;
+					if ((value != null))
+					{
+						value.Aprobaciones.Add(this);
+						this._idRecurso = value.id;
+					}
+					else
+					{
+						this._idRecurso = default(int);
+					}
+					this.SendPropertyChanged("Recurso");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -2499,13 +2499,13 @@ namespace IndignadoServer.LinqDataContext
 		
 		private double _longitud;
 		
-		private System.Nullable<int> _maxMarcasInadecuadasRecursoX;
+		private int _maxMarcasInadecuadasRecursoX;
 		
-		private System.Nullable<int> _maxRecursosInadecuadosUsuarioZ;
+		private int _maxRecursosInadecuadosUsuarioZ;
 		
-		private System.Nullable<int> _maxRecursosPopularesN;
+		private int _maxRecursosPopularesN;
 		
-		private System.Nullable<int> _maxUltimosRecursosM;
+		private int _maxUltimosRecursosM;
 		
 		private EntitySet<CategoriasTematica> _CategoriasTematicas;
 		
@@ -2535,13 +2535,13 @@ namespace IndignadoServer.LinqDataContext
     partial void OnlatitudChanged();
     partial void OnlongitudChanging(double value);
     partial void OnlongitudChanged();
-    partial void OnmaxMarcasInadecuadasRecursoXChanging(System.Nullable<int> value);
+    partial void OnmaxMarcasInadecuadasRecursoXChanging(int value);
     partial void OnmaxMarcasInadecuadasRecursoXChanged();
-    partial void OnmaxRecursosInadecuadosUsuarioZChanging(System.Nullable<int> value);
+    partial void OnmaxRecursosInadecuadosUsuarioZChanging(int value);
     partial void OnmaxRecursosInadecuadosUsuarioZChanged();
-    partial void OnmaxRecursosPopularesNChanging(System.Nullable<int> value);
+    partial void OnmaxRecursosPopularesNChanging(int value);
     partial void OnmaxRecursosPopularesNChanged();
-    partial void OnmaxUltimosRecursosMChanging(System.Nullable<int> value);
+    partial void OnmaxUltimosRecursosMChanging(int value);
     partial void OnmaxUltimosRecursosMChanged();
     #endregion
 		
@@ -2718,8 +2718,8 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maxMarcasInadecuadasRecursoX", DbType="Int")]
-		public System.Nullable<int> maxMarcasInadecuadasRecursoX
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maxMarcasInadecuadasRecursoX", DbType="Int NOT NULL")]
+		public int maxMarcasInadecuadasRecursoX
 		{
 			get
 			{
@@ -2738,8 +2738,8 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maxRecursosInadecuadosUsuarioZ", DbType="Int")]
-		public System.Nullable<int> maxRecursosInadecuadosUsuarioZ
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maxRecursosInadecuadosUsuarioZ", DbType="Int NOT NULL")]
+		public int maxRecursosInadecuadosUsuarioZ
 		{
 			get
 			{
@@ -2758,8 +2758,8 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maxRecursosPopularesN", DbType="Int")]
-		public System.Nullable<int> maxRecursosPopularesN
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maxRecursosPopularesN", DbType="Int NOT NULL")]
+		public int maxRecursosPopularesN
 		{
 			get
 			{
@@ -2778,8 +2778,8 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maxUltimosRecursosM", DbType="Int")]
-		public System.Nullable<int> maxUltimosRecursosM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maxUltimosRecursosM", DbType="Int NOT NULL")]
+		public int maxUltimosRecursosM
 		{
 			get
 			{
@@ -3459,6 +3459,8 @@ namespace IndignadoServer.LinqDataContext
 		
 		private string _tag;
 		
+		private string _titulo;
+		
 		private EntityRef<Movimiento> _Movimiento;
 		
     #region Extensibility Method Definitions
@@ -3471,6 +3473,8 @@ namespace IndignadoServer.LinqDataContext
     partial void OnidMovimientoChanged();
     partial void OntagChanging(string value);
     partial void OntagChanged();
+    partial void OntituloChanging(string value);
+    partial void OntituloChanged();
     #endregion
 		
 		public RssFeed()
@@ -3539,6 +3543,26 @@ namespace IndignadoServer.LinqDataContext
 					this._tag = value;
 					this.SendPropertyChanged("tag");
 					this.OntagChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_titulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string titulo
+		{
+			get
+			{
+				return this._titulo;
+			}
+			set
+			{
+				if ((this._titulo != value))
+				{
+					this.OntituloChanging(value);
+					this.SendPropertyChanging();
+					this._titulo = value;
+					this.SendPropertyChanged("titulo");
+					this.OntituloChanged();
 				}
 			}
 		}
