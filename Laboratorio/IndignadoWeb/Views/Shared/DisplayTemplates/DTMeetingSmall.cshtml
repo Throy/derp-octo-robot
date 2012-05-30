@@ -54,11 +54,13 @@
                             }
                         </div>
                     </div>*@
-
+                    
+                    @if (ViewBag.UserIsRegUser)
+                    {
                     <div class="likes">
                         @using (Html.BeginForm(new { id = @Model.id }))
                         {
-        
+
                             if (@Model.myAttendance != 1)
                             {
                                 <input class="btn1" type="submit" name="buttonDoAttend" value="Do attend" />
@@ -73,9 +75,10 @@
                             {
                                 <input class="btn1" type="submit" name="buttonUnconfirmAttendance" value="Unconfirm attendance" />
                             }
-        
+
                         }
                     </div>
+                    }
                         
                     <div class="clear"></div>
                     <div class="footer">

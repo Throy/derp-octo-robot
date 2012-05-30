@@ -13,6 +13,7 @@ using IndignadoWeb.SessionServiceReference;
 using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.TestServiceReference;
 using IndignadoWeb.UsersServiceReference;
+using System.Diagnostics;
 
 namespace IndignadoWeb.Controllers
 {
@@ -440,6 +441,10 @@ namespace IndignadoWeb.Controllers
         {
             try
             {
+                // check if the user is a registered user.
+                IUsersService servValidate = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+                DTUser_Users dtUser = servValidate.getUser();
+
                 // get movement
                 IMovAdminService serv2 = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
                 IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv2.getMovement();
@@ -778,23 +783,18 @@ namespace IndignadoWeb.Controllers
         // create resource.
         public ActionResult ResourceShare(ShareResourceModel model)
         {
-            /*
-            try
-            {
+            try{
                 // check if the user is a registered user.
-                ISessionService serv = GetService<ISessionService>(HomeControllerConstants.urlSessionService);
-                serv.ValidateRegUser();
-            */
+                IUsersService servValidate = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+                DTUser_Users dtUser = servValidate.getUser();
 
                 // show form
-                return View(model);
-            /*
+                return View();
             }
             catch (Exception error)
             {
                 return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
             }
-            */
         }
 
         // create resource.
@@ -980,18 +980,29 @@ namespace IndignadoWeb.Controllers
         // shows all theme categories in a list.
         public ActionResult ThemeCategoriesList()
         {
-            IUsersService serv = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+            try
+            {
+                // check if the user is a registered user.
+                IUsersService servValidate = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+                DTUser_Users dtUser = servValidate.getUser();
 
-            // initialize model
-            ThemeCategoriesListModel model = new ThemeCategoriesListModel();
-            model.newItem = new DTThemeCategoryUsers();
-            model.items = serv.getThemeCategoriesList();
+                IUsersService serv = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
 
-            // close service
-            (serv as ICommunicationObject).Close();
+                // initialize model
+                ThemeCategoriesListModel model = new ThemeCategoriesListModel();
+                model.newItem = new DTThemeCategoryUsers();
+                model.items = serv.getThemeCategoriesList();
 
-            // send the meetings to the model.
-            return View(model);
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the meetings to the model.
+                return View(model);
+            }
+            catch
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
         }
 
         // shows all theme categories in a list
@@ -1141,23 +1152,29 @@ namespace IndignadoWeb.Controllers
         // configure user.
         public ActionResult UserConfig()
         {
-            // show configuration
-            IUsersService serv = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
+            try{
+                // show configuration
+                IUsersService serv = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
 
-            // get movement
-            DTUser_Users movement = serv.getUser();
+                // get movement
+                DTUser_Users user = serv.getUser();
 
-            // close service
-            (serv as ICommunicationObject).Close();
+                // close service
+                (serv as ICommunicationObject).Close();
 
-            // send the meeting to the model.
-            UserConfigModel model = new UserConfigModel();
-            model.fullName = movement.fullName;
-            model.mail = movement.mail;
-            model.locationLati = movement.locationLati;
-            model.locationLong = movement.locationLong;
+                // send the user to the model.
+                UserConfigModel model = new UserConfigModel();
+                model.fullName = user.fullName;
+                model.mail = user.mail;
+                model.locationLati = user.locationLati;
+                model.locationLong = user.locationLong;
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
         }
 
         // configure user.

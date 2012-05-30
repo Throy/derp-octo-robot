@@ -4,6 +4,7 @@
   <xs:complexType name="DTLoginInfo">
     <xs:sequence>
       <xs:element minOccurs="0" name="isMovAdmin" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isRegUser" type="xs:boolean" />
       <xs:element minOccurs="0" name="isSysAdmin" type="xs:boolean" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="token" nillable="true" type="xs:string" />
@@ -21,6 +22,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="UNKOWN_OR_INVALID" />
       <xs:enumeration value="FB_NOT_REGISTERED" />
+      <xs:enumeration value="BANNED" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="DTLoginFaultType" nillable="true" type="tns:DTLoginFaultType" />
