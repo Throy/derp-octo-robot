@@ -116,24 +116,12 @@ namespace IndignadoServer.Controllers
         {
             // only get theme categories from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            IEnumerable<CategoriasTematica> themeCategoriesEnum = indignadoContext.ExecuteQuery<CategoriasTematica>("SELECT id, idMovimiento, titulo, descripcion FROM CategoriasTematicas WHERE idMovimiento = {0}", IdMovement);
+            IEnumerable<CategoriasTematica> themeCategoriesEnum = indignadoContext.ExecuteQuery<CategoriasTematica>
+                ("SELECT id, idMovimiento, titulo, descripcion FROM CategoriasTematicas WHERE idMovimiento = {0}", IdMovement);
 
             Collection<CategoriasTematica> themeCategoriesCol = new Collection<CategoriasTematica>();
             foreach (CategoriasTematica themeCategory in themeCategoriesEnum)
             {
-                /*
-                // get own attendance
-                themeCategory.miInteres = -1;
-                if (UserInfo != null)
-                {
-                    IEnumerable<int> myInterests = indignadoContext.ExecuteQuery<int>("SELECT interes FROM Interes WHERE (idCategoriaTematica = {0}) AND (idUsuario = {1})", themeCategory.id, UserInfo.Id);
-                    foreach (int myInterest in myInterests)
-                    {
-                        themeCategory.miInteres = myInterest;
-                    }
-                }
-                 * */
-
                 // add item to the collection
                 themeCategoriesCol.Add(themeCategory);
             }
@@ -249,7 +237,7 @@ namespace IndignadoServer.Controllers
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE Usuarios.idMovimiento = {0}", IdMovement);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado, CantAprobaciones.cantAprobaciones, CantMarcasInadecuados.cantMarcasInadecuado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantMarcasInadecuado FROM MarcasInadecuados GROUP BY idRecurso) CantMarcasInadecuados ON (CantMarcasInadecuados.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) ORDER BY CantMarcasInadecuados.cantMarcasInadecuado DESC, Recursos.id DESC", IdMovement);
             return toResourcesCol(resourcesEnum);
         }
 
@@ -259,7 +247,8 @@ namespace IndignadoServer.Controllers
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
+                //("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado, CantAprobaciones.cantAprobaciones, CantMarcasInadecuados.cantMarcasInadecuado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantMarcasInadecuado FROM MarcasInadecuados GROUP BY idRecurso) CantMarcasInadecuados ON (CantMarcasInadecuados.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) ORDER BY CantMarcasInadecuados.cantMarcasInadecuado DESC, Recursos.id DESC", IdMovement, 0);
             return toResourcesCol(resourcesEnum);
         }
 
@@ -269,7 +258,7 @@ namespace IndignadoServer.Controllers
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 1);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado, CantAprobaciones.cantAprobaciones, CantMarcasInadecuados.cantMarcasInadecuado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantMarcasInadecuado FROM MarcasInadecuados GROUP BY idRecurso) CantMarcasInadecuados ON (CantMarcasInadecuados.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) ORDER BY CantMarcasInadecuados.cantMarcasInadecuado DESC, Recursos.id DESC", IdMovement, 1);
             return toResourcesCol(resourcesEnum);
         }
 
@@ -278,7 +267,7 @@ namespace IndignadoServer.Controllers
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE Usuarios.id = {0}", user.id);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado, CantAprobaciones.cantAprobaciones, CantMarcasInadecuados.cantMarcasInadecuado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantMarcasInadecuado FROM MarcasInadecuados GROUP BY idRecurso) CantMarcasInadecuados ON (CantMarcasInadecuados.idRecurso = Recursos.id) WHERE (Usuarios.id = {0}) ORDER BY CantMarcasInadecuados.cantMarcasInadecuado DESC, Recursos.id DESC", user.id);
             return toResourcesCol(resourcesEnum);
         }
 
@@ -300,12 +289,14 @@ namespace IndignadoServer.Controllers
                     resource.cantAprobaciones = numberLikes;
                 }
 
+                /*
                 // get number of marks as inappropriate
                 IEnumerable<int> numbersMarksInappropriate = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM MarcasInadecuados WHERE idRecurso = {0}", resource.id);
                 foreach (int numberMarksInappropriate in numbersMarksInappropriate)
                 {
                     resource.cantMarcasInadecuado = numberMarksInappropriate;
                 }
+                 * */
                 
                 // add item to the collection
                 recursosCol.Add(resource);
