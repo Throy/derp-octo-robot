@@ -319,6 +319,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\UsersServiceReference\IndignadoWeb.UsersServiceReference.DTMovement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\UsersServiceReference\IndignadoWeb.UsersServiceReference.DTThemeCategoriesColUsers.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

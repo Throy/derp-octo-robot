@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using IndignadoWeb.MovAdminServiceReference;
 using IndignadoWeb.NewsResourcesServiceReference;
+using IndignadoWeb.UsersServiceReference;
 
 namespace IndignadoWeb.Models
 {

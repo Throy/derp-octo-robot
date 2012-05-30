@@ -13,7 +13,21 @@ namespace IndignadoServer.Services
 {
     public class UsersService : IUsersService
     {
+        // gets the user's movement.
+        public DTMovement getMovement()
+        {
+            try
+            {
+                return ClassToDT.MovementToDT(ControllersHub.Instance.getIUsersController().getMovement());
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         // returns all theme categories.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public DTThemeCategoriesColUsers getThemeCategoriesList()
         {
             // create new theme categories datatype collection

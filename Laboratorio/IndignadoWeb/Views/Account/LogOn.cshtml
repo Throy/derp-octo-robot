@@ -7,13 +7,11 @@
 <h2 style="margin-left:30px;">Log On</h2>
 
 <p style="margin-left:30px;">
-    Please enter your user name and password. @Html.ActionLink("Register", "Register") if you don't have an account.
+    @Html.ActionLink("Register", "Register") if you don't have an account.
 </p>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-
-@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
 
 <div class="special-btn-wrap">
 	<a id="fb-login" class="special-btn facebook badge-facebook-connect" label="LoginFormFacebookButton">Login with Facebook</a>
@@ -81,6 +79,7 @@
     }    
 </script>
 
+@Html.ValidationSummary(true, "Login was unsuccessful.")
 
 @using (Html.BeginForm()) {
     <div class="reg-box big-red">

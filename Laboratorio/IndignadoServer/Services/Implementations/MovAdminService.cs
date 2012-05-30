@@ -9,6 +9,7 @@ namespace IndignadoServer.Services
     public class MovAdminService : IMovAdminService
     {
         // gets the admin's movement.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public DTMovement getMovement()
         {
             try
@@ -41,6 +42,7 @@ namespace IndignadoServer.Services
         }
 
         // gets the rss resources.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public DTRssSourcesCol listRssSources(){
             return ControllersHub.Instance.getIMovAdminController().listRssSources();
         }
@@ -58,8 +60,9 @@ namespace IndignadoServer.Services
         {
             ControllersHub.Instance.getIMovAdminController().removeThemeCategory(DTToClass.DTToThemeCategory(dtThemeCategory));
         }
-        
+
         // gets the theme categories.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public DTThemeCategoriesColMovAdmin listThemeCategories()
         {
             // create new theme categories datatype collection
@@ -80,6 +83,7 @@ namespace IndignadoServer.Services
         }
 
         // returns all users.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public DTUserDetails_MovAdmin getUserDetails(DTUser_MovAdmin dtUser)
         {
             // get user object
@@ -102,6 +106,7 @@ namespace IndignadoServer.Services
         }
 
         // returns all users.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public DTUsersCol_MovAdmin getUsersListFull()
         {
             // create new theme categories datatype collection
@@ -122,6 +127,7 @@ namespace IndignadoServer.Services
         }
 
         // returns all users allowed.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public DTUsersCol_MovAdmin getUsersListAllowed()
         {
             // create new theme categories datatype collection
@@ -142,6 +148,7 @@ namespace IndignadoServer.Services
         }
 
         // returns all users banned.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public DTUsersCol_MovAdmin getUsersListBanned()
         {
             // create new theme categories datatype collection
@@ -176,6 +183,7 @@ namespace IndignadoServer.Services
         }
 
         // returns all resources.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public DTResourcesCol_MovAdmin getResourcesListAll()
         {
             // get resources datatypes.
@@ -196,6 +204,7 @@ namespace IndignadoServer.Services
         }
 
         // returns all resources enabled.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public DTResourcesCol_MovAdmin getResourcesListEnabled()
         {
             // get resources datatypes.
@@ -216,6 +225,7 @@ namespace IndignadoServer.Services
         }
 
         // returns all resources disabled.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public DTResourcesCol_MovAdmin getResourcesListDisabled()
         {
             // get resources datatypes.

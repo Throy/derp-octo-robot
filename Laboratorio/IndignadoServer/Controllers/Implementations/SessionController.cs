@@ -48,13 +48,13 @@ namespace IndignadoServer.Controllers
             // usuario inexistente o contraseña incorrecta.
             if (user == null)
             {
-                throw new FaultException<LoginFault>(new LoginFault("Unknown username or incorrect password", DTLoginFaultType.UNKOWN_OR_INVALID));
+                throw new FaultException("Unknown username or incorrect password");
             }
 
             // usuario deshabilitado.
             if (user.banned)
             {
-                throw new FaultException<LoginFault>(new LoginFault("The user is banned, please contact the movement administrator.", DTLoginFaultType.BANNED));
+                throw new FaultException("The user is banned, please contact the movement administrator.");
             }
 
             String token = GenerateToken();
