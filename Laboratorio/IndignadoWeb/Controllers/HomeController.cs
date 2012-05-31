@@ -38,6 +38,7 @@ namespace IndignadoWeb.Controllers
         public const string viewUserConfig = "UserConfig";
         public const string viewUserDetails = "UserDetails";
         public const string viewUsersManage = "UsersManage";
+        public const string viewUsersRegisterReport = "UsersRegisterReport";
 
         public const string urlMeetingsService = "http://localhost:8730/IndignadoServer/MeetingsService/";
         public const string urlMovAdminService = "http://localhost:8730/IndignadoServer/MovAdminService/";
@@ -1435,6 +1436,62 @@ namespace IndignadoWeb.Controllers
             {
                 return RedirectToAction(HomeControllerConstants.viewAccessDenied);
             }
+        }
+
+        // shows the users register report.
+        public ActionResult UsersRegisterReport(DTUsersRegisterReport dtUsersReport)
+        {
+            try
+            {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                // get users register report.
+                if (dtUsersReport == null)
+                {
+                    dtUsersReport = new DTUsersRegisterReport();
+                    dtUsersReport.periodType = DTUsersRegisterReport_PeriodType.Day;
+                }
+                dtUsersReport = serv.getUsersRegisterReport(dtUsersReport);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the report to the model.
+                return View(dtUsersReport);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // shows the users register report - change period type.
+        [HttpPost]
+        public ActionResult UsersRegisterReport(string buttonShowByYear, string buttonShowByMonth, string buttonShowByDay, DTUsersRegisterReport model)
+        {
+            // by year.
+            if (buttonShowByYear != null)
+            {
+                model.periodType = DTUsersRegisterReport_PeriodType.Year;
+                return RedirectToAction(HomeControllerConstants.viewUsersRegisterReport, model);
+            }
+
+            // by month.
+            else if (buttonShowByMonth != null)
+            {
+                model.periodType = DTUsersRegisterReport_PeriodType.Month;
+                return RedirectToAction(HomeControllerConstants.viewUsersRegisterReport, model);
+            }
+
+            // by day.
+            else if (buttonShowByDay != null)
+            {
+                model.periodType = DTUsersRegisterReport_PeriodType.Day;
+                return RedirectToAction(HomeControllerConstants.viewUsersRegisterReport, model);
+            }
+
+            return View();
         }
     }
 }

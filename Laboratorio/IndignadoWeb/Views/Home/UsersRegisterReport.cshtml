@@ -1,0 +1,51 @@
+﻿<!-- model -->
+@model IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReport
+
+<!-- page title -->
+@{
+    ViewBag.Title = "Indignado Framework - Users register report";
+}
+
+<!-- page content -->
+
+<h2>Users register report</h2>
+
+@using (Html.BeginForm())
+{
+    if ((int) Model.periodType == 0)
+    {
+        <text>
+            <b>By year</b>
+        </text>
+    }
+    else
+    {
+        <input type="submit" name="buttonShowByYear" value="By year" />
+    }
+
+    if ((int)Model.periodType == 1)
+    {
+        <text>
+            <b>By month</b>
+        </text>
+    }
+    else
+    {
+        <input type="submit" name="buttonShowByMonth" value="By month" />
+    }
+
+    if ((int)Model.periodType == 2)
+    {
+        <text>
+            <b>By day</b>
+        </text>
+    }
+    else
+    {
+        <input type="submit" name="buttonShowByDay" value="By day" />
+    }
+}
+
+<p>
+    @Html.DisplayFor(m => m.items)
+</p>

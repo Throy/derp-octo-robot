@@ -1047,6 +1047,174 @@ namespace IndignadoWeb.MovAdminServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUsersRegisterReport", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTUsersRegisterReport : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReportItem[] itemsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReport_PeriodType periodTypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReportItem[] items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
+                    this.itemsField = value;
+                    this.RaisePropertyChanged("items");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReport_PeriodType periodType {
+            get {
+                return this.periodTypeField;
+            }
+            set {
+                if ((this.periodTypeField.Equals(value) != true)) {
+                    this.periodTypeField = value;
+                    this.RaisePropertyChanged("periodType");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUsersRegisterReportItem", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTUsersRegisterReportItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int numberRegistersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int numberUsersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string periodField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int numberRegisters {
+            get {
+                return this.numberRegistersField;
+            }
+            set {
+                if ((this.numberRegistersField.Equals(value) != true)) {
+                    this.numberRegistersField = value;
+                    this.RaisePropertyChanged("numberRegisters");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int numberUsers {
+            get {
+                return this.numberUsersField;
+            }
+            set {
+                if ((this.numberUsersField.Equals(value) != true)) {
+                    this.numberUsersField = value;
+                    this.RaisePropertyChanged("numberUsers");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string period {
+            get {
+                return this.periodField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.periodField, value) != true)) {
+                    this.periodField = value;
+                    this.RaisePropertyChanged("period");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUsersRegisterReport_PeriodType", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    public enum DTUsersRegisterReport_PeriodType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Year = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Month = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Day = 2,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MovAdminServiceReference.IMovAdminService")]
     public interface IMovAdminService {
@@ -1107,6 +1275,9 @@ namespace IndignadoWeb.MovAdminServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/disableResource", ReplyAction="http://tempuri.org/IMovAdminService/disableResourceResponse")]
         void disableResource(IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin resource);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/getUsersRegisterReport", ReplyAction="http://tempuri.org/IMovAdminService/getUsersRegisterReportResponse")]
+        IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReport getUsersRegisterReport(IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReport dtUserReport);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1210,6 +1381,10 @@ namespace IndignadoWeb.MovAdminServiceReference {
         
         public void disableResource(IndignadoWeb.MovAdminServiceReference.DTResource_MovAdmin resource) {
             base.Channel.disableResource(resource);
+        }
+        
+        public IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReport getUsersRegisterReport(IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReport dtUserReport) {
+            return base.Channel.getUsersRegisterReport(dtUserReport);
         }
     }
 }

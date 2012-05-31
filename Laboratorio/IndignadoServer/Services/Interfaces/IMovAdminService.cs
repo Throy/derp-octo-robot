@@ -86,5 +86,9 @@ namespace IndignadoServer.Services
         // reallows a resource.
         [OperationContract]
         void disableResource(DTResource_MovAdmin resource);
+
+        // returns a user report.
+        [OperationContract]
+        DTUsersRegisterReport getUsersRegisterReport(DTUsersRegisterReport dtUserReport);
     }
 }

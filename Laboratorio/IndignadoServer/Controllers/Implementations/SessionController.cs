@@ -111,7 +111,7 @@ namespace IndignadoServer.Controllers
 
             userDb.banned = false;
             userDb.privilegio = 0;
-            userDb.fechaRegistro = DateTime.Now;
+            userDb.fechaRegistro = new DateTime (DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0);
 
             try
             {

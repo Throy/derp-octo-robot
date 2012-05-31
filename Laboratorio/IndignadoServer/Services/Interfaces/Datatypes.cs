@@ -515,6 +515,42 @@ namespace IndignadoServer.Services
         public int room { get; set; }
     }
 
+    // Users RegisterReport datatype
+    [DataContract]
+    public class DTUsersRegisterReport
+    {
+        [DataMember]
+        public DTUsersRegisterReport_PeriodType periodType { get; set; }
+
+        [DataMember]
+        public Collection<DTUsersRegisterReportItem> items { get; set; }
+    }
+
+    // Users RegisterReport Item datatype
+    [DataContract]
+    public class DTUsersRegisterReportItem
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public String period { get; set; }
+        
+        [DataMember]
+        public int numberRegisters { get; set; }
+        
+        [DataMember]
+        public int numberUsers { get; set; }
+    }
+    
+    // Users RegisterReport Period Type enum
+    public enum DTUsersRegisterReport_PeriodType
+    {
+        Year = 0,
+        Month = 1,
+        Day = 2
+    }
+
     // **********
     // conversors
     // **********

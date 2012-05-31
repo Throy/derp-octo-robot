@@ -224,6 +224,9 @@
     <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTUsersCol_MovAdmin.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReport.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\MovAdminServiceReference\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -420,6 +423,8 @@
     <Content Include="Views\Home\UserDetails.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMeetingSmall.cshtml" />
     <Content Include="Views\Home\ResourcesListTopRanked.cshtml" />
+    <Content Include="Views\Home\UsersRegisterReport.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTUsersRegisterReportItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
