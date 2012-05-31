@@ -1,13 +1,14 @@
 ﻿<!-- model -->
 @model IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReportItem
-           
-<div>
-    <!-- header -->
-    <h3>@Html.DisplayFor(m => m.period)</h3>
-     
-    <!-- fields -->
-    Registers: @Html.DisplayFor(m => m.numberRegisters)
-    <br />
-    Users: @Html.DisplayFor(m => m.numberUsers)
-    <br />
-</div>
+
+<tr>
+    <td>
+        @Html.DisplayFor(m => m.period)
+    </td>
+    <td>
+        @Html.DisplayFor(m => m.numberRegisters)
+    </td>
+    <td>
+        @Html.DisplayFor(m => m.numberUsers)
+    </td>
+</tr>
