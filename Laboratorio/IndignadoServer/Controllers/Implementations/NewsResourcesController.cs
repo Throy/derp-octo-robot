@@ -120,7 +120,7 @@ namespace IndignadoServer.Controllers
 
             // set internal and foreign ids
             resource.idUsuario = UserInfo.Id;
-            resource.fecha = DateTime.UtcNow;
+            resource.fecha = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, DateTime.UtcNow.Minute, 0);
             resource.deshabilitado = 0;
 
             indignadoContext.Recursos.InsertOnSubmit(resource);
