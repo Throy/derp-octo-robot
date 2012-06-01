@@ -352,7 +352,7 @@ namespace IndignadoServer.Controllers
             if (dtUsersReport.periodType == DTUsersRegisterReport_PeriodType.Year)
             {
                 int earlyYear = earlyDate.Year;
-                int lateYear = lateDate.Year;
+                int lateYear = DateTime.UtcNow.Year;
 
                 DTUsersRegisterReportItem[] reportItemsArray = new DTUsersRegisterReportItem[lateYear - earlyYear + 1];
 
@@ -389,7 +389,7 @@ namespace IndignadoServer.Controllers
             else if (dtUsersReport.periodType == DTUsersRegisterReport_PeriodType.Month)
             {
                 int earlyMonth = earlyDate.Month + 12 * earlyDate.Year - 24001;
-                int lateMonth = lateDate.Month + 12 * lateDate.Year - 24001;
+                int lateMonth = DateTime.UtcNow.Month + 12 * DateTime.UtcNow.Year - 24001;
 
                 DTUsersRegisterReportItem[] reportItemsArray = new DTUsersRegisterReportItem[lateMonth - earlyMonth + 1];
 
@@ -431,7 +431,7 @@ namespace IndignadoServer.Controllers
             else if (dtUsersReport.periodType == DTUsersRegisterReport_PeriodType.Day)
             {
                 int earlyDay = earlyDate.DayOfYear + 366 * earlyDate.Year - 736001;
-                int lateDay = lateDate.DayOfYear + 366 * lateDate.Year - 736001;
+                int lateDay = DateTime.UtcNow.DayOfYear + 366 * DateTime.UtcNow.Year - 736001;
 
                 DTUsersRegisterReportItem[] reportItemsArray = new DTUsersRegisterReportItem[lateDay - earlyDay + 1];
 
