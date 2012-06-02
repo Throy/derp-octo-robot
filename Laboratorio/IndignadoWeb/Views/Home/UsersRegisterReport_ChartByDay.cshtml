@@ -6,6 +6,7 @@
 <!-- page content -->
 
 @{
+    // registers
     var numberRegistersXValue = new string[@Model.items.Length];
     var numberRegistersYValues = new int[@Model.items.Length];
     int idx = 0;
@@ -14,11 +15,25 @@
         numberRegistersYValues[idx] = reportItem.numberRegisters;
         idx += 1;
     }
+    var numberUsersXValue = new string[@Model.items.Length];
+    var numberUsersYValues = new int[@Model.items.Length];
+    
+    // users
+    idx = 0;
+    foreach (DTUsersRegisterReportItem reportItem in @Model.items)
+    {
+        numberUsersXValue[idx] = reportItem.period;
+        numberUsersYValues[idx] = reportItem.numberUsers;
+        idx += 1;
+    }
     var myChart = new System.Web.Helpers.Chart(width: 600, height: 300)
         .AddSeries(
-            name: "Employee",
             xValue: numberRegistersXValue,
             yValues: numberRegistersYValues,
             chartType: "Column")
+        .AddSeries(
+            xValue: numberUsersXValue,
+            yValues: numberUsersYValues,
+            chartType: "Line")
         .Write();
 }
