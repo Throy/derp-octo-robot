@@ -124,6 +124,13 @@
                 @Html.ValidationMessageFor(m => m.locationLong)
             </div>
 
+            <div class="editor-label">
+                @Html.LabelFor(m => m.layouts)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(m => m.layoutId, Model.layouts)
+            </div>
+
             <p>
                 <input type="submit" class="boton-big-red" value="Save configuration" />
             </p>

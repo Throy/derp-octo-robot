@@ -242,6 +242,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\MeetingsServiceReference\MeetingsService.wsdl" />
+    <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTLayout.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\MovAdminServiceReference\IndignadoWeb.MovAdminServiceReference.DTMovement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Security.Permissions;
 using IndignadoServer.Controllers;
 using IndignadoServer.LinqDataContext;
+using System.Collections.Generic;
 
 namespace IndignadoServer.Services
 {
@@ -28,6 +29,13 @@ namespace IndignadoServer.Services
         public void setMovement(DTMovement dtMovement)
         {
             ControllersHub.Instance.getIMovAdminController().setMovement(DTToClass.DTToMovement(dtMovement));
+        }
+
+        // returns a list of available layouts
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
+        public List<DTLayout> getLayouts()
+        {
+            return ControllersHub.Instance.getIMovAdminController().getLayouts();
         }
 
         // adds a new rss resource.

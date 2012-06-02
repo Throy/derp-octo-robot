@@ -14,9 +14,29 @@ using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.TestServiceReference;
 using IndignadoWeb.UsersServiceReference;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace IndignadoWeb.Controllers
 {
+    public static class ListsHelper
+    {
+
+        public static IEnumerable<SelectListItem> ToSelectListItems(
+              this IEnumerable<DTLayout> layouts, int selectedId)
+        {
+            return
+                layouts.Select(layout =>
+                          new SelectListItem
+                          {
+                              Selected = (layout.id == selectedId),
+                              Text = layout.name,
+                              Value = layout.id.ToString()
+                          });
+        }
+    }
+
+
     public class HomeControllerConstants
     {
         public const string viewAccessDenied = "AccessDenied";
@@ -567,7 +587,7 @@ namespace IndignadoWeb.Controllers
                 // get movement configuration
                 IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
                 IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv.getMovement();
-                (serv as ICommunicationObject).Close();
+                
 
                 // send the meeting to the model.
                 SingleMovementModel model = new SingleMovementModel();
@@ -575,7 +595,10 @@ namespace IndignadoWeb.Controllers
                 model.description = movement.description;
                 model.locationLati = movement.locationLati;
                 model.locationLong = movement.locationLong;
+                model.layouts = serv.getLayouts().ToSelectListItems(movement.idLayout);
 
+                (serv as ICommunicationObject).Close();
+                
                 return View(model);
             }
             catch
@@ -590,10 +613,12 @@ namespace IndignadoWeb.Controllers
         {
             try
             {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
                 if (ModelState.IsValid)
                 {
-                    // open service
-                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+                    
 
                     // create new movement
                     //serv.addEmptyMovement();
@@ -604,6 +629,7 @@ namespace IndignadoWeb.Controllers
                     dtMovement.description = model.description;
                     dtMovement.locationLati = model.locationLati;
                     dtMovement.locationLong = model.locationLong;
+                    dtMovement.idLayout = model.layoutId;
                     serv.setMovement(dtMovement);
 
                     // close service
@@ -615,9 +641,16 @@ namespace IndignadoWeb.Controllers
                     // close service
                     (serv2 as ICommunicationObject).Close();
 
-                   // send the movements to the model.
+                    // send the movements to the model.
                     return View("MovementConfigSuccess");
                 }
+
+                // Vuelvo a rellenar la lista de layouts
+                model.layouts = serv.getLayouts().ToSelectListItems(model.layoutId);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
 
                 // If we got this far, something failed, redisplay form
                 return View(model);

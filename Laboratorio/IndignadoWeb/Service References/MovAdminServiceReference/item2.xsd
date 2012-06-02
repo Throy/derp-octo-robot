@@ -11,6 +11,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTMovement" nillable="true" type="tns:DTMovement" />
+  <xs:complexType name="ArrayOfDTLayout">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTLayout" nillable="true" type="tns:DTLayout" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTLayout" nillable="true" type="tns:ArrayOfDTLayout" />
+  <xs:complexType name="DTLayout">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTLayout" nillable="true" type="tns:DTLayout" />
   <xs:complexType name="DTRssSource">
     <xs:sequence>
       <xs:element minOccurs="0" name="tag" nillable="true" type="xs:string" />

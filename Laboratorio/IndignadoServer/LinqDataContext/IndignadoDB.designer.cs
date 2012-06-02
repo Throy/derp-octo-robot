@@ -51,9 +51,6 @@ namespace IndignadoServer.LinqDataContext
     partial void InsertInterese(Interese instance);
     partial void UpdateInterese(Interese instance);
     partial void DeleteInterese(Interese instance);
-    partial void InsertLayout(Layout instance);
-    partial void UpdateLayout(Layout instance);
-    partial void DeleteLayout(Layout instance);
     partial void InsertMarcasInadecuado(MarcasInadecuado instance);
     partial void UpdateMarcasInadecuado(MarcasInadecuado instance);
     partial void DeleteMarcasInadecuado(MarcasInadecuado instance);
@@ -69,6 +66,9 @@ namespace IndignadoServer.LinqDataContext
     partial void InsertUsuarioFacebook(UsuarioFacebook instance);
     partial void UpdateUsuarioFacebook(UsuarioFacebook instance);
     partial void DeleteUsuarioFacebook(UsuarioFacebook instance);
+    partial void InsertLayout(Layout instance);
+    partial void UpdateLayout(Layout instance);
+    partial void DeleteLayout(Layout instance);
     #endregion
 		
 		public IndignadoDBDataContext() : 
@@ -157,14 +157,6 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		public System.Data.Linq.Table<Layout> Layouts
-		{
-			get
-			{
-				return this.GetTable<Layout>();
-			}
-		}
-		
 		public System.Data.Linq.Table<MarcasInadecuado> MarcasInadecuados
 		{
 			get
@@ -202,6 +194,14 @@ namespace IndignadoServer.LinqDataContext
 			get
 			{
 				return this.GetTable<UsuarioFacebook>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Layout> Layouts
+		{
+			get
+			{
+				return this.GetTable<Layout>();
 			}
 		}
 	}
@@ -2195,120 +2195,6 @@ namespace IndignadoServer.LinqDataContext
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Layouts")]
-	public partial class Layout : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _layoutFile;
-		
-		private EntitySet<Movimiento> _Movimientos;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnlayoutFileChanging(string value);
-    partial void OnlayoutFileChanged();
-    #endregion
-		
-		public Layout()
-		{
-			this._Movimientos = new EntitySet<Movimiento>(new Action<Movimiento>(this.attach_Movimientos), new Action<Movimiento>(this.detach_Movimientos));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_layoutFile", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string layoutFile
-		{
-			get
-			{
-				return this._layoutFile;
-			}
-			set
-			{
-				if ((this._layoutFile != value))
-				{
-					this.OnlayoutFileChanging(value);
-					this.SendPropertyChanging();
-					this._layoutFile = value;
-					this.SendPropertyChanged("layoutFile");
-					this.OnlayoutFileChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Layout_Movimiento", Storage="_Movimientos", ThisKey="id", OtherKey="idLayout")]
-		public EntitySet<Movimiento> Movimientos
-		{
-			get
-			{
-				return this._Movimientos;
-			}
-			set
-			{
-				this._Movimientos.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Movimientos(Movimiento entity)
-		{
-			this.SendPropertyChanging();
-			entity.Layout = this;
-		}
-		
-		private void detach_Movimientos(Movimiento entity)
-		{
-			this.SendPropertyChanging();
-			entity.Layout = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MarcasInadecuados")]
 	public partial class MarcasInadecuado : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3770,6 +3656,144 @@ namespace IndignadoServer.LinqDataContext
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Layouts")]
+	public partial class Layout : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _layoutFile;
+		
+		private string _name;
+		
+		private EntitySet<Movimiento> _Movimientos;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnlayoutFileChanging(string value);
+    partial void OnlayoutFileChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    #endregion
+		
+		public Layout()
+		{
+			this._Movimientos = new EntitySet<Movimiento>(new Action<Movimiento>(this.attach_Movimientos), new Action<Movimiento>(this.detach_Movimientos));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_layoutFile", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string layoutFile
+		{
+			get
+			{
+				return this._layoutFile;
+			}
+			set
+			{
+				if ((this._layoutFile != value))
+				{
+					this.OnlayoutFileChanging(value);
+					this.SendPropertyChanging();
+					this._layoutFile = value;
+					this.SendPropertyChanged("layoutFile");
+					this.OnlayoutFileChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Layout_Movimiento", Storage="_Movimientos", ThisKey="id", OtherKey="idLayout")]
+		public EntitySet<Movimiento> Movimientos
+		{
+			get
+			{
+				return this._Movimientos;
+			}
+			set
+			{
+				this._Movimientos.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Movimientos(Movimiento entity)
+		{
+			this.SendPropertyChanging();
+			entity.Layout = this;
+		}
+		
+		private void detach_Movimientos(Movimiento entity)
+		{
+			this.SendPropertyChanging();
+			entity.Layout = null;
 		}
 	}
 }

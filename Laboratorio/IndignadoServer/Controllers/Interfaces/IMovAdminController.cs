@@ -16,6 +16,9 @@ namespace IndignadoServer.Controllers
         // changes the configuration of the movement.
         void setMovement(Movimiento dtMovement);
 
+        // returns a list of available layouts
+        List<DTLayout> getLayouts();
+
         // adds a new rss resource.
         void addRssSource(RssFeed rssSource);
 

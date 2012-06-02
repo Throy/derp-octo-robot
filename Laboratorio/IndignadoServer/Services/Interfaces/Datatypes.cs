@@ -89,6 +89,16 @@ namespace IndignadoServer.Services
     }
 
     [DataContract]
+    public class DTLayout
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public String name { get; set; }
+    }
+
+    [DataContract]
     public class DTTenantInfo
     {
         [DataMember]
@@ -620,6 +630,15 @@ namespace IndignadoServer.Services
             dtMovement.locationLong = (float)movement.longitud;
             dtMovement.idLayout = movement.idLayout;
             return dtMovement;
+        }
+
+        public static DTLayout LayoutToDT(Layout layout)
+        {
+            DTLayout dtLayout = new DTLayout();
+            dtLayout.id = layout.id;
+            dtLayout.name = layout.name;
+
+            return dtLayout;
         }
 
         public static DTRssItem RssItemToDT(RssItem rssItem)

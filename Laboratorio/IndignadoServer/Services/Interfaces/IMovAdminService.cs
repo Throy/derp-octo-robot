@@ -19,6 +19,10 @@ namespace IndignadoServer.Services
         [OperationContract]
         void setMovement(DTMovement dtMovement);
 
+        // returns a list of available layouts
+        [OperationContract]
+        List<DTLayout> getLayouts();
+
         // adds a new rss resource.
         [OperationContract]
         void addRssSource(DTRssSource dtRssSource);

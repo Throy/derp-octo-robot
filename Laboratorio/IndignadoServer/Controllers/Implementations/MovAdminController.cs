@@ -35,7 +35,23 @@ namespace IndignadoServer.Controllers
         public void setMovement(Movimiento movement)
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            indignadoContext.ExecuteCommand("UPDATE Movimiento SET nombre = {0}, descripcion = {1}, latitud = {2}, longitud = {3} WHERE id = {4}", movement.nombre, movement.descripcion, movement.latitud, movement.longitud, IdMovement);
+            indignadoContext.ExecuteCommand("UPDATE Movimiento SET nombre = {0}, descripcion = {1}, latitud = {2}, longitud = {3}, idLayout = {4} WHERE id = {5}", movement.nombre, movement.descripcion, movement.latitud, movement.longitud, movement.idLayout, IdMovement);
+        }
+
+        // returns a list of available layouts
+        public List<DTLayout> getLayouts()
+        {
+            var db = new IndignadoDBDataContext();
+            var layouts = db.Layouts.ToList();
+
+            var dtList = new List<DTLayout>();
+
+            foreach (var layout in layouts)
+            {
+                dtList.Add(ClassToDT.LayoutToDT(layout));
+            }
+
+            return dtList;
         }
 
         // adds a new rss resource.
