@@ -69,5 +69,8 @@ namespace IndignadoServer.Controllers
 
         // enable a resource.
         void enableResource(Recurso resource);
+
+        // returns a users register report.
+        DTUsersRegisterReport getUsersRegisterReport(DTUsersRegisterReport dtUsersReport);
     }
 }

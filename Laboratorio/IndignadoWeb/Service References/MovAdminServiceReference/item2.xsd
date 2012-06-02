@@ -143,4 +143,34 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTResourcesCol_MovAdmin" nillable="true" type="tns:DTResourcesCol_MovAdmin" />
+  <xs:complexType name="DTUsersRegisterReport">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTUsersRegisterReportItem" />
+      <xs:element minOccurs="0" name="periodType" type="tns:DTUsersRegisterReport_PeriodType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTUsersRegisterReport" nillable="true" type="tns:DTUsersRegisterReport" />
+  <xs:complexType name="ArrayOfDTUsersRegisterReportItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTUsersRegisterReportItem" nillable="true" type="tns:DTUsersRegisterReportItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTUsersRegisterReportItem" nillable="true" type="tns:ArrayOfDTUsersRegisterReportItem" />
+  <xs:complexType name="DTUsersRegisterReportItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="numberRegisters" type="xs:int" />
+      <xs:element minOccurs="0" name="numberUsers" type="xs:int" />
+      <xs:element minOccurs="0" name="period" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTUsersRegisterReportItem" nillable="true" type="tns:DTUsersRegisterReportItem" />
+  <xs:simpleType name="DTUsersRegisterReport_PeriodType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Year" />
+      <xs:enumeration value="Month" />
+      <xs:enumeration value="Day" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DTUsersRegisterReport_PeriodType" nillable="true" type="tns:DTUsersRegisterReport_PeriodType" />
 </xs:schema>

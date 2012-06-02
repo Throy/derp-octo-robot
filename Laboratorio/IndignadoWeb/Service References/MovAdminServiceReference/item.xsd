@@ -231,4 +231,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="getUsersRegisterReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtUserReport" nillable="true" type="q21:DTUsersRegisterReport" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getUsersRegisterReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersRegisterReportResult" nillable="true" type="q22:DTUsersRegisterReport" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

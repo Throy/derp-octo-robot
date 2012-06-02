@@ -4,6 +4,7 @@ using IndignadoServer.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace IndignadoServer.Controllers
 {
@@ -116,24 +117,12 @@ namespace IndignadoServer.Controllers
         {
             // only get theme categories from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            IEnumerable<CategoriasTematica> themeCategoriesEnum = indignadoContext.ExecuteQuery<CategoriasTematica>("SELECT id, idMovimiento, titulo, descripcion FROM CategoriasTematicas WHERE idMovimiento = {0}", IdMovement);
+            IEnumerable<CategoriasTematica> themeCategoriesEnum = indignadoContext.ExecuteQuery<CategoriasTematica>
+                ("SELECT id, idMovimiento, titulo, descripcion FROM CategoriasTematicas WHERE idMovimiento = {0}", IdMovement);
 
             Collection<CategoriasTematica> themeCategoriesCol = new Collection<CategoriasTematica>();
             foreach (CategoriasTematica themeCategory in themeCategoriesEnum)
             {
-                /*
-                // get own attendance
-                themeCategory.miInteres = -1;
-                if (UserInfo != null)
-                {
-                    IEnumerable<int> myInterests = indignadoContext.ExecuteQuery<int>("SELECT interes FROM Interes WHERE (idCategoriaTematica = {0}) AND (idUsuario = {1})", themeCategory.id, UserInfo.Id);
-                    foreach (int myInterest in myInterests)
-                    {
-                        themeCategory.miInteres = myInterest;
-                    }
-                }
-                 * */
-
                 // add item to the collection
                 themeCategoriesCol.Add(themeCategory);
             }
@@ -249,7 +238,7 @@ namespace IndignadoServer.Controllers
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE Usuarios.idMovimiento = {0}", IdMovement);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado, CantAprobaciones.cantAprobaciones, CantMarcasInadecuados.cantMarcasInadecuado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantMarcasInadecuado FROM MarcasInadecuados GROUP BY idRecurso) CantMarcasInadecuados ON (CantMarcasInadecuados.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) ORDER BY CantMarcasInadecuados.cantMarcasInadecuado DESC, Recursos.id DESC", IdMovement);
             return toResourcesCol(resourcesEnum);
         }
 
@@ -259,7 +248,8 @@ namespace IndignadoServer.Controllers
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
+                //("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 0);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado, CantAprobaciones.cantAprobaciones, CantMarcasInadecuados.cantMarcasInadecuado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantMarcasInadecuado FROM MarcasInadecuados GROUP BY idRecurso) CantMarcasInadecuados ON (CantMarcasInadecuados.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) ORDER BY CantMarcasInadecuados.cantMarcasInadecuado DESC, Recursos.id DESC", IdMovement, 0);
             return toResourcesCol(resourcesEnum);
         }
 
@@ -269,7 +259,7 @@ namespace IndignadoServer.Controllers
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1})", IdMovement, 1);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado, CantAprobaciones.cantAprobaciones, CantMarcasInadecuados.cantMarcasInadecuado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantMarcasInadecuado FROM MarcasInadecuados GROUP BY idRecurso) CantMarcasInadecuados ON (CantMarcasInadecuados.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) ORDER BY CantMarcasInadecuados.cantMarcasInadecuado DESC, Recursos.id DESC", IdMovement, 1);
             return toResourcesCol(resourcesEnum);
         }
 
@@ -278,7 +268,7 @@ namespace IndignadoServer.Controllers
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) WHERE Usuarios.id = {0}", user.id);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, deshabilitado, CantAprobaciones.cantAprobaciones, CantMarcasInadecuados.cantMarcasInadecuado FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantMarcasInadecuado FROM MarcasInadecuados GROUP BY idRecurso) CantMarcasInadecuados ON (CantMarcasInadecuados.idRecurso = Recursos.id) WHERE (Usuarios.id = {0}) ORDER BY CantMarcasInadecuados.cantMarcasInadecuado DESC, Recursos.id DESC", user.id);
             return toResourcesCol(resourcesEnum);
         }
 
@@ -300,12 +290,14 @@ namespace IndignadoServer.Controllers
                     resource.cantAprobaciones = numberLikes;
                 }
 
+                /*
                 // get number of marks as inappropriate
                 IEnumerable<int> numbersMarksInappropriate = indignadoContext.ExecuteQuery<int>("SELECT COUNT(*) FROM MarcasInadecuados WHERE idRecurso = {0}", resource.id);
                 foreach (int numberMarksInappropriate in numbersMarksInappropriate)
                 {
                     resource.cantMarcasInadecuado = numberMarksInappropriate;
                 }
+                 * */
                 
                 // add item to the collection
                 recursosCol.Add(resource);
@@ -326,6 +318,160 @@ namespace IndignadoServer.Controllers
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             indignadoContext.ExecuteCommand("UPDATE Recursos SET deshabilitado = {0} WHERE id = {1}", 0, resource.id);
+        }
+
+        // returns a users register report.
+        public DTUsersRegisterReport getUsersRegisterReport(DTUsersRegisterReport dtUsersReport)
+        {
+            // get all users.
+            Collection<Usuario> usersCol = getUsersListFull();
+
+            // get early and late register dates.
+            DateTime earlyDate = new DateTime(4000, 12, 31);
+            DateTime lateDate = new DateTime(1000, 1, 1);
+            foreach (Usuario user in usersCol)
+            {
+                if (user.fechaRegistro.HasValue)
+                {
+                    if (user.fechaRegistro.Value < earlyDate)
+                    {
+                        earlyDate = user.fechaRegistro.Value;
+                    }
+                    if (user.fechaRegistro.Value > lateDate)
+                    {
+                        lateDate = user.fechaRegistro.Value;
+                    }
+                }
+            }
+
+            // add the items to the report,
+            // depending on period.
+
+            dtUsersReport.items = new Collection<DTUsersRegisterReportItem>();
+
+            // by year
+            if (dtUsersReport.periodType == DTUsersRegisterReport_PeriodType.Year)
+            {
+                int earlyYear = earlyDate.Year;
+                int lateYear = DateTime.UtcNow.Year;
+
+                DTUsersRegisterReportItem[] reportItemsArray = new DTUsersRegisterReportItem[lateYear - earlyYear + 1];
+
+                for (int year = earlyYear; year <= lateYear; year += 1)
+                {
+                    DTUsersRegisterReportItem reportItem = new DTUsersRegisterReportItem();
+                    reportItem.id = year;
+                    reportItem.period = year.ToString();
+                    reportItem.numberRegisters = 0;
+                    reportItem.numberUsers = 0;
+                    reportItemsArray[year - earlyYear] = reportItem;
+                }
+
+
+                foreach (Usuario user in usersCol)
+                {
+                    if (user.fechaRegistro.HasValue)
+                    {
+                        reportItemsArray[user.fechaRegistro.Value.Year - earlyYear].numberRegisters += 1;
+                    }
+                }
+
+                reportItemsArray[0].numberUsers = reportItemsArray[0].numberRegisters;
+                dtUsersReport.items.Add(reportItemsArray[0]);
+                for (int year = earlyYear + 1; year <= lateYear; year += 1)
+                {
+                    reportItemsArray[year - earlyYear].numberUsers = reportItemsArray[year - earlyYear].numberRegisters + reportItemsArray[year - earlyYear - 1].numberUsers;
+                    dtUsersReport.items.Add(reportItemsArray[year - earlyYear]);
+                }
+
+            }
+
+            // by month
+            else if (dtUsersReport.periodType == DTUsersRegisterReport_PeriodType.Month)
+            {
+                int earlyMonth = earlyDate.Month + 12 * earlyDate.Year - 24001;
+                int lateMonth = DateTime.UtcNow.Month + 12 * DateTime.UtcNow.Year - 24001;
+
+                DTUsersRegisterReportItem[] reportItemsArray = new DTUsersRegisterReportItem[lateMonth - earlyMonth + 1];
+
+                DateTime date = earlyDate;
+
+                for (int month = earlyMonth; month <= lateMonth; month += 1)
+                {
+                    DTUsersRegisterReportItem reportItem = new DTUsersRegisterReportItem();
+                    reportItem.id = month;
+                    reportItem.period = date.Year.ToString();
+                    reportItem.period += " - " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(date.Month);
+                    reportItem.numberRegisters = 0;
+                    reportItem.numberUsers = 0;
+                    reportItemsArray[month - earlyMonth] = reportItem;
+                    date = date.AddDays(1);
+                }
+
+                foreach (Usuario user in usersCol)
+                {
+                    if (user.fechaRegistro.HasValue)
+                    {
+                        int month = user.fechaRegistro.Value.Month + 12 * user.fechaRegistro.Value.Year - 24001;
+                        reportItemsArray[month - earlyMonth].numberRegisters += 1;
+                    }
+                }
+
+                reportItemsArray[0].numberUsers = reportItemsArray[0].numberRegisters;
+                dtUsersReport.items.Add(reportItemsArray[0]);
+                for (int month = earlyMonth + 1; month <= lateMonth; month += 1)
+                {
+                    reportItemsArray[month - earlyMonth].numberUsers = reportItemsArray[month - earlyMonth].numberRegisters + reportItemsArray[month - earlyMonth - 1].numberUsers;
+                    dtUsersReport.items.Add(reportItemsArray[month - earlyMonth]);
+                }
+
+            }
+
+
+            // by day
+            else if (dtUsersReport.periodType == DTUsersRegisterReport_PeriodType.Day)
+            {
+                int earlyDay = earlyDate.DayOfYear + 366 * earlyDate.Year - 736001;
+                int lateDay = DateTime.UtcNow.DayOfYear + 366 * DateTime.UtcNow.Year - 736001;
+
+                DTUsersRegisterReportItem[] reportItemsArray = new DTUsersRegisterReportItem[lateDay - earlyDay + 1];
+
+                DateTime date = earlyDate;
+
+                for (int day = earlyDay; day <= lateDay; day += 1)
+                {
+                    DTUsersRegisterReportItem reportItem = new DTUsersRegisterReportItem();
+                    reportItem.id = day;
+                    reportItem.period = date.Year.ToString();
+                    reportItem.period += " - " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(date.Month);
+                    reportItem.period += " " + date.Day.ToString();
+                    reportItem.numberRegisters = 0;
+                    reportItem.numberUsers = 0;
+                    reportItemsArray[day - earlyDay] = reportItem;
+                    date = date.AddDays(1);
+                }
+
+                foreach (Usuario user in usersCol)
+                {
+                    if (user.fechaRegistro.HasValue)
+                    {
+                        int day = user.fechaRegistro.Value.DayOfYear + 366 * user.fechaRegistro.Value.Year - 736001;
+                        reportItemsArray[day - earlyDay].numberRegisters += 1;
+                    }
+                }
+
+                reportItemsArray[0].numberUsers = reportItemsArray[0].numberRegisters;
+                dtUsersReport.items.Add(reportItemsArray[0]);
+                for (int day = earlyDay + 1; day <= lateDay; day += 1)
+                {
+                    reportItemsArray[day - earlyDay].numberUsers = reportItemsArray[day - earlyDay].numberRegisters + reportItemsArray[day - earlyDay - 1].numberUsers;
+                    dtUsersReport.items.Add(reportItemsArray[day - earlyDay]);
+                }
+
+            }
+
+            // return the report.
+            return dtUsersReport;
         }
     }
 }
