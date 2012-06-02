@@ -65,7 +65,7 @@ namespace IndignadoServer.Controllers
             bool isMovAdmin = (user.privilegio & IndignadoServer.Roles.MovAdminMask) == IndignadoServer.Roles.MovAdminMask;
             bool isSysAdmin = (user.privilegio & IndignadoServer.Roles.SysAdminMask) == IndignadoServer.Roles.SysAdminMask;
 
-            return new DTLoginInfo(user.apodo, token, isRegUser, isMovAdmin, isSysAdmin);
+            return new DTLoginInfo(user.apodo, user.id, token, isRegUser, isMovAdmin, isSysAdmin);
         }
 
         public DTLoginInfo LoginFB(int idMovimiento, String accesToken)
@@ -98,7 +98,7 @@ namespace IndignadoServer.Controllers
             bool isMovAdmin = (userDB.privilegio & IndignadoServer.Roles.MovAdminMask) == IndignadoServer.Roles.MovAdminMask;
             bool isSysAdmin = (userDB.privilegio & IndignadoServer.Roles.SysAdminMask) == IndignadoServer.Roles.SysAdminMask;
 
-            return new DTLoginInfo(userDB.apodo, token, isRegUser, isMovAdmin, isSysAdmin);
+            return new DTLoginInfo(userDB.apodo, userDB.id, token, isRegUser, isMovAdmin, isSysAdmin);
         }
 
         public DTUserCreateStatus RegisterUser(DTRegisterModel user)

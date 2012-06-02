@@ -21,7 +21,7 @@ var windowFocus = true;
 var username;
 var chatHeartbeatCount = 0;
 var minChatHeartbeat = 1000;
-var maxChatHeartbeat = 33000;
+var maxChatHeartbeat = 23000;
 var chatHeartbeatTime = minChatHeartbeat;
 var originalTitle;
 var blinkOrder = 0;
@@ -30,6 +30,7 @@ var chatboxFocus = new Array();
 var newMessages = new Array();
 var newMessagesWin = new Array();
 var chatBoxes = new Array();
+var usersNicks = new Array();
 
 $(document).ready(function(){
 	originalTitle = document.title;
@@ -41,46 +42,79 @@ $(document).ready(function(){
 		windowFocus = true;
 		document.title = originalTitle;
 	});
+    
+    if ($.cookie('users_online_minimized') && $.cookie('users_online_minimized') == '0') {  
+		$('#UsersOnline .UsersOnlineContent').css('display','block');
+		$("#UsersOnline .UsersOnlineContent").scrollTop($("#UsersOnline .UsersOnlineContent")[0].scrollHeight);
+	} else {
+		$('#UsersOnline .UsersOnlineContent').css('display','none');
+	}
+    
 });
+
+function UpdateUsersOnline(users, usersCount) {
+    if (usersCount == 1)
+        $("#UsersOnlineTitle").html('Chat - <b>'+usersCount+'</b> user online');
+    else 
+        $("#UsersOnlineTitle").html('Chat - <b>'+usersCount+'</b> users online');
+        
+    $.each(users, function(i,user){
+        if (user.active) {
+            if ($("#user_online_"+user.id).length <= 0)
+                $("#UsersOnlineList").append('<li id="user_online_'+user.id+'"><a href="javascript:void(0)" onclick="javascript:chatWith(\''+user.nick+'\', '+user.id+')">'+user.nick+'</a></li>');
+            usersNicks[user.id] = user.nick;
+        }
+        else {
+            $('#user_online_'+user.id).remove();
+        }
+    });
+}
 
 function restructureChatBoxes() {
 	align = 0;
 	for (x in chatBoxes) {
-		chatboxtitle = chatBoxes[x];
+		chatboxroomid = chatBoxes[x];
 
-		if ($("#chatbox_"+chatboxtitle).css('display') != 'none') {
+		if ($("#chatbox_"+chatboxroomid).css('display') != 'none') {
 			if (align == 0) {
-				$("#chatbox_"+chatboxtitle).css('right', '20px');
+				$("#chatbox_"+chatboxroomid).css('right', '20px');
 			} else {
 				width = (align)*(225+7)+20;
-				$("#chatbox_"+chatboxtitle).css('right', width+'px');
+				$("#chatbox_"+chatboxroomid).css('right', width+'px');
 			}
 			align++;
 		}
 	}
 }
 
-function chatWith(chatuser) {
-	createChatBox(chatuser);
-	$("#chatbox_"+chatuser+" .chatboxtextarea").focus();
+function chatWith(chatuser, chatuserid) {
+    $.ajax({
+      url: "/Chat/InitChatBox",
+      data: "userId="+chatuserid,
+      cache: false,
+      dataType: "json",
+      success: function(data) {
+        createChatBox(data.title, data.id);
+        $("#chatbox_"+data.id+" .chatboxtextarea").focus();
+    }});
 }
 
-function createChatBox(chatboxtitle,minimizeChatBox) {
-	if ($("#chatbox_"+chatboxtitle).length > 0) {
-		if ($("#chatbox_"+chatboxtitle).css('display') == 'none') {
-			$("#chatbox_"+chatboxtitle).css('display','block');
+function createChatBox(chatboxtitle,chatboxroomid,minimizeChatBox) {
+	if ($("#chatbox_"+chatboxroomid).length > 0) {
+		if ($("#chatbox_"+chatboxroomid).css('display') == 'none') {
+			$("#chatbox_"+chatboxroomid).css('display','block');
 			restructureChatBoxes();
 		}
-		$("#chatbox_"+chatboxtitle+" .chatboxtextarea").focus();
+		$("#chatbox_"+chatboxroomid+" .chatboxtextarea").focus();
 		return;
 	}
 
-	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
+	$(" <div />" ).attr("id","chatbox_"+chatboxroomid)
 	.addClass("chatbox")
-	.html('<div class="chatboxhead"><div class="chatboxtitle">'+chatboxtitle+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')">-</a> <a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
+	.html('<div class="chatboxhead"><div class="chatboxtitle">'+chatboxtitle+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:toggleChatBoxGrowth(\''+chatboxroomid+'\')">-</a> <a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxroomid+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxroomid+'\');"></textarea></div>')
 	.appendTo($( "body" ));
 			   
-	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
+	$("#chatbox_"+chatboxroomid).css('bottom', '0px');
 	
 	chatBoxeslength = 0;
 
@@ -91,13 +125,13 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 	}
 
 	if (chatBoxeslength == 0) {
-		$("#chatbox_"+chatboxtitle).css('right', '20px');
+		$("#chatbox_"+chatboxroomid).css('right', '20px');
 	} else {
 		width = (chatBoxeslength)*(225+7)+20;
-		$("#chatbox_"+chatboxtitle).css('right', width+'px');
+		$("#chatbox_"+chatboxroomid).css('right', width+'px');
 	}
 	
-	chatBoxes.push(chatboxtitle);
+	chatBoxes.push(chatboxroomid);
 
 	if (minimizeChatBox == 1) {
 		minimizedChatBoxes = new Array();
@@ -107,36 +141,36 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 		}
 		minimize = 0;
 		for (j=0;j<minimizedChatBoxes.length;j++) {
-			if (minimizedChatBoxes[j] == chatboxtitle) {
+			if (minimizedChatBoxes[j] == chatboxroomid) {
 				minimize = 1;
 			}
 		}
 
 		if (minimize == 1) {
-			$('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display','none');
-			$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','none');
+			$('#chatbox_'+chatboxroomid+' .chatboxcontent').css('display','none');
+			$('#chatbox_'+chatboxroomid+' .chatboxinput').css('display','none');
 		}
 	}
 
-	chatboxFocus[chatboxtitle] = false;
+	chatboxFocus[chatboxroomid] = false;
 
-	$("#chatbox_"+chatboxtitle+" .chatboxtextarea").blur(function(){
-		chatboxFocus[chatboxtitle] = false;
-		$("#chatbox_"+chatboxtitle+" .chatboxtextarea").removeClass('chatboxtextareaselected');
+	$("#chatbox_"+chatboxroomid+" .chatboxtextarea").blur(function(){
+		chatboxFocus[chatboxroomid] = false;
+		$("#chatbox_"+chatboxroomid+" .chatboxtextarea").removeClass('chatboxtextareaselected');
 	}).focus(function(){
-		chatboxFocus[chatboxtitle] = true;
-		newMessages[chatboxtitle] = false;
-		$('#chatbox_'+chatboxtitle+' .chatboxhead').removeClass('chatboxblink');
-		$("#chatbox_"+chatboxtitle+" .chatboxtextarea").addClass('chatboxtextareaselected');
+		chatboxFocus[chatboxroomid] = true;
+		newMessages[chatboxroomid] = false;
+		$('#chatbox_'+chatboxroomid+' .chatboxhead').removeClass('chatboxblink');
+		$("#chatbox_"+chatboxroomid+" .chatboxtextarea").addClass('chatboxtextareaselected');
 	});
 
-	$("#chatbox_"+chatboxtitle).click(function() {
-		if ($('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display') != 'none') {
-			$("#chatbox_"+chatboxtitle+" .chatboxtextarea").focus();
+	$("#chatbox_"+chatboxroomid).click(function() {
+		if ($('#chatbox_'+chatboxroomid+' .chatboxcontent').css('display') != 'none') {
+			$("#chatbox_"+chatboxroomid+" .chatboxtextarea").focus();
 		}
 	});
 
-	$("#chatbox_"+chatboxtitle).show();
+	$("#chatbox_"+chatboxroomid).show();
 }
 
 
@@ -152,7 +186,7 @@ function chatHeartbeat(){
 			if (newMessagesWin[x] == true) {
 				++blinkNumber;
 				if (blinkNumber >= blinkOrder) {
-					document.title = x+' says...';
+					document.title = usersNicks[x]+' says...';
 					titleChanged = 1;
 					break;	
 				}
@@ -187,32 +221,35 @@ function chatHeartbeat(){
 	  dataType: "json",
 	  success: function(data) {
 
+        UpdateUsersOnline(data.usersOnline, data.usersCount);
+        
 		$.each(data.items, function(i,item){
 			if (item)	{ // fix strange ie bug
 
-				chatboxtitle = item.f;
-
-				if ($("#chatbox_"+chatboxtitle).length <= 0) {
-					createChatBox(chatboxtitle);
+				chatboxtitle = item.room.title;
+                chatboxroomid = item.room.id;
+                
+				if ($("#chatbox_"+chatboxroomid).length <= 0) {
+					createChatBox(chatboxtitle, chatboxroomid);
 				}
-				if ($("#chatbox_"+chatboxtitle).css('display') == 'none') {
-					$("#chatbox_"+chatboxtitle).css('display','block');
+				if ($("#chatbox_"+chatboxroomid).css('display') == 'none') {
+					$("#chatbox_"+chatboxroomid).css('display','block');
 					restructureChatBoxes();
 				}
 				
-				if (item.s == 1) {
-					item.f = username;
+				if (item.type == 1) {
+					item.from = username;
 				}
 
-				if (item.s == 2) {
-					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxinfo">'+item.m+'</span></div>');
+				if (item.type == 2) {
+					$("#chatbox_"+chatboxroomid+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxinfo">'+item.message+'</span></div>');
 				} else {
-					newMessages[chatboxtitle] = true;
-					newMessagesWin[chatboxtitle] = true;
-					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.f+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.m+'</span></div>');
+					newMessages[chatboxroomid] = true;
+					newMessagesWin[item.fromId] = true;
+					$("#chatbox_"+chatboxroomid+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.from+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.message+'</span></div>');
 				}
 
-				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
+				$("#chatbox_"+chatboxroomid+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxroomid+" .chatboxcontent")[0].scrollHeight);
 				itemsfound += 1;
 			}
 		});
@@ -234,17 +271,22 @@ function chatHeartbeat(){
 	}});
 }
 
-function closeChatBox(chatboxtitle) {
-	$('#chatbox_'+chatboxtitle).css('display','none');
+function closeChatBox(chatboxroomid) {
+	$('#chatbox_'+chatboxroomid).remove();
+    for (var i = 0; i < chatBoxes.length; i++)
+    { 
+        if (chatBoxes[i] == chatboxroomid)
+            chatBoxes.splice(i, 1); 
+    } 
 	restructureChatBoxes();
 
-	$.post("/Chat/Close", { chatbox: chatboxtitle} , function(data){	
+	$.post("/Chat/Close", { roomId: chatboxroomid} , function(data){	
 	});
 
 }
 
-function toggleChatBoxGrowth(chatboxtitle) {
-	if ($('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display') == 'none') {  
+function toggleChatBoxGrowth(chatboxroomid) {
+	if ($('#chatbox_'+chatboxroomid+' .chatboxcontent').css('display') == 'none') {  
 		
 		var minimizedChatBoxes = new Array();
 		
@@ -255,8 +297,8 @@ function toggleChatBoxGrowth(chatboxtitle) {
 		var newCookie = '';
 
 		for (i=0;i<minimizedChatBoxes.length;i++) {
-			if (minimizedChatBoxes[i] != chatboxtitle) {
-				newCookie += chatboxtitle+'|';
+			if (minimizedChatBoxes[i] != chatboxroomid) {
+				newCookie += chatboxroomid+'|';
 			}
 		}
 
@@ -264,12 +306,12 @@ function toggleChatBoxGrowth(chatboxtitle) {
 
 
 		$.cookie('chatbox_minimized', newCookie);
-		$('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display','block');
-		$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','block');
-		$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
+		$('#chatbox_'+chatboxroomid+' .chatboxcontent').css('display','block');
+		$('#chatbox_'+chatboxroomid+' .chatboxinput').css('display','block');
+		$("#chatbox_"+chatboxroomid+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxroomid+" .chatboxcontent")[0].scrollHeight);
 	} else {
 		
-		var newCookie = chatboxtitle;
+		var newCookie = chatboxroomid;
 
 		if ($.cookie('chatbox_minimized')) {
 			newCookie += '|'+$.cookie('chatbox_minimized');
@@ -277,13 +319,25 @@ function toggleChatBoxGrowth(chatboxtitle) {
 
 
 		$.cookie('chatbox_minimized',newCookie);
-		$('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display','none');
-		$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','none');
+		$('#chatbox_'+chatboxroomid+' .chatboxcontent').css('display','none');
+		$('#chatbox_'+chatboxroomid+' .chatboxinput').css('display','none');
 	}
 	
 }
 
-function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
+function toggleUsersOnline() {
+	if ($('#UsersOnline .UsersOnlineContent').css('display') == 'none') {
+		$.cookie('users_online_minimized', '0');
+		$('#UsersOnline .UsersOnlineContent').css('display','block');
+		$("#UsersOnline .UsersOnlineContent").scrollTop($("#UsersOnline .UsersOnlineContent")[0].scrollHeight);
+	} else {
+		$.cookie('users_online_minimized', '1');
+		$('#UsersOnline .UsersOnlineContent').css('display','none');
+	}
+	
+}
+
+function checkChatBoxInputKey(event,chatboxtextarea,chatboxroomid) {
 	 
 	if(event.keyCode == 13 && event.shiftKey == 0)  {
 		message = $(chatboxtextarea).val();
@@ -293,10 +347,10 @@ function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
 		$(chatboxtextarea).focus();
 		$(chatboxtextarea).css('height','44px');
 		if (message != '') {
-			$.post("/Chat/Send", {to: chatboxtitle, message: message} , function(data){
+			$.post("/Chat/Send", {roomId: chatboxroomid, message: message} , function(data){
 				message = message.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;");
-				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+username+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span></div>');
-				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
+				$("#chatbox_"+chatboxroomid+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+username+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span></div>');
+				$("#chatbox_"+chatboxroomid+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxroomid+" .chatboxcontent")[0].scrollHeight);
 			});
 		}
 		chatHeartbeatTime = minChatHeartbeat;
@@ -328,87 +382,38 @@ function startChatSession(){
 	  success: function(data) {
  
 		username = data.username;
-
+        
+        UpdateUsersOnline(data.usersOnline, data.usersCount);
+        
 		$.each(data.items, function(i,item){
 			if (item)	{ // fix strange ie bug
 
-				chatboxtitle = item.f;
+				chatboxtitle = item.room.title;
+                chatboxroomid = item.room.id;
 
-				if ($("#chatbox_"+chatboxtitle).length <= 0) {
-					createChatBox(chatboxtitle,1);
+				if ($("#chatbox_"+chatboxroomid).length <= 0) {
+					createChatBox(chatboxtitle, chatboxroomid, 1);
 				}
 				
-				if (item.s == 1) {
-					item.f = username;
+				if (item.type == 1) {
+					item.from = username;
 				}
 
-				if (item.s == 2) {
-					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxinfo">'+item.m+'</span></div>');
+				if (item.type == 2) {
+					$("#chatbox_"+chatboxroomid+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxinfo">'+item.message+'</span></div>');
 				} else {
-					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.f+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.m+'</span></div>');
+					$("#chatbox_"+chatboxroomid+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.from+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.message+'</span></div>');
 				}
 			}
 		});
 		
 		for (i=0;i<chatBoxes.length;i++) {
-			chatboxtitle = chatBoxes[i];
-			$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
-			setTimeout('$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);', 100); // yet another strange ie bug
+			chatboxroomid = chatBoxes[i];
+			$("#chatbox_"+chatboxroomid+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxroomid+" .chatboxcontent")[0].scrollHeight);
+			setTimeout('$("#chatbox_"+chatboxroomid+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxroomid+" .chatboxcontent")[0].scrollHeight);', 100); // yet another strange ie bug
 		}
 	
 	setTimeout('chatHeartbeat();',chatHeartbeatTime);
 		
 	}});
 }
-
-/**
- * Cookie plugin
- *
- * Copyright (c) 2006 Klaus Hartl (stilbuero.de)
- * Dual licensed under the MIT and GPL licenses:
- * http://www.opensource.org/licenses/mit-license.php
- * http://www.gnu.org/licenses/gpl.html
- *
- */
-
-jQuery.cookie = function(name, value, options) {
-    if (typeof value != 'undefined') { // name and value given, set cookie
-        options = options || {};
-        if (value === null) {
-            value = '';
-            options.expires = -1;
-        }
-        var expires = '';
-        if (options.expires && (typeof options.expires == 'number' || options.expires.toUTCString)) {
-            var date;
-            if (typeof options.expires == 'number') {
-                date = new Date();
-                date.setTime(date.getTime() + (options.expires * 24 * 60 * 60 * 1000));
-            } else {
-                date = options.expires;
-            }
-            expires = '; expires=' + date.toUTCString(); // use expires attribute, max-age is not supported by IE
-        }
-        // CAUTION: Needed to parenthesize options.path and options.domain
-        // in the following expressions, otherwise they evaluate to undefined
-        // in the packed version for some reason...
-        var path = options.path ? '; path=' + (options.path) : '';
-        var domain = options.domain ? '; domain=' + (options.domain) : '';
-        var secure = options.secure ? '; secure' : '';
-        document.cookie = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
-    } else { // only name given, get cookie
-        var cookieValue = null;
-        if (document.cookie && document.cookie != '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-};

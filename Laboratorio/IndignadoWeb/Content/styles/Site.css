@@ -95,7 +95,7 @@ ul {
 /* Pagina */
 
 #Kontainer {
-    z-index:0;
+    z-index:1;
     margin:0 auto;
     position: relative;
     margin-top:36px;
@@ -109,14 +109,16 @@ ul {
 
 #Footer {
     text-align:right;
-    width:996px;
-    margin:0 auto;
+    width:810px;
     font-size:12px;
     color:#505050;
     float:left;
-    margin-bottom: 15px;
+    margin-bottom: 0;
     margin-top: 15px;
+    margin-left: 187px;
+    margin-right: 10px;
     border-top: 1px solid #d3cebd;
+    height:60px;
 }
 
 #header {    
@@ -169,8 +171,8 @@ ul {
     width:810px;
     text-align:justify;
     height: auto;
+    z-index:2;
     padding-bottom: 30px;
-    z-index:1;
     min-height: 400px;
     float:right;
 }

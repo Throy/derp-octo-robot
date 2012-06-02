@@ -322,9 +322,10 @@ namespace IndignadoServer.Services
     [DataContract]
     public class DTLoginInfo
     {
-        public DTLoginInfo(String name, String token, bool isRegUser, bool isMovAdmin, bool isSysAdmin)
+        public DTLoginInfo(String name, int id, String token, bool isRegUser, bool isMovAdmin, bool isSysAdmin)
         {
             this.name = name;
+            this.id = id;
             this.token = token;
             this.isRegUser = isRegUser;
             this.isMovAdmin = isMovAdmin;
@@ -333,6 +334,9 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public String name { get; set; }
+
+        [DataMember]
+        public int id { get; set; }
 
         [DataMember]
         public String token { get; set; }
@@ -506,13 +510,42 @@ namespace IndignadoServer.Services
     public class DTChatMessage
     {
         [DataMember]
-        public int from { get; set; }
+        public int fromId { get; set; }
+
+        [DataMember]
+        public String from { get; set; }
+
+        [DataMember]
+        public int type { get; set; }
 
         [DataMember]
         public String message { get; set; }
 
         [DataMember]
-        public int room { get; set; }
+        public DTChatRoom room { get; set; }
+    }
+
+    [DataContract]
+    public class DTChatRoom
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public String title { get; set; }
+    }
+
+    [DataContract]
+    public class DTChatUser
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public String nick { get; set; }
+
+        [DataMember]
+        public bool active { get; set; }
     }
 
     // **********
@@ -677,15 +710,27 @@ namespace IndignadoServer.Services
             return dtUser;
         }
 
-
-
-        public static DTChatMessage MessageToDT(ChatMessage m)
+        public static DTChatMessage MessageToDT(ChatMessage m, String roomTitle)
         {
             DTChatMessage result = new DTChatMessage();
-            result.from = m.Sender;
+            result.from = m.SenderNick;
+            result.fromId = m.Sender;
             result.message = m.Message;
-            result.room = m.Room;
+            result.room = new DTChatRoom();
+            result.room.id = m.Room;
+            result.room.title = roomTitle;
+            result.type = m.Type;
             return result;
+        }
+
+        public static DTChatUser ChatUserToDT(ChatUser u)
+        {
+            DTChatUser dt = new DTChatUser();
+            dt.id = u.id;
+            dt.nick = u.nick;
+            dt.active = u.active;
+
+            return dt;
         }
 
         public static DTRssSource RssSourceToDT(RssFeed rssSource)
