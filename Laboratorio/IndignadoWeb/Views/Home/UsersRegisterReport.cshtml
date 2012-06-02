@@ -12,7 +12,7 @@
 
 @using (Html.BeginForm())
 {
-    if ((int) Model.periodType == 0)
+    if ((int)Model.periodType == 0)
     {
         <text>
             <b>By year</b>
@@ -43,6 +43,23 @@
     else
     {
         <input type="submit" name="buttonShowByDay" value="By day" />
+    }
+}
+
+@{
+    if ((int)Model.periodType == 0)
+    {
+        <img src="UsersRegisterReport_ChartByYear" width="600" alt=""/>
+    }
+    
+    if ((int)Model.periodType == 1)
+    {
+        <img src="UsersRegisterReport_ChartByMonth" width="600" alt=""/>
+    }
+    
+    if ((int)Model.periodType == 2)
+    {
+        <img src="UsersRegisterReport_ChartByDay" width="600" alt=""/>
     }
 }
 

@@ -42,6 +42,8 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DataVisualization.Design" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -425,6 +427,9 @@
     <Content Include="Views\Home\ResourcesListTopRanked.cshtml" />
     <Content Include="Views\Home\UsersRegisterReport.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTUsersRegisterReportItem.cshtml" />
+    <Content Include="Views\Home\UsersRegisterReport_ChartByMonth.cshtml" />
+    <Content Include="Views\Home\UsersRegisterReport_ChartByYear.cshtml" />
+    <Content Include="Views\Home\UsersRegisterReport_ChartByDay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

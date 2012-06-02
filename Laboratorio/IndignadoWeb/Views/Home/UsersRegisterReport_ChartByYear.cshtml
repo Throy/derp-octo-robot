@@ -1,0 +1,24 @@
+﻿<!-- model -->
+@model IndignadoWeb.MovAdminServiceReference.DTUsersRegisterReport
+@using IndignadoWeb.MovAdminServiceReference
+@using System.Web.UI.DataVisualization.Charting
+
+<!-- page content -->
+
+@{
+    var numberRegistersXValue = new string[@Model.items.Length];
+    var numberRegistersYValues = new int[@Model.items.Length];
+    int idx = 0;
+    foreach (DTUsersRegisterReportItem reportItem in @Model.items) {
+        numberRegistersXValue[idx] = reportItem.period;
+        numberRegistersYValues[idx] = reportItem.numberRegisters;
+        idx += 1;
+    }
+    var myChart = new System.Web.Helpers.Chart(width: 600, height: 300)
+        .AddSeries(
+            name: "Employee",
+            xValue: numberRegistersXValue,
+            yValues: numberRegistersYValues,
+            chartType: "Column")
+        .Write();
+}

@@ -4,6 +4,7 @@ using IndignadoServer.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace IndignadoServer.Controllers
 {
@@ -360,7 +361,7 @@ namespace IndignadoServer.Controllers
                 {
                     DTUsersRegisterReportItem reportItem = new DTUsersRegisterReportItem();
                     reportItem.id = year;
-                    reportItem.period = "Year: " + year.ToString();
+                    reportItem.period = year.ToString();
                     reportItem.numberRegisters = 0;
                     reportItem.numberUsers = 0;
                     reportItemsArray[year - earlyYear] = reportItem;
@@ -399,8 +400,8 @@ namespace IndignadoServer.Controllers
                 {
                     DTUsersRegisterReportItem reportItem = new DTUsersRegisterReportItem();
                     reportItem.id = month;
-                    reportItem.period = "Year: " + date.Year;
-                    reportItem.period += " / Month: " + date.Month;
+                    reportItem.period = date.Year.ToString();
+                    reportItem.period += " - " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(date.Month);
                     reportItem.numberRegisters = 0;
                     reportItem.numberUsers = 0;
                     reportItemsArray[month - earlyMonth] = reportItem;
@@ -441,9 +442,9 @@ namespace IndignadoServer.Controllers
                 {
                     DTUsersRegisterReportItem reportItem = new DTUsersRegisterReportItem();
                     reportItem.id = day;
-                    reportItem.period = "Year: " + date.Year;
-                    reportItem.period += " / Month: " + date.Month;
-                    reportItem.period += " / Day: " + date.Day;
+                    reportItem.period = date.Year.ToString();
+                    reportItem.period += " - " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(date.Month);
+                    reportItem.period += " " + date.Day.ToString();
                     reportItem.numberRegisters = 0;
                     reportItem.numberUsers = 0;
                     reportItemsArray[day - earlyDay] = reportItem;

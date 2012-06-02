@@ -1493,5 +1493,80 @@ namespace IndignadoWeb.Controllers
 
             return View();
         }
+
+        // shows the users register report - chart by year.
+        public ActionResult UsersRegisterReport_ChartByYear()
+        {
+            try
+            {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                // get users register report.
+                DTUsersRegisterReport dtUsersReport = new DTUsersRegisterReport();
+                dtUsersReport.periodType = DTUsersRegisterReport_PeriodType.Year;
+                dtUsersReport = serv.getUsersRegisterReport(dtUsersReport);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the report to the model.
+                return View(dtUsersReport);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // shows the users register report - chart by month.
+        public ActionResult UsersRegisterReport_ChartByMonth()
+        {
+            try
+            {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                // get users register report.
+                DTUsersRegisterReport dtUsersReport = new DTUsersRegisterReport();
+                dtUsersReport.periodType = DTUsersRegisterReport_PeriodType.Month;
+                dtUsersReport = serv.getUsersRegisterReport(dtUsersReport);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the report to the model.
+                return View(dtUsersReport);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // shows the users register report - chart by day.
+        public ActionResult UsersRegisterReport_ChartByDay()
+        {
+            try
+            {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                // get users register report.
+                DTUsersRegisterReport dtUsersReport = new DTUsersRegisterReport();
+                dtUsersReport.periodType = DTUsersRegisterReport_PeriodType.Day;
+                dtUsersReport = serv.getUsersRegisterReport(dtUsersReport);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the report to the model.
+                return View(dtUsersReport);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
     }
 }
