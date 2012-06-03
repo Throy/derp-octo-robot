@@ -702,6 +702,41 @@ namespace IndignadoWeb.Controllers
         {
             return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id);
         }
+        
+        [HttpPost]
+        public ActionResult ResourceLike(string like, string id)
+        {
+            if (like == "0")
+            {
+                // open service
+                INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                // like resource
+                DTResource_NewsResources dtResource = new DTResource_NewsResources();
+                dtResource.id = int.Parse(id);
+                serv.likeResource(dtResource);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                return Content("exito");
+            }
+            else 
+            {
+                INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                // like resource
+                DTResource_NewsResources dtResource = new DTResource_NewsResources();
+                dtResource.id = int.Parse(id);
+                serv.unlikeResource(dtResource);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                return Content("exito"); ;
+            }
+            
+        }
 
         // like / dislike resource.
         public ActionResult ResourcesListGeneric(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
@@ -886,7 +921,7 @@ namespace IndignadoWeb.Controllers
 
         // configures the rss sources.
         [HttpPost]
-        public ActionResult RssSourcesConfig(string buttonAdd, string buttonRemove, RssSourcesModel model, string url, string tag)
+        public ActionResult RssSourcesConfig(string buttonAdd, RssSourcesModel model, string url, string tag)
         {
             try
             {
@@ -902,15 +937,6 @@ namespace IndignadoWeb.Controllers
                     }
                 }
 
-                // button Remove
-                else if (buttonRemove != null)
-                {
-                    DTRssSource dtRssSource = new DTRssSource();
-                    dtRssSource.url = url;
-                    dtRssSource.tag = tag;
-                    serv.removeRssSource(dtRssSource);
-                }
-
                 // show rss sources
                 return RedirectToAction(HomeControllerConstants.viewRssSourcesConfig);
             }
@@ -919,8 +945,22 @@ namespace IndignadoWeb.Controllers
                 return RedirectToAction(HomeControllerConstants.viewAccessDenied);
             }
         }
-        
 
+        public ActionResult RemoveRssSource(string url, string tag)
+        {
+            IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+            try
+                {
+                    DTRssSource dtRssSource = new DTRssSource();
+                    dtRssSource.url = url;
+                    dtRssSource.tag = tag;
+                    serv.removeRssSource(dtRssSource);
+                    return Content("exito");
+                }
+            catch {
+                return Content("Se produjo un error al intentar borrar la fuente de RSS");
+            }
+        }
         // configures the theme categories.
         public ActionResult ThemeCategoriesConfig()
         {
@@ -983,7 +1023,38 @@ namespace IndignadoWeb.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult RemoveThemeCategory(int id)
+        {
+            try
+            {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+                string retorno = "";
+                // button Remove
+                if (id != null)
+                {
+                    // remove theme category
+                    DTThemeCategoryMovAdmin dtThemeCategory = new DTThemeCategoryMovAdmin();
+                    dtThemeCategory.id = id;
+                    if (serv.removeThemeCategory(dtThemeCategory))
+                        retorno = "exito";
+                    else
+                        retorno = "Se produjo un error al intentar eliminar. La Categoria tiene demasiadas dependencias.";
+                }
+                else
+                    retorno = "Se produjo un error al intentar eliminar.";
 
+                // close service
+                (serv as ICommunicationObject).Close();
+                return Content(retorno);
+                
+            }
+            catch
+            {
+                return Content("Se produjo un error al intentar eliminar.");
+            }
+        }
         // shows all theme categories in a list.
         public ActionResult ThemeCategoriesList()
         {
@@ -1015,7 +1086,7 @@ namespace IndignadoWeb.Controllers
 
         // shows all theme categories in a list
         [HttpPost]
-        public ActionResult ThemeCategoriesList(string buttonAdd, string buttonRemove, string buttonImInterested, string buttonNotInterested, ThemeCategoriesConfigModel model, int id)
+        public ActionResult ThemeCategoriesList(string buttonImInterested, int id)
         {
             try
             {
@@ -1023,7 +1094,7 @@ namespace IndignadoWeb.Controllers
                 IUsersService serv = GetService<IUsersService>(HomeControllerConstants.urlUsersService);
 
                 // button ImInterested
-                if (buttonImInterested != null)
+                if (buttonImInterested.CompareTo("buttonImInterested")==0)
                 {
                     // get interested
                     DTThemeCategoryUsers dtThemeCategory = new DTThemeCategoryUsers();
@@ -1032,7 +1103,7 @@ namespace IndignadoWeb.Controllers
                 }
 
                 // button NotInterested
-                else if (buttonNotInterested != null)
+                else
                 {
                     // get interested
                     DTThemeCategoryUsers dtThemeCategory = new DTThemeCategoryUsers();
@@ -1043,7 +1114,7 @@ namespace IndignadoWeb.Controllers
                 // close service
                 (serv as ICommunicationObject).Close();
 
-                return RedirectToAction(HomeControllerConstants.viewThemeCategoriesList);
+                return Content("exito");
             }
             catch
             {

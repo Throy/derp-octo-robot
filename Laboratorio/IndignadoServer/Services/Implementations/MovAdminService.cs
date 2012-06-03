@@ -56,9 +56,9 @@ namespace IndignadoServer.Services
         
         // removes a current theme category.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
-        public void removeThemeCategory(DTThemeCategoryMovAdmin dtThemeCategory)
+        public bool removeThemeCategory(DTThemeCategoryMovAdmin dtThemeCategory)
         {
-            ControllersHub.Instance.getIMovAdminController().removeThemeCategory(DTToClass.DTToThemeCategory(dtThemeCategory));
+            return ControllersHub.Instance.getIMovAdminController().removeThemeCategory(DTToClass.DTToThemeCategory(dtThemeCategory));
         }
 
         // gets the theme categories.

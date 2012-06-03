@@ -1,22 +1,22 @@
 ﻿<!-- model -->
 @model IndignadoWeb.MovAdminServiceReference.DTThemeCategoryMovAdmin
            
-<div>
+<div class="Theme" id="@Model.id" >
     <!-- header -->
-    <h3>@Html.DisplayFor(m => m.title)</h3>
+    <h3 class="ThemeTitle">@Html.DisplayFor(m => m.title)</h3>
      
     <!-- fields -->
-     @Html.DisplayFor(m => m.description)
-    <br />
-    <br />
+    <div class="ThemeLbl" id="@Model.id.ToString().Insert(Model.id.ToString().Count(),"desc")">
+    -@Model.description
+    </div>
+    
     
     <!-- interest buttons -->
-    @using (Html.BeginForm(new { id = @Model.id }))
-    {
-        if (@Model.myInterest == 0)
+    <div >
+        @if (@Model.myInterest == 0)
         {
-            <input type="submit" name="buttonRemove" value="Remove" />
+            <input type="button" class="boton-big-red ThemeButton" onclick="Remove(@Model.id);" name="buttonRemove" value="Remove" />
             <br />
         }
-    }
+    </div>
 </div>

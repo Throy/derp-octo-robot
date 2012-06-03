@@ -1,30 +1,26 @@
 ﻿<!-- model -->
 @model IndignadoWeb.UsersServiceReference.DTThemeCategoryUsers
-           
-<div>
+   
+  <div class="Theme">
+   
     <!-- header -->
-    <h5>@Html.DisplayFor(m => m.title)</h5>
+    <h5 class="ThemeTitle">@Html.DisplayFor(m => m.title)</h5>
      
-    <!-- fields -->
-    Internal ID: @Html.DisplayFor(m => m.id)
-    <br />
-    Movement ID: @Html.DisplayFor(m => m.idMovement)
-    <br />
-    Description: @Html.DisplayFor(m => m.description)
-    <br />
+    <div class="ThemeLbl2">-  @Model.description</div>
+    
     
     <!-- interest buttons -->
-    @using (Html.BeginForm(new { id = @Model.id }))
-    {
-        if (@Model.myInterest == 0)
+    <div id="@Model.id">
+        @if (@Model.myInterest == 0)
         {
-            <input type="submit" name="buttonImInterested" value="Get interested" />
+            
+            <input class="boton-big-red ThemeButtonInterested" type="button" onclick="ToggleInterest(1,@Model.id);" name="buttonImInterested" value="I´m interested" />
         }
 
-        if (Model.myInterest > 0)
+        @if (Model.myInterest > 0)
         {
-            <text>I'm interested</text>
-            <input type="submit" name="buttonNotInterested" value="Not anymore" />
+            
+            <input class="ThemeButtonNotInterested" type="button" onclick="ToggleInterest(0,@Model.id);" name="buttonNotInterested" value="Not interested" />
         }
-    }
+    </div>
 </div>

@@ -1070,7 +1070,7 @@ namespace IndignadoWeb.MovAdminServiceReference {
         void addThemeCategory(IndignadoWeb.MovAdminServiceReference.DTThemeCategoryMovAdmin dtThemeCategory);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/removeThemeCategory", ReplyAction="http://tempuri.org/IMovAdminService/removeThemeCategoryResponse")]
-        void removeThemeCategory(IndignadoWeb.MovAdminServiceReference.DTThemeCategoryMovAdmin dtThemeCategory);
+        bool removeThemeCategory(IndignadoWeb.MovAdminServiceReference.DTThemeCategoryMovAdmin dtThemeCategory);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMovAdminService/listThemeCategories", ReplyAction="http://tempuri.org/IMovAdminService/listThemeCategoriesResponse")]
         IndignadoWeb.MovAdminServiceReference.DTThemeCategoriesColMovAdmin listThemeCategories();
@@ -1160,8 +1160,8 @@ namespace IndignadoWeb.MovAdminServiceReference {
             base.Channel.addThemeCategory(dtThemeCategory);
         }
         
-        public void removeThemeCategory(IndignadoWeb.MovAdminServiceReference.DTThemeCategoryMovAdmin dtThemeCategory) {
-            base.Channel.removeThemeCategory(dtThemeCategory);
+        public bool removeThemeCategory(IndignadoWeb.MovAdminServiceReference.DTThemeCategoryMovAdmin dtThemeCategory) {
+            return base.Channel.removeThemeCategory(dtThemeCategory);
         }
         
         public IndignadoWeb.MovAdminServiceReference.DTThemeCategoriesColMovAdmin listThemeCategories() {

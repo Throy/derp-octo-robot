@@ -29,7 +29,7 @@ namespace IndignadoServer.Controllers
         void addThemeCategory(CategoriasTematica themeCategory);
 
         // removes a current theme category.
-        void removeThemeCategory(CategoriasTematica themeCategory);
+        bool removeThemeCategory(CategoriasTematica themeCategory);
 
         // gets the theme categories.
         Collection<CategoriasTematica> listThemeCategories();

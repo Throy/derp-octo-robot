@@ -5,6 +5,35 @@
 @{
     ViewBag.Title = "Indignado Framework - Resources list";
 }
+<script src="../../Scripts/jquery-1.5.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function like(like, id , numberOfLikes) {
+        $.ajax({
+            type: "POST",
+            url: "/Home/ResourceLike",
+            data: { "like": like,
+                "id": id
+            },
+            success: function (data) {
+                $("#" + id + "like").removeClass("removableLike");
+                
+                var buttonLike = "";
+                if (like == '0') {
+                    numberOfLikes = numberOfLikes + 1;
+                    buttonLike = "<input type=\"button\" class=\"removableLike likebtn2\" name=\"buttonUnlike\" onclick=\"like('1'," + id + "," + numberOfLikes.toString() + ");\" value=\"Unlike\" />";
+                }
+                else {
+                    numberOfLikes = numberOfLikes - 1;
+                    buttonLike = "<input type=\"button\" class=\"removableLike likebtn\" name=\"buttonLike\" onclick=\"like('0'," + id + "," + numberOfLikes.toString() + ");\" value=\"Like\" />";
+                    
+                }
+                $("#" + id + "like").append(buttonLike);
+                $("#" + id).text(numberOfLikes);
+
+            }
+        });
+    }
+</script>
 
 <!-- page content -->
 

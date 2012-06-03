@@ -97,7 +97,19 @@
 .list1 .likes {
     float:right;
 }
-
+.likesn
+{
+    margin-top:6px;
+}
+.floatL
+{
+    float:left;
+}
+.mwidth
+{
+    width:120px;
+    
+}
 .likebtn:hover {
     cursor:pointer;
     background-position: right -26px;

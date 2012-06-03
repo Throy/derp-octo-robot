@@ -37,7 +37,7 @@ namespace IndignadoServer.Services
 
         // removes a current theme category.
         [OperationContract]
-        void removeThemeCategory(DTThemeCategoryMovAdmin dtThemeCategory);
+        bool removeThemeCategory(DTThemeCategoryMovAdmin dtThemeCategory);
 
         // gets the theme categories.
         [OperationContract]

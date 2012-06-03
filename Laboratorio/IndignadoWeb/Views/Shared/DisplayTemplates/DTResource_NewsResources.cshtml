@@ -43,25 +43,25 @@
                         </td>
                     }
                     
-                    <div class="likes">
+                    <div class="likes mwidth">
                         <!-- likes -->
-                        @using (Html.BeginForm(new { id = @Model.id }))
-                        {
-                            <text>Likes: </text> @Html.DisplayFor(m => m.numberLikes);
+                            <div class="floatL likesn">
+                            <text>Likes: </text> <label id="@Model.id">@Model.numberLikes</label>;</div>
                             
-                            if (ViewBag.UserIsRegUser)
+                            <div class="floatL" id="@Model.id.ToString().Insert(Model.id.ToString().Count(),"like")">
+                            @if (ViewBag.UserIsRegUser)
                             {
                                 if (@Model.iLikeIt == 0)
                                 {
-                                    <input type="submit" class="likebtn" name="buttonLike" value="Like" />
+                                    <input type="button" class="removableLike likebtn" name="buttonLike" onclick="like('0','@Model.id',@Model.numberLikes);" value="Like" />
                                 }
 
                                 if (@Model.iLikeIt > 0)
                                 {
-                                    <input type="submit" class="likebtn2"  name="buttonUnlike" value="Unlike" />
+                                    <input type="button" class="removableLike likebtn2"  name="buttonUnlike" onclick="like('1','@Model.id',@Model.numberLikes);" value="Unlike" />
                                 }
                             }
-                        }
+                        </div>
                     </div>
 
                     

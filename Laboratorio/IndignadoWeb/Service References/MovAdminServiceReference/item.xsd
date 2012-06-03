@@ -82,7 +82,9 @@
   </xs:element>
   <xs:element name="removeThemeCategoryResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="removeThemeCategoryResult" type="xs:boolean" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="listThemeCategories">

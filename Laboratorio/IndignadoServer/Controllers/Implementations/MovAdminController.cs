@@ -105,10 +105,17 @@ namespace IndignadoServer.Controllers
         }
         
         // removes a current theme category.
-        public void removeThemeCategory(CategoriasTematica themeCategory)
+        public bool removeThemeCategory(CategoriasTematica themeCategory)
         {
-            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            indignadoContext.ExecuteCommand("DELETE FROM CategoriasTematicas WHERE (id = {0})", themeCategory.id);
+            try
+            {
+                IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+                indignadoContext.ExecuteCommand("DELETE FROM CategoriasTematicas WHERE (id = {0})", themeCategory.id);
+                return true;
+            }
+            catch {
+                return false;
+            }
         }
         
         // gets the theme categories.
