@@ -47,7 +47,7 @@ namespace IndignadoServer.Controllers
             Usuario userDb = DTToClass.DTToUsuario(user);
             userDb.banned = false;
             userDb.privilegio = (short) Roles.MovAdminMask;
-            userDb.fechaRegistro = DateTime.Now;
+            userDb.fechaRegistro = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, DateTime.UtcNow.Minute, 0);
             indignadoContext.Usuarios.InsertOnSubmit(userDb);
 
             // submit changes to the database

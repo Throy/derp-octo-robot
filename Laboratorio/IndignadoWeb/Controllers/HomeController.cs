@@ -14,9 +14,29 @@ using IndignadoWeb.SysAdminServiceReference;
 using IndignadoWeb.TestServiceReference;
 using IndignadoWeb.UsersServiceReference;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace IndignadoWeb.Controllers
 {
+    public static class ListsHelper
+    {
+
+        public static IEnumerable<SelectListItem> ToSelectListItems(
+              this IEnumerable<DTLayout> layouts, int selectedId)
+        {
+            return
+                layouts.Select(layout =>
+                          new SelectListItem
+                          {
+                              Selected = (layout.id == selectedId),
+                              Text = layout.name,
+                              Value = layout.id.ToString()
+                          });
+        }
+    }
+
+
     public class HomeControllerConstants
     {
         public const string viewAccessDenied = "AccessDenied";
@@ -38,6 +58,7 @@ namespace IndignadoWeb.Controllers
         public const string viewUserConfig = "UserConfig";
         public const string viewUserDetails = "UserDetails";
         public const string viewUsersManage = "UsersManage";
+        public const string viewUsersRegisterReport = "UsersRegisterReport";
 
         public const string urlMeetingsService = "http://localhost:8730/IndignadoServer/MeetingsService/";
         public const string urlMovAdminService = "http://localhost:8730/IndignadoServer/MovAdminService/";
@@ -566,7 +587,7 @@ namespace IndignadoWeb.Controllers
                 // get movement configuration
                 IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
                 IndignadoWeb.MovAdminServiceReference.DTMovement movement = serv.getMovement();
-                (serv as ICommunicationObject).Close();
+                
 
                 // send the meeting to the model.
                 SingleMovementModel model = new SingleMovementModel();
@@ -574,7 +595,10 @@ namespace IndignadoWeb.Controllers
                 model.description = movement.description;
                 model.locationLati = movement.locationLati;
                 model.locationLong = movement.locationLong;
+                model.layouts = serv.getLayouts().ToSelectListItems(movement.idLayout);
 
+                (serv as ICommunicationObject).Close();
+                
                 return View(model);
             }
             catch
@@ -589,10 +613,12 @@ namespace IndignadoWeb.Controllers
         {
             try
             {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
                 if (ModelState.IsValid)
                 {
-                    // open service
-                    IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+                    
 
                     // create new movement
                     //serv.addEmptyMovement();
@@ -603,6 +629,7 @@ namespace IndignadoWeb.Controllers
                     dtMovement.description = model.description;
                     dtMovement.locationLati = model.locationLati;
                     dtMovement.locationLong = model.locationLong;
+                    dtMovement.idLayout = model.layoutId;
                     serv.setMovement(dtMovement);
 
                     // close service
@@ -614,9 +641,16 @@ namespace IndignadoWeb.Controllers
                     // close service
                     (serv2 as ICommunicationObject).Close();
 
-                   // send the movements to the model.
+                    // send the movements to the model.
                     return View("MovementConfigSuccess");
                 }
+
+                // Vuelvo a rellenar la lista de layouts
+                model.layouts = serv.getLayouts().ToSelectListItems(model.layoutId);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
 
                 // If we got this far, something failed, redisplay form
                 return View(model);
@@ -628,7 +662,7 @@ namespace IndignadoWeb.Controllers
         }
 
         // shows all news in a list.
-        [OutputCache(Duration = 60, VaryByParam = "none")]
+        [OutputCache(Duration = 180, VaryByParam = "none")]
         public ActionResult NewsList()
         {
             // open service
@@ -1501,6 +1535,137 @@ namespace IndignadoWeb.Controllers
                 }
 
                 return View(model);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // shows the users register report.
+        public ActionResult UsersRegisterReport(DTUsersRegisterReport dtUsersReport)
+        {
+            try
+            {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                // get users register report.
+                if (dtUsersReport == null)
+                {
+                    dtUsersReport = new DTUsersRegisterReport();
+                    dtUsersReport.periodType = DTUsersRegisterReport_PeriodType.Day;
+                }
+                dtUsersReport = serv.getUsersRegisterReport(dtUsersReport);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the report to the model.
+                return View(dtUsersReport);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // shows the users register report - change period type.
+        [HttpPost]
+        public ActionResult UsersRegisterReport(string buttonShowByYear, string buttonShowByMonth, string buttonShowByDay, DTUsersRegisterReport model)
+        {
+            // by year.
+            if (buttonShowByYear != null)
+            {
+                model.periodType = DTUsersRegisterReport_PeriodType.Year;
+                return RedirectToAction(HomeControllerConstants.viewUsersRegisterReport, model);
+            }
+
+            // by month.
+            else if (buttonShowByMonth != null)
+            {
+                model.periodType = DTUsersRegisterReport_PeriodType.Month;
+                return RedirectToAction(HomeControllerConstants.viewUsersRegisterReport, model);
+            }
+
+            // by day.
+            else if (buttonShowByDay != null)
+            {
+                model.periodType = DTUsersRegisterReport_PeriodType.Day;
+                return RedirectToAction(HomeControllerConstants.viewUsersRegisterReport, model);
+            }
+
+            return View();
+        }
+
+        // shows the users register report - chart by year.
+        public ActionResult UsersRegisterReport_ChartByYear()
+        {
+            try
+            {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                // get users register report.
+                DTUsersRegisterReport dtUsersReport = new DTUsersRegisterReport();
+                dtUsersReport.periodType = DTUsersRegisterReport_PeriodType.Year;
+                dtUsersReport = serv.getUsersRegisterReport(dtUsersReport);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the report to the model.
+                return View(dtUsersReport);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // shows the users register report - chart by month.
+        public ActionResult UsersRegisterReport_ChartByMonth()
+        {
+            try
+            {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                // get users register report.
+                DTUsersRegisterReport dtUsersReport = new DTUsersRegisterReport();
+                dtUsersReport.periodType = DTUsersRegisterReport_PeriodType.Month;
+                dtUsersReport = serv.getUsersRegisterReport(dtUsersReport);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the report to the model.
+                return View(dtUsersReport);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
+        // shows the users register report - chart by day.
+        public ActionResult UsersRegisterReport_ChartByDay()
+        {
+            try
+            {
+                // open service
+                IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
+
+                // get users register report.
+                DTUsersRegisterReport dtUsersReport = new DTUsersRegisterReport();
+                dtUsersReport.periodType = DTUsersRegisterReport_PeriodType.Day;
+                dtUsersReport = serv.getUsersRegisterReport(dtUsersReport);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                // send the report to the model.
+                return View(dtUsersReport);
             }
             catch (Exception error)
             {

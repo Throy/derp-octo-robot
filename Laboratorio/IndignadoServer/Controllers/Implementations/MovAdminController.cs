@@ -4,6 +4,7 @@ using IndignadoServer.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace IndignadoServer.Controllers
 {
@@ -34,7 +35,23 @@ namespace IndignadoServer.Controllers
         public void setMovement(Movimiento movement)
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            indignadoContext.ExecuteCommand("UPDATE Movimiento SET nombre = {0}, descripcion = {1}, latitud = {2}, longitud = {3} WHERE id = {4}", movement.nombre, movement.descripcion, movement.latitud, movement.longitud, IdMovement);
+            indignadoContext.ExecuteCommand("UPDATE Movimiento SET nombre = {0}, descripcion = {1}, latitud = {2}, longitud = {3}, idLayout = {4} WHERE id = {5}", movement.nombre, movement.descripcion, movement.latitud, movement.longitud, movement.idLayout, IdMovement);
+        }
+
+        // returns a list of available layouts
+        public List<DTLayout> getLayouts()
+        {
+            var db = new IndignadoDBDataContext();
+            var layouts = db.Layouts.ToList();
+
+            var dtList = new List<DTLayout>();
+
+            foreach (var layout in layouts)
+            {
+                dtList.Add(ClassToDT.LayoutToDT(layout));
+            }
+
+            return dtList;
         }
 
         // adds a new rss resource.
@@ -324,6 +341,160 @@ namespace IndignadoServer.Controllers
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             indignadoContext.ExecuteCommand("UPDATE Recursos SET deshabilitado = {0} WHERE id = {1}", 0, resource.id);
+        }
+
+        // returns a users register report.
+        public DTUsersRegisterReport getUsersRegisterReport(DTUsersRegisterReport dtUsersReport)
+        {
+            // get all users.
+            Collection<Usuario> usersCol = getUsersListFull();
+
+            // get early and late register dates.
+            DateTime earlyDate = new DateTime(4000, 12, 31);
+            DateTime lateDate = new DateTime(1000, 1, 1);
+            foreach (Usuario user in usersCol)
+            {
+                if (user.fechaRegistro.HasValue)
+                {
+                    if (user.fechaRegistro.Value < earlyDate)
+                    {
+                        earlyDate = user.fechaRegistro.Value;
+                    }
+                    if (user.fechaRegistro.Value > lateDate)
+                    {
+                        lateDate = user.fechaRegistro.Value;
+                    }
+                }
+            }
+
+            // add the items to the report,
+            // depending on period.
+
+            dtUsersReport.items = new Collection<DTUsersRegisterReportItem>();
+
+            // by year
+            if (dtUsersReport.periodType == DTUsersRegisterReport_PeriodType.Year)
+            {
+                int earlyYear = earlyDate.Year;
+                int lateYear = DateTime.UtcNow.Year;
+
+                DTUsersRegisterReportItem[] reportItemsArray = new DTUsersRegisterReportItem[lateYear - earlyYear + 1];
+
+                for (int year = earlyYear; year <= lateYear; year += 1)
+                {
+                    DTUsersRegisterReportItem reportItem = new DTUsersRegisterReportItem();
+                    reportItem.id = year;
+                    reportItem.period = year.ToString();
+                    reportItem.numberRegisters = 0;
+                    reportItem.numberUsers = 0;
+                    reportItemsArray[year - earlyYear] = reportItem;
+                }
+
+
+                foreach (Usuario user in usersCol)
+                {
+                    if (user.fechaRegistro.HasValue)
+                    {
+                        reportItemsArray[user.fechaRegistro.Value.Year - earlyYear].numberRegisters += 1;
+                    }
+                }
+
+                reportItemsArray[0].numberUsers = reportItemsArray[0].numberRegisters;
+                dtUsersReport.items.Add(reportItemsArray[0]);
+                for (int year = earlyYear + 1; year <= lateYear; year += 1)
+                {
+                    reportItemsArray[year - earlyYear].numberUsers = reportItemsArray[year - earlyYear].numberRegisters + reportItemsArray[year - earlyYear - 1].numberUsers;
+                    dtUsersReport.items.Add(reportItemsArray[year - earlyYear]);
+                }
+
+            }
+
+            // by month
+            else if (dtUsersReport.periodType == DTUsersRegisterReport_PeriodType.Month)
+            {
+                int earlyMonth = earlyDate.Month + 12 * earlyDate.Year - 24001;
+                int lateMonth = DateTime.UtcNow.Month + 12 * DateTime.UtcNow.Year - 24001;
+
+                DTUsersRegisterReportItem[] reportItemsArray = new DTUsersRegisterReportItem[lateMonth - earlyMonth + 1];
+
+                DateTime date = earlyDate;
+
+                for (int month = earlyMonth; month <= lateMonth; month += 1)
+                {
+                    DTUsersRegisterReportItem reportItem = new DTUsersRegisterReportItem();
+                    reportItem.id = month;
+                    reportItem.period = date.Year.ToString();
+                    reportItem.period += " - " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(date.Month);
+                    reportItem.numberRegisters = 0;
+                    reportItem.numberUsers = 0;
+                    reportItemsArray[month - earlyMonth] = reportItem;
+                    date = date.AddDays(1);
+                }
+
+                foreach (Usuario user in usersCol)
+                {
+                    if (user.fechaRegistro.HasValue)
+                    {
+                        int month = user.fechaRegistro.Value.Month + 12 * user.fechaRegistro.Value.Year - 24001;
+                        reportItemsArray[month - earlyMonth].numberRegisters += 1;
+                    }
+                }
+
+                reportItemsArray[0].numberUsers = reportItemsArray[0].numberRegisters;
+                dtUsersReport.items.Add(reportItemsArray[0]);
+                for (int month = earlyMonth + 1; month <= lateMonth; month += 1)
+                {
+                    reportItemsArray[month - earlyMonth].numberUsers = reportItemsArray[month - earlyMonth].numberRegisters + reportItemsArray[month - earlyMonth - 1].numberUsers;
+                    dtUsersReport.items.Add(reportItemsArray[month - earlyMonth]);
+                }
+
+            }
+
+
+            // by day
+            else if (dtUsersReport.periodType == DTUsersRegisterReport_PeriodType.Day)
+            {
+                int earlyDay = earlyDate.DayOfYear + 366 * earlyDate.Year - 736001;
+                int lateDay = DateTime.UtcNow.DayOfYear + 366 * DateTime.UtcNow.Year - 736001;
+
+                DTUsersRegisterReportItem[] reportItemsArray = new DTUsersRegisterReportItem[lateDay - earlyDay + 1];
+
+                DateTime date = earlyDate;
+
+                for (int day = earlyDay; day <= lateDay; day += 1)
+                {
+                    DTUsersRegisterReportItem reportItem = new DTUsersRegisterReportItem();
+                    reportItem.id = day;
+                    reportItem.period = date.Year.ToString();
+                    reportItem.period += " - " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(date.Month);
+                    reportItem.period += " " + date.Day.ToString();
+                    reportItem.numberRegisters = 0;
+                    reportItem.numberUsers = 0;
+                    reportItemsArray[day - earlyDay] = reportItem;
+                    date = date.AddDays(1);
+                }
+
+                foreach (Usuario user in usersCol)
+                {
+                    if (user.fechaRegistro.HasValue)
+                    {
+                        int day = user.fechaRegistro.Value.DayOfYear + 366 * user.fechaRegistro.Value.Year - 736001;
+                        reportItemsArray[day - earlyDay].numberRegisters += 1;
+                    }
+                }
+
+                reportItemsArray[0].numberUsers = reportItemsArray[0].numberRegisters;
+                dtUsersReport.items.Add(reportItemsArray[0]);
+                for (int day = earlyDay + 1; day <= lateDay; day += 1)
+                {
+                    reportItemsArray[day - earlyDay].numberUsers = reportItemsArray[day - earlyDay].numberRegisters + reportItemsArray[day - earlyDay - 1].numberUsers;
+                    dtUsersReport.items.Add(reportItemsArray[day - earlyDay]);
+                }
+
+            }
+
+            // return the report.
+            return dtUsersReport;
         }
     }
 }

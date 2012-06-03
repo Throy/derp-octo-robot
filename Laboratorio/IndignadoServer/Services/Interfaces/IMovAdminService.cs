@@ -19,6 +19,10 @@ namespace IndignadoServer.Services
         [OperationContract]
         void setMovement(DTMovement dtMovement);
 
+        // returns a list of available layouts
+        [OperationContract]
+        List<DTLayout> getLayouts();
+
         // adds a new rss resource.
         [OperationContract]
         void addRssSource(DTRssSource dtRssSource);
@@ -86,5 +90,9 @@ namespace IndignadoServer.Services
         // reallows a resource.
         [OperationContract]
         void disableResource(DTResource_MovAdmin resource);
+
+        // returns a users register report.
+        [OperationContract]
+        DTUsersRegisterReport getUsersRegisterReport(DTUsersRegisterReport dtUserReport);
     }
 }

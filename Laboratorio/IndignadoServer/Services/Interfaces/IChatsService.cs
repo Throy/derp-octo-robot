@@ -11,15 +11,24 @@ namespace IndignadoServer.Services
     public interface IChatsService
     {
         [OperationContract]
-        int initChat(int userinviting, int user);
+        DTChatRoom initChatWith(int user);
 
         [OperationContract]
-        void closeChat(int user, int room);
+        void closeChat(int room);
 
         [OperationContract]
-        void sendMesage(int user, int room , String message);
+        void sendMesage(int type, int room, String message);
 
         [OperationContract]
-        List<DTChatMessage> checkMessages(int user);
+        List<DTChatMessage> checkMessages(bool onlyUnConsumed);
+
+        [OperationContract]
+        void HeartBeat();
+
+        [OperationContract]
+        List<DTChatUser> GetUsersOnline(bool onlyUnConsumed);
+
+        [OperationContract]
+        int GetUsersOnlineCount();
     }
 }

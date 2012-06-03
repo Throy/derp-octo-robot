@@ -1,7 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Security.Permissions;
 using IndignadoServer.Controllers;
 using IndignadoServer.LinqDataContext;
+using System.Collections.Generic;
 
 namespace IndignadoServer.Services
 {
@@ -27,6 +29,13 @@ namespace IndignadoServer.Services
         public void setMovement(DTMovement dtMovement)
         {
             ControllersHub.Instance.getIMovAdminController().setMovement(DTToClass.DTToMovement(dtMovement));
+        }
+
+        // returns a list of available layouts
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
+        public List<DTLayout> getLayouts()
+        {
+            return ControllersHub.Instance.getIMovAdminController().getLayouts();
         }
 
         // adds a new rss resource.
@@ -257,6 +266,13 @@ namespace IndignadoServer.Services
         public void enableResource(DTResource_MovAdmin resource)
         {
             ControllersHub.Instance.getIMovAdminController().enableResource(DTToClass.DTToResource(resource));
+        }
+
+        // returns a users register report.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
+        public DTUsersRegisterReport getUsersRegisterReport(DTUsersRegisterReport dtUsersReport)
+        {
+            return ControllersHub.Instance.getIMovAdminController().getUsersRegisterReport(dtUsersReport);
         }
     }
 }

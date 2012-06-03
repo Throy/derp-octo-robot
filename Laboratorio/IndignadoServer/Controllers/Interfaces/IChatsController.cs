@@ -9,12 +9,18 @@ namespace IndignadoServer.Controllers
     interface IChatsController
     {
 
-        int initChat(int userinviting, int user);
+        DTChatRoom initChatWith(int user);
 
-        void leaveChat(int user, int room);
+        void leaveChat(int room);
 
-        void sendMesage(int user, int room,String message);
+        void sendMesage(int type, int room, String message);
 
-        List<DTChatMessage> checkMessages(int user);
+        List<DTChatMessage> checkMessages(bool onlyUnConsumed);
+
+        void HeartBeat();
+
+        List<DTChatUser> GetUsersOnline(bool onlyUnConsumed);
+
+        int GetUsersOnlineCount();
     }
 }

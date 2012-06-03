@@ -25,10 +25,22 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="getLayouts">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getLayoutsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getLayoutsResult" nillable="true" type="q3:ArrayOfDTLayout" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="addRssSource">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtRssSource" nillable="true" type="q3:DTRssSource" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtRssSource" nillable="true" type="q4:DTRssSource" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -40,7 +52,7 @@
   <xs:element name="removeRssSource">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtRssSource" nillable="true" type="q4:DTRssSource" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtRssSource" nillable="true" type="q5:DTRssSource" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -57,14 +69,14 @@
   <xs:element name="listRssSourcesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="listRssSourcesResult" nillable="true" type="q5:DTRssSourcesCol" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="listRssSourcesResult" nillable="true" type="q6:DTRssSourcesCol" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="addThemeCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtThemeCategory" nillable="true" type="q6:DTThemeCategoryMovAdmin" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtThemeCategory" nillable="true" type="q7:DTThemeCategoryMovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -76,7 +88,7 @@
   <xs:element name="removeThemeCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtThemeCategory" nillable="true" type="q7:DTThemeCategoryMovAdmin" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtThemeCategory" nillable="true" type="q8:DTThemeCategoryMovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -95,21 +107,21 @@
   <xs:element name="listThemeCategoriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="listThemeCategoriesResult" nillable="true" type="q8:DTThemeCategoriesColMovAdmin" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="listThemeCategoriesResult" nillable="true" type="q9:DTThemeCategoriesColMovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="getUserDetails">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtUser" nillable="true" type="q9:DTUser_MovAdmin" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtUser" nillable="true" type="q10:DTUser_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="getUserDetailsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUserDetailsResult" nillable="true" type="q10:DTUserDetails_MovAdmin" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUserDetailsResult" nillable="true" type="q11:DTUserDetails_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -121,7 +133,7 @@
   <xs:element name="getUsersListFullResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListFullResult" nillable="true" type="q11:DTUsersCol_MovAdmin" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListFullResult" nillable="true" type="q12:DTUsersCol_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -133,7 +145,7 @@
   <xs:element name="getUsersListAllowedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListAllowedResult" nillable="true" type="q12:DTUsersCol_MovAdmin" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListAllowedResult" nillable="true" type="q13:DTUsersCol_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -145,14 +157,14 @@
   <xs:element name="getUsersListBannedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListBannedResult" nillable="true" type="q13:DTUsersCol_MovAdmin" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersListBannedResult" nillable="true" type="q14:DTUsersCol_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="banUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q14:DTUser_MovAdmin" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q15:DTUser_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -164,7 +176,7 @@
   <xs:element name="reallowUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q15:DTUser_MovAdmin" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="user" nillable="true" type="q16:DTUser_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -181,7 +193,7 @@
   <xs:element name="getResourcesListAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getResourcesListAllResult" nillable="true" type="q16:DTResourcesCol_MovAdmin" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getResourcesListAllResult" nillable="true" type="q17:DTResourcesCol_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -193,7 +205,7 @@
   <xs:element name="getResourcesListEnabledResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getResourcesListEnabledResult" nillable="true" type="q17:DTResourcesCol_MovAdmin" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getResourcesListEnabledResult" nillable="true" type="q18:DTResourcesCol_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -205,14 +217,14 @@
   <xs:element name="getResourcesListDisabledResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getResourcesListDisabledResult" nillable="true" type="q18:DTResourcesCol_MovAdmin" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getResourcesListDisabledResult" nillable="true" type="q19:DTResourcesCol_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="enableResource">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="resource" nillable="true" type="q19:DTResource_MovAdmin" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="resource" nillable="true" type="q20:DTResource_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -224,13 +236,27 @@
   <xs:element name="disableResource">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="resource" nillable="true" type="q20:DTResource_MovAdmin" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="resource" nillable="true" type="q21:DTResource_MovAdmin" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="disableResourceResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getUsersRegisterReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtUserReport" nillable="true" type="q22:DTUsersRegisterReport" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getUsersRegisterReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUsersRegisterReportResult" nillable="true" type="q23:DTUsersRegisterReport" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

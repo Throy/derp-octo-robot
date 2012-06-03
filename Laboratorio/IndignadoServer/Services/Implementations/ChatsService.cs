@@ -12,26 +12,39 @@ namespace IndignadoServer.Services
     public class ChatsService : IChatsService
     {
 
-
-        public int initChat(int userinviting, int user)
+        public DTChatRoom initChatWith(int user)
         {
-            return ControllersHub.Instance.getIChatsController().initChat(userinviting,user);
+            return ControllersHub.Instance.getIChatsController().initChatWith(user);
         }
 
 
-        public void closeChat(int user, int room){
-            ControllersHub.Instance.getIChatsController().leaveChat(user,room);
+        public void closeChat(int room){
+            ControllersHub.Instance.getIChatsController().leaveChat(room);
         }
 
-        public void sendMesage(int user, int room, String message){
-            ControllersHub.Instance.getIChatsController().sendMesage(user,room,message);
+        public void sendMesage(int type, int room, String message){
+            ControllersHub.Instance.getIChatsController().sendMesage(type, room, message);
         }
 
-        public List<DTChatMessage> checkMessages(int user)
+        public List<DTChatMessage> checkMessages(bool onlyUnConsumed)
         {
-            List<DTChatMessage> result = ControllersHub.Instance.getIChatsController().checkMessages(user);
+            List<DTChatMessage> result = ControllersHub.Instance.getIChatsController().checkMessages(onlyUnConsumed);
             return result;
         }
 
+        public void HeartBeat()
+        {
+            ControllersHub.Instance.getIChatsController().HeartBeat();
+        }
+
+        public List<DTChatUser> GetUsersOnline(bool onlyUnConsumed)
+        {
+            return ControllersHub.Instance.getIChatsController().GetUsersOnline(onlyUnConsumed);
+        }
+
+        public int GetUsersOnlineCount()
+        {
+            return ControllersHub.Instance.getIChatsController().GetUsersOnlineCount();
+        }
     }
 }

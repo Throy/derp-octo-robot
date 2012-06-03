@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.ServiceModel;
 using IndignadoWeb.SessionServiceReference;
 using System.Web.Security;
+using System.Web.Routing;
 
 namespace IndignadoWeb.Common
 {
@@ -29,6 +30,14 @@ namespace IndignadoWeb.Common
                 {
                     filterContext.HttpContext.Session.Abandon();
                     FormsAuthentication.SignOut();
+
+                    string[] myCookies = filterContext.HttpContext.Request.Cookies.AllKeys;
+                    foreach (string cookie in myCookies)
+                    {
+                        filterContext.HttpContext.Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
+                    }
+
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } });
                 }
             }
             else

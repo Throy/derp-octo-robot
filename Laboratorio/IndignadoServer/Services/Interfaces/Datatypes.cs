@@ -89,6 +89,16 @@ namespace IndignadoServer.Services
     }
 
     [DataContract]
+    public class DTLayout
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public String name { get; set; }
+    }
+
+    [DataContract]
     public class DTTenantInfo
     {
         [DataMember]
@@ -322,9 +332,10 @@ namespace IndignadoServer.Services
     [DataContract]
     public class DTLoginInfo
     {
-        public DTLoginInfo(String name, String token, bool isRegUser, bool isMovAdmin, bool isSysAdmin)
+        public DTLoginInfo(String name, int id, String token, bool isRegUser, bool isMovAdmin, bool isSysAdmin)
         {
             this.name = name;
+            this.id = id;
             this.token = token;
             this.isRegUser = isRegUser;
             this.isMovAdmin = isMovAdmin;
@@ -333,6 +344,9 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public String name { get; set; }
+
+        [DataMember]
+        public int id { get; set; }
 
         [DataMember]
         public String token { get; set; }
@@ -506,13 +520,78 @@ namespace IndignadoServer.Services
     public class DTChatMessage
     {
         [DataMember]
-        public int from { get; set; }
+        public int fromId { get; set; }
+
+        [DataMember]
+        public String from { get; set; }
+
+        [DataMember]
+        public int type { get; set; }
 
         [DataMember]
         public String message { get; set; }
 
         [DataMember]
-        public int room { get; set; }
+        public DTChatRoom room { get; set; }
+    }
+
+    [DataContract]
+    public class DTChatRoom
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public String title { get; set; }
+    }
+
+    [DataContract]
+    public class DTChatUser
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public String nick { get; set; }
+
+        [DataMember]
+        public bool active { get; set; }
+    }
+
+    // Users RegisterReport datatype
+    [DataContract]
+    public class DTUsersRegisterReport
+    {
+        [DataMember]
+        public DTUsersRegisterReport_PeriodType periodType { get; set; }
+
+        [DataMember]
+        public Collection<DTUsersRegisterReportItem> items { get; set; }
+    }
+
+    // Users RegisterReport Item datatype
+    [DataContract]
+    public class DTUsersRegisterReportItem
+    {
+        [DataMember]
+        public int id { get; set; }
+
+        [DataMember]
+        public String period { get; set; }
+        
+        [DataMember]
+        public int numberRegisters { get; set; }
+        
+        [DataMember]
+        public int numberUsers { get; set; }
+    }
+    
+    // Users RegisterReport Period Type enum
+    public enum DTUsersRegisterReport_PeriodType
+    {
+        Year = 0,
+        Month = 1,
+        Day = 2
     }
 
     // **********
@@ -551,6 +630,15 @@ namespace IndignadoServer.Services
             dtMovement.locationLong = (float)movement.longitud;
             dtMovement.idLayout = movement.idLayout;
             return dtMovement;
+        }
+
+        public static DTLayout LayoutToDT(Layout layout)
+        {
+            DTLayout dtLayout = new DTLayout();
+            dtLayout.id = layout.id;
+            dtLayout.name = layout.name;
+
+            return dtLayout;
         }
 
         public static DTRssItem RssItemToDT(RssItem rssItem)
@@ -677,15 +765,27 @@ namespace IndignadoServer.Services
             return dtUser;
         }
 
-
-
-        public static DTChatMessage MessageToDT(ChatMessage m)
+        public static DTChatMessage MessageToDT(ChatMessage m, String roomTitle)
         {
             DTChatMessage result = new DTChatMessage();
-            result.from = m.Sender;
+            result.from = m.SenderNick;
+            result.fromId = m.Sender;
             result.message = m.Message;
-            result.room = m.Room;
+            result.room = new DTChatRoom();
+            result.room.id = m.Room;
+            result.room.title = roomTitle;
+            result.type = m.Type;
             return result;
+        }
+
+        public static DTChatUser ChatUserToDT(ChatUser u)
+        {
+            DTChatUser dt = new DTChatUser();
+            dt.id = u.id;
+            dt.nick = u.nick;
+            dt.active = u.active;
+
+            return dt;
         }
 
         public static DTRssSource RssSourceToDT(RssFeed rssSource)

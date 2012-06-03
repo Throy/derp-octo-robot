@@ -1,4 +1,5 @@
-﻿@if(Request.IsAuthenticated) {
+﻿@if (ViewBag.UserIsRegUser)
+{
     <text>
     <li class="outer"><span class="userbtn"><a>@User.Identity.Name</a></span>
         <ul style="right: 9px; width: 145px;">

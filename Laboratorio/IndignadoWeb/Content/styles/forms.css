@@ -210,8 +210,8 @@
 .boton-red a,
 .boton-ingresar-red {
     display:inline;
-    background-color: #e3701b;
-    border: 1px solid #e66b10;
+    background-color: #f99d39;
+    border: 1px solid #e68910;
     border-radius: 3px 3px 3px 3px;
     -moz-border-radius: 3px 3px 3px 3px;
     box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.300) inset, 0px 1px 0px rgba(0, 0, 0, 0.298);
@@ -245,7 +245,7 @@
 .boton-big-red:hover,
 .boton-red a:hover,
 .boton-ingresar-red:hover {
-    background-color: #e6861f;
+    background-color: #f8ba60;
     -moz-box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.400) inset, 2px 2px 1px #e2dac0;
     -webkit-box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.400) inset, 2px 2px 1px #e2dac0;
     box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.400) inset, 2px 2px 1px #e2dac0;

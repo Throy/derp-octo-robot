@@ -181,6 +181,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_getLayouts_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_getLayouts_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_addRssSource_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -827,6 +865,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_getUsersRegisterReport_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IMovAdminService_getUsersRegisterReport_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8730/IndignadoServer/MovAdminService/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -845,6 +921,12 @@
   </wsdl:message>
   <wsdl:message name="IMovAdminService_setMovement_OutputMessage">
     <wsdl:part name="parameters" element="tns:setMovementResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMovAdminService_getLayouts_InputMessage">
+    <wsdl:part name="parameters" element="tns:getLayouts" />
+  </wsdl:message>
+  <wsdl:message name="IMovAdminService_getLayouts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getLayoutsResponse" />
   </wsdl:message>
   <wsdl:message name="IMovAdminService_addRssSource_InputMessage">
     <wsdl:part name="parameters" element="tns:addRssSource" />
@@ -948,6 +1030,12 @@
   <wsdl:message name="IMovAdminService_disableResource_OutputMessage">
     <wsdl:part name="parameters" element="tns:disableResourceResponse" />
   </wsdl:message>
+  <wsdl:message name="IMovAdminService_getUsersRegisterReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:getUsersRegisterReport" />
+  </wsdl:message>
+  <wsdl:message name="IMovAdminService_getUsersRegisterReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getUsersRegisterReportResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMovAdminService">
     <wsdl:operation name="getMovement">
       <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/getMovement" message="tns:IMovAdminService_getMovement_InputMessage" />
@@ -956,6 +1044,10 @@
     <wsdl:operation name="setMovement">
       <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/setMovement" message="tns:IMovAdminService_setMovement_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMovAdminService/setMovementResponse" message="tns:IMovAdminService_setMovement_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getLayouts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/getLayouts" message="tns:IMovAdminService_getLayouts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMovAdminService/getLayoutsResponse" message="tns:IMovAdminService_getLayouts_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="addRssSource">
       <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/addRssSource" message="tns:IMovAdminService_addRssSource_InputMessage" />
@@ -1025,6 +1117,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/disableResource" message="tns:IMovAdminService_disableResource_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMovAdminService/disableResourceResponse" message="tns:IMovAdminService_disableResource_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getUsersRegisterReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMovAdminService/getUsersRegisterReport" message="tns:IMovAdminService_getUsersRegisterReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMovAdminService/getUsersRegisterReportResponse" message="tns:IMovAdminService_getUsersRegisterReport_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IMovAdminService" type="tns:IMovAdminService">
     <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_policy" />
@@ -1048,6 +1144,17 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_setMovement_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLayouts">
+      <soap12:operation soapAction="http://tempuri.org/IMovAdminService/getLayouts" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_getLayouts_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_getLayouts_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -1235,6 +1342,17 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_disableResource_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUsersRegisterReport">
+      <soap12:operation soapAction="http://tempuri.org/IMovAdminService/getUsersRegisterReport" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_getUsersRegisterReport_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IMovAdminService_getUsersRegisterReport_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
