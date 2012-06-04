@@ -24,7 +24,7 @@ namespace IndignadoWeb
 
             routes.Add("SysAdminRoute", new DomainRoute(
                        "indignado.4c7.net",     // Domain with parameters 
-                       "admin/{action}/{id}",    // URL with parameters 
+                       "SysAdmin/{action}/{id}",    // URL with parameters 
                        new { controller = "SysAdmin", action = "LogOn", id = "" }  // Parameter defaults 
                     ));
 
