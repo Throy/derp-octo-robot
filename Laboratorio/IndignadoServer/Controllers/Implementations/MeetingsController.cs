@@ -55,15 +55,18 @@ namespace IndignadoServer.Controllers
             indignadoContext.ExecuteCommand("DELETE FROM CatTemasConvocatorias WHERE (idConvocatoria = {0})", meeting.id);
 
             // add all theme categories to the meeting.
-            foreach (CategoriasTematica themeCat in themeCategories)
+            if (themeCategories != null)
             {
-                // create a themeCatMeeting
-                CatTemasConvocatoria themeCatMeeting = new CatTemasConvocatoria();
-                themeCatMeeting.idCategoriaTematica = themeCat.id;
-                themeCatMeeting.idConvocatoria = meeting.id;
+                foreach (CategoriasTematica themeCat in themeCategories)
+                {
+                    // create a themeCatMeeting
+                    CatTemasConvocatoria themeCatMeeting = new CatTemasConvocatoria();
+                    themeCatMeeting.idCategoriaTematica = themeCat.id;
+                    themeCatMeeting.idConvocatoria = meeting.id;
 
-                // add the themeCatMeeting to the database.
-                indignadoContext.CatTemasConvocatorias.InsertOnSubmit(themeCatMeeting);
+                    // add the themeCatMeeting to the database.
+                    indignadoContext.CatTemasConvocatorias.InsertOnSubmit(themeCatMeeting);
+                }
             }
 
             // submit changes to the database.
@@ -89,7 +92,6 @@ namespace IndignadoServer.Controllers
         }
 
         // returns all meetings that the user is interested in.
-        // *** POR AHORA SOLO CONSIDERA CATEGORIAS TEMATICAS, NO CERCANIA GEOGRÁFICA ***
         public Collection<Convocatoria> getMeetingsListOnInterest()
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
@@ -118,7 +120,7 @@ namespace IndignadoServer.Controllers
             {
                 if (! meetingsCol.Any(m => m.id == meeting.id))
                 {
-
+                    // if the user is close to the meeting, add it.
                     float latiMeetingRadians = (float)(meeting.latitud * Math.PI / 180);
                     float longMeetingRadians = (float)(meeting.longitud * Math.PI / 180);
                     if (6378 * Math.Acos

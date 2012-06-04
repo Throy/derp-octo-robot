@@ -33,39 +33,46 @@ namespace IndignadoServer.Controllers
 
         public static void RefreshNewsList(object o)
         {
-            // Java, esto es para vos.
-            var controller = o as NewsResourcesController;
-
-            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-
-            List<Movimiento> movimientos = indignadoContext.Movimientos.ToList();
-
-            foreach (Movimiento mov in movimientos)
+            try
             {
-                IEnumerable<RssFeed> fuentesEnum = indignadoContext.ExecuteQuery<RssFeed>("SELECT idMovimiento, url, tag FROM RssFeeds WHERE idMovimiento = {0}", mov.id);
+                var controller = o as NewsResourcesController;
 
-                Collection<RssItem> rssItemsCol = new Collection<RssItem>();
-                Collection<List<RssItem>> ColRssLists = new Collection<List<RssItem>>();
-                foreach (RssFeed source in fuentesEnum)
+                IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+
+                List<Movimiento> movimientos = indignadoContext.Movimientos.ToList();
+
+                foreach (Movimiento mov in movimientos)
                 {
-                    List<RssItem> rssItemsList = RssDocument.Load(new System.Uri(source.url)).Channel.Items;
-                    ColRssLists.Add(rssItemsList);
-                    if (ColRssLists.Count > 10)
+                    IEnumerable<RssFeed> fuentesEnum = indignadoContext.ExecuteQuery<RssFeed>("SELECT idMovimiento, url, tag FROM RssFeeds WHERE idMovimiento = {0}", mov.id);
+
+                    Collection<RssItem> rssItemsCol = new Collection<RssItem>();
+                    Collection<List<RssItem>> ColRssLists = new Collection<List<RssItem>>();
+                    foreach (RssFeed source in fuentesEnum)
                     {
-                        break;
+                        List<RssItem> rssItemsList = RssDocument.Load(new System.Uri(source.url)).Channel.Items;
+                        ColRssLists.Add(rssItemsList);
+                        if (ColRssLists.Count > 10)
+                        {
+                            break;
+                        }
+                    }
+
+                    if (ColRssLists.Count > 0)
+                    {
+                        for (int j = 0; j < 10; j++)
+                        {
+                            List<RssItem> rssItemsList = ColRssLists[j % ColRssLists.Count];
+                            if (rssItemsList.Count > (j / ColRssLists.Count))
+                            {
+                                rssItemsCol.Add(rssItemsList[j / ColRssLists.Count]);
+                            }
+                        }
+
+                        controller._rssItemsCol[mov.id] = rssItemsCol;
                     }
                 }
-
-                for (int j = 0; j < 10; j++)
-                {
-                    List<RssItem> rssItemsList = ColRssLists[j % ColRssLists.Count];
-                    if (rssItemsList.Count > (j / ColRssLists.Count))
-                    {
-                        rssItemsCol.Add(rssItemsList[j / ColRssLists.Count]);
-                    }
-                }
-
-                controller._rssItemsCol[mov.id] = rssItemsCol;
+            }
+            catch (Exception error) {
             }
         }
 
