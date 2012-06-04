@@ -7,44 +7,75 @@ using System.Text.RegularExpressions;
 using System.ServiceModel;
 using IndignadoServer.LinqDataContext;
 using RssToolkit.Rss;
+using System.Threading;
 
 namespace IndignadoServer.Controllers
 {
     class NewsResourcesController : IndignadoController, INewsResourcesController
     {
+        private Timer _timer;
+        Dictionary<int, Collection<RssItem>> _rssItemsCol { get; set; }
+
         // ******************
         // controller methods
         // ******************
-        
+
+        public NewsResourcesController()
+        {
+            _rssItemsCol = new Dictionary<int, Collection<RssItem>>();
+            _timer = new Timer(new TimerCallback(RefreshNewsList), this, 1000, 60000);
+        }
+
+        ~ NewsResourcesController()
+        {
+            _timer.Dispose();
+        }
+
+        public static void RefreshNewsList(object o)
+        {
+            // Java, esto es para vos.
+            var controller = o as NewsResourcesController;
+
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+
+            List<Movimiento> movimientos = indignadoContext.Movimientos.ToList();
+
+            foreach (Movimiento mov in movimientos)
+            {
+                IEnumerable<RssFeed> fuentesEnum = indignadoContext.ExecuteQuery<RssFeed>("SELECT idMovimiento, url, tag FROM RssFeeds WHERE idMovimiento = {0}", mov.id);
+
+                Collection<RssItem> rssItemsCol = new Collection<RssItem>();
+                Collection<List<RssItem>> ColRssLists = new Collection<List<RssItem>>();
+                foreach (RssFeed source in fuentesEnum)
+                {
+                    List<RssItem> rssItemsList = RssDocument.Load(new System.Uri(source.url)).Channel.Items;
+                    ColRssLists.Add(rssItemsList);
+                    if (ColRssLists.Count > 10)
+                    {
+                        break;
+                    }
+                }
+
+                for (int j = 0; j < 10; j++)
+                {
+                    List<RssItem> rssItemsList = ColRssLists[j % ColRssLists.Count];
+                    if (rssItemsList.Count > (j / ColRssLists.Count))
+                    {
+                        rssItemsCol.Add(rssItemsList[j / ColRssLists.Count]);
+                    }
+                }
+
+                controller._rssItemsCol[mov.id] = rssItemsCol;
+            }
+        }
+
         // returns all rss items.
         public Collection<RssItem> getNewsList()
         {
-            // Java, esto es para vos.
-            
-            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            IEnumerable<RssFeed> fuentesEnum = indignadoContext.ExecuteQuery<RssFeed>("SELECT idMovimiento, url, tag FROM RssFeeds WHERE idMovimiento = {0}", IdMovement);
+            if (!_rssItemsCol.ContainsKey(IdMovement))
+                _rssItemsCol.Add(IdMovement, new Collection<RssItem>());
 
-            Collection<RssItem> rssItemsCol = new Collection<RssItem>();
-            Collection<List<RssItem>> ColRssLists = new Collection<List<RssItem>>();
-            foreach (RssFeed source in fuentesEnum)
-            {
-                List<RssItem> rssItemsList = RssDocument.Load(new System.Uri(source.url)).Channel.Items;
-                ColRssLists.Add(rssItemsList);
-                if (ColRssLists.Count > 10)
-                {
-                    break;
-                }
-            }
-
-            for (int j = 0; j < 10 ; j++)
-            {
-                List<RssItem> rssItemsList = ColRssLists[j % ColRssLists.Count];
-                if (rssItemsList.Count > (j / ColRssLists.Count))
-                {
-                    rssItemsCol.Add(rssItemsList[j / ColRssLists.Count]);
-                }
-            }
-            return rssItemsCol;
+            return _rssItemsCol[IdMovement];
         }
 
         // returns all resources.

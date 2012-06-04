@@ -662,7 +662,7 @@ namespace IndignadoWeb.Controllers
         }
 
         // shows all news in a list.
-        [OutputCache(Duration = 180, VaryByParam = "none")]
+        //[OutputCache(Duration = 180, VaryByParam = "none")]
         public ActionResult NewsList()
         {
             // open service
