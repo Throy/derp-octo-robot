@@ -37,7 +37,7 @@
 
     <span class="BeginDateField">Begining:</span><div class="fieldvalue field BeginDateValue"><span>@Model.dateBegin.ToShortDateString()</span></div>
 
-    <img class="image" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null) ? @Model.imagePath.ToString().Replace(".jpg","_90.jpg") : "meeting_default.jpg"))" alt="Image" />
+    <img class="image" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null && @Model.imagePath != "") ? @Model.imagePath.ToString().Replace(".jpg", "_90.jpg") : "meeting_default.jpg"))" alt="Image" />
 
     <div class="scrollable @Model.id.ToString().Insert(Model.id.ToString().Count(),"s")">
         <table class="list" border="0" rules="none">
