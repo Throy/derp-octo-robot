@@ -37,13 +37,13 @@
 @{
     ViewBag.Title = Model.movement.name + " - Home page - powered by Indignado Framework";
 }
-
+<div class="layoutConditional">
 <h2>@Html.DisplayFor(m => m.movement.name) - Home page</h2>
 
 <font size="3">@Html.DisplayFor(m => m.movement.description)</font>
 <br />
 <br />
-
+</div>
 
 <script type="text/javascript"
     src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDMxElmlzDp8EFWG0el5fZxRrRzN3E3NRU&sensor=false">

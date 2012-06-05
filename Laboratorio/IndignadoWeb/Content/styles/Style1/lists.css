@@ -1,0 +1,155 @@
+/* 
+    Document   : lists
+    Author     : Grupo 9
+    Description:
+        
+*/
+
+
+.list1 .shadowl .int:hover {
+    background-color: #f6f8fb;
+}
+
+.list1 .int { 
+    background: url("../../images/shadowlist.png") left top no-repeat;
+    display: block;
+    padding: 0px;
+    text-decoration: none;
+    padding:10px;
+    margin-right:3px;
+    border-bottom: 1px solid #8e8a7e;
+    webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.list1 .title  h3{
+    color: #3C6DC6;
+    margin:0 0 10px 0;
+}
+
+.list1 {
+    margin:0 50px;
+    padding:0;
+}
+
+.list1 .body {
+    color: #3E3D37;    
+}
+
+.list1 .img {
+    float:left;
+    margin: 0 15px 0 0;
+}
+
+.list1 .desc {
+    margin: 0 10px 0 0;
+    display:block;
+}
+
+.clear {
+    clear:both;
+}
+
+.list1 .footer {
+    color: #959283;    
+    margin-top: 5px;
+    border-top: 1px solid #ebe6d5;
+    padding-top:5px;
+    clear:both;
+}
+
+.list1 .user {
+    float:right;
+}
+
+.list1 li {
+    clear:both;
+}
+
+.list1 .shadowl {
+    
+}
+
+.list1 .shadowr {
+    background: url("../../images/shadowlist.png") right top no-repeat;
+}
+
+.list1 .report {
+    float:right;
+    margin-right:80px;
+}
+
+.reportbtn:hover {
+    cursor:pointer;
+    background: #e6e3e2;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+}
+
+.reportbtn {
+    background: none;
+    border:none;
+    color:#af4d3b;
+}
+
+.list1 .likes {
+    float:right;
+}
+.likesn
+{
+    margin-top:6px;
+}
+.floatL
+{
+    float:left;
+}
+.mwidth
+{
+    width:120px;
+    
+}
+.likebtn:hover {
+    cursor:pointer;
+    background-position: right -26px;
+}
+
+.likebtn {
+    background: url("../../images/like.png") right top no-repeat;
+    border:none;
+    color:#6946ac;
+    width:60px;
+    height:25px;
+    line-height:21px;
+    text-align: left;
+}
+
+.likebtn2:hover {
+    cursor:pointer;
+    background-position: right 0;
+}
+
+.likebtn2 {
+    background: url("../../images/like.png") right -26px no-repeat;
+    border:none;
+    color:#6946ac;
+    width:70px;
+    height:25px;
+    line-height:26px;
+    text-align: left;
+}
+
+.btn1:hover {
+    cursor:pointer;
+    background: #e6e3e2;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+}
+
+.btn1 {
+    background: none;
+    border:none;
+    color:#6946ac;
+}

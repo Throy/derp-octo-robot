@@ -1,0 +1,120 @@
+﻿.MeetingList
+{
+    position:relative;
+    margin-left:20px;
+    margin-bottom:20px;
+    width: 740px;
+    height:165px;
+    font-family:Verdana;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius:15px;
+    border-style:outset; 
+    border-width:0px; 
+    border-top-width:1px;
+    border-color:Gray;
+    box-shadow:0 1px 2px #aaa; 
+    -moz-box-shadow:0 1px 2px #AAAAAA;
+}
+
+.MeetingButton
+{
+    position: absolute;
+    bottom:0;
+    right:0;
+    margin-right:70px;
+    margin-bottom:10px;
+}
+
+.Header
+{
+    text-align:left;
+    margin-left:70px;
+}
+
+.field
+{
+    margin-left:15px;
+    border-style:none;
+    font-size:90%;
+}
+
+.fieldvalue
+{
+     text-align:center;
+     margin-right:25px;
+     height:10px;
+     
+ }
+ .list
+ {
+     margin-left:20px;
+     width:500px;
+     border-style:none;
+     float:left;
+ }
+ .image
+ {
+     margin-left:50px;
+     float:left;
+ }
+ .tableCategories
+ {
+     text-align:center;
+     margin-right:140px;
+ }
+ .hide
+ {
+     display:none;
+ }
+ .scrollable
+ {
+    height:90px;
+    margin-left:20px;
+    /* overflow:auto;    */
+ }
+ .BeginDateValue
+ {
+    position: absolute;
+    top:0;
+    right:0;
+    margin-right:20px;
+    margin-top:3px;
+    font-size:80%;
+    color:Gray;
+ }
+ .BeginDateField
+ {
+    position: absolute;
+    top:0;
+    font-size:85%;
+    right:0;
+    margin-top:2px;
+    margin-right:90px;
+    color:Gray;
+ }
+ .ampliar
+ {
+    position: absolute;
+    bottom:0;
+    right:0;
+    height:13px;
+    width:28px;
+    margin-right:380px;
+    margin-bottom:10px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background-color:#997777;/*#e3701b;*/
+}
+.ampliarText
+{
+    position:relative;
+    font-size:80%;
+    vertical-align:middle;
+    margin-left:9px;
+    padding-bottom:18px;
+    font-weight:bold;
+    color:White;
+    
+}

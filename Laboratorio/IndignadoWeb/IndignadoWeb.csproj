@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -148,7 +148,7 @@
     <Content Include="Content\images\menubg - copia.png" />
     <Content Include="Content\images\menubg.png" />
     <Content Include="Content\images\menubtn.png" />
-	<Content Include="Content\images\menudown.png" />
+    <Content Include="Content\images\menudown.png" />
     <Content Include="Content\images\shadowh.png" />
     <Content Include="Content\images\shadowlist.png" />
     <Content Include="Content\images\Thumb\1da5b9c9-3daf-4a5d-8237-bfe7e05bde92.jpg" />
@@ -166,6 +166,16 @@
     <Content Include="Content\styles\screen.css" />
     <Content Include="Content\styles\screen_ie.css" />
     <Content Include="Content\styles\Site.css" />
+    <Content Include="Content\styles\Style1\chat.css" />
+    <Content Include="Content\styles\Style1\forms.css" />
+    <Content Include="Content\styles\Style1\lists.css" />
+    <Content Include="Content\styles\Style1\MeetingsList.css" />
+    <Content Include="Content\styles\Style1\menu.css" />
+    <Content Include="Content\styles\Style1\Rss.css" />
+    <Content Include="Content\styles\Style1\screen.css" />
+    <Content Include="Content\styles\Style1\screen_ie.css" />
+    <Content Include="Content\styles\Style1\Site.css" />
+    <Content Include="Content\styles\Style1\ThemeCategories.css" />
     <Content Include="Content\styles\ThemeCategories.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

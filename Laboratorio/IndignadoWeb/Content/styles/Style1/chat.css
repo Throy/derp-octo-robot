@@ -1,0 +1,197 @@
+.chatbox {
+	position: fixed;
+	position:expression("absolute");
+	width: 225px;
+	display:none;
+    -moz-box-shadow: -1px 1px 1px #ccc;
+    -webkit-box-shadow: 0 1px 5px #ccc;
+    box-shadow: 0 1px 5px #ccc;
+    z-index:10;
+}
+
+.chatboxhead {
+	background-color: #3D49CE;
+	padding:7px;
+	color: #ffffff;
+
+	border-right:1px solid #3D49CE;
+	border-left:1px solid #3D49CE;
+}
+
+.chatboxblink {
+	background-color: #176689;
+	border-right:1px solid #176689;
+	border-left:1px solid #176689;
+}
+
+.chatboxcontent {
+	font-family: arial,sans-serif;
+	font-size: 13px;
+	color: #333333;
+	height:200px;
+	width:209px;
+	overflow-y:auto;
+	overflow-x:auto;
+	padding:7px;
+	border-left:1px solid #cccccc;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #eeeeee;
+	background-color: #ffffff;
+	line-height: 1.3em;
+    text-align:left;
+}
+
+.chatboxinput {
+	padding: 5px;
+	background-color: #ffffff;
+	border-left:1px solid #cccccc;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+}
+
+.chatboxtextarea {
+	width: 208px;
+	height:44px;
+	padding:2px 0pt 2px 2px;
+	border: 1px solid #eeeeee;
+	margin: 0;
+	overflow:hidden;
+}
+
+.chatboxtextareaselected {
+	border: 1px solid #f99d39;
+	margin:0;
+    -moz-box-shadow: inset -1px 1px 1px #ccc;
+    -webkit-box-shadow: inset 0 1px 5px #ccc;
+    box-shadow: inset 0 1px 5px #ccc;
+}
+
+.chatboxmessage {
+	margin-left:1em;
+}
+
+.chatboxinfo {
+	margin-left:-1em;
+	color:#666666;
+
+}
+
+.chatboxmessagefrom {
+	margin-left:-1em;
+	font-weight: bold;
+}
+
+.chatboxmessagecontent {
+}
+
+.chatboxoptions {
+	float: right;
+}
+
+.chatboxoptions a {
+	text-decoration: none;
+	color: white;
+	font-weight:bold;
+	font-family:Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+    text-shadow: 1px 1px 1px #c16f16;
+}
+
+.chatboxtitle {
+	float: left;
+    text-shadow: 1px 1px 1px #c16f16;
+    font-weight:bold;
+}
+
+.ChatBar {
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+}
+
+.ChatBarCenter {
+    margin: 0 auto;
+    width: 996px;
+}
+
+#UsersOnline {
+	position: relative;
+	width: 177px;
+    display: block;  
+    left: 0px; 
+    -moz-box-shadow: -1px 1px 1px #ccc;
+    -webkit-box-shadow: 0 1px 5px #ccc;
+    box-shadow: 0 1px 5px #ccc;
+    z-index:100;
+}
+
+.UsersOnlineHead {
+	background-color: #3B5998;
+	padding:7px;
+	color: #ffffff;
+
+	border-right:1px solid #3B5998;
+	border-left:1px solid #3B5998;
+}
+
+#UsersOnlineTitle {
+	float: left;
+    text-shadow: 1px 1px 1px black;
+}
+
+.UsersOnlineOptions {
+	float: right;
+}
+
+.UsersOnlineOptions a {
+	text-decoration: none;
+	color: white;
+	font-weight:bold;
+	font-family:Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+    text-shadow: 1px 1px 1px #c16f16;
+}
+
+.UsersOnlineContent {
+	font-family: arial,sans-serif;
+	font-size: 13px;
+	color: #333333;
+	width:175px;
+	overflow-x:hidden;
+	border-left:1px solid #cccccc;
+	border-right:1px solid #cccccc;
+	background-color: #ffffff;
+    max-height:285px;
+    overflow-y: auto;
+}
+
+.UsersOnlineContent ul {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.UsersOnlineContent ul li a{
+    text-align: left;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    height: 25px;
+    width: 165px;
+    line-height: 25px;
+    padding-left: 10px;
+    text-decoration:none;
+    border-bottom:1px solid #edeadc;
+    color:#4e3125;
+}
+
+.UsersOnlineContent ul li a:hover{
+    background-color: #5d5747;
+    color:#fff;
+}
+
+.UserListEnd {
+    background-color: #f6f1eb;
+    height: 7px;
+    width: 175px;
+    border:none;
+}
