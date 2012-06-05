@@ -87,8 +87,7 @@
 </p>
 
 <p>
-@using (Html.BeginForm())
-{
+<form action="/Home/MovementConfig" method="post" enctype="multipart/form-data">
     @Html.ValidationSummary(true, "Some fields have errors, please fix them.")
     <div class="reg-box big-red">
         <fieldset>
@@ -130,13 +129,15 @@
             <div class="editor-field">
                 @Html.DropDownListFor(m => m.layoutId, Model.layouts)
             </div>
-
+            
+            <label style="margin-top:15px">Logo:</label>
+            <input name="ImageU" id="ImageU" type="file" />
             <p>
                 <input type="submit" class="boton-big-red" value="Save configuration" />
             </p>
         </fieldset>
     </div>
-}
+</form>
 </p>
 
 

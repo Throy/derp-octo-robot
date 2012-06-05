@@ -86,6 +86,9 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public float locationLong { get; set; }
+
+        [DataMember]
+        public String imagePath { get; set; }
     }
 
     [DataContract]
@@ -617,6 +620,7 @@ namespace IndignadoServer.Services
             dtMeeting.dateEnd = (meeting.fechaFin == null) ? new DateTime() : meeting.fechaFin.Value;
             dtMeeting.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
             dtMeeting.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
+            dtMeeting.imagePath = meeting.logo == null ? "" : meeting.logo;
             return dtMeeting;
         }
 
@@ -629,6 +633,7 @@ namespace IndignadoServer.Services
             dtMovement.locationLati = (float)movement.latitud;
             dtMovement.locationLong = (float)movement.longitud;
             dtMovement.idLayout = movement.idLayout;
+            dtMovement.imagePath = movement.logo;
             return dtMovement;
         }
 
@@ -830,6 +835,7 @@ namespace IndignadoServer.Services
             movement.latitud = dtMovement.locationLati;
             movement.longitud = dtMovement.locationLong;
             movement.idLayout = dtMovement.idLayout;
+            movement.logo = dtMovement.imagePath;
             return movement;
         }
 

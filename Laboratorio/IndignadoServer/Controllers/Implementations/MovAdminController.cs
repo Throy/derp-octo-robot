@@ -35,7 +35,15 @@ namespace IndignadoServer.Controllers
         public void setMovement(Movimiento movement)
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-            indignadoContext.ExecuteCommand("UPDATE Movimiento SET nombre = {0}, descripcion = {1}, latitud = {2}, longitud = {3}, idLayout = {4} WHERE id = {5}", movement.nombre, movement.descripcion, movement.latitud, movement.longitud, movement.idLayout, IdMovement);
+            Movimiento mov = indignadoContext.Movimientos.SingleOrDefault(m => m.id == IdMovement);
+            mov.nombre = movement.nombre;
+            mov.descripcion = movement.descripcion;
+            mov.latitud = movement.latitud;
+            mov.longitud = movement.longitud;
+            mov.idLayout = movement.idLayout;
+            mov.logo = movement.logo;
+            indignadoContext.SubmitChanges();
+            //indignadoContext.ExecuteCommand("UPDATE Movimiento SET nombre = {0}, descripcion = {1}, latitud = {2}, longitud = {3}, idLayout = {4}, logo={6} WHERE id = {5}", movement.nombre, movement.descripcion, movement.latitud, movement.longitud, movement.idLayout, IdMovement);
         }
 
         // returns a list of available layouts

@@ -616,7 +616,8 @@ namespace IndignadoWeb.Controllers
                 // open service
                 IMovAdminService serv = GetService<IMovAdminService>(HomeControllerConstants.urlMovAdminService);
 
-                if (ModelState.IsValid)
+                if (ModelState.IsValidField("description") && ModelState.IsValidField("name") && ModelState.IsValidField("locationLati")
+                    && ModelState.IsValidField("locationLong") && ModelState.IsValidField("layoutId"))
                 {
                     
 
@@ -630,6 +631,22 @@ namespace IndignadoWeb.Controllers
                     dtMovement.locationLati = model.locationLati;
                     dtMovement.locationLong = model.locationLong;
                     dtMovement.idLayout = model.layoutId;
+                    if (model.ImageU != null)
+                    {
+                        string fileName = Guid.NewGuid().ToString();
+                        string serverPath = Server.MapPath("~");
+                        string imagesPath = serverPath + "Content\\Images\\";
+                        string thumbPath = imagesPath + "Thumb\\";
+                        string fullPath = imagesPath + "Full\\";
+
+                        CreateMeetingModel.ResizeAndSave(thumbPath, fileName, model.ImageU.InputStream, 170, false);
+
+                        dtMovement.imagePath = fileName + ".jpg";
+                    }
+                    else
+                    {
+                        dtMovement.imagePath = "defaultMov.jpg";
+                    }
                     serv.setMovement(dtMovement);
 
                     // close service

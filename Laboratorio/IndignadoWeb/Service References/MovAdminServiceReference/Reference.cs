@@ -32,6 +32,9 @@ namespace IndignadoWeb.MovAdminServiceReference {
         private int idLayoutField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string imagePathField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private float locationLatiField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -85,6 +88,19 @@ namespace IndignadoWeb.MovAdminServiceReference {
                 if ((this.idLayoutField.Equals(value) != true)) {
                     this.idLayoutField = value;
                     this.RaisePropertyChanged("idLayout");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string imagePath {
+            get {
+                return this.imagePathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.imagePathField, value) != true)) {
+                    this.imagePathField = value;
+                    this.RaisePropertyChanged("imagePath");
                 }
             }
         }
