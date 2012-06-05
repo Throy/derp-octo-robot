@@ -91,6 +91,11 @@ namespace IndignadoServer.Controllers
 
             var userDB = db.Usuarios.SingleOrDefault(u => (u.id == fbUserDB.idUsuario));
 
+            if (userDB.banned)
+            {
+                throw new FaultException<LoginFault>(new LoginFault("The user is banned, please contact the movement administrator.", DTLoginFaultType.BANNED));
+            }
+
             String token = GenerateToken();
 
             _usersOnline[token] = new UserOnlineInfo(userDB.id, userDB.apodo, userDB.privilegio, idMovimiento, token);

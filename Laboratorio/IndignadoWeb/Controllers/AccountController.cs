@@ -109,6 +109,7 @@ namespace IndignadoWeb.Controllers
             if (success)
             {
                 HttpContext.Session.Add("token", loginInfo.token);
+                HttpContext.Session.Add("loginInfo", loginInfo);
 
                 FormsAuthentication.SetAuthCookie(loginInfo.name, true);
                 if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
