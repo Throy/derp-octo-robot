@@ -86,6 +86,9 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public float locationLong { get; set; }
+
+        [DataMember]
+        public String subURL { get; set; }
     }
 
     [DataContract]
@@ -629,6 +632,7 @@ namespace IndignadoServer.Services
             dtMovement.locationLati = (float)movement.latitud;
             dtMovement.locationLong = (float)movement.longitud;
             dtMovement.idLayout = movement.idLayout;
+            dtMovement.subURL = movement.url;
             return dtMovement;
         }
 

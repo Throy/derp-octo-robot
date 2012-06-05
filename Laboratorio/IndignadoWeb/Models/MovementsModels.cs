@@ -31,6 +31,10 @@ namespace IndignadoWeb.Models
         [Display(Name = "Location - Longitude: ")]
         public float locationLong { get; set; }
 
+        [Required]
+        [Display(Name = "Sub Domain: ")]
+        public float url { get; set; }
+
         [Display(Name = "Layouts: ")]
         public IEnumerable<SelectListItem> layouts { get; set; }
     }
