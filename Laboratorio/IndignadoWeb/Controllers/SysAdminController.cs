@@ -10,12 +10,13 @@ using IndignadoWeb.SessionServiceReference;
 using IndignadoWeb.MovAdminServiceReference;
 using System.Web.Security;
 using IndignadoWeb.Common;
+using System.Text.RegularExpressions;
 
 namespace IndignadoWeb.Controllers
 {
     public class SysAdminControllerConstants
     {
-        public const string loginUrl = "~/SysAdmin/LogOn";
+        public const string loginUrl = "~/admin/LogOn";
         public const string viewAccessDenied = "AccessDenied";
         public const string viewMovementCreate = "MovementCreate";
         public const string viewMovementsList = "MovementsList";
@@ -176,17 +177,17 @@ namespace IndignadoWeb.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    ISysAdminService serv = GetService<ISysAdminService>(SysAdminControllerConstants.urlSysAdminService);
 
-                    // create new movement
-                    //serv.addEmptyMovement();
+                    ISysAdminService serv = GetService<ISysAdminService>(SysAdminControllerConstants.urlSysAdminService);
 
                     IndignadoWeb.SysAdminServiceReference.DTMovement dtMovement = new IndignadoWeb.SysAdminServiceReference.DTMovement();
                     dtMovement.id = -1;
                     dtMovement.name = model.name;
                     dtMovement.description = model.description;
                     dtMovement.locationLati = model.locationLati;
-                    dtMovement.locationLong = model.locationLong;
+                    dtMovement.locationLong = model.locationLong;               
+
+                    dtMovement.subURL = model.url.Replace(' ','_');
                     serv.createMovement(dtMovement);
 
                     // get all movements

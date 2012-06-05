@@ -840,6 +840,7 @@ namespace IndignadoServer.Services
             movement.longitud = dtMovement.locationLong;
             movement.idLayout = dtMovement.idLayout;
             movement.logo = dtMovement.imagePath;
+            movement.url = dtMovement.subURL;
             return movement;
         }
 
