@@ -88,7 +88,12 @@
         
 <div id="Kontainer">
     
-    <div id="welcome"><h2 class="shadowH2 welcomeTitle">Welcome to @ViewBag.TenantInfo.name </h2></div>
+    <div id="welcome">
+    
+    <h2 class="welcomeTitle">Welcome to @ViewBag.TenantInfo.name </h2>
+    <h5 class="poweredby">Indignado Framework</h5>
+    </div>
+    
     <div id="Lateral">
     <div id="logo">
         <a href="/" style="background: url('@Url.Content("~/Content/images/Thumb/" + ViewBag.TenantInfo.logo)') top left no-repeat;"></a></div>
