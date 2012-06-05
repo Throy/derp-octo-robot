@@ -19,6 +19,7 @@ namespace IndignadoServer.Controllers
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
 
             // creates the movement.
+            movement.url.Replace(' ', '_');
             indignadoContext.Movimientos.InsertOnSubmit(movement);
             indignadoContext.SubmitChanges();
 

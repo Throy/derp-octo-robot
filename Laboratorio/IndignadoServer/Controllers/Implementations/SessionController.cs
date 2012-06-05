@@ -199,7 +199,7 @@ namespace IndignadoServer.Controllers
             DTTenantInfo info = new DTTenantInfo();
 
             var db = new IndignadoDBDataContext();
-            var movInfo = db.Movimientos.SingleOrDefault(m => m.nombre == movimiento);
+            var movInfo = db.Movimientos.SingleOrDefault(m => m.url == movimiento);
 
             if (movInfo == null)
             {

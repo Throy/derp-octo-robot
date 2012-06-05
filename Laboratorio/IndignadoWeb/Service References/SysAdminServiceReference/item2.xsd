@@ -9,6 +9,7 @@
       <xs:element minOccurs="0" name="locationLati" type="xs:float" />
       <xs:element minOccurs="0" name="locationLong" type="xs:float" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="subURL" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTMovement" nillable="true" type="tns:DTMovement" />

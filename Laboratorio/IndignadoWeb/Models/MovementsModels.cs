@@ -39,7 +39,7 @@ namespace IndignadoWeb.Models
 
         [Required]
         [Display(Name = "Sub Domain: ")]
-        public float url { get; set; }
+        public String url { get; set; }
 
         [Display(Name = "Layouts: ")]
         public IEnumerable<SelectListItem> layouts { get; set; }
