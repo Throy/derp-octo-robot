@@ -187,12 +187,23 @@ ul {
     float:left;
     width:816px;
     height:154px;
+    border-bottom-color:#3B5998;
+    border-bottom-style:solid;
+    border-bottom-width:2px;
     
 }
 .welcomeTitle
 {
-    padding-top:60px;
-    font-size:35px;
+    margin-left:280px;
+    
+    padding-top:40px;
+    font-size:30px;
+    color:#5C594C;
+}
+.poweredby
+{
+    font-size:80%;
+    padding-top:7px;
     color:#5C594C;
 }
 .layoutConditional
