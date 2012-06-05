@@ -112,6 +112,7 @@
       <Column Name="maxRecursosInadecuadosUsuarioZ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="maxRecursosPopularesN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="maxUltimosRecursosM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Member="url" Type="System.String" CanBeNull="false" />
       <Association Name="Movimiento_CategoriasTematica" Member="CategoriasTematicas" ThisKey="id" OtherKey="idMovimiento" Type="CategoriasTematica" />
       <Association Name="Movimiento_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idMovimiento" Type="Convocatoria" />
       <Association Name="Movimiento_RssFeed" Member="RssFeeds" ThisKey="id" OtherKey="idMovimiento" Type="RssFeed" />

@@ -32,8 +32,12 @@ namespace IndignadoServer.Services
         {
             // create the theme categories collection.
             Collection<CategoriasTematica> themeCategories = new Collection<CategoriasTematica>();
-            foreach (DTThemeCategoryMeetings dtThemeCat in dtMeeting.themeCategories) {
-                themeCategories.Add(DTToClass.DTToThemeCategory(dtThemeCat));
+            if (dtMeeting.themeCategories != null)
+            {
+                foreach (DTThemeCategoryMeetings dtThemeCat in dtMeeting.themeCategories)
+                {
+                    themeCategories.Add(DTToClass.DTToThemeCategory(dtThemeCat));
+                }
             }
             
             // create the meeting.

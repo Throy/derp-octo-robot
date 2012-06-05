@@ -15,7 +15,7 @@ namespace IndignadoWeb.Controllers
 {
     public class SysAdminControllerConstants
     {
-        public const string loginUrl = "~/admin/LogOn";
+        public const string loginUrl = "~/SysAdmin/LogOn";
         public const string viewAccessDenied = "AccessDenied";
         public const string viewMovementCreate = "MovementCreate";
         public const string viewMovementsList = "MovementsList";

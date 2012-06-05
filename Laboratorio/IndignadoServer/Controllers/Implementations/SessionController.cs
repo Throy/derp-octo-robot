@@ -52,7 +52,12 @@ namespace IndignadoServer.Controllers
             }
 
             // usuario deshabilitado.
-            if (user.banned)
+
+            bool isRegUser = true;
+            bool isMovAdmin = (user.privilegio & IndignadoServer.Roles.MovAdminMask) == IndignadoServer.Roles.MovAdminMask;
+            bool isSysAdmin = (user.privilegio & IndignadoServer.Roles.SysAdminMask) == IndignadoServer.Roles.SysAdminMask;
+
+            if (user.banned && !isMovAdmin && !isSysAdmin)
             {
                 throw new FaultException("The user is banned, please contact the movement administrator.");
             }
@@ -60,10 +65,6 @@ namespace IndignadoServer.Controllers
             String token = GenerateToken();
 
             _usersOnline[token] = new UserOnlineInfo(user.id, user.apodo, user.privilegio, idMovimiento, token);
-
-            bool isRegUser = true;
-            bool isMovAdmin = (user.privilegio & IndignadoServer.Roles.MovAdminMask) == IndignadoServer.Roles.MovAdminMask;
-            bool isSysAdmin = (user.privilegio & IndignadoServer.Roles.SysAdminMask) == IndignadoServer.Roles.SysAdminMask;
 
             return new DTLoginInfo(user.apodo, user.id, token, isRegUser, isMovAdmin, isSysAdmin);
         }
