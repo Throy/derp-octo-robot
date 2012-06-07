@@ -8,20 +8,8 @@ namespace IndignadoServer.Services
     public interface IMeetingsService
     {
         // returns a meeting
-        /*
-        [OperationContract]
-        DTMeeting getMeeting();
-         * */
-
-        // returns a meeting
         [OperationContract]
         DTMeeting getMeeting (int index);
-
-        // adds a meeting
-        /*
-        [OperationContract]
-        void addEmptyMeeting();
-         * */
 
         // creates a meeting
         [OperationContract]
@@ -38,6 +26,10 @@ namespace IndignadoServer.Services
         // returns all meetings that the user is interested in.
         [OperationContract]
         DTMeetingsCol getMeetingsListOnInterest();
+
+        // returns all meetings that the user has been notified.
+        [OperationContract]
+        DTMeetingsNotificationsCol getMeetingsNotifications();
         
         // returns all theme categories.
         [OperationContract]
@@ -54,5 +46,9 @@ namespace IndignadoServer.Services
         // don't attend a meeting.
         [OperationContract]
         void dontAttendMeeting(DTMeeting dtMeeting);
+
+        // removes a meeting notification.
+        [OperationContract]
+        void deleteMeetingNotification(DTMeeting dtMeeting);
     }
 }

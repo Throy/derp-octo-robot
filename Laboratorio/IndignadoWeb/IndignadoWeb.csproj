@@ -242,6 +242,9 @@
     <None Include="Service References\MeetingsServiceReference\IndignadoWeb.MeetingsServiceReference.DTMeetingsCol.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\MeetingsServiceReference\IndignadoWeb.MeetingsServiceReference.DTMeetingsNotificationsCol.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\MeetingsServiceReference\IndignadoWeb.MeetingsServiceReference.DTThemeCategoriesColMeetings.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -491,6 +494,8 @@
     <Content Include="Views\Home\MeetingDetails.cshtml" />
     <Content Include="Views\Home\MeetingsMap.cshtml" />
     <Content Include="Views\Home\ResourcesConfig.cshtml" />
+    <Content Include="Views\Home\MeetingsNotificationsList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTMeetingNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

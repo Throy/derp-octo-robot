@@ -65,6 +65,20 @@ namespace IndignadoServer.Services
         public Collection<DTMeeting> items { get; set; }
     }
 
+    // Meeting Notification datatype
+    [DataContract]
+    public class DTMeetingNotification : DTMeeting
+    {
+    }
+
+    // Meeting Notification Collection datatype
+    [DataContract]
+    public class DTMeetingsNotificationsCol
+    {
+        [DataMember]
+        public Collection<DTMeetingNotification> items { get; set; }
+    }
+
     // Movement datatype
     [DataContract]
     public class DTMovement
@@ -625,6 +639,25 @@ namespace IndignadoServer.Services
             dtMeeting.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
             dtMeeting.imagePath = meeting.logo == null ? "" : meeting.logo;
             return dtMeeting;
+        }
+
+        public static DTMeetingNotification MeetingNotificationToDT(Convocatoria meeting)
+        {
+            DTMeetingNotification dtMeetingNotification = new DTMeetingNotification();
+            dtMeetingNotification.id = meeting.id;
+            dtMeetingNotification.idMovement = meeting.idMovimiento;
+            dtMeetingNotification.name = meeting.titulo;
+            dtMeetingNotification.description = meeting.descripcion + " ";
+            dtMeetingNotification.locationLati = (float)meeting.latitud;
+            dtMeetingNotification.locationLong = (float)meeting.longitud;
+            dtMeetingNotification.minQuorum = meeting.minQuorum == null ? 0 : meeting.minQuorum.Value;
+            dtMeetingNotification.imagePath = meeting.logo;
+            dtMeetingNotification.dateBegin = (meeting.fechaInicio == null) ? new DateTime() : meeting.fechaInicio.Value;
+            dtMeetingNotification.dateEnd = (meeting.fechaFin == null) ? new DateTime() : meeting.fechaFin.Value;
+            dtMeetingNotification.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
+            dtMeetingNotification.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
+            dtMeetingNotification.imagePath = meeting.logo == null ? "" : meeting.logo;
+            return dtMeetingNotification;
         }
 
         public static DTMovement MovementToDT(Movimiento movement)

@@ -54,6 +54,26 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfDTMeeting" nillable="true" type="tns:ArrayOfDTMeeting" />
+  <xs:complexType name="DTMeetingsNotificationsCol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTMeetingNotification" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTMeetingsNotificationsCol" nillable="true" type="tns:DTMeetingsNotificationsCol" />
+  <xs:complexType name="ArrayOfDTMeetingNotification">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTMeetingNotification" nillable="true" type="tns:DTMeetingNotification" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTMeetingNotification" nillable="true" type="tns:ArrayOfDTMeetingNotification" />
+  <xs:complexType name="DTMeetingNotification">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:DTMeeting">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DTMeetingNotification" nillable="true" type="tns:DTMeetingNotification" />
   <xs:complexType name="DTThemeCategoriesColMeetings">
     <xs:sequence>
       <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTThemeCategoryMeetings" />

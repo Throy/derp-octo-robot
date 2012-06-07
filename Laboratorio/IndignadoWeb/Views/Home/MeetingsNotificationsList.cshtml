@@ -1,9 +1,9 @@
 ﻿<!-- model -->
-@model IndignadoWeb.Models.MeetingsMapModel
+@model IndignadoWeb.Models.MeetingsNotificationsMapModel
 
 <!-- page title -->
 @{
-    ViewBag.Title = "Indignado Framework - Meetings list on interest";
+    ViewBag.Title = "Indignado Framework - Meetings notifications list";
     
 }
 
@@ -26,7 +26,7 @@
         var infoWindow = new google.maps.InfoWindow({ content : "cargando..."});
         @{int i = 0; }
         
-        @foreach (var item in Model.meetings.items)
+        @foreach (var item in Model.meetingsNotifications.items)
         {
             String latitud = item.locationLati.ToString().Replace(",", ".");
             String longitud = item.locationLong.ToString().Replace(",", ".");
@@ -65,12 +65,12 @@
 
 <!-- page content -->
 
-<h2 style="text-align:center">Meetings list on interest</h2>
+<h2 style="text-align:center">Meetings notifications list</h2>
 
 <div id="map_canvas" style="width: 400px; height:300px ; margin-left:220px;border-style:outset; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA" ></div>
 
 <p>
-    @Html.DisplayFor(m => m.meetings.items)
+    @Html.DisplayFor(m => m.meetingsNotifications.items)
 </p>
 
 <script type="text/javascript">googleMapsInitialize();</script>

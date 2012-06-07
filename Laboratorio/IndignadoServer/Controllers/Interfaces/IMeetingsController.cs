@@ -19,6 +19,9 @@ namespace IndignadoServer.Controllers
         
         // returns all meetings that the user is interested in.
         Collection<Convocatoria> getMeetingsListOnInterest();
+
+        // returns all meetings that the user has been notified.
+        Collection<Convocatoria> getMeetingsNotifications();
         
         // returns all theme categories.
         Collection<CategoriasTematica> getThemeCategoriesList();
@@ -34,5 +37,8 @@ namespace IndignadoServer.Controllers
 
         // don't atttend a meeting.
         void dontAttendMeeting(Convocatoria meeting);
+        
+        // removes a meeting notification.
+        void deleteMeetingNotification(Convocatoria meeting);
     }
 }

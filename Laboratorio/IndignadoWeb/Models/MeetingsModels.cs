@@ -22,6 +22,17 @@ namespace IndignadoWeb.Models
         public float locationLong { get; set; }
     }
 
+    // model for meetings notifications map
+
+    public class MeetingsNotificationsMapModel
+    {
+        public DTMeetingsNotificationsCol meetingsNotifications { get; set; }
+
+        public float locationLati { get; set; }
+
+        public float locationLong { get; set; }
+    }
+
     // model for Create meeting
 
     public class CreateMeetingModel
