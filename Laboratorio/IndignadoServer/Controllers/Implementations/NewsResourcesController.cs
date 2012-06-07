@@ -102,7 +102,7 @@ namespace IndignadoServer.Controllers
             // get top ranked resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) ORDER BY CantAprobaciones.cantAprobaciones DESC, Recursos.id DESC", IdMovement, 0);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) AND (Recursos.fecha > {2}) ORDER BY CantAprobaciones.cantAprobaciones DESC, Recursos.id DESC", IdMovement, 0, DateTime.UtcNow.AddDays(-31));
             Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
             return toResourcesCol(recursosEnum, movement.maxRecursosPopularesN);
         }
