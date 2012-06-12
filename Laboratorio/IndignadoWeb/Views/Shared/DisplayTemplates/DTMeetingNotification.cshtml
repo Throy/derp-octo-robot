@@ -56,8 +56,24 @@
             <table class="list" border="0" rules="none">
     
                 <tr class="field"><td class="field"><span>Min quorum: </span></td>
-                <td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.minQuorum)</div></td></tr>    
+                <td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.minQuorum)</div></td></tr>
     
+                @{
+                    if (! @Model.isActive)
+                    {
+                        <tr class="field"><td class="field"><span>Meeting is inactive</span></td></tr>
+                    }
+
+                    else if (@Model.isConfirmed)
+                    {
+                        <tr class="field"><td class="field"><span>Meeting is confirmed</span></td></tr>
+                    }
+
+                    else
+                    {
+                        <tr class="field"><td class="field"><span>Meeting is active</span></td></tr>
+                    }
+                }
             </table>
     
             @{

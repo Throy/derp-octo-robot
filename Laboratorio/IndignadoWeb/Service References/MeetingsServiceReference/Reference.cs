@@ -48,9 +48,6 @@ namespace IndignadoWeb.MeetingsServiceReference {
         private bool isConfirmedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool isImminentField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private float locationLatiField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -181,19 +178,6 @@ namespace IndignadoWeb.MeetingsServiceReference {
                 if ((this.isConfirmedField.Equals(value) != true)) {
                     this.isConfirmedField = value;
                     this.RaisePropertyChanged("isConfirmed");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool isImminent {
-            get {
-                return this.isImminentField;
-            }
-            set {
-                if ((this.isImminentField.Equals(value) != true)) {
-                    this.isImminentField = value;
-                    this.RaisePropertyChanged("isImminent");
                 }
             }
         }

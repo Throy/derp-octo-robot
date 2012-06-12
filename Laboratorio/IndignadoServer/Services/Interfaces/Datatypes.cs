@@ -57,9 +57,6 @@ namespace IndignadoServer.Services
         public int myAttendance { get; set; }
 
         [DataMember]
-        public bool isImminent { get; set; }
-
-        [DataMember]
         public bool isConfirmed { get; set; }
 
         [DataMember]

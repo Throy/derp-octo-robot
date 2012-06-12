@@ -93,26 +93,6 @@
     margin-right:90px;
     color:Gray;
  }
- .EndDateValue
- {
-    position: absolute;
-    top:15;
-    right:0;
-    margin-right:20px;
-    margin-top:3px;
-    font-size:80%;
-    color:Gray;
- }
- .EndDateField
- {
-    position: absolute;
-    top:15;
-    font-size:85%;
-    right:0;
-    margin-top:2px;
-    margin-right:90px;
-    color:Gray;
- }
  .ampliar
  {
     position: absolute;
