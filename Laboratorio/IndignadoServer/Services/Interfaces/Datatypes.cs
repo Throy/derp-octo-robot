@@ -106,6 +106,21 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public String subURL { get; set; }
+
+        [DataMember]
+        public int maxMarcasInadecuadasRecursoX { get; set; }
+
+        [DataMember]
+        public int maxRecursosInadecuadosUsuarioZ { get; set; }
+
+        [DataMember]
+        public int maxRecursosPopularesN { get; set; }
+
+        [DataMember]
+        public int maxUltimosRecursosM { get; set; }
+
+
+
     }
 
     [DataContract]
@@ -671,6 +686,10 @@ namespace IndignadoServer.Services
             dtMovement.idLayout = movement.idLayout;
             dtMovement.imagePath = movement.logo;
             dtMovement.subURL = movement.url;
+            dtMovement.maxMarcasInadecuadasRecursoX = movement.maxMarcasInadecuadasRecursoX;
+            dtMovement.maxRecursosInadecuadosUsuarioZ = movement.maxRecursosInadecuadosUsuarioZ;
+            dtMovement.maxRecursosPopularesN = movement.maxRecursosPopularesN;
+            dtMovement.maxUltimosRecursosM = movement.maxUltimosRecursosM;
             return dtMovement;
         }
 
@@ -874,6 +893,10 @@ namespace IndignadoServer.Services
             movement.idLayout = dtMovement.idLayout;
             movement.logo = dtMovement.imagePath;
             movement.url = dtMovement.subURL;
+            movement.maxMarcasInadecuadasRecursoX = dtMovement.maxMarcasInadecuadasRecursoX;
+            movement.maxRecursosInadecuadosUsuarioZ = dtMovement.maxRecursosInadecuadosUsuarioZ;
+            movement.maxRecursosPopularesN = dtMovement.maxRecursosPopularesN;
+            movement.maxUltimosRecursosM = dtMovement.maxUltimosRecursosM;
             return movement;
         }
 

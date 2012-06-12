@@ -44,6 +44,22 @@ namespace IndignadoWeb.Models
         [Display(Name = "Layouts: ")]
         public IEnumerable<SelectListItem> layouts { get; set; }
 
+        [Required]
+        [Display(Name = "Max Marcas Inadecuadas Recurso: ")]
+        public int maxMarcasInadecuadasRecursoX { get; set; }
+
+        [Required]
+        [Display(Name = "Max Recursos Inadecuados Usuario: ")]
+        public int maxRecursosInadecuadosUsuarioZ { get; set; }
+
+        [Required]
+        [Display(Name = "Max Recursos Populares: ")]
+        public int maxRecursosPopularesN { get; set; }
+
+        [Required]
+        [Display(Name = "Max Ultimos Recursos: ")]
+        public int maxUltimosRecursosM { get; set; }
+
         public HttpPostedFileWrapper ImageU { get; set; }
 
         public static void ResizeAndSave(string savePath, string fileName, Stream imageBuffer, int maxSideSize, bool makeItSquare)

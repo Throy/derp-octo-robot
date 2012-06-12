@@ -135,23 +135,6 @@ namespace IndignadoWeb.Controllers
             return View();
         }
 
-        /*
-        // shows a meeting.
-        public ActionResult MeetingDetails()
-        {
-            // open service
-            IMeetingsService serv = GetService<IMeetingsService>(HomeControllerConstants.urlMeetingsService);
-
-            // get meeting
-            DTMeeting meeting = serv.getMeeting(0);
-
-            // close service
-            (serv as ICommunicationObject).Close();
-
-            // send the meeting to the model.
-            return View(meeting);
-        }
-         * */
 
         // shows all meetings.
         public ActionResult MeetingsList()
@@ -709,6 +692,10 @@ namespace IndignadoWeb.Controllers
                 model.locationLati = movement.locationLati;
                 model.locationLong = movement.locationLong;
                 model.layouts = serv.getLayouts().ToSelectListItems(movement.idLayout);
+                model.maxMarcasInadecuadasRecursoX = movement.maxMarcasInadecuadasRecursoX;
+                model.maxRecursosInadecuadosUsuarioZ = movement.maxRecursosInadecuadosUsuarioZ;
+                model.maxRecursosPopularesN = movement.maxRecursosPopularesN;
+                model.maxUltimosRecursosM = movement.maxUltimosRecursosM;
 
                 (serv as ICommunicationObject).Close();
                 
@@ -760,6 +747,12 @@ namespace IndignadoWeb.Controllers
                     {
                         dtMovement.imagePath = "defaultMov.jpg";
                     }
+                    dtMovement.maxMarcasInadecuadasRecursoX = model.maxMarcasInadecuadasRecursoX ;
+                    dtMovement.maxRecursosInadecuadosUsuarioZ = model.maxRecursosInadecuadosUsuarioZ;
+                    dtMovement.maxRecursosPopularesN = model.maxRecursosPopularesN;
+                    dtMovement.maxUltimosRecursosM = model.maxUltimosRecursosM;
+
+
                     serv.setMovement(dtMovement);
 
                     // close service
@@ -790,6 +783,11 @@ namespace IndignadoWeb.Controllers
                 return RedirectToAction(HomeControllerConstants.viewAccessDenied);
             }
         }
+
+
+       
+
+     
 
         // shows all news in a list.
         //[OutputCache(Duration = 180, VaryByParam = "none")]

@@ -60,6 +60,38 @@
                 @Html.ValidationMessageFor(m => m.url)
             </div>
 
+            <div class="editor-label">
+                @Html.LabelFor(m => m.maxMarcasInadecuadasRecursoX)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.maxMarcasInadecuadasRecursoX)
+                @Html.ValidationMessageFor(m => m.maxMarcasInadecuadasRecursoX)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.maxRecursosInadecuadosUsuarioZ)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.maxRecursosInadecuadosUsuarioZ)
+                @Html.ValidationMessageFor(m => m.maxRecursosInadecuadosUsuarioZ)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.maxRecursosPopularesN)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.maxRecursosPopularesN)
+                @Html.ValidationMessageFor(m => m.maxRecursosPopularesN)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.maxUltimosRecursosM)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.maxUltimosRecursosM)
+                @Html.ValidationMessageFor(m => m.maxUltimosRecursosM)
+            </div>
+
 
             <p>
                 <input type="submit" value="Create movement" style="display:none;" id="WorkaroundForOperaInputFocusBorderBug" />
