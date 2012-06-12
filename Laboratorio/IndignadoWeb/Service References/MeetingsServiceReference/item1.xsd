@@ -8,6 +8,9 @@
       <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="idMovement" type="xs:int" />
       <xs:element minOccurs="0" name="imagePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="isActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isConfirmed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isImminent" type="xs:boolean" />
       <xs:element minOccurs="0" name="locationLati" type="xs:float" />
       <xs:element minOccurs="0" name="locationLong" type="xs:float" />
       <xs:element minOccurs="0" name="minQuorum" type="xs:int" />

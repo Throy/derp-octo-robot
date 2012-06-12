@@ -55,6 +55,15 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public int myAttendance { get; set; }
+
+        [DataMember]
+        public bool isImminent { get; set; }
+
+        [DataMember]
+        public bool isConfirmed { get; set; }
+
+        [DataMember]
+        public bool isActive { get; set; }
     }
 
     // Meeting Collection datatype
@@ -171,7 +180,10 @@ namespace IndignadoServer.Services
         public String description { get; set; }
 
         [DataMember]
-        public String link { get; set; }
+        public String sourceUrl { get; set; }
+
+        [DataMember]
+        public String sourceTitle { get; set; }
 
         [DataMember]
         public String image { get; set; }
@@ -648,10 +660,12 @@ namespace IndignadoServer.Services
             dtMeeting.locationLong = (float)meeting.longitud;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
             dtMeeting.imagePath = meeting.logo;
-            dtMeeting.dateBegin = (meeting.fechaInicio == null) ? new DateTime() : meeting.fechaInicio.Value;
-            dtMeeting.dateEnd = (meeting.fechaFin == null) ? new DateTime() : meeting.fechaFin.Value;
+            dtMeeting.dateBegin = meeting.fechaInicio;
+            dtMeeting.dateEnd = meeting.fechaFin;
             dtMeeting.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
             dtMeeting.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
+            dtMeeting.isConfirmed = meeting.estaConfirmada == null ? false : meeting.estaConfirmada.Value;
+            dtMeeting.isActive = meeting.estaActiva == null ? false : meeting.estaActiva.Value;
             dtMeeting.imagePath = meeting.logo == null ? "" : meeting.logo;
             return dtMeeting;
         }
@@ -667,10 +681,12 @@ namespace IndignadoServer.Services
             dtMeetingNotification.locationLong = (float)meeting.longitud;
             dtMeetingNotification.minQuorum = meeting.minQuorum == null ? 0 : meeting.minQuorum.Value;
             dtMeetingNotification.imagePath = meeting.logo;
-            dtMeetingNotification.dateBegin = (meeting.fechaInicio == null) ? new DateTime() : meeting.fechaInicio.Value;
-            dtMeetingNotification.dateEnd = (meeting.fechaFin == null) ? new DateTime() : meeting.fechaFin.Value;
+            dtMeetingNotification.dateBegin = meeting.fechaInicio;
+            dtMeetingNotification.dateEnd = meeting.fechaFin;
             dtMeetingNotification.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
             dtMeetingNotification.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
+            dtMeetingNotification.isConfirmed = meeting.estaConfirmada == null ? false : meeting.estaConfirmada.Value;
+            dtMeetingNotification.isActive = meeting.estaActiva == null ? false : meeting.estaActiva.Value;
             dtMeetingNotification.imagePath = meeting.logo == null ? "" : meeting.logo;
             return dtMeetingNotification;
         }
@@ -709,7 +725,8 @@ namespace IndignadoServer.Services
             //dtRssItem.description = Regex.Replace(rssItem.Description, @"</?(a|img|div|p|strong) ?[^>]*?>", string.Empty);
             // Le puse para que quite todas las tags, sino quedaba el br y me movia todo de lugar
             dtRssItem.description = Regex.Replace(rssItem.Description, "<(.|\\n)*?>", string.Empty);
-            dtRssItem.link = (rssItem.Link == null) ? "" : rssItem.Link;
+            dtRssItem.sourceUrl = (rssItem.Link == null) ? "" : rssItem.Link;
+            dtRssItem.sourceTitle = "";
             // Le agregue jpg para que no capture unos gifs transparentes que no mostraban nada
             dtRssItem.image = Regex.Match(rssItem.Description, @"<img[^>]*jpg.*?/>").Value;
             dtRssItem.image = (dtRssItem.image == null) ? null : Regex.Match(dtRssItem.image, @"src\=\"".*?\""").Value;
@@ -879,6 +896,8 @@ namespace IndignadoServer.Services
             meeting.fechaFin = dtMeeting.dateEnd;
             meeting.cantAsistencias = dtMeeting.numberAttendants;
             meeting.miAsistencia = dtMeeting.myAttendance;
+            meeting.estaConfirmada = dtMeeting.isConfirmed;
+            meeting.estaActiva = dtMeeting.isActive;
             return meeting;
         }
 

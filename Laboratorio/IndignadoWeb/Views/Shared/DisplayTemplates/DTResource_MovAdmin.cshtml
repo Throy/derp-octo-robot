@@ -49,7 +49,7 @@
                     
                     <div class="clear"></div>
                     <div class="footer">
-                        Date: @Html.DisplayFor(m => m.date)
+                        Date: @Model.date.ToString("yyyy-MM-dd HH:mm")
 
                         <div class="user">
                             by @Html.ActionLink("" + @Html.DisplayFor(m => m.username), "UserDetails", new { id = @Model.idUser })

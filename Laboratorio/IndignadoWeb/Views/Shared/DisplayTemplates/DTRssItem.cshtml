@@ -4,7 +4,7 @@
 <li class="item">
     <div class="shadowl">
         <div class="shadowr">
-            <a class="int" href="@Html.DisplayFor(m => m.link)" target="_blank">
+            <a class="int" href="@Html.DisplayFor(m => m.sourceUrl)" target="_blank">
                 <div class="title">
                     <h3>@Html.DisplayFor(m => m.title)</h3>
                 </div>
@@ -20,7 +20,11 @@
                         @Html.Raw(HttpUtility.HtmlDecode(Model.description))     
                     </div>
                     <div class="footer">
-                        Date: @Html.DisplayFor(m => m.date)
+                        Date: @Model.date.ToString("yyyy-MM-dd HH:mm")
+
+                        <div class="user">
+                            by @Model.sourceTitle
+                        </div>
                     </div>
                 </div>
             </a>

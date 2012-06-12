@@ -35,32 +35,46 @@
          </label> 
     </div>
 
-    <span class="BeginDateField">Begining:</span><div class="fieldvalue field BeginDateValue"><span>@Model.dateBegin.ToShortDateString()</span></div>
+    <span class="BeginDateField">Begining: @Model.dateBegin.ToString("yyyy-MM-dd HH:mm")<br />End: @Model.dateEnd.ToString("yyyy-MM-dd HH:mm")</span>
 
     <img class="image" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null && @Model.imagePath != "") ? @Model.imagePath.ToString().Replace(".jpg", "_90.jpg") : "meeting_default.jpg"))" alt="Image" />
 
     <div class="scrollable @Model.id.ToString().Insert(Model.id.ToString().Count(),"s")">
         <table class="list" border="0" rules="none">
             <!-- fields -->
-            <tr class="field"><td class="field"><span>Description: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.description)</div></td></tr>
+            <tr class="field"><td class="field"><span>Description: </span></td>
+            <td class="field"><div class="fieldvalue">@Model.description</div></td></tr>
             
-            <tr class="field"><td class="field"><span>Attendance: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.numberAttendants)</div></td></tr>
-
-            <tr class="field"><td class="field"><span>Ending date: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.dateEnd)</div></td></tr>    
+            <tr class="field"><td class="field"><span>Attendance: </span></td>
+            <td class="field"><div class="fieldvalue">@Model.numberAttendants</div></td></tr>
     
         </table>
         <div class="hide @Model.id.ToString().Insert(Model.id.ToString().Count(), "h")">
             <table class="list" border="0" rules="none">
-                <tr class="field"><td class="field"><span>Location - Latitude: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.locationLati)</div></td></tr>
+                <tr class="field"><td class="field"><span>Min quorum: </span></td>
+                <td class="field"><div class="fieldvalue">@Model.minQuorum</div></td></tr>
     
-                <tr class="field"><td class="field"><span>Location - Longitude: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.locationLong)</div></td></tr>
-    
-                <tr class="field"><td class="field"><span>Min quorum: </span></td><td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.minQuorum)</div></td></tr>    
-    
+                @{
+                    if (! @Model.isActive)
+                    {
+                        <tr class="field"><td class="field"><span>Meeting is inactive</span></td></tr>
+                    }
+
+                    else if (@Model.isConfirmed)
+                    {
+                        <tr class="field"><td class="field"><span>Meeting is confirmed</span></td></tr>
+                    }
+
+                    else
+                    {
+                        <tr class="field"><td class="field"><span>Meeting is active</span></td></tr>
+                    }
+                }
             </table>
     
             @{
-                if (@Model.themeCategories != null && Model.themeCategories.Length >= 1) {
+                if (@Model.themeCategories != null && Model.themeCategories.Length >= 1)
+                {
                     <br />
                     <div class="tableCategories">
                         Categories:

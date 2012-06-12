@@ -3,27 +3,27 @@
            
 <div>
     <!-- header -->
-    <h3>@Html.ActionLink(@Html.DisplayFor(m => m.id) + " - " + @Html.DisplayFor(m => m.username), "UserDetails", new { id = @Model.id })</h3>
+    <h3>@Html.ActionLink(@Model.id + " - " + @Model.username, "UserDetails", new { id = @Model.id })</h3>
     
     <!-- fields -->
-    Full name: @Html.DisplayFor(m => m.fullName)
+    Full name: @Model.fullName
     <br />
-    Mail: @Html.DisplayFor(m => m.mail)
+    Mail: @Model.mail
     <br />
-    Register date: @Html.DisplayFor(m => m.registerDate)
+    Register date: @Model.registerDate.ToString("yyyy-MM-dd HH:mm")
     <br />
     <br />
 
-    Resources marked as inappropriate: @Html.DisplayFor(m => m.numberResourcesMarkedInappr)
+    Resources marked as inappropriate: @Model.numberResourcesMarkedInappr
     <br />
-    Resources disabled: @Html.DisplayFor(m => m.numberResourcesDisabled)
+    Resources disabled: @Model.numberResourcesDisabled
     <br />
     <br />
 
     <!-- ban / reallow -->
     @using (Html.BeginForm(new { id = @Model.id }))
     {
-        if (! @Model.banned)
+        if (!@Model.banned)
         {
             <input type="submit" name="buttonBan" value="Ban user" />
         }

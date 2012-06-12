@@ -12,20 +12,8 @@ namespace IndignadoServer.Services
         // returns all rss items.
         public DTRssItemsCol getNewsList()
         {
-            // get rss items datatypes.
-            Collection<RssItem> rssItemsCol = ControllersHub.Instance.getINewsResourcesController().getNewsList();
-
-            // create new rss items datatypes collection.
             DTRssItemsCol dtRssItemsCol = new DTRssItemsCol();
-            dtRssItemsCol.items = new Collection<DTRssItem>();
-
-            // add rss items to the datatypes collection.
-            foreach (RssItem rssItem in rssItemsCol)
-            {
-                dtRssItemsCol.items.Add(ClassToDT.RssItemToDT(rssItem));
-            }
-
-            // return the collection.
+            dtRssItemsCol.items = ControllersHub.Instance.getINewsResourcesController().getNewsList();
             return dtRssItemsCol;
         }
 

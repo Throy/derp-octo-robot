@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using IndignadoServer.LinqDataContext;
-using RssToolkit.Rss;
+using IndignadoServer.Services;
 
 namespace IndignadoServer.Controllers
 {
     interface INewsResourcesController
     {
         // returns all rss items.
-        Collection<RssItem> getNewsList();
+        Collection<DTRssItem> getNewsList();
 
         // returns all resources.
         Collection<Recurso> getResourcesList();

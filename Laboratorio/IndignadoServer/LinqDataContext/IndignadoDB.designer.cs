@@ -33,9 +33,9 @@ namespace IndignadoServer.LinqDataContext
     partial void InsertAprobacione(Aprobacione instance);
     partial void UpdateAprobacione(Aprobacione instance);
     partial void DeleteAprobacione(Aprobacione instance);
-    partial void InsertUsuario(Usuario instance);
-    partial void UpdateUsuario(Usuario instance);
-    partial void DeleteUsuario(Usuario instance);
+    partial void InsertUsuarioFacebook(UsuarioFacebook instance);
+    partial void UpdateUsuarioFacebook(UsuarioFacebook instance);
+    partial void DeleteUsuarioFacebook(UsuarioFacebook instance);
     partial void InsertAsistencia(Asistencia instance);
     partial void UpdateAsistencia(Asistencia instance);
     partial void DeleteAsistencia(Asistencia instance);
@@ -69,9 +69,9 @@ namespace IndignadoServer.LinqDataContext
     partial void InsertRssFeed(RssFeed instance);
     partial void UpdateRssFeed(RssFeed instance);
     partial void DeleteRssFeed(RssFeed instance);
-    partial void InsertUsuarioFacebook(UsuarioFacebook instance);
-    partial void UpdateUsuarioFacebook(UsuarioFacebook instance);
-    partial void DeleteUsuarioFacebook(UsuarioFacebook instance);
+    partial void InsertUsuario(Usuario instance);
+    partial void UpdateUsuario(Usuario instance);
+    partial void DeleteUsuario(Usuario instance);
     #endregion
 		
 		public IndignadoDBDataContext() : 
@@ -112,11 +112,11 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		public System.Data.Linq.Table<Usuario> Usuarios
+		public System.Data.Linq.Table<UsuarioFacebook> UsuarioFacebooks
 		{
 			get
 			{
-				return this.GetTable<Usuario>();
+				return this.GetTable<UsuarioFacebook>();
 			}
 		}
 		
@@ -208,11 +208,11 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		public System.Data.Linq.Table<UsuarioFacebook> UsuarioFacebooks
+		public System.Data.Linq.Table<Usuario> Usuarios
 		{
 			get
 			{
-				return this.GetTable<UsuarioFacebook>();
+				return this.GetTable<Usuario>();
 			}
 		}
 	}
@@ -227,9 +227,9 @@ namespace IndignadoServer.LinqDataContext
 		
 		private int _idUsuario;
 		
-		private EntityRef<Usuario> _Usuario;
-		
 		private EntityRef<Recurso> _Recurso;
+		
+		private EntityRef<Usuario> _Usuario;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -243,8 +243,8 @@ namespace IndignadoServer.LinqDataContext
 		
 		public Aprobacione()
 		{
-			this._Usuario = default(EntityRef<Usuario>);
 			this._Recurso = default(EntityRef<Recurso>);
+			this._Usuario = default(EntityRef<Usuario>);
 			OnCreated();
 		}
 		
@@ -296,40 +296,6 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Aprobacione", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
-		public Usuario Usuario
-		{
-			get
-			{
-				return this._Usuario.Entity;
-			}
-			set
-			{
-				Usuario previousValue = this._Usuario.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuario.Entity = null;
-						previousValue.Aprobaciones.Remove(this);
-					}
-					this._Usuario.Entity = value;
-					if ((value != null))
-					{
-						value.Aprobaciones.Add(this);
-						this._idUsuario = value.id;
-					}
-					else
-					{
-						this._idUsuario = default(int);
-					}
-					this.SendPropertyChanged("Usuario");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recurso_Aprobacione", Storage="_Recurso", ThisKey="idRecurso", OtherKey="id", IsForeignKey=true)]
 		public Recurso Recurso
 		{
@@ -364,6 +330,40 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Aprobacione", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.Aprobaciones.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.Aprobaciones.Add(this);
+						this._idUsuario = value.id;
+					}
+					else
+					{
+						this._idUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -385,120 +385,83 @@ namespace IndignadoServer.LinqDataContext
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Usuarios")]
-	public partial class Usuario : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UsuarioFacebook")]
+	public partial class UsuarioFacebook : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _id;
+		private int _idUsuario;
+		
+		private int _idFacebook;
 		
 		private int _idMovimiento;
 		
-		private string _nombre;
-		
-		private string _apodo;
-		
-		private string _mail;
-		
-		private System.Data.Linq.Binary _contraseña;
-		
-		private double _latitud;
-		
-		private double _longitud;
-		
-		private System.Nullable<System.DateTime> _fechaRegistro;
-		
-		private System.Nullable<int> _cantRecursosMarcadosInadecuados;
-		
-		private System.Nullable<int> _cantRecursosDeshabilitados;
-		
-		private bool _banned;
-		
-		private short _privilegio;
-		
-		private EntitySet<Aprobacione> _Aprobaciones;
-		
-		private EntitySet<Asistencia> _Asistencias;
-		
-		private EntitySet<Convocatoria> _Convocatorias;
-		
-		private EntitySet<Interese> _Intereses;
-		
-		private EntitySet<MarcasInadecuado> _MarcasInadecuados;
-		
-		private EntitySet<Notificacione> _Notificaciones;
-		
-		private EntitySet<Recurso> _Recursos;
-		
-		private EntitySet<UsuarioFacebook> _UsuarioFacebooks;
+		private EntityRef<Usuario> _Usuario;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
+    partial void OnidUsuarioChanging(int value);
+    partial void OnidUsuarioChanged();
+    partial void OnidFacebookChanging(int value);
+    partial void OnidFacebookChanged();
     partial void OnidMovimientoChanging(int value);
     partial void OnidMovimientoChanged();
-    partial void OnnombreChanging(string value);
-    partial void OnnombreChanged();
-    partial void OnapodoChanging(string value);
-    partial void OnapodoChanged();
-    partial void OnmailChanging(string value);
-    partial void OnmailChanged();
-    partial void OncontraseñaChanging(System.Data.Linq.Binary value);
-    partial void OncontraseñaChanged();
-    partial void OnlatitudChanging(double value);
-    partial void OnlatitudChanged();
-    partial void OnlongitudChanging(double value);
-    partial void OnlongitudChanged();
-    partial void OnfechaRegistroChanging(System.Nullable<System.DateTime> value);
-    partial void OnfechaRegistroChanged();
-    partial void OncantRecursosMarcadosInadecuadosChanging(System.Nullable<int> value);
-    partial void OncantRecursosMarcadosInadecuadosChanged();
-    partial void OncantRecursosDeshabilitadosChanging(System.Nullable<int> value);
-    partial void OncantRecursosDeshabilitadosChanged();
-    partial void OnbannedChanging(bool value);
-    partial void OnbannedChanged();
-    partial void OnprivilegioChanging(short value);
-    partial void OnprivilegioChanged();
     #endregion
 		
-		public Usuario()
+		public UsuarioFacebook()
 		{
-			this._Aprobaciones = new EntitySet<Aprobacione>(new Action<Aprobacione>(this.attach_Aprobaciones), new Action<Aprobacione>(this.detach_Aprobaciones));
-			this._Asistencias = new EntitySet<Asistencia>(new Action<Asistencia>(this.attach_Asistencias), new Action<Asistencia>(this.detach_Asistencias));
-			this._Convocatorias = new EntitySet<Convocatoria>(new Action<Convocatoria>(this.attach_Convocatorias), new Action<Convocatoria>(this.detach_Convocatorias));
-			this._Intereses = new EntitySet<Interese>(new Action<Interese>(this.attach_Intereses), new Action<Interese>(this.detach_Intereses));
-			this._MarcasInadecuados = new EntitySet<MarcasInadecuado>(new Action<MarcasInadecuado>(this.attach_MarcasInadecuados), new Action<MarcasInadecuado>(this.detach_MarcasInadecuados));
-			this._Notificaciones = new EntitySet<Notificacione>(new Action<Notificacione>(this.attach_Notificaciones), new Action<Notificacione>(this.detach_Notificaciones));
-			this._Recursos = new EntitySet<Recurso>(new Action<Recurso>(this.attach_Recursos), new Action<Recurso>(this.detach_Recursos));
-			this._UsuarioFacebooks = new EntitySet<UsuarioFacebook>(new Action<UsuarioFacebook>(this.attach_UsuarioFacebooks), new Action<UsuarioFacebook>(this.detach_UsuarioFacebooks));
+			this._Usuario = default(EntityRef<Usuario>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int NOT NULL")]
+		public int idUsuario
 		{
 			get
 			{
-				return this._id;
+				return this._idUsuario;
 			}
 			set
 			{
-				if ((this._id != value))
+				if ((this._idUsuario != value))
 				{
-					this.OnidChanging(value);
+					if (this._Usuario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidUsuarioChanging(value);
 					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
+					this._idUsuario = value;
+					this.SendPropertyChanged("idUsuario");
+					this.OnidUsuarioChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMovimiento", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idFacebook", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idFacebook
+		{
+			get
+			{
+				return this._idFacebook;
+			}
+			set
+			{
+				if ((this._idFacebook != value))
+				{
+					this.OnidFacebookChanging(value);
+					this.SendPropertyChanging();
+					this._idFacebook = value;
+					this.SendPropertyChanged("idFacebook");
+					this.OnidFacebookChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMovimiento", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int idMovimiento
 		{
 			get
@@ -518,327 +481,37 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string nombre
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_UsuarioFacebook", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
+		public Usuario Usuario
 		{
 			get
 			{
-				return this._nombre;
+				return this._Usuario.Entity;
 			}
 			set
 			{
-				if ((this._nombre != value))
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnnombreChanging(value);
 					this.SendPropertyChanging();
-					this._nombre = value;
-					this.SendPropertyChanged("nombre");
-					this.OnnombreChanged();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.UsuarioFacebooks.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.UsuarioFacebooks.Add(this);
+						this._idUsuario = value.id;
+					}
+					else
+					{
+						this._idUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_apodo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string apodo
-		{
-			get
-			{
-				return this._apodo;
-			}
-			set
-			{
-				if ((this._apodo != value))
-				{
-					this.OnapodoChanging(value);
-					this.SendPropertyChanging();
-					this._apodo = value;
-					this.SendPropertyChanged("apodo");
-					this.OnapodoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mail", DbType="VarChar(50)")]
-		public string mail
-		{
-			get
-			{
-				return this._mail;
-			}
-			set
-			{
-				if ((this._mail != value))
-				{
-					this.OnmailChanging(value);
-					this.SendPropertyChanging();
-					this._mail = value;
-					this.SendPropertyChanged("mail");
-					this.OnmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_contraseña", DbType="VarBinary(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary contraseña
-		{
-			get
-			{
-				return this._contraseña;
-			}
-			set
-			{
-				if ((this._contraseña != value))
-				{
-					this.OncontraseñaChanging(value);
-					this.SendPropertyChanging();
-					this._contraseña = value;
-					this.SendPropertyChanged("contraseña");
-					this.OncontraseñaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitud", DbType="Float NOT NULL")]
-		public double latitud
-		{
-			get
-			{
-				return this._latitud;
-			}
-			set
-			{
-				if ((this._latitud != value))
-				{
-					this.OnlatitudChanging(value);
-					this.SendPropertyChanging();
-					this._latitud = value;
-					this.SendPropertyChanged("latitud");
-					this.OnlatitudChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", DbType="Float NOT NULL")]
-		public double longitud
-		{
-			get
-			{
-				return this._longitud;
-			}
-			set
-			{
-				if ((this._longitud != value))
-				{
-					this.OnlongitudChanging(value);
-					this.SendPropertyChanging();
-					this._longitud = value;
-					this.SendPropertyChanged("longitud");
-					this.OnlongitudChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaRegistro", DbType="DateTime")]
-		public System.Nullable<System.DateTime> fechaRegistro
-		{
-			get
-			{
-				return this._fechaRegistro;
-			}
-			set
-			{
-				if ((this._fechaRegistro != value))
-				{
-					this.OnfechaRegistroChanging(value);
-					this.SendPropertyChanging();
-					this._fechaRegistro = value;
-					this.SendPropertyChanged("fechaRegistro");
-					this.OnfechaRegistroChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cantRecursosMarcadosInadecuados", DbType="Int")]
-		public System.Nullable<int> cantRecursosMarcadosInadecuados
-		{
-			get
-			{
-				return this._cantRecursosMarcadosInadecuados;
-			}
-			set
-			{
-				if ((this._cantRecursosMarcadosInadecuados != value))
-				{
-					this.OncantRecursosMarcadosInadecuadosChanging(value);
-					this.SendPropertyChanging();
-					this._cantRecursosMarcadosInadecuados = value;
-					this.SendPropertyChanged("cantRecursosMarcadosInadecuados");
-					this.OncantRecursosMarcadosInadecuadosChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cantRecursosDeshabilitados", DbType="Int")]
-		public System.Nullable<int> cantRecursosDeshabilitados
-		{
-			get
-			{
-				return this._cantRecursosDeshabilitados;
-			}
-			set
-			{
-				if ((this._cantRecursosDeshabilitados != value))
-				{
-					this.OncantRecursosDeshabilitadosChanging(value);
-					this.SendPropertyChanging();
-					this._cantRecursosDeshabilitados = value;
-					this.SendPropertyChanged("cantRecursosDeshabilitados");
-					this.OncantRecursosDeshabilitadosChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_banned", DbType="Bit NOT NULL")]
-		public bool banned
-		{
-			get
-			{
-				return this._banned;
-			}
-			set
-			{
-				if ((this._banned != value))
-				{
-					this.OnbannedChanging(value);
-					this.SendPropertyChanging();
-					this._banned = value;
-					this.SendPropertyChanged("banned");
-					this.OnbannedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_privilegio", DbType="SmallInt NOT NULL")]
-		public short privilegio
-		{
-			get
-			{
-				return this._privilegio;
-			}
-			set
-			{
-				if ((this._privilegio != value))
-				{
-					this.OnprivilegioChanging(value);
-					this.SendPropertyChanging();
-					this._privilegio = value;
-					this.SendPropertyChanged("privilegio");
-					this.OnprivilegioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Aprobacione", Storage="_Aprobaciones", ThisKey="id", OtherKey="idUsuario")]
-		public EntitySet<Aprobacione> Aprobaciones
-		{
-			get
-			{
-				return this._Aprobaciones;
-			}
-			set
-			{
-				this._Aprobaciones.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Asistencia", Storage="_Asistencias", ThisKey="id", OtherKey="idUsuario")]
-		public EntitySet<Asistencia> Asistencias
-		{
-			get
-			{
-				return this._Asistencias;
-			}
-			set
-			{
-				this._Asistencias.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Convocatorias", ThisKey="id", OtherKey="idAutor")]
-		public EntitySet<Convocatoria> Convocatorias
-		{
-			get
-			{
-				return this._Convocatorias;
-			}
-			set
-			{
-				this._Convocatorias.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Interese", Storage="_Intereses", ThisKey="id", OtherKey="idUsuario")]
-		public EntitySet<Interese> Intereses
-		{
-			get
-			{
-				return this._Intereses;
-			}
-			set
-			{
-				this._Intereses.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_MarcasInadecuado", Storage="_MarcasInadecuados", ThisKey="id", OtherKey="idUsuario")]
-		public EntitySet<MarcasInadecuado> MarcasInadecuados
-		{
-			get
-			{
-				return this._MarcasInadecuados;
-			}
-			set
-			{
-				this._MarcasInadecuados.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Notificacione", Storage="_Notificaciones", ThisKey="id", OtherKey="idUsuario")]
-		public EntitySet<Notificacione> Notificaciones
-		{
-			get
-			{
-				return this._Notificaciones;
-			}
-			set
-			{
-				this._Notificaciones.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Recurso", Storage="_Recursos", ThisKey="id", OtherKey="idUsuario")]
-		public EntitySet<Recurso> Recursos
-		{
-			get
-			{
-				return this._Recursos;
-			}
-			set
-			{
-				this._Recursos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_UsuarioFacebook", Storage="_UsuarioFacebooks", ThisKey="id", OtherKey="idUsuario")]
-		public EntitySet<UsuarioFacebook> UsuarioFacebooks
-		{
-			get
-			{
-				return this._UsuarioFacebooks;
-			}
-			set
-			{
-				this._UsuarioFacebooks.Assign(value);
 			}
 		}
 		
@@ -861,102 +534,6 @@ namespace IndignadoServer.LinqDataContext
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_Aprobaciones(Aprobacione entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = this;
-		}
-		
-		private void detach_Aprobaciones(Aprobacione entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = null;
-		}
-		
-		private void attach_Asistencias(Asistencia entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = this;
-		}
-		
-		private void detach_Asistencias(Asistencia entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = null;
-		}
-		
-		private void attach_Convocatorias(Convocatoria entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = this;
-		}
-		
-		private void detach_Convocatorias(Convocatoria entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = null;
-		}
-		
-		private void attach_Intereses(Interese entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = this;
-		}
-		
-		private void detach_Intereses(Interese entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = null;
-		}
-		
-		private void attach_MarcasInadecuados(MarcasInadecuado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = this;
-		}
-		
-		private void detach_MarcasInadecuados(MarcasInadecuado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = null;
-		}
-		
-		private void attach_Notificaciones(Notificacione entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = this;
-		}
-		
-		private void detach_Notificaciones(Notificacione entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = null;
-		}
-		
-		private void attach_Recursos(Recurso entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = this;
-		}
-		
-		private void detach_Recursos(Recurso entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = null;
-		}
-		
-		private void attach_UsuarioFacebooks(UsuarioFacebook entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = this;
-		}
-		
-		private void detach_UsuarioFacebooks(UsuarioFacebook entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Asistencias")]
@@ -971,9 +548,9 @@ namespace IndignadoServer.LinqDataContext
 		
 		private int _hayAsistencia;
 		
-		private EntityRef<Usuario> _Usuario;
-		
 		private EntityRef<Convocatoria> _Convocatoria;
+		
+		private EntityRef<Usuario> _Usuario;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -989,8 +566,8 @@ namespace IndignadoServer.LinqDataContext
 		
 		public Asistencia()
 		{
-			this._Usuario = default(EntityRef<Usuario>);
 			this._Convocatoria = default(EntityRef<Convocatoria>);
+			this._Usuario = default(EntityRef<Usuario>);
 			OnCreated();
 		}
 		
@@ -1062,40 +639,6 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Asistencia", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
-		public Usuario Usuario
-		{
-			get
-			{
-				return this._Usuario.Entity;
-			}
-			set
-			{
-				Usuario previousValue = this._Usuario.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuario.Entity = null;
-						previousValue.Asistencias.Remove(this);
-					}
-					this._Usuario.Entity = value;
-					if ((value != null))
-					{
-						value.Asistencias.Add(this);
-						this._idUsuario = value.id;
-					}
-					else
-					{
-						this._idUsuario = default(int);
-					}
-					this.SendPropertyChanged("Usuario");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convocatoria_Asistencia", Storage="_Convocatoria", ThisKey="idConvocatoria", OtherKey="id", IsForeignKey=true)]
 		public Convocatoria Convocatoria
 		{
@@ -1126,6 +669,40 @@ namespace IndignadoServer.LinqDataContext
 						this._idConvocatoria = default(int);
 					}
 					this.SendPropertyChanged("Convocatoria");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Asistencia", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.Asistencias.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.Asistencias.Add(this);
+						this._idUsuario = value.id;
+					}
+					else
+					{
+						this._idUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
 				}
 			}
 		}
@@ -1596,9 +1173,9 @@ namespace IndignadoServer.LinqDataContext
 		
 		private double _longitud;
 		
-		private System.Nullable<System.DateTime> _fechaInicio;
+		private System.DateTime _fechaInicio;
 		
-		private System.Nullable<System.DateTime> _fechaFin;
+		private System.DateTime _fechaFin;
 		
 		private System.Nullable<int> _minQuorum;
 		
@@ -1606,15 +1183,19 @@ namespace IndignadoServer.LinqDataContext
 		
 		private System.Nullable<int> _miAsistencia;
 		
+		private System.Nullable<bool> _estaConfirmada;
+		
+		private System.Nullable<bool> _estaActiva;
+		
 		private EntitySet<Asistencia> _Asistencias;
 		
 		private EntitySet<CatTemasConvocatoria> _CatTemasConvocatorias;
 		
 		private EntitySet<Notificacione> _Notificaciones;
 		
-		private EntityRef<Usuario> _Usuario;
-		
 		private EntityRef<Movimiento> _Movimiento;
+		
+		private EntityRef<Usuario> _Usuario;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1636,9 +1217,9 @@ namespace IndignadoServer.LinqDataContext
     partial void OnlatitudChanged();
     partial void OnlongitudChanging(double value);
     partial void OnlongitudChanged();
-    partial void OnfechaInicioChanging(System.Nullable<System.DateTime> value);
+    partial void OnfechaInicioChanging(System.DateTime value);
     partial void OnfechaInicioChanged();
-    partial void OnfechaFinChanging(System.Nullable<System.DateTime> value);
+    partial void OnfechaFinChanging(System.DateTime value);
     partial void OnfechaFinChanged();
     partial void OnminQuorumChanging(System.Nullable<int> value);
     partial void OnminQuorumChanged();
@@ -1646,6 +1227,10 @@ namespace IndignadoServer.LinqDataContext
     partial void OncantAsistenciasChanged();
     partial void OnmiAsistenciaChanging(System.Nullable<int> value);
     partial void OnmiAsistenciaChanged();
+    partial void OnestaConfirmadaChanging(System.Nullable<bool> value);
+    partial void OnestaConfirmadaChanged();
+    partial void OnestaActivaChanging(System.Nullable<bool> value);
+    partial void OnestaActivaChanged();
     #endregion
 		
 		public Convocatoria()
@@ -1653,8 +1238,8 @@ namespace IndignadoServer.LinqDataContext
 			this._Asistencias = new EntitySet<Asistencia>(new Action<Asistencia>(this.attach_Asistencias), new Action<Asistencia>(this.detach_Asistencias));
 			this._CatTemasConvocatorias = new EntitySet<CatTemasConvocatoria>(new Action<CatTemasConvocatoria>(this.attach_CatTemasConvocatorias), new Action<CatTemasConvocatoria>(this.detach_CatTemasConvocatorias));
 			this._Notificaciones = new EntitySet<Notificacione>(new Action<Notificacione>(this.attach_Notificaciones), new Action<Notificacione>(this.detach_Notificaciones));
-			this._Usuario = default(EntityRef<Usuario>);
 			this._Movimiento = default(EntityRef<Movimiento>);
+			this._Usuario = default(EntityRef<Usuario>);
 			OnCreated();
 		}
 		
@@ -1826,8 +1411,8 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaInicio", DbType="DateTime")]
-		public System.Nullable<System.DateTime> fechaInicio
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaInicio", DbType="DateTime NOT NULL")]
+		public System.DateTime fechaInicio
 		{
 			get
 			{
@@ -1846,8 +1431,8 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaFin", DbType="DateTime")]
-		public System.Nullable<System.DateTime> fechaFin
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaFin", DbType="DateTime NOT NULL")]
+		public System.DateTime fechaFin
 		{
 			get
 			{
@@ -1926,6 +1511,46 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_estaConfirmada", DbType="Bit")]
+		public System.Nullable<bool> estaConfirmada
+		{
+			get
+			{
+				return this._estaConfirmada;
+			}
+			set
+			{
+				if ((this._estaConfirmada != value))
+				{
+					this.OnestaConfirmadaChanging(value);
+					this.SendPropertyChanging();
+					this._estaConfirmada = value;
+					this.SendPropertyChanged("estaConfirmada");
+					this.OnestaConfirmadaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_estaActiva", DbType="Bit")]
+		public System.Nullable<bool> estaActiva
+		{
+			get
+			{
+				return this._estaActiva;
+			}
+			set
+			{
+				if ((this._estaActiva != value))
+				{
+					this.OnestaActivaChanging(value);
+					this.SendPropertyChanging();
+					this._estaActiva = value;
+					this.SendPropertyChanged("estaActiva");
+					this.OnestaActivaChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convocatoria_Asistencia", Storage="_Asistencias", ThisKey="id", OtherKey="idConvocatoria")]
 		public EntitySet<Asistencia> Asistencias
 		{
@@ -1965,40 +1590,6 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Usuario", ThisKey="idAutor", OtherKey="id", IsForeignKey=true)]
-		public Usuario Usuario
-		{
-			get
-			{
-				return this._Usuario.Entity;
-			}
-			set
-			{
-				Usuario previousValue = this._Usuario.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuario.Entity = null;
-						previousValue.Convocatorias.Remove(this);
-					}
-					this._Usuario.Entity = value;
-					if ((value != null))
-					{
-						value.Convocatorias.Add(this);
-						this._idAutor = value.id;
-					}
-					else
-					{
-						this._idAutor = default(int);
-					}
-					this.SendPropertyChanged("Usuario");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movimiento_Convocatoria", Storage="_Movimiento", ThisKey="idMovimiento", OtherKey="id", IsForeignKey=true)]
 		public Movimiento Movimiento
 		{
@@ -2029,6 +1620,40 @@ namespace IndignadoServer.LinqDataContext
 						this._idMovimiento = default(int);
 					}
 					this.SendPropertyChanged("Movimiento");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Usuario", ThisKey="idAutor", OtherKey="id", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.Convocatorias.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.Convocatorias.Add(this);
+						this._idAutor = value.id;
+					}
+					else
+					{
+						this._idAutor = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
 				}
 			}
 		}
@@ -2406,9 +2031,9 @@ namespace IndignadoServer.LinqDataContext
 		
 		private int _idUsuario;
 		
-		private EntityRef<Usuario> _Usuario;
-		
 		private EntityRef<Recurso> _Recurso;
+		
+		private EntityRef<Usuario> _Usuario;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2422,8 +2047,8 @@ namespace IndignadoServer.LinqDataContext
 		
 		public MarcasInadecuado()
 		{
-			this._Usuario = default(EntityRef<Usuario>);
 			this._Recurso = default(EntityRef<Recurso>);
+			this._Usuario = default(EntityRef<Usuario>);
 			OnCreated();
 		}
 		
@@ -2475,40 +2100,6 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_MarcasInadecuado", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
-		public Usuario Usuario
-		{
-			get
-			{
-				return this._Usuario.Entity;
-			}
-			set
-			{
-				Usuario previousValue = this._Usuario.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuario.Entity = null;
-						previousValue.MarcasInadecuados.Remove(this);
-					}
-					this._Usuario.Entity = value;
-					if ((value != null))
-					{
-						value.MarcasInadecuados.Add(this);
-						this._idUsuario = value.id;
-					}
-					else
-					{
-						this._idUsuario = default(int);
-					}
-					this.SendPropertyChanged("Usuario");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Recurso_MarcasInadecuado", Storage="_Recurso", ThisKey="idRecurso", OtherKey="id", IsForeignKey=true)]
 		public Recurso Recurso
 		{
@@ -2539,6 +2130,40 @@ namespace IndignadoServer.LinqDataContext
 						this._idRecurso = default(int);
 					}
 					this.SendPropertyChanged("Recurso");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_MarcasInadecuado", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.MarcasInadecuados.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.MarcasInadecuados.Add(this);
+						this._idUsuario = value.id;
+					}
+					else
+					{
+						this._idUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
 				}
 			}
 		}
@@ -3901,83 +3526,120 @@ namespace IndignadoServer.LinqDataContext
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UsuarioFacebook")]
-	public partial class UsuarioFacebook : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Usuarios")]
+	public partial class Usuario : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _idUsuario;
-		
-		private int _idFacebook;
+		private int _id;
 		
 		private int _idMovimiento;
 		
-		private EntityRef<Usuario> _Usuario;
+		private string _nombre;
+		
+		private string _apodo;
+		
+		private string _mail;
+		
+		private System.Data.Linq.Binary _contraseña;
+		
+		private double _latitud;
+		
+		private double _longitud;
+		
+		private System.Nullable<System.DateTime> _fechaRegistro;
+		
+		private System.Nullable<int> _cantRecursosMarcadosInadecuados;
+		
+		private System.Nullable<int> _cantRecursosDeshabilitados;
+		
+		private bool _banned;
+		
+		private short _privilegio;
+		
+		private EntitySet<Aprobacione> _Aprobaciones;
+		
+		private EntitySet<UsuarioFacebook> _UsuarioFacebooks;
+		
+		private EntitySet<Asistencia> _Asistencias;
+		
+		private EntitySet<Convocatoria> _Convocatorias;
+		
+		private EntitySet<Interese> _Intereses;
+		
+		private EntitySet<MarcasInadecuado> _MarcasInadecuados;
+		
+		private EntitySet<Notificacione> _Notificaciones;
+		
+		private EntitySet<Recurso> _Recursos;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidUsuarioChanging(int value);
-    partial void OnidUsuarioChanged();
-    partial void OnidFacebookChanging(int value);
-    partial void OnidFacebookChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
     partial void OnidMovimientoChanging(int value);
     partial void OnidMovimientoChanged();
+    partial void OnnombreChanging(string value);
+    partial void OnnombreChanged();
+    partial void OnapodoChanging(string value);
+    partial void OnapodoChanged();
+    partial void OnmailChanging(string value);
+    partial void OnmailChanged();
+    partial void OncontraseñaChanging(System.Data.Linq.Binary value);
+    partial void OncontraseñaChanged();
+    partial void OnlatitudChanging(double value);
+    partial void OnlatitudChanged();
+    partial void OnlongitudChanging(double value);
+    partial void OnlongitudChanged();
+    partial void OnfechaRegistroChanging(System.Nullable<System.DateTime> value);
+    partial void OnfechaRegistroChanged();
+    partial void OncantRecursosMarcadosInadecuadosChanging(System.Nullable<int> value);
+    partial void OncantRecursosMarcadosInadecuadosChanged();
+    partial void OncantRecursosDeshabilitadosChanging(System.Nullable<int> value);
+    partial void OncantRecursosDeshabilitadosChanged();
+    partial void OnbannedChanging(bool value);
+    partial void OnbannedChanged();
+    partial void OnprivilegioChanging(short value);
+    partial void OnprivilegioChanged();
     #endregion
 		
-		public UsuarioFacebook()
+		public Usuario()
 		{
-			this._Usuario = default(EntityRef<Usuario>);
+			this._Aprobaciones = new EntitySet<Aprobacione>(new Action<Aprobacione>(this.attach_Aprobaciones), new Action<Aprobacione>(this.detach_Aprobaciones));
+			this._UsuarioFacebooks = new EntitySet<UsuarioFacebook>(new Action<UsuarioFacebook>(this.attach_UsuarioFacebooks), new Action<UsuarioFacebook>(this.detach_UsuarioFacebooks));
+			this._Asistencias = new EntitySet<Asistencia>(new Action<Asistencia>(this.attach_Asistencias), new Action<Asistencia>(this.detach_Asistencias));
+			this._Convocatorias = new EntitySet<Convocatoria>(new Action<Convocatoria>(this.attach_Convocatorias), new Action<Convocatoria>(this.detach_Convocatorias));
+			this._Intereses = new EntitySet<Interese>(new Action<Interese>(this.attach_Intereses), new Action<Interese>(this.detach_Intereses));
+			this._MarcasInadecuados = new EntitySet<MarcasInadecuado>(new Action<MarcasInadecuado>(this.attach_MarcasInadecuados), new Action<MarcasInadecuado>(this.detach_MarcasInadecuados));
+			this._Notificaciones = new EntitySet<Notificacione>(new Action<Notificacione>(this.attach_Notificaciones), new Action<Notificacione>(this.detach_Notificaciones));
+			this._Recursos = new EntitySet<Recurso>(new Action<Recurso>(this.attach_Recursos), new Action<Recurso>(this.detach_Recursos));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int NOT NULL")]
-		public int idUsuario
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
 		{
 			get
 			{
-				return this._idUsuario;
+				return this._id;
 			}
 			set
 			{
-				if ((this._idUsuario != value))
+				if ((this._id != value))
 				{
-					if (this._Usuario.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidUsuarioChanging(value);
+					this.OnidChanging(value);
 					this.SendPropertyChanging();
-					this._idUsuario = value;
-					this.SendPropertyChanged("idUsuario");
-					this.OnidUsuarioChanged();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idFacebook", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int idFacebook
-		{
-			get
-			{
-				return this._idFacebook;
-			}
-			set
-			{
-				if ((this._idFacebook != value))
-				{
-					this.OnidFacebookChanging(value);
-					this.SendPropertyChanging();
-					this._idFacebook = value;
-					this.SendPropertyChanged("idFacebook");
-					this.OnidFacebookChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMovimiento", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMovimiento", DbType="Int NOT NULL")]
 		public int idMovimiento
 		{
 			get
@@ -3997,37 +3659,327 @@ namespace IndignadoServer.LinqDataContext
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_UsuarioFacebook", Storage="_Usuario", ThisKey="idUsuario", OtherKey="id", IsForeignKey=true)]
-		public Usuario Usuario
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string nombre
 		{
 			get
 			{
-				return this._Usuario.Entity;
+				return this._nombre;
 			}
 			set
 			{
-				Usuario previousValue = this._Usuario.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				if ((this._nombre != value))
 				{
+					this.OnnombreChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuario.Entity = null;
-						previousValue.UsuarioFacebooks.Remove(this);
-					}
-					this._Usuario.Entity = value;
-					if ((value != null))
-					{
-						value.UsuarioFacebooks.Add(this);
-						this._idUsuario = value.id;
-					}
-					else
-					{
-						this._idUsuario = default(int);
-					}
-					this.SendPropertyChanged("Usuario");
+					this._nombre = value;
+					this.SendPropertyChanged("nombre");
+					this.OnnombreChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_apodo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string apodo
+		{
+			get
+			{
+				return this._apodo;
+			}
+			set
+			{
+				if ((this._apodo != value))
+				{
+					this.OnapodoChanging(value);
+					this.SendPropertyChanging();
+					this._apodo = value;
+					this.SendPropertyChanged("apodo");
+					this.OnapodoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mail", DbType="VarChar(50)")]
+		public string mail
+		{
+			get
+			{
+				return this._mail;
+			}
+			set
+			{
+				if ((this._mail != value))
+				{
+					this.OnmailChanging(value);
+					this.SendPropertyChanging();
+					this._mail = value;
+					this.SendPropertyChanged("mail");
+					this.OnmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_contraseña", DbType="VarBinary(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary contraseña
+		{
+			get
+			{
+				return this._contraseña;
+			}
+			set
+			{
+				if ((this._contraseña != value))
+				{
+					this.OncontraseñaChanging(value);
+					this.SendPropertyChanging();
+					this._contraseña = value;
+					this.SendPropertyChanged("contraseña");
+					this.OncontraseñaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitud", DbType="Float NOT NULL")]
+		public double latitud
+		{
+			get
+			{
+				return this._latitud;
+			}
+			set
+			{
+				if ((this._latitud != value))
+				{
+					this.OnlatitudChanging(value);
+					this.SendPropertyChanging();
+					this._latitud = value;
+					this.SendPropertyChanged("latitud");
+					this.OnlatitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitud", DbType="Float NOT NULL")]
+		public double longitud
+		{
+			get
+			{
+				return this._longitud;
+			}
+			set
+			{
+				if ((this._longitud != value))
+				{
+					this.OnlongitudChanging(value);
+					this.SendPropertyChanging();
+					this._longitud = value;
+					this.SendPropertyChanged("longitud");
+					this.OnlongitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaRegistro", DbType="DateTime")]
+		public System.Nullable<System.DateTime> fechaRegistro
+		{
+			get
+			{
+				return this._fechaRegistro;
+			}
+			set
+			{
+				if ((this._fechaRegistro != value))
+				{
+					this.OnfechaRegistroChanging(value);
+					this.SendPropertyChanging();
+					this._fechaRegistro = value;
+					this.SendPropertyChanged("fechaRegistro");
+					this.OnfechaRegistroChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cantRecursosMarcadosInadecuados", DbType="Int")]
+		public System.Nullable<int> cantRecursosMarcadosInadecuados
+		{
+			get
+			{
+				return this._cantRecursosMarcadosInadecuados;
+			}
+			set
+			{
+				if ((this._cantRecursosMarcadosInadecuados != value))
+				{
+					this.OncantRecursosMarcadosInadecuadosChanging(value);
+					this.SendPropertyChanging();
+					this._cantRecursosMarcadosInadecuados = value;
+					this.SendPropertyChanged("cantRecursosMarcadosInadecuados");
+					this.OncantRecursosMarcadosInadecuadosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cantRecursosDeshabilitados", DbType="Int")]
+		public System.Nullable<int> cantRecursosDeshabilitados
+		{
+			get
+			{
+				return this._cantRecursosDeshabilitados;
+			}
+			set
+			{
+				if ((this._cantRecursosDeshabilitados != value))
+				{
+					this.OncantRecursosDeshabilitadosChanging(value);
+					this.SendPropertyChanging();
+					this._cantRecursosDeshabilitados = value;
+					this.SendPropertyChanged("cantRecursosDeshabilitados");
+					this.OncantRecursosDeshabilitadosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_banned", DbType="Bit NOT NULL")]
+		public bool banned
+		{
+			get
+			{
+				return this._banned;
+			}
+			set
+			{
+				if ((this._banned != value))
+				{
+					this.OnbannedChanging(value);
+					this.SendPropertyChanging();
+					this._banned = value;
+					this.SendPropertyChanged("banned");
+					this.OnbannedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_privilegio", DbType="SmallInt NOT NULL")]
+		public short privilegio
+		{
+			get
+			{
+				return this._privilegio;
+			}
+			set
+			{
+				if ((this._privilegio != value))
+				{
+					this.OnprivilegioChanging(value);
+					this.SendPropertyChanging();
+					this._privilegio = value;
+					this.SendPropertyChanged("privilegio");
+					this.OnprivilegioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Aprobacione", Storage="_Aprobaciones", ThisKey="id", OtherKey="idUsuario")]
+		public EntitySet<Aprobacione> Aprobaciones
+		{
+			get
+			{
+				return this._Aprobaciones;
+			}
+			set
+			{
+				this._Aprobaciones.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_UsuarioFacebook", Storage="_UsuarioFacebooks", ThisKey="id", OtherKey="idUsuario")]
+		public EntitySet<UsuarioFacebook> UsuarioFacebooks
+		{
+			get
+			{
+				return this._UsuarioFacebooks;
+			}
+			set
+			{
+				this._UsuarioFacebooks.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Asistencia", Storage="_Asistencias", ThisKey="id", OtherKey="idUsuario")]
+		public EntitySet<Asistencia> Asistencias
+		{
+			get
+			{
+				return this._Asistencias;
+			}
+			set
+			{
+				this._Asistencias.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Convocatoria", Storage="_Convocatorias", ThisKey="id", OtherKey="idAutor")]
+		public EntitySet<Convocatoria> Convocatorias
+		{
+			get
+			{
+				return this._Convocatorias;
+			}
+			set
+			{
+				this._Convocatorias.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Interese", Storage="_Intereses", ThisKey="id", OtherKey="idUsuario")]
+		public EntitySet<Interese> Intereses
+		{
+			get
+			{
+				return this._Intereses;
+			}
+			set
+			{
+				this._Intereses.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_MarcasInadecuado", Storage="_MarcasInadecuados", ThisKey="id", OtherKey="idUsuario")]
+		public EntitySet<MarcasInadecuado> MarcasInadecuados
+		{
+			get
+			{
+				return this._MarcasInadecuados;
+			}
+			set
+			{
+				this._MarcasInadecuados.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Notificacione", Storage="_Notificaciones", ThisKey="id", OtherKey="idUsuario")]
+		public EntitySet<Notificacione> Notificaciones
+		{
+			get
+			{
+				return this._Notificaciones;
+			}
+			set
+			{
+				this._Notificaciones.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Recurso", Storage="_Recursos", ThisKey="id", OtherKey="idUsuario")]
+		public EntitySet<Recurso> Recursos
+		{
+			get
+			{
+				return this._Recursos;
+			}
+			set
+			{
+				this._Recursos.Assign(value);
 			}
 		}
 		
@@ -4049,6 +4001,102 @@ namespace IndignadoServer.LinqDataContext
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Aprobaciones(Aprobacione entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_Aprobaciones(Aprobacione entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
+		private void attach_UsuarioFacebooks(UsuarioFacebook entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_UsuarioFacebooks(UsuarioFacebook entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
+		private void attach_Asistencias(Asistencia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_Asistencias(Asistencia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
+		private void attach_Convocatorias(Convocatoria entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_Convocatorias(Convocatoria entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
+		private void attach_Intereses(Interese entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_Intereses(Interese entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
+		private void attach_MarcasInadecuados(MarcasInadecuado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_MarcasInadecuados(MarcasInadecuado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
+		private void attach_Notificaciones(Notificacione entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_Notificaciones(Notificacione entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
+		private void attach_Recursos(Recurso entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_Recursos(Recurso entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
 		}
 	}
 }

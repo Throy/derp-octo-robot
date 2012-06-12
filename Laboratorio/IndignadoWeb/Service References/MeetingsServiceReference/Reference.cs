@@ -42,6 +42,15 @@ namespace IndignadoWeb.MeetingsServiceReference {
         private string imagePathField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isActiveField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isConfirmedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isImminentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private float locationLatiField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -146,6 +155,45 @@ namespace IndignadoWeb.MeetingsServiceReference {
                 if ((object.ReferenceEquals(this.imagePathField, value) != true)) {
                     this.imagePathField = value;
                     this.RaisePropertyChanged("imagePath");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isActive {
+            get {
+                return this.isActiveField;
+            }
+            set {
+                if ((this.isActiveField.Equals(value) != true)) {
+                    this.isActiveField = value;
+                    this.RaisePropertyChanged("isActive");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isConfirmed {
+            get {
+                return this.isConfirmedField;
+            }
+            set {
+                if ((this.isConfirmedField.Equals(value) != true)) {
+                    this.isConfirmedField = value;
+                    this.RaisePropertyChanged("isConfirmed");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isImminent {
+            get {
+                return this.isImminentField;
+            }
+            set {
+                if ((this.isImminentField.Equals(value) != true)) {
+                    this.isImminentField = value;
+                    this.RaisePropertyChanged("isImminent");
                 }
             }
         }

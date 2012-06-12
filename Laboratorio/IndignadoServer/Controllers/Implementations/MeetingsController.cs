@@ -185,6 +185,10 @@ namespace IndignadoServer.Controllers
                             }
                         }
 
+                        // get meeting status
+                        meeting.estaActiva = (DateTime.UtcNow < meeting.fechaFin);
+                        meeting.estaConfirmada = (meeting.fechaInicio.AddDays(-1) < DateTime.UtcNow) && (meeting.cantAsistencias >= meeting.minQuorum);
+
                         // add item to the collection
                         meetingsCol.Add(meeting);
                     }
@@ -221,6 +225,10 @@ namespace IndignadoServer.Controllers
                         meeting.miAsistencia = myAttendance;
                     }
                 }
+
+                // get meeting status
+                meeting.estaActiva = (DateTime.UtcNow < meeting.fechaFin);
+                meeting.estaConfirmada = (meeting.fechaInicio.AddDays(-1) < DateTime.UtcNow) && (meeting.cantAsistencias >= meeting.minQuorum);
 
                 // add item to the collection
                 meetingsCol.Add(meeting);
