@@ -37,10 +37,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getUserDetails">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtUser" nillable="true" type="q4:DTUser_NewsResources" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getUserDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getUserDetailsResult" nillable="true" type="q5:DTUserDetails_NewsResources" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="createResource">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtResource" nillable="true" type="q4:DTResource_NewsResources" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtResource" nillable="true" type="q6:DTResource_NewsResources" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -59,14 +73,14 @@
   <xs:element name="getResourceDataResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getResourceDataResult" nillable="true" type="q5:DTResource_NewsResources" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="getResourceDataResult" nillable="true" type="q7:DTResource_NewsResources" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="likeResource">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtResource" nillable="true" type="q6:DTResource_NewsResources" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtResource" nillable="true" type="q8:DTResource_NewsResources" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -78,7 +92,7 @@
   <xs:element name="unlikeResource">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtResource" nillable="true" type="q7:DTResource_NewsResources" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="dtResource" nillable="true" type="q9:DTResource_NewsResources" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -90,7 +104,7 @@
   <xs:element name="markResourceInappropriate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="resource" nillable="true" type="q8:DTResource_NewsResources" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="resource" nillable="true" type="q10:DTResource_NewsResources" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -102,7 +116,7 @@
   <xs:element name="unmarkResourceInappropriate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="resource" nillable="true" type="q9:DTResource_NewsResources" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/IndignadoServer.Services" minOccurs="0" name="resource" nillable="true" type="q11:DTResource_NewsResources" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

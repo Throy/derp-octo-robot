@@ -63,4 +63,34 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTResource" nillable="true" type="tns:DTResource" />
+  <xs:complexType name="DTUser_NewsResources">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:DTUser">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DTUser_NewsResources" nillable="true" type="tns:DTUser_NewsResources" />
+  <xs:complexType name="DTUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="banned" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="locationLati" type="xs:float" />
+      <xs:element minOccurs="0" name="locationLong" type="xs:float" />
+      <xs:element minOccurs="0" name="mail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="numberResourcesDisabled" type="xs:int" />
+      <xs:element minOccurs="0" name="numberResourcesMarkedInappr" type="xs:int" />
+      <xs:element minOccurs="0" name="registerDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTUser" nillable="true" type="tns:DTUser" />
+  <xs:complexType name="DTUserDetails_NewsResources">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="resources" nillable="true" type="tns:ArrayOfDTResource_NewsResources" />
+      <xs:element minOccurs="0" name="user" nillable="true" type="tns:DTUser_NewsResources" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTUserDetails_NewsResources" nillable="true" type="tns:DTUserDetails_NewsResources" />
 </xs:schema>

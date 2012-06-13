@@ -505,6 +505,264 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUser", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(IndignadoWeb.NewsResourcesServiceReference.DTUser_NewsResources))]
+    public partial class DTUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool bannedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string fullNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float locationLatiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float locationLongField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string mailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int numberResourcesDisabledField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int numberResourcesMarkedInapprField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime registerDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string usernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool banned {
+            get {
+                return this.bannedField;
+            }
+            set {
+                if ((this.bannedField.Equals(value) != true)) {
+                    this.bannedField = value;
+                    this.RaisePropertyChanged("banned");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string fullName {
+            get {
+                return this.fullNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fullNameField, value) != true)) {
+                    this.fullNameField = value;
+                    this.RaisePropertyChanged("fullName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float locationLati {
+            get {
+                return this.locationLatiField;
+            }
+            set {
+                if ((this.locationLatiField.Equals(value) != true)) {
+                    this.locationLatiField = value;
+                    this.RaisePropertyChanged("locationLati");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float locationLong {
+            get {
+                return this.locationLongField;
+            }
+            set {
+                if ((this.locationLongField.Equals(value) != true)) {
+                    this.locationLongField = value;
+                    this.RaisePropertyChanged("locationLong");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string mail {
+            get {
+                return this.mailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.mailField, value) != true)) {
+                    this.mailField = value;
+                    this.RaisePropertyChanged("mail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int numberResourcesDisabled {
+            get {
+                return this.numberResourcesDisabledField;
+            }
+            set {
+                if ((this.numberResourcesDisabledField.Equals(value) != true)) {
+                    this.numberResourcesDisabledField = value;
+                    this.RaisePropertyChanged("numberResourcesDisabled");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int numberResourcesMarkedInappr {
+            get {
+                return this.numberResourcesMarkedInapprField;
+            }
+            set {
+                if ((this.numberResourcesMarkedInapprField.Equals(value) != true)) {
+                    this.numberResourcesMarkedInapprField = value;
+                    this.RaisePropertyChanged("numberResourcesMarkedInappr");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime registerDate {
+            get {
+                return this.registerDateField;
+            }
+            set {
+                if ((this.registerDateField.Equals(value) != true)) {
+                    this.registerDateField = value;
+                    this.RaisePropertyChanged("registerDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
+                    this.usernameField = value;
+                    this.RaisePropertyChanged("username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUser_NewsResources", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTUser_NewsResources : IndignadoWeb.NewsResourcesServiceReference.DTUser {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DTUserDetails_NewsResources", Namespace="http://schemas.datacontract.org/2004/07/IndignadoServer.Services")]
+    [System.SerializableAttribute()]
+    public partial class DTUserDetails_NewsResources : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources[] resourcesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private IndignadoWeb.NewsResourcesServiceReference.DTUser_NewsResources userField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources[] resources {
+            get {
+                return this.resourcesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.resourcesField, value) != true)) {
+                    this.resourcesField = value;
+                    this.RaisePropertyChanged("resources");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public IndignadoWeb.NewsResourcesServiceReference.DTUser_NewsResources user {
+            get {
+                return this.userField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.userField, value) != true)) {
+                    this.userField = value;
+                    this.RaisePropertyChanged("user");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NewsResourcesServiceReference.INewsResourcesService")]
     public interface INewsResourcesService {
@@ -517,6 +775,9 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/getResourcesListTopRanked", ReplyAction="http://tempuri.org/INewsResourcesService/getResourcesListTopRankedResponse")]
         IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol_NewsResources getResourcesListTopRanked();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/getUserDetails", ReplyAction="http://tempuri.org/INewsResourcesService/getUserDetailsResponse")]
+        IndignadoWeb.NewsResourcesServiceReference.DTUserDetails_NewsResources getUserDetails(IndignadoWeb.NewsResourcesServiceReference.DTUser_NewsResources dtUser);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsResourcesService/createResource", ReplyAction="http://tempuri.org/INewsResourcesService/createResourceResponse")]
         void createResource(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources dtResource);
@@ -574,6 +835,10 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         
         public IndignadoWeb.NewsResourcesServiceReference.DTResourcesCol_NewsResources getResourcesListTopRanked() {
             return base.Channel.getResourcesListTopRanked();
+        }
+        
+        public IndignadoWeb.NewsResourcesServiceReference.DTUserDetails_NewsResources getUserDetails(IndignadoWeb.NewsResourcesServiceReference.DTUser_NewsResources dtUser) {
+            return base.Channel.getUserDetails(dtUser);
         }
         
         public void createResource(IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources dtResource) {

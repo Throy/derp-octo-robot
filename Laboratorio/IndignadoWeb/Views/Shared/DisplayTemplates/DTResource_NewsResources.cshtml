@@ -67,8 +67,10 @@
                     
                     <div class="clear"></div>
                     <div class="footer">
+                        <!-- date -->
                         Date: @Model.date.ToString("yyyy-MM-dd HH:mm")
-
+                        
+                        <!-- author -->
                         <div class="user">
                             @{
                                 if (ViewBag.UserIsMovAdmin)
@@ -80,7 +82,7 @@
                                 else
                                 {
                                     <text>
-                                    by @Model.username
+                                    by @Html.ActionLink("" + @Model.username, "ResourcesListUser", new { id = @Model.idUser })
                                     </text>
                                 }
                             }

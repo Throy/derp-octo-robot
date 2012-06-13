@@ -8,6 +8,7 @@ using System.Threading;
 using IndignadoServer.LinqDataContext;
 using IndignadoServer.Services;
 using RssToolkit.Rss;
+using System.ServiceModel;
 
 namespace IndignadoServer.Controllers
 {
@@ -114,6 +115,16 @@ namespace IndignadoServer.Controllers
             return toResourcesCol(recursosEnum, movement.maxRecursosPopularesN);
         }
 
+        // returns all resources published by the given user.
+        public Collection<Recurso> getResourcesListUser(Usuario user)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Usuarios.id = {1}) ORDER BY Recursos.id DESC", IdMovement, user.id);
+            Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
+            return toResourcesCol(resourcesEnum, movement.maxUltimosRecursosM);
+        }
+
         // converts a resources enumerable to a collection.
         private Collection<Recurso> toResourcesCol(IEnumerable<Recurso> recursosEnum, int numberItems)
         {
@@ -156,6 +167,20 @@ namespace IndignadoServer.Controllers
             }
 
             return recursosCol;
+        }
+
+        // returns all the data of the user.
+        public Usuario getUser(Usuario user)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            Usuario fullUser = indignadoContext.Usuarios.SingleOrDefault(u => (u.id == user.id));
+            if (fullUser.idMovimiento != IdMovement) 
+            {
+                throw new FaultException ("The user doesn't belong to the movement");
+            }
+            else {
+                return fullUser;
+            }
         }
 
         // creates a resource.

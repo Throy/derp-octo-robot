@@ -52,6 +52,7 @@ namespace IndignadoWeb.Controllers
         public const string viewResourceShare = "ResourceShare";
         public const string viewResourcesList = "ResourcesList";
         public const string viewResourcesListTopRanked = "ResourcesListTopRanked";
+        public const string viewResourcesListUser = "ResourcesListUser";
         public const string viewResourcesManage = "ResourcesManage";
         public const string viewRssSourcesConfig = "RssSourcesConfig";
         public const string viewThemeCategoriesConfig = "ThemeCategoriesConfig";
@@ -696,20 +697,56 @@ namespace IndignadoWeb.Controllers
             }
         }
 
-        // like / dislike resource.
+        // shows the user's resources in a list.
+        public ActionResult ResourcesListUser(int id)
+        {
+            try
+            {
+                // open service
+                INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                // get all news
+                ListResourcesModel listResourcesModel = new ListResourcesModel();
+                DTUser_NewsResources dtUser = new DTUser_NewsResources();
+                dtUser.id = id;
+                DTUserDetails_NewsResources userDetails = serv.getUserDetails(dtUser);
+                listResourcesModel.items = new DTResourcesCol_NewsResources();
+                listResourcesModel.items.items = userDetails.resources;
+                listResourcesModel.username = userDetails.user.username;
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                return View(listResourcesModel);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
+        }
+
+        // shows all resources in a list - respond to user action.
         [HttpPost]
         public ActionResult ResourcesList(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
         {
             return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id, false);
         }
 
-        // like / dislike resource.
+        // shows the top ranked resources in a list - respond to user action.
         [HttpPost]
         public ActionResult ResourcesListTopRanked(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
         {
             return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id, false);
         }
-        
+
+        // shows the user's resources in a list - respond to user action.
+        [HttpPost]
+        public ActionResult ResourcesListUser(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
+        {
+            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id, false);
+        }
+
+        // like / dislike resource.
         [HttpPost]
         public ActionResult ResourceLike(string like, string id)
         {

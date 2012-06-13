@@ -298,6 +298,9 @@
     <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTUserDetails_NewsResources.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SessionServiceReference\IndignadoWeb.SessionServiceReference.DTLoginInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -496,6 +499,7 @@
     <Content Include="Views\Home\ResourcesConfig.cshtml" />
     <Content Include="Views\Home\MeetingsNotificationsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMeetingNotification.cshtml" />
+    <Content Include="Views\Home\ResourcesListUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

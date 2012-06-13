@@ -17,6 +17,10 @@ namespace IndignadoServer.Services
         // returns the top ranked resources.
         [OperationContract]
         DTResourcesCol_NewsResources getResourcesListTopRanked();
+        
+        // returns all the data of the user.
+        [OperationContract]
+        DTUserDetails_NewsResources getUserDetails(DTUser_NewsResources dtUser);
 
         // creates a resource.
         [OperationContract]

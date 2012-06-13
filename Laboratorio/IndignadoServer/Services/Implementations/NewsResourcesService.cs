@@ -57,6 +57,27 @@ namespace IndignadoServer.Services
             return dtResourcesCol;
         }
 
+        // returns all the data of the user.
+        public DTUserDetails_NewsResources getUserDetails(DTUser_NewsResources dtUser)
+        {
+            // create user details
+            DTUserDetails_NewsResources userDetails = new DTUserDetails_NewsResources();
+            userDetails.user = ClassToDT.UserToDT_NewsResources(ControllersHub.Instance.getINewsResourcesController().getUser(DTToClass.DTToUser(dtUser)));
+            userDetails.resources = new Collection<DTResource_NewsResources>();
+
+            // get resources datatypes.
+            Collection<Recurso> recursosCol = ControllersHub.Instance.getINewsResourcesController().getResourcesListUser(DTToClass.DTToUser(dtUser));
+
+            // add meetings to the datatypes collection.
+            foreach (Recurso resource in recursosCol)
+            {
+                userDetails.resources.Add(ClassToDT.ResourceToDT_NewsResources(resource));
+            }
+
+            // return the datatype.
+            return userDetails;
+        }
+
         // creates a resource.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void createResource (DTResource_NewsResources dtResource)

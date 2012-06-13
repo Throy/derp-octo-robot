@@ -1,0 +1,42 @@
+﻿
+<!-- model -->
+@model IndignadoWeb.Models.ListResourcesModel
+
+<!-- page title -->
+@{
+    ViewBag.Title = "Indignado Framework - Resources list by " + Model.username;
+}
+<script type="text/javascript">
+    function like(like, id, numberOfLikes) {
+        $.ajax({
+            type: "POST",
+            url: "/Home/ResourceLike",
+            data: { "like": like,
+                "id": id
+            },
+            success: function (data) {
+
+                $("#" + id + "like .removableLike").remove();
+                var buttonLike = "";
+                if (like == '0') {
+                    numberOfLikes = numberOfLikes + 1;
+                    buttonLike = "<input type=\"button\" class=\"removableLike likebtn2\" name=\"buttonUnlike\" onclick=\"like('1'," + id + "," + numberOfLikes.toString() + ");\" value=\"Unlike\" />";
+                }
+                else {
+                    numberOfLikes = numberOfLikes - 1;
+                    buttonLike = "<input type=\"button\" class=\"removableLike likebtn\" name=\"buttonLike\" onclick=\"like('0'," + id + "," + numberOfLikes.toString() + ");\" value=\"Like\" />";
+
+                }
+                $("#" + id + "like").append(buttonLike);
+                $("#" + id).text(numberOfLikes);
+            }
+        });
+    }
+</script>
+<!-- page content -->
+
+<h2>Resources list by @Model.username</h2>
+
+<ul class="list1" style="margin:0 80px;">
+    @Html.DisplayFor(m => m.items.items)
+</ul>

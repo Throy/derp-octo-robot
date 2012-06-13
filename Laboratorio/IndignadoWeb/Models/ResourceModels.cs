@@ -40,6 +40,8 @@ namespace IndignadoWeb.Models
 
         [Display(Name = "ID: ")]
         public int id { get; set; }
+
+        public String username { get; set; }
     }
 
     // model for Manage resources

@@ -529,6 +529,12 @@ namespace IndignadoServer.Services
         public bool banned { get; set; }
     }
 
+    // User datatype - NewsResourcesController
+    [DataContract]
+    public class DTUser_NewsResources : DTUser
+    {
+    }
+
     // User datatype - MovAdminController
     [DataContract]
     public class DTUser_MovAdmin: DTUser
@@ -558,6 +564,17 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public Collection<DTResource_MovAdmin> resources { get; set; }
+    }
+
+    // User Details datatype - NewsResourcesController
+    [DataContract]
+    public class DTUserDetails_NewsResources
+    {
+        [DataMember]
+        public DTUser_NewsResources user { get; set; }
+
+        [DataMember]
+        public Collection<DTResource_NewsResources> resources { get; set; }
     }
 
     [DataContract]
@@ -811,6 +828,22 @@ namespace IndignadoServer.Services
         public static DTUser_MovAdmin UserToDT_MovAdmin(Usuario user)
         {
             DTUser_MovAdmin dtUser = new DTUser_MovAdmin();
+            dtUser.id = user.id;
+            dtUser.username = user.apodo;
+            dtUser.fullName = user.nombre;
+            dtUser.mail = user.mail;
+            dtUser.registerDate = (user.fechaRegistro == null) ? new DateTime() : user.fechaRegistro.Value;
+            dtUser.locationLati = (float)user.latitud;
+            dtUser.locationLong = (float)user.longitud;
+            dtUser.numberResourcesMarkedInappr = (user.cantRecursosMarcadosInadecuados == null) ? 0 : user.cantRecursosMarcadosInadecuados.Value;
+            dtUser.numberResourcesDisabled = (user.cantRecursosDeshabilitados == null) ? 0 : user.cantRecursosDeshabilitados.Value;
+            dtUser.banned = user.banned;
+            return dtUser;
+        }
+
+        public static DTUser_NewsResources UserToDT_NewsResources(Usuario user)
+        {
+            DTUser_NewsResources dtUser = new DTUser_NewsResources();
             dtUser.id = user.id;
             dtUser.username = user.apodo;
             dtUser.fullName = user.nombre;

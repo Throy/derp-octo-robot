@@ -47,7 +47,7 @@ namespace IndignadoServer.Services
         [OperationContract]
         DTThemeCategoriesColMovAdmin listThemeCategories();
 
-        // returns all users.
+        // returns all the data of the user.
         [OperationContract]
         DTUserDetails_MovAdmin getUserDetails(DTUser_MovAdmin dtUser);
 
