@@ -144,7 +144,7 @@ namespace IndignadoWeb.Controllers
             // resources
             else
             {
-                return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id, true);
+                return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id, HomeControllerConstants.viewIndex);
             }
         }
 
@@ -729,21 +729,21 @@ namespace IndignadoWeb.Controllers
         [HttpPost]
         public ActionResult ResourcesList(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
         {
-            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id, false);
+            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id, HomeControllerConstants.viewResourcesList);
         }
 
         // shows the top ranked resources in a list - respond to user action.
         [HttpPost]
         public ActionResult ResourcesListTopRanked(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
         {
-            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id, false);
+            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id, HomeControllerConstants.viewResourcesListTopRanked);
         }
 
         // shows the user's resources in a list - respond to user action.
         [HttpPost]
         public ActionResult ResourcesListUser(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id)
         {
-            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id, false);
+            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, id, HomeControllerConstants.viewResourcesListUser);
         }
 
         // like / dislike resource.
@@ -783,7 +783,7 @@ namespace IndignadoWeb.Controllers
         }
 
         // like / dislike resource.
-        public ActionResult ResourcesListGeneric(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id, bool isIndex)
+        public ActionResult ResourcesListGeneric(string buttonLike, string buttonUnlike, string buttonMarkInappr, string buttonUnmarkInappr, int id, string view)
         {
             try
             {
@@ -801,14 +801,7 @@ namespace IndignadoWeb.Controllers
                     (serv as ICommunicationObject).Close();
 
                     // reload the view
-                    if (isIndex)
-                    {
-                        return RedirectToAction(HomeControllerConstants.viewIndex);
-                    }
-                    else
-                    {
-                        return RedirectToAction(HomeControllerConstants.viewResourcesList);
-                    }
+                    return RedirectToAction(view);
                 }
             
                 else if (buttonUnlike != null)
@@ -825,14 +818,7 @@ namespace IndignadoWeb.Controllers
                     (serv as ICommunicationObject).Close();
 
                     // reload the view
-                    if (isIndex)
-                    {
-                        return RedirectToAction(HomeControllerConstants.viewIndex);
-                    }
-                    else
-                    {
-                        return RedirectToAction(HomeControllerConstants.viewResourcesList);
-                    }
+                    return RedirectToAction(view);
                 }
 
                 else if (buttonMarkInappr != null)
@@ -849,14 +835,7 @@ namespace IndignadoWeb.Controllers
                     (serv as ICommunicationObject).Close();
 
                     // reload the view
-                    if (isIndex)
-                    {
-                        return RedirectToAction(HomeControllerConstants.viewIndex);
-                    }
-                    else
-                    {
-                        return RedirectToAction(HomeControllerConstants.viewResourcesList);
-                    }
+                    return RedirectToAction(view);
                 }
 
                 else if (buttonUnmarkInappr != null)
@@ -873,14 +852,7 @@ namespace IndignadoWeb.Controllers
                     (serv as ICommunicationObject).Close();
                     
                     // reload the view
-                    if (isIndex)
-                    {
-                        return RedirectToAction(HomeControllerConstants.viewIndex);
-                    }
-                    else
-                    {
-                        return RedirectToAction(HomeControllerConstants.viewResourcesList);
-                    }
+                    return RedirectToAction(view);
                 }
 
                 return View ();
