@@ -4,16 +4,16 @@
 <li class="item">
     <div class="shadowl">
         <div class="shadowr">
-            <a class="int" href="@Html.DisplayFor(m => m.sourceUrl)" target="_blank">
+            <div class="int">
                 <div class="title">
-                    <h3>@Html.DisplayFor(m => m.title)</h3>
+                    <h3><a href="@Model.itemUrl" target="_blank">@Model.title</a></h3>
                 </div>
                 <!-- header -->
     
                 <div class="body">
                     @if ((@Model.image != null) && (@Model.image != "")) {
                         <div class="img">
-                            <img src="@Html.DisplayFor(m => m.image)" width="120px"/>
+                            <img src="@Model.image" width="120px"/>
                         </div>
                     }
                     <div class="desc">
@@ -23,11 +23,10 @@
                         Date: @Model.date.ToString("yyyy-MM-dd HH:mm")
 
                         <div class="user">
-                            by @Model.sourceTitle
+                            by <a href="@Model.sourceUrl" target="_blank">@Model.sourceTitle</a>
                         </div>
                     </div>
-                </div>
-            </a>
+            </div>
         </div>
     </div>
 </li>

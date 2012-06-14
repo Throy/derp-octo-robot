@@ -177,6 +177,9 @@ namespace IndignadoServer.Services
         public String description { get; set; }
 
         [DataMember]
+        public String itemUrl { get; set; }
+
+        [DataMember]
         public String sourceUrl { get; set; }
 
         [DataMember]
@@ -739,7 +742,8 @@ namespace IndignadoServer.Services
             //dtRssItem.description = Regex.Replace(rssItem.Description, @"</?(a|img|div|p|strong) ?[^>]*?>", string.Empty);
             // Le puse para que quite todas las tags, sino quedaba el br y me movia todo de lugar
             dtRssItem.description = Regex.Replace(rssItem.Description, "<(.|\\n)*?>", string.Empty);
-            dtRssItem.sourceUrl = (rssItem.Link == null) ? "" : rssItem.Link;
+            dtRssItem.itemUrl = (rssItem.Link == null) ? "" : rssItem.Link;
+            dtRssItem.sourceUrl = "";
             dtRssItem.sourceTitle = "";
             // Le agregue jpg para que no capture unos gifs transparentes que no mostraban nada
             dtRssItem.image = Regex.Match(rssItem.Description, @"<img[^>]*jpg.*?/>").Value;

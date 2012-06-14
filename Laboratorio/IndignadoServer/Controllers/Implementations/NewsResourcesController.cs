@@ -50,11 +50,13 @@ namespace IndignadoServer.Controllers
                     // get items from the sources.
                     Collection<List<RssItem>> ColRssLists = new Collection<List<RssItem>>();
                     Collection<String> colRssSourceTitle = new Collection<String>();
+                    Collection<String> colRssSourceUrl = new Collection<String>();
                     foreach (RssFeed source in fuentesEnum)
                     {
                         List<RssItem> rssItemsList = RssDocument.Load(new System.Uri(source.url)).Channel.Items;
                         ColRssLists.Add(rssItemsList);
                         colRssSourceTitle.Add(source.titulo);
+                        colRssSourceUrl.Add(source.url);
                         if (ColRssLists.Count > 10)
                         {
                             break;
@@ -72,6 +74,7 @@ namespace IndignadoServer.Controllers
                             {
                                 DTRssItem dtRssItem = ClassToDT.RssItemToDT(rssItemsList[j / ColRssLists.Count]);
                                 dtRssItem.sourceTitle = colRssSourceTitle[j % colRssSourceTitle.Count];
+                                dtRssItem.sourceUrl = colRssSourceUrl[j % colRssSourceTitle.Count];
                                 rssItemsCol.Add(dtRssItem);
                             }
                         }

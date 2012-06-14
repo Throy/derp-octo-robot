@@ -60,6 +60,7 @@
                     <li class="menuitm">@Html.ActionLink("List top resources", "ResourcesListTopRanked", "Home")</li>
                     @if (ViewBag.UserIsRegUser)
                     {
+                        <li class="menuitm">@Html.ActionLink("List own resources", "ResourcesListUser/", "Home")</li>
                         <li class="menuitm">@Html.ActionLink("Share resource", "ResourceShare", "Home")</li>
                     }
                 </ul>
