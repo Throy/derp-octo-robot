@@ -36,6 +36,42 @@
 
 <h2>Top resources list</h2>
 
+<p align="center">
+@{
+    if (@Model.itemsList.currentPage > 1)
+    {
+        @Html.ActionLink("Newer resources", "ResourcesList", new { id = @Model.itemsList.currentPage - 1 })
+    }
+    
+    <text>
+    ...
+    </text>
+        
+    if (@Model.itemsList.currentPage < @Model.itemsList.maxPage)
+    {
+        @Html.ActionLink("Older resources", "ResourcesList", new { id = @Model.itemsList.currentPage + 1 })
+    }
+}
+</p>
+
 <ul class="list1" style="margin:0 80px;">
-    @Html.DisplayFor(m => m.items.items)
+    @Html.DisplayFor(m => m.itemsList.items)
 </ul>
+
+<p align="center">
+@{
+    if (@Model.itemsList.currentPage > 1)
+    {
+        @Html.ActionLink("Newer resources", "ResourcesList", new { id = @Model.itemsList.currentPage - 1 })
+    }
+    
+    <text>
+    ...
+    </text>
+        
+    if (@Model.itemsList.currentPage < @Model.itemsList.maxPage)
+    {
+        @Html.ActionLink("Older resources", "ResourcesList", new { id = @Model.itemsList.currentPage + 1 })
+    }
+}
+</p>

@@ -36,7 +36,7 @@ namespace IndignadoWeb.Models
 
     public class ListResourcesModel
     {
-        public DTResourcesCol_NewsResources items { get; set; }
+        public DTResourcesCol_NewsResources itemsList { get; set; }
 
         [Display(Name = "ID: ")]
         public int id { get; set; }

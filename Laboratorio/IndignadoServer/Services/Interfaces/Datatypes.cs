@@ -260,6 +260,13 @@ namespace IndignadoServer.Services
     {
         [DataMember]
         public Collection<DTResource_NewsResources> items { get; set; }
+
+        [DataMember]
+        public int currentPage { get; set; }
+
+        [DataMember]
+        public int maxPage { get; set; }
+
     }
 
     // Resource datatype - MovAdmin
@@ -574,7 +581,7 @@ namespace IndignadoServer.Services
         public DTUser_NewsResources user { get; set; }
 
         [DataMember]
-        public Collection<DTResource_NewsResources> resources { get; set; }
+        public DTResourcesCol_NewsResources resources { get; set; }
     }
 
     [DataContract]

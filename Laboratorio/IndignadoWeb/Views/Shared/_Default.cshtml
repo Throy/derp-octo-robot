@@ -56,8 +56,8 @@
             <li class="outer"><span class="menubtn"><a>News and resources</a></span>
                 <ul style="width:180px">
                     <li class="menuitm">@Html.ActionLink("List news", "NewsList", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("List recent resources", "ResourcesList", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("List top resources", "ResourcesListTopRanked", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("List recent resources", "ResourcesList/1", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("List top resources", "ResourcesListTopRanked/1", "Home")</li>
                     @if (ViewBag.UserIsRegUser)
                     {
                         <li class="menuitm">@Html.ActionLink("Share resource", "ResourceShare", "Home")</li>
@@ -92,11 +92,13 @@
     <div id="Lateral">
         <div id="logo"><a href="/" style="background: url('@Url.Content("~/Content/images/Thumb/" + ViewBag.TenantInfo.logo)') top left no-repeat;"></a></div>
         
+        <!--
         <div id="ContentLateral">
             <div style="float:left;padding:5px;">
                 
             </div>
         </div>
+        -->
     </div>
     <div id="Content">
         <div style="float:left;margin:10px; width:790px">

@@ -18,61 +18,26 @@ namespace IndignadoServer.Services
         }
 
         // returns all resources.
-        public DTResourcesCol_NewsResources getResourcesList()
+        public DTResourcesCol_NewsResources getResourcesList(int pageNumber)
         {
             // get resources datatypes.
-            Collection<Recurso> recursosCol = ControllersHub.Instance.getINewsResourcesController().getResourcesList();
-
-            // create new resources datatypes collection.
-            DTResourcesCol_NewsResources dtResourcesCol = new DTResourcesCol_NewsResources();
-            dtResourcesCol.items = new Collection<DTResource_NewsResources>();
-
-            // add meetings to the datatypes collection.
-            foreach (Recurso resource in recursosCol)
-            {
-                dtResourcesCol.items.Add(ClassToDT.ResourceToDT_NewsResources(resource));
-            }
-
-            // return the collection.
-            return dtResourcesCol;
+            return ControllersHub.Instance.getINewsResourcesController().getResourcesList(pageNumber);
         }
 
         // returns the top ranked resources.
-        public DTResourcesCol_NewsResources getResourcesListTopRanked()
+        public DTResourcesCol_NewsResources getResourcesListTopRanked(int pageNumber)
         {
             // get resources datatypes.
-            Collection<Recurso> recursosCol = ControllersHub.Instance.getINewsResourcesController().getResourcesListTopRanked();
-
-            // create new resources datatypes collection.
-            DTResourcesCol_NewsResources dtResourcesCol = new DTResourcesCol_NewsResources();
-            dtResourcesCol.items = new Collection<DTResource_NewsResources>();
-
-            // add meetings to the datatypes collection.
-            foreach (Recurso resource in recursosCol)
-            {
-                dtResourcesCol.items.Add(ClassToDT.ResourceToDT_NewsResources(resource));
-            }
-
-            // return the collection.
-            return dtResourcesCol;
+            return ControllersHub.Instance.getINewsResourcesController().getResourcesListTopRanked( pageNumber);
         }
 
         // returns all the data of the user.
-        public DTUserDetails_NewsResources getUserDetails(DTUser_NewsResources dtUser)
+        public DTUserDetails_NewsResources getUserDetails(DTUser_NewsResources dtUser, int pageNumber)
         {
             // create user details
             DTUserDetails_NewsResources userDetails = new DTUserDetails_NewsResources();
             userDetails.user = ClassToDT.UserToDT_NewsResources(ControllersHub.Instance.getINewsResourcesController().getUser(DTToClass.DTToUser(dtUser)));
-            userDetails.resources = new Collection<DTResource_NewsResources>();
-
-            // get resources datatypes.
-            Collection<Recurso> recursosCol = ControllersHub.Instance.getINewsResourcesController().getResourcesListUser(DTToClass.DTToUser(dtUser));
-
-            // add meetings to the datatypes collection.
-            foreach (Recurso resource in recursosCol)
-            {
-                userDetails.resources.Add(ClassToDT.ResourceToDT_NewsResources(resource));
-            }
+            userDetails.resources  = ControllersHub.Instance.getINewsResourcesController().getResourcesListUser(DTToClass.DTToUser(dtUser), pageNumber);
 
             // return the datatype.
             return userDetails;

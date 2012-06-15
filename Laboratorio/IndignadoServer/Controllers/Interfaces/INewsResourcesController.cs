@@ -10,13 +10,13 @@ namespace IndignadoServer.Controllers
         Collection<DTRssItem> getNewsList();
 
         // returns all resources.
-        Collection<Recurso> getResourcesList();
+        DTResourcesCol_NewsResources getResourcesList(int pageNumber);
 
         // returns the top ranked resources.
-        Collection<Recurso> getResourcesListTopRanked();
+        DTResourcesCol_NewsResources getResourcesListTopRanked(int pageNumber);
 
         // returns all resources published by the given user.
-        Collection<Recurso> getResourcesListUser(Usuario user);
+        DTResourcesCol_NewsResources getResourcesListUser(Usuario user, int pageNumber);
 
         // returns all the data of the user.
         Usuario getUser(Usuario user);

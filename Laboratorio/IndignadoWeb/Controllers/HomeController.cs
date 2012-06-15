@@ -109,7 +109,7 @@ namespace IndignadoWeb.Controllers
             // send the meeting to the model.
             HomeModel model = new HomeModel();
             model.movement = movement;
-            model.resources = serv.getResourcesList();
+            model.resources = serv.getResourcesList(1);
 
             // close service
             (serv as ICommunicationObject).Close();
@@ -652,7 +652,7 @@ namespace IndignadoWeb.Controllers
         }
 
         // shows all resources in a list.
-        public ActionResult ResourcesList()
+        public ActionResult ResourcesList(ListResourcesModel listResourcesModel)
         {
             try
             {
@@ -660,8 +660,9 @@ namespace IndignadoWeb.Controllers
                 INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
                 // get all news
-                ListResourcesModel listResourcesModel = new ListResourcesModel();
-                listResourcesModel.items = serv.getResourcesList();
+                int currentPage = listResourcesModel.id;
+                listResourcesModel = new ListResourcesModel();
+                listResourcesModel.itemsList = serv.getResourcesList(currentPage);
 
                 // close service
                 (serv as ICommunicationObject).Close();
@@ -675,7 +676,7 @@ namespace IndignadoWeb.Controllers
         }
 
         // shows the top ranked resources in a list.
-        public ActionResult ResourcesListTopRanked()
+        public ActionResult ResourcesListTopRanked(ListResourcesModel listResourcesModel)
         {
             try
             {
@@ -683,8 +684,9 @@ namespace IndignadoWeb.Controllers
                 INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
 
                 // get all news
-                ListResourcesModel listResourcesModel = new ListResourcesModel();
-                listResourcesModel.items = serv.getResourcesListTopRanked();
+                int currentPage = listResourcesModel.id;
+                listResourcesModel = new ListResourcesModel();
+                listResourcesModel.itemsList = serv.getResourcesListTopRanked(currentPage);
 
                 // close service
                 (serv as ICommunicationObject).Close();
@@ -709,9 +711,9 @@ namespace IndignadoWeb.Controllers
                 ListResourcesModel listResourcesModel = new ListResourcesModel();
                 DTUser_NewsResources dtUser = new DTUser_NewsResources();
                 dtUser.id = id;
-                DTUserDetails_NewsResources userDetails = serv.getUserDetails(dtUser);
-                listResourcesModel.items = new DTResourcesCol_NewsResources();
-                listResourcesModel.items.items = userDetails.resources;
+                DTUserDetails_NewsResources userDetails = serv.getUserDetails(dtUser,1);
+                listResourcesModel.itemsList = new DTResourcesCol_NewsResources();
+                listResourcesModel.itemsList.items = userDetails.resources.items;
                 listResourcesModel.username = userDetails.user.username;
 
                 // close service

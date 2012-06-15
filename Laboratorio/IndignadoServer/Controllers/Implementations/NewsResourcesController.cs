@@ -94,48 +94,77 @@ namespace IndignadoServer.Controllers
         }
 
         // returns all resources.
-        public Collection<Recurso> getResourcesList()
+        public DTResourcesCol_NewsResources getResourcesList(int pageNumber)
         {
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
                 ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) ORDER BY Recursos.id DESC", IdMovement, 0);
             Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
-            return toResourcesCol(recursosEnum, movement.maxUltimosRecursosM);
+            return toResourcesCol(recursosEnum, movement.maxUltimosRecursosM, pageNumber);
         }
 
         // returns the top ranked resources.
-        public Collection<Recurso> getResourcesListTopRanked()
+        public DTResourcesCol_NewsResources getResourcesListTopRanked(int pageNumber)
         {
             // get top ranked resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
                 ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) AND (Recursos.fecha > {2}) ORDER BY CantAprobaciones.cantAprobaciones DESC, Recursos.id DESC", IdMovement, 0, DateTime.UtcNow.AddDays(-31));
             Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
-            return toResourcesCol(recursosEnum, movement.maxRecursosPopularesN);
+            return toResourcesCol(recursosEnum, movement.maxRecursosPopularesN, pageNumber);
         }
 
         // returns all resources published by the given user.
-        public Collection<Recurso> getResourcesListUser(Usuario user)
+        public DTResourcesCol_NewsResources getResourcesListUser(Usuario user, int pageNumber)
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
                 ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Usuarios.id = {1}) ORDER BY Recursos.id DESC", IdMovement, user.id);
             Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
-            return toResourcesCol(resourcesEnum, movement.maxUltimosRecursosM);
+            return toResourcesCol(resourcesEnum, movement.maxUltimosRecursosM,pageNumber);
         }
 
         // converts a resources enumerable to a collection.
-        private Collection<Recurso> toResourcesCol(IEnumerable<Recurso> recursosEnum, int numberItems)
+        private DTResourcesCol_NewsResources toResourcesCol(IEnumerable<Recurso> recursosEnum, int itemsNumber, int pageNumber)
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
 
-            // create new resources collection.
-            Collection<Recurso> recursosCol = new Collection<Recurso>();
+            // create new resources datatypes collection.
+            DTResourcesCol_NewsResources dtResourcesCol = new DTResourcesCol_NewsResources();
+            dtResourcesCol.items = new Collection<DTResource_NewsResources>();
 
-            // for each resource, ...
+            Collection<Recurso> colecciontrucha = new Collection<Recurso>();
             foreach (Recurso resource in recursosEnum)
             {
+                colecciontrucha.Add(resource);
+            }
+
+            // get page number
+            int itemsCount = colecciontrucha.Count();
+            int maxpag = (itemsCount / itemsNumber);
+            if (itemsCount  %   itemsNumber != 0){
+                maxpag++;
+            }
+            if (pageNumber > maxpag) {
+                pageNumber = maxpag;
+            }
+            dtResourcesCol.currentPage = pageNumber;
+            dtResourcesCol.maxPage = maxpag;
+
+            //recursosEnum = recursosEnum.Skip((pageNumber-1)*itemsNumber);
+
+            // for each resource, ...
+            int counter = 0;
+            foreach (Recurso resource in colecciontrucha)
+            {
+                counter++;
+                if (counter <= (pageNumber - 1) * itemsNumber)
+                {
+                    continue;
+                }
+                
+
                 // get own like
                 if (UserInfo != null)
                 {
@@ -157,16 +186,16 @@ namespace IndignadoServer.Controllers
                 }
 
                 // add item to the collection
-                recursosCol.Add(resource);
+                dtResourcesCol.items.Add(ClassToDT.ResourceToDT_NewsResources(resource));
 
                 // stop at the desired number of items.
-                if (recursosCol.Count >= numberItems)
+                if (dtResourcesCol.items.Count >= itemsNumber)
                 {
                     break;
                 }
             }
 
-            return recursosCol;
+            return dtResourcesCol;
         }
 
         // returns all the data of the user.

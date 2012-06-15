@@ -25,7 +25,9 @@
   <xs:element name="DTRssItem" nillable="true" type="tns:DTRssItem" />
   <xs:complexType name="DTResourcesCol_NewsResources">
     <xs:sequence>
+      <xs:element minOccurs="0" name="currentPage" type="xs:int" />
       <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfDTResource_NewsResources" />
+      <xs:element minOccurs="0" name="maxPage" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DTResourcesCol_NewsResources" nillable="true" type="tns:DTResourcesCol_NewsResources" />
@@ -88,7 +90,7 @@
   <xs:element name="DTUser" nillable="true" type="tns:DTUser" />
   <xs:complexType name="DTUserDetails_NewsResources">
     <xs:sequence>
-      <xs:element minOccurs="0" name="resources" nillable="true" type="tns:ArrayOfDTResource_NewsResources" />
+      <xs:element minOccurs="0" name="resources" nillable="true" type="tns:DTResourcesCol_NewsResources" />
       <xs:element minOccurs="0" name="user" nillable="true" type="tns:DTUser_NewsResources" />
     </xs:sequence>
   </xs:complexType>
