@@ -17,6 +17,7 @@
       <xs:element minOccurs="0" name="date" type="xs:dateTime" />
       <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="image" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="itemUrl" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="sourceTitle" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="sourceUrl" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />

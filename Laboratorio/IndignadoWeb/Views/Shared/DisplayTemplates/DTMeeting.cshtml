@@ -35,7 +35,7 @@
          </label> 
     </div>
 
-    <span class="BeginDateField">Begining: @Model.dateBegin.ToString("yyyy-MM-dd HH:mm")<br />End: @Model.dateEnd.ToString("yyyy-MM-dd HH:mm")</span>
+    <span class="BeginDateField">Beginning: @Model.dateBegin.ToString("yyyy-MM-dd HH:mm")<br />End: @Model.dateEnd.ToString("yyyy-MM-dd HH:mm")</span>
 
     <img class="image" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null && @Model.imagePath != "") ? @Model.imagePath.ToString().Replace(".jpg", "_90.jpg") : "meeting_default.jpg"))" alt="Image" />
 

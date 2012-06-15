@@ -77,6 +77,9 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         private string imageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string itemUrlField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string sourceTitleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -130,6 +133,19 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
                 if ((object.ReferenceEquals(this.imageField, value) != true)) {
                     this.imageField = value;
                     this.RaisePropertyChanged("image");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string itemUrl {
+            get {
+                return this.itemUrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemUrlField, value) != true)) {
+                    this.itemUrlField = value;
+                    this.RaisePropertyChanged("itemUrl");
                 }
             }
         }
