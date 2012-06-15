@@ -60,7 +60,7 @@
                     <li class="menuitm">@Html.ActionLink("List top resources", "ResourcesListTopRanked/1", "Home")</li>
                     @if (ViewBag.UserIsRegUser)
                     {
-                        <li class="menuitm">@Html.ActionLink("List own resources", "ResourcesListUser", new { id = @ViewBag.idUser })</li>
+                        <li class="menuitm">@Html.ActionLink("List own resources", "ResourcesListUser", new { id = @ViewBag.idUser, currentPage = 1 })</li>
                         <li class="menuitm">@Html.ActionLink("Share resource", "ResourceShare", "Home")</li>
                     }
                 </ul>
@@ -73,12 +73,12 @@
                 <!-- movement admin -->
                 <li class="outer"><span class="menubtn"><a>Movement admin</a></span>
                     <ul>
-                        <li class="menuitm">@Html.ActionLink("Configure movement", "MovementConfig", "Home")</li>
-                        <li class="menuitm">@Html.ActionLink("Configure RSS sources", "RssSourcesConfig", "Home")</li>
-                        <li class="menuitm">@Html.ActionLink("Configure theme categories", "ThemeCategoriesConfig", "Home")</li>
-                        <li class="menuitm">@Html.ActionLink("Manage resources", "ResourcesManage", "Home")</li>
-                        <li class="menuitm">@Html.ActionLink("Manage users", "UsersManage", "Home")</li>
-                        <li class="menuitm">@Html.ActionLink("Users register report", "UsersRegisterReport", "Home")</li>
+                        <li class="menuitm">@Html.ActionLink("Configure movement", "MovementConfig", "MovAdmin")</li>
+                        <li class="menuitm">@Html.ActionLink("Configure RSS sources", "RssSourcesConfig", "MovAdmin")</li>
+                        <li class="menuitm">@Html.ActionLink("Configure theme categories", "ThemeCategoriesConfig", "MovAdmin")</li>
+                        <li class="menuitm">@Html.ActionLink("Manage resources", "ResourcesManage", "MovAdmin")</li>
+                        <li class="menuitm">@Html.ActionLink("Manage users", "UsersManage", "MovAdmin")</li>
+                        <li class="menuitm">@Html.ActionLink("Users register report", "UsersRegisterReport", "MovAdmin")</li>
                     </ul>
                 </li>
             }

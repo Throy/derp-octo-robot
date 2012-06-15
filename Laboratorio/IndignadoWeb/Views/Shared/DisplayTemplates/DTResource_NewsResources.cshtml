@@ -81,7 +81,7 @@
                                 else
                                 {
                                     <text>
-                                    by @Html.ActionLink("" + @Model.username, "ResourcesListUser", new { id = @Model.idUser })
+                                    by @Html.ActionLink("" + @Model.username, "ResourcesListUser", new { id = @Model.idUser, currentPage = 1 })
                                     </text>
                                 }
                             }
@@ -93,14 +93,16 @@
                             <!-- report -->
                             @using (Html.BeginForm(new { id = @Model.id }))
                             {
-                                if (@Model.myMarkInappr == 0)
-                                {
-                                    <input type="submit" class="reportbtn" name="buttonMarkInappr" value="Mark as inappropriate" />
-                                }
+                                if (@Model.idUser != @ViewBag.idUser) {
+                                    if (@Model.myMarkInappr == 0)
+                                    {
+                                        <input type="submit" class="reportbtn" name="buttonMarkInappr" value="Mark as inappropriate" />
+                                    }
 
-                                if (Model.myMarkInappr > 0)
-                                {
-                                    <input type="submit" class="reportbtn" name="buttonUnmarkInappr" value="Unmark as inappropriate" />
+                                    if (Model.myMarkInappr > 0)
+                                    {
+                                        <input type="submit" class="reportbtn" name="buttonUnmarkInappr" value="Unmark as inappropriate" />
+                                    }
                                 }
                             }
                         </div>
