@@ -7,7 +7,14 @@
             <div class="int">
                 <!-- header -->
                 <div class="title">
-                    <h3><a href="@Html.DisplayFor(m => m.urlLink)">@Html.DisplayFor(m => m.title)</a></h3>
+                    @if ((@Model.urlLink != null) && (@Model.urlLink != ""))
+                    {
+                        <h3><a href="@Model.urlLink">@Model.title</a></h3>
+                    }
+                    else
+                    {
+                        <h3>@Model.title</h3>
+                    }
                 </div>
 
                 <div class="body">
@@ -17,9 +24,9 @@
                     <!-- image -->
                     @if ((@Model.urlImage != null) && (@Model.urlImage != ""))
                     {
-                            <div class="img">
-                                <img src="@Html.DisplayFor(m => m.urlImage)" width="400" alt=""/>
-                            </div>
+                        <div class="img">
+                            <img src="@Html.DisplayFor(m => m.urlImage)" width="400" alt=""/>
+                        </div>
                     }
                 
                     <!-- video -->
@@ -47,7 +54,7 @@
                             <div class="floatL likesn">
                             <text>Likes: </text> <label id="@Model.id">@Model.numberLikes</label></div>
                             
-                            <div class="floatL" id="@Model.id.ToString().Insert(Model.id.ToString().Count(),"like")">
+                            <div class="floatL" id="@Model.id.ToString().Insert(Model.id.ToString().Count(), "like")">
                             @if (ViewBag.UserIsRegUser)
                             {
                                 if (@Model.iLikeIt == 0)
@@ -62,7 +69,6 @@
                             }
                         </div>
                     </div>
-
                     
                     <div class="clear"></div>
                     <div class="footer">

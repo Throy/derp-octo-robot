@@ -40,7 +40,7 @@
 @{
     if (@Model.itemsList.currentPage > 1)
     {
-        @Html.ActionLink("Better resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage - 1 })
+        @Html.ActionLink("Previous resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage - 1 })
     }
     
     <text>
@@ -49,7 +49,7 @@
         
     if (@Model.itemsList.currentPage < @Model.itemsList.maxPage)
     {
-        @Html.ActionLink("Worse resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage + 1 })
+        @Html.ActionLink("Next resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage + 1 })
     }
 }
 </p>
@@ -62,7 +62,7 @@
 @{
     if (@Model.itemsList.currentPage > 1)
     {
-        @Html.ActionLink("Better resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage - 1 })
+        @Html.ActionLink("Previous resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage - 1 })
     }
     
     <text>
@@ -71,7 +71,7 @@
         
     if (@Model.itemsList.currentPage < @Model.itemsList.maxPage)
     {
-        @Html.ActionLink("Worse resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage + 1 })
+        @Html.ActionLink("Next resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage + 1 })
     }
 }
 </p>

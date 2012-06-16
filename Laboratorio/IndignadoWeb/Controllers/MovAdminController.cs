@@ -126,7 +126,7 @@ namespace IndignadoWeb.Controllers
                     }
                     else
                     {
-                        dtMovement.imagePath = "defaultMov.jpg";
+                        dtMovement.imagePath = null;
                     }
                     dtMovement.maxMarcasInadecuadasRecursoX = model.maxMarcasInadecuadasRecursoX;
                     dtMovement.maxRecursosInadecuadosUsuarioZ = model.maxRecursosInadecuadosUsuarioZ;

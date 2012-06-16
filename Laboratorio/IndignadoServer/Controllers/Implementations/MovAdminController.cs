@@ -41,7 +41,10 @@ namespace IndignadoServer.Controllers
             mov.latitud = movement.latitud;
             mov.longitud = movement.longitud;
             mov.idLayout = movement.idLayout;
-            mov.logo = movement.logo;
+            if ((movement.logo != null) && (movement.logo != ""))
+            {
+                mov.logo = movement.logo;
+            }
             mov.maxMarcasInadecuadasRecursoX = movement.maxMarcasInadecuadasRecursoX;
             mov.maxRecursosInadecuadosUsuarioZ = movement.maxRecursosInadecuadosUsuarioZ;
             mov.maxRecursosPopularesN = movement.maxRecursosPopularesN;
