@@ -259,6 +259,28 @@ namespace IndignadoServer.Controllers
             return resource;
         }
 
+        // removes a resource by the user.
+        public void removeResource(Recurso resource)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            Recurso fullResource = indignadoContext.Recursos.SingleOrDefault(res => (res.id == resource.id));
+            if ((fullResource != null) && (fullResource.idUsuario == UserInfo.Id))
+            {
+                try
+                {
+                    indignadoContext.ExecuteCommand("DELETE FROM Aprobaciones WHERE idRecurso = {0}", resource.id);
+                    indignadoContext.ExecuteCommand("DELETE FROM MarcasInadecuados WHERE idRecurso = {0}", resource.id);
+                    indignadoContext.SubmitChanges();
+                    indignadoContext = new IndignadoDBDataContext();
+                    indignadoContext.ExecuteCommand("DELETE FROM Recursos WHERE (id = {0}) AND (idUsuario = {1})", resource.id, UserInfo.Id);
+                    indignadoContext.SubmitChanges();
+                }
+                catch (Exception error)
+                {
+                }
+            }
+        }
+
         // likes a resource.
         public void likeResource(Recurso resource)
         {

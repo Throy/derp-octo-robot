@@ -30,6 +30,10 @@ namespace IndignadoServer.Services
         [OperationContract]
         DTResource_NewsResources getResourceData(string link);
 
+        // removes a resource by the user.
+        [OperationContract]
+        void removeResource(DTResource_NewsResources dtResource);
+
         // likes a resource.
         [OperationContract]
         void likeResource(DTResource_NewsResources dtResource);

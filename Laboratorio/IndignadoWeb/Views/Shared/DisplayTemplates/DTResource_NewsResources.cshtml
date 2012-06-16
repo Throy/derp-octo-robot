@@ -93,7 +93,8 @@
                             <!-- report -->
                             @using (Html.BeginForm(new { id = @Model.id }))
                             {
-                                if (@Model.idUser != @ViewBag.idUser) {
+                                if (@Model.idUser != @ViewBag.idUser)
+                                {
                                     if (@Model.myMarkInappr == 0)
                                     {
                                         <input type="submit" class="reportbtn" name="buttonMarkInappr" value="Mark as inappropriate" />
@@ -103,6 +104,10 @@
                                     {
                                         <input type="submit" class="reportbtn" name="buttonUnmarkInappr" value="Unmark as inappropriate" />
                                     }
+                                }
+                                else
+                                {
+                                    <input type="submit" class="reportbtn" name="buttonRemove" value="Remove" />
                                 }
                             }
                         </div>

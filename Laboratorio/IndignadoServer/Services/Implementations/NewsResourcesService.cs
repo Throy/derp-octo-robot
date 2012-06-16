@@ -56,6 +56,13 @@ namespace IndignadoServer.Services
             return ClassToDT.ResourceToDT_NewsResources(ControllersHub.Instance.getINewsResourcesController().getResourceData(link));
         }
 
+        // removes a resource by the user.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void removeResource(DTResource_NewsResources dtResource)
+        {
+            ControllersHub.Instance.getINewsResourcesController().removeResource(DTToClass.DTToResource(dtResource));
+        }
+
         // likes a resource.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
         public void likeResource(DTResource_NewsResources dtResource)

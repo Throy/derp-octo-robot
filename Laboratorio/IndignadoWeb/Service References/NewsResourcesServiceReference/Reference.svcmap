@@ -21,10 +21,10 @@
     <MetadataSource Address="http://localhost:8730/IndignadoServer/NewsResourcesService/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="8cabda9c-5d64-462a-b3f5-9807f931dd04" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/NewsResourcesService/?xsd=xsd0" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="44876de5-9e0a-4b56-ac94-13792f417df2" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/NewsResourcesService/?xsd=xsd2" />
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="f865a054-65c6-4620-853a-4c6bbea5dd21" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/NewsResourcesService/?disco" />
     <MetadataFile FileName="NewsResourcesService.wsdl" MetadataType="Wsdl" ID="16c0f610-1490-40b6-82c5-c51d01a012e7" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/NewsResourcesService/?wsdl" />
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="44876de5-9e0a-4b56-ac94-13792f417df2" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/NewsResourcesService/?xsd=xsd2" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="8cabda9c-5d64-462a-b3f5-9807f931dd04" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/NewsResourcesService/?xsd=xsd0" />
     <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="7ea94381-0284-4e3e-880e-75349aad764e" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/NewsResourcesService/?xsd=xsd1" />
   </Metadata>
   <Extensions>

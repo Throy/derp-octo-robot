@@ -26,6 +26,9 @@ namespace IndignadoServer.Controllers
         
         // gets resource data from the link.
         Recurso getResourceData(string link);
+
+        // removes a resource by the user.
+        void removeResource(Recurso resource);
         
         // likes a resource.
         void likeResource(Recurso resource);
