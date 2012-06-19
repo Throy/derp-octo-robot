@@ -146,6 +146,50 @@ namespace IndignadoWeb.Controllers
             return View(movements);
         }
 
+        [HttpPost]
+        [AuthFilter(LoginUrl = SysAdminControllerConstants.loginUrl)]
+        public ActionResult MovementsList(string buttonDisable, string buttonEnable, int id)
+        {
+            try
+            {
+                // disable movement
+                if (buttonDisable != null)
+                {
+                    // open service
+                    ISysAdminService serv = GetService<ISysAdminService>(SysAdminControllerConstants.urlSysAdminService);
+
+                    // ban user
+                    serv.disableMovement(id);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction("MovementsList");
+                }
+
+                // enable resource
+                else if (buttonEnable != null)
+                {
+                    // open service
+                    ISysAdminService serv = GetService<ISysAdminService>(SysAdminControllerConstants.urlSysAdminService);
+
+                    // ban user
+                    serv.enableMovement(id);
+
+                    // close service
+                    (serv as ICommunicationObject).Close();
+
+                    return RedirectToAction("MovementsList");
+                }
+
+                return View();
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewAccessDenied);
+            }
+        }
+
         // create movement.
         [AuthFilter(LoginUrl = SysAdminControllerConstants.loginUrl)]
         public ActionResult MovementCreate()

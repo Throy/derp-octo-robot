@@ -12,40 +12,48 @@ namespace IndignadoWeb.Common
 {
     public class MultiTenanActionFilter : ActionFilterAttribute
     {
-        private DTTenantInfo _tenantInfo;
-
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            ISessionService session = GetService<ISessionService>("http://localhost:8730/IndignadoServer/SessionService/");
-            String movimiento = filterContext.RouteData.Values["movimiento"] as String;
-
-            _tenantInfo = session.GetTenantInfo(movimiento);
-
-            filterContext.HttpContext.Session.Add("tenantInfo", _tenantInfo);
-            filterContext.ActionParameters["tenantInfo"] = _tenantInfo;
-
-            if (filterContext.HttpContext.Session["token"] != null)
+            try
             {
-                if (!session.ValidateToken(_tenantInfo.id, filterContext.HttpContext.Session["token"] as String))
+                ISessionService session = GetService<ISessionService>("http://localhost:8730/IndignadoServer/SessionService/");
+                String movimiento = filterContext.RouteData.Values["movimiento"] as String;
+
+                DTTenantInfo tenantInfo = session.GetTenantInfo(movimiento);
+
+                filterContext.HttpContext.Session.Add("tenantInfo", tenantInfo);
+                filterContext.ActionParameters["tenantInfo"] = tenantInfo;
+
+                if (filterContext.HttpContext.Session["token"] != null)
                 {
-                    filterContext.HttpContext.Session.Abandon();
-                    FormsAuthentication.SignOut();
-
-                    string[] myCookies = filterContext.HttpContext.Request.Cookies.AllKeys;
-                    foreach (string cookie in myCookies)
+                    if (!session.ValidateToken(tenantInfo.id, filterContext.HttpContext.Session["token"] as String))
                     {
-                        filterContext.HttpContext.Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
+                        filterContext.HttpContext.Session.Abandon();
+                        FormsAuthentication.SignOut();
+
+                        string[] myCookies = filterContext.HttpContext.Request.Cookies.AllKeys;
+                        foreach (string cookie in myCookies)
+                        {
+                            filterContext.HttpContext.Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
+                        }
+
+                        filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } });
                     }
-
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } });
                 }
-            }
-            else
-            {
-                FormsAuthentication.SignOut();
-            }
+                else
+                {
+                    FormsAuthentication.SignOut();
+                }
 
-            (session as ICommunicationObject).Close();
+                (session as ICommunicationObject).Close();
+            }
+            catch (Exception e)
+            {
+                ViewResult view = new ViewResult { ViewName = "Error" };
+                view.ViewBag.ErrorMessage = e.Message;
+                filterContext.Result = view;// new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Home" }, { "action", "Error" } });
+
+            }
         }
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)
@@ -57,8 +65,20 @@ namespace IndignadoWeb.Common
             if (filterContext.Result is ViewResult)
             {
                 ViewResult view = filterContext.Result as ViewResult;
-                view.MasterName = _tenantInfo.layoutFile;
-                view.ViewBag.TenantInfo = _tenantInfo;
+                if (filterContext.HttpContext.Session["tenantInfo"] != null)
+                {
+                    DTTenantInfo tenantInfo = filterContext.HttpContext.Session["tenantInfo"] as DTTenantInfo;
+                    view.MasterName = tenantInfo.layoutFile;
+                    view.ViewBag.TenantInfo = tenantInfo;
+                }
+                else
+                {
+                    view.MasterName = "~/Views/Shared/_Default.cshtml";
+                    DTTenantInfo tenantInfo = new DTTenantInfo();
+                    tenantInfo.habilitado = true;
+                    view.ViewBag.TenantInfo = tenantInfo;
+                }
+
                 if (filterContext.HttpContext.Session["loginInfo"] != null)
                 {
                     view.ViewBag.idUser = (filterContext.HttpContext.Session["loginInfo"] as DTLoginInfo).id;

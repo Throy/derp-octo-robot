@@ -37,9 +37,15 @@ namespace IndignadoServer.Services
         }
 
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.SysAdmin)]
-        public void enableMovement(){}
+        public void enableMovement(int id) 
+        {
+            ControllersHub.Instance.getISysAdminController().enableMovement(id);
+        }
 
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.SysAdmin)]
-        public void disableMovement(){}
+        public void disableMovement(int id) 
+        {
+            ControllersHub.Instance.getISysAdminController().disableMovement(id);
+        }
     }
 }

@@ -15,8 +15,8 @@ namespace IndignadoServer.Controllers
         // returns all movements
         Collection<Movimiento> getMovementsList();
 
-        void enableMovement();
+        void enableMovement(int id);
 
-        void disableMovement();
+        void disableMovement(int id);
     }
 }

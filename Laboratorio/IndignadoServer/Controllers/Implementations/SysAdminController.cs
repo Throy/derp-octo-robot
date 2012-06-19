@@ -89,8 +89,26 @@ namespace IndignadoServer.Controllers
             return movementsCol;
         }
 
-        public void enableMovement() { }
+        public void enableMovement(int id)
+        {
+            var db = new IndignadoDBDataContext();
+            var mov = db.Movimientos.SingleOrDefault(m => (m.id == id));
+            if (mov != null)
+            {
+                mov.habilitado = true;
+                db.SubmitChanges();
+            }
+        }
 
-        public void disableMovement() { }
+        public void disableMovement(int id) 
+        {
+            var db = new IndignadoDBDataContext();
+            var mov = db.Movimientos.SingleOrDefault(m => (m.id == id));
+            if (mov != null)
+            {
+                mov.habilitado = false;
+                db.SubmitChanges();
+            }
+        }
     }
 }

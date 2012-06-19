@@ -211,6 +211,12 @@ namespace IndignadoServer.Controllers
                 throw new FaultException("No existe un movimiento con ese nombre!");
             }
 
+            if (!movInfo.habilitado)
+            {
+                // si no lo encontro
+                throw new FaultException("El movimiento fue deshabilitado!");
+            }
+
             info.name = movInfo.nombre;
             info.habilitado = movInfo.habilitado;
             info.id = movInfo.id;

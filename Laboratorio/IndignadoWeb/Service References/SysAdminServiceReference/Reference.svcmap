@@ -21,10 +21,10 @@
     <MetadataSource Address="http://localhost:8730/IndignadoServer/SysAdminService/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="815a827f-7ddc-4f23-8e99-68d4cb2ba768" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SysAdminService/?xsd=xsd1" />
     <MetadataFile FileName="SysAdminService.wsdl" MetadataType="Wsdl" ID="3e44e735-9e20-4c3f-99b4-7d078be41569" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SysAdminService/?wsdl" />
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="ddac0cbc-db27-4a1a-b464-09ddd47431be" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SysAdminService/?disco" />
     <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="34fb2faa-b42e-4474-a348-432e5e1baef4" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SysAdminService/?xsd=xsd0" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="815a827f-7ddc-4f23-8e99-68d4cb2ba768" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SysAdminService/?xsd=xsd1" />
     <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="137ff451-3ceb-48d1-b351-c3e8b16ec79c" SourceId="1" SourceUrl="http://localhost:8730/IndignadoServer/SysAdminService/?xsd=xsd2" />
   </Metadata>
   <Extensions>
