@@ -74,23 +74,32 @@ namespace IndignadoServer.Controllers
             // add notifications to interested users.
 
             // notify users interested in the meeting's theme categories.
-            IEnumerable<CatTemasConvocatoria> cattemas = indignadoContext.ExecuteQuery<CatTemasConvocatoria>
-                ("SELECT idCategoriaTematica, idConvocatoria FROM CatTemasConvocatorias WHERE idConvocatoria = {0}", meeting.id);
-            IEnumerable<Usuario> usersEnumOnThemeCat = indignadoContext.ExecuteQuery<Usuario>
-                ("SELECT Intereses.idUsuario AS id FROM Intereses RIGHT JOIN (SELECT * FROM CatTemasConvocatorias WHERE idConvocatoria = {0}) CatTemas ON CatTemas.idCategoriaTematica = Intereses.idCategoriaTematica", meeting.id);
+            //IEnumerable<CatTemasConvocatoria> cattemas = indignadoContext.ExecuteQuery<CatTemasConvocatoria>
+                //("SELECT idCategoriaTematica, idConvocatoria FROM CatTemasConvocatorias WHERE idConvocatoria = {0}", meeting.id);
+            List<CatTemasConvocatoria> cattemas = indignadoContext.CatTemasConvocatorias.Where(c => c.idConvocatoria == meeting.id).ToList();
+            //IEnumerable<Usuario> usersEnumOnThemeCat = indignadoContext.ExecuteQuery<Usuario>
+              //  ("SELECT Intereses.idUsuario AS id FROM Intereses RIGHT JOIN (SELECT * FROM CatTemasConvocatorias WHERE idConvocatoria = {0}) CatTemas ON CatTemas.idCategoriaTematica = Intereses.idCategoriaTematica", meeting.id);
 
-            foreach (Usuario usuario in usersEnumOnThemeCat)
+            List<Usuario> usersEnumOnThemeCat = indignadoContext.Usuarios.Where(u => u.Intereses.FirstOrDefault(i => 
+                                                                                                                indignadoContext.Convocatorias.Single(c => 
+                                                                                                                                                        c.id == meeting.id).CatTemasConvocatorias.SingleOrDefault(c =>                              
+                                                                                                                                                                   c.idCategoriaTematica == i.idCategoriaTematica) != null) != null).ToList();
+            if (usersEnumOnThemeCat != null)
             {
-                Notificacione notification = new Notificacione();
-                notification.idUsuario = usuario.id;
-                notification.idConvocatoria = meeting.id;
-                indignadoContext.Notificaciones.InsertOnSubmit(notification);
+                foreach (Usuario usuario in usersEnumOnThemeCat)
+                {
+                    Notificacione notification = new Notificacione();
+                    notification.idUsuario = usuario.id;
+                    notification.idConvocatoria = meeting.id;
+                    indignadoContext.Notificaciones.InsertOnSubmit(notification);
+                }
             }
 
             // notify users close to the meeting.
-            IEnumerable<Usuario> usersEnumFull = indignadoContext.ExecuteQuery<Usuario>
-                ("SELECT * FROM Usuarios WHERE idMovimiento = {0}", IdMovement);
+            //IEnumerable<Usuario> usersEnumFull = indignadoContext.ExecuteQuery<Usuario>
+                //("SELECT * FROM Usuarios WHERE idMovimiento = {0}", IdMovement);
 
+            List<Usuario> usersEnumFull = indignadoContext.Usuarios.Where(u => u.idMovimiento == IdMovement).ToList();
             float latiMeetingRadians = (float)(meeting.latitud * Math.PI / 180);
             float longMeetingRadians = (float)(meeting.longitud * Math.PI / 180);
             foreach (Usuario usuario in usersEnumFull)
@@ -102,10 +111,13 @@ namespace IndignadoServer.Controllers
                     (Math.Sin(latiUserRadians) * Math.Sin(latiMeetingRadians)
                     + Math.Cos(latiUserRadians) * Math.Cos(latiMeetingRadians) * Math.Cos(longUserRadians - longMeetingRadians)) < maxDistanceInterest)
                 {
-                    Notificacione notification = new Notificacione();
-                    notification.idUsuario = usuario.id;
-                    notification.idConvocatoria = meeting.id;
-                    indignadoContext.Notificaciones.InsertOnSubmit(notification);
+                    if (usersEnumOnThemeCat.SingleOrDefault(us => us.id == usuario.id) == null)
+                    {
+                        Notificacione notification = new Notificacione();
+                        notification.idUsuario = usuario.id;
+                        notification.idConvocatoria = meeting.id;
+                        indignadoContext.Notificaciones.InsertOnSubmit(notification);
+                    }
                 }
             }
             indignadoContext.SubmitChanges();

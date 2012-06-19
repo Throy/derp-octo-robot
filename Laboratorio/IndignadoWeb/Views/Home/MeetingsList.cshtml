@@ -71,11 +71,5 @@
 <p>
     @Html.DisplayFor(m => m.meetings.items)
 </p>
-@{
-    if (Model.meetings.items.Count() > 10)
-    {
-        <div><span>Anterior</span></div> <div><span>Siguiente</span></div>
-    }
-}
 
 <script type="text/javascript">googleMapsInitialize();</script>

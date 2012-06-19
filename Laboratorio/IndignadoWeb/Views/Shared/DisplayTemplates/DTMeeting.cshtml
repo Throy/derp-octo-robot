@@ -6,20 +6,11 @@
     function ampliar(id) {
         if ($("#" + id.toString() + "sign").text() == "+") {
             $("#" + id.toString() + "sign").text("-");
-            $("." + id.toString() + "sign").css("margin-left", "10px");
-            $("." + id.toString() + "signdiv").css("width", "25px");
-            $("." + id.toString() + "s").css("overflow", "auto");
-            $("." + id.toString() + "s").css("height", "220px");
-            $("." + id.toString() + "m").css("height", "370px");
-            $("." + id.toString() + "h").show();
+            $("." + id.toString() + "h").slideDown(300);
+
         }
         else {
             $("#" + id.toString() + "sign").text("+");
-            $("." + id.toString() + "sign").css("margin-left", "9px");
-            $("." + id.toString() + "signdiv").css("width", "28px");
-            $("." + id.toString() + "s").css("overflow", "hidden");
-            $("." + id.toString() + "s").css("height", "90");
-            $("." + id.toString() + "m").css("height", "165px");
             $("." + id.toString() + "h").hide();
         }
     }
@@ -29,17 +20,11 @@
 
     <h3 class="Header">@Html.DisplayFor(m => m.name)</h3>
     
-    <div class="ampliar @Model.id.ToString().Insert(Model.id.ToString().Count(),"signdiv")" onclick="ampliar(@Model.id);">
-         <label class="ampliarText @Model.id.ToString().Insert(Model.id.ToString().Count(), "sign")" id="@Model.id.ToString().Insert(Model.id.ToString().Count(), "sign")">
-            +
-         </label> 
-    </div>
-
     <span class="BeginDateField">Beginning: @Model.dateBegin.ToString("yyyy-MM-dd HH:mm")<br />End: @Model.dateEnd.ToString("yyyy-MM-dd HH:mm")</span>
 
     <img class="image" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null && @Model.imagePath != "") ? @Model.imagePath.ToString().Replace(".jpg", "_90.jpg") : "meeting_default.jpg"))" alt="Image" />
 
-    <div class="scrollable @Model.id.ToString().Insert(Model.id.ToString().Count(),"s")">
+    <div class="scrollable @Model.id.ToString().Insert(Model.id.ToString().Count(), "s")">
         <table class="list" border="0" rules="none">
             <!-- fields -->
             <tr class="field"><td class="field"><span>Description: </span></td>
@@ -48,43 +33,66 @@
             <tr class="field"><td class="field"><span>Attendance: </span></td>
             <td class="field"><div class="fieldvalue">@Model.numberAttendants</div></td></tr>
     
-        </table>
-        <div class="hide @Model.id.ToString().Insert(Model.id.ToString().Count(), "h")">
-            <table class="list" border="0" rules="none">
-                <tr class="field"><td class="field"><span>Min quorum: </span></td>
-                <td class="field"><div class="fieldvalue">@Model.minQuorum</div></td></tr>
+            <tr class="hide field @Model.id.ToString().Insert(Model.id.ToString().Count(), "h")">
+                <td class="field"><span>Min quorum: </span></td>
+                <td class="field"><div class="fieldvalue">@Model.minQuorum</div></td>
+            </tr>
     
                 @{
-                    if (! @Model.isActive)
+                    if (!@Model.isActive)
                     {
-                        <tr class="field"><td class="field"><span>Meeting is inactive</span></td></tr>
+                        <tr class="hide field @Model.id.ToString().Insert(Model.id.ToString().Count(), "h")">
+                            <td class="field"><span>Status:</span></td>
+                            <td class="field"><div class="fieldvalue"><span>Meeting is inactive</span></div></td>
+                        </tr>
                     }
 
                     else if (@Model.isConfirmed)
                     {
-                        <tr class="field"><td class="field"><span>Meeting is confirmed</span></td></tr>
+                        <tr class="hide field @Model.id.ToString().Insert(Model.id.ToString().Count(), "h")">
+                            <td class="field"><span>Status:</span></td>
+                            <td class="field"><div class="fieldvalue"><span>Meeting is confirmed</span></div></td>
+                        </tr>
                     }
 
                     else
                     {
-                        <tr class="field"><td class="field"><span>Meeting is active</span></td></tr>
+                       <tr class="hide field @Model.id.ToString().Insert(Model.id.ToString().Count(), "h")">
+                            <td class="field"><span>Status:</span></td>
+                            <td class="field"><div class="fieldvalue"><span>Meeting is active</span></div></td>
+                       </tr>
                     }
                 }
-            </table>
+                </table>
     
             @{
                 if (@Model.themeCategories != null && Model.themeCategories.Length >= 1)
                 {
                     <br />
-                    <div class="tableCategories">
+                    <div class="tableCategories hide @Model.id.ToString().Insert(Model.id.ToString().Count(), "h")">
                         Categories:
                         <br />
                         @Html.DisplayFor(m => m.themeCategories)
                     </div>
                 }
             }
+
+            <table class="tablacentrada" border="0" rules="none">
+            <tr class="field">
+            <td align="center" class="field center">
+                    <div class="center ampliar @Model.id.ToString().Insert(Model.id.ToString().Count(), "signdiv")" onclick="ampliar(@Model.id);">
+                         <label class="center ampliarText @Model.id.ToString().Insert(Model.id.ToString().Count(), "sign")" id="@Model.id.ToString().Insert(Model.id.ToString().Count(), "sign")">
+            
+                         </label> 
+                         <script type="text/javascript"> $("#" + @Model.id.ToString() + "sign").text("+");</script>
+                    </div>
+            </td>
+            </tr>
+            </table>
+        
         </div>
-    </div>
+        
+    
 
     <!-- attendance buttons -->
     
@@ -112,4 +120,4 @@
         }
         </div>
     }
-</div>
+    </div>
