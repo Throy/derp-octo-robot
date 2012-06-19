@@ -140,7 +140,7 @@ namespace IndignadoWeb.Controllers
                     (serv as ICommunicationObject).Close();
 
                     // send the movements to the model.
-                    return View("MovementConfigSuccess");
+                    return RedirectToAction("MovementConfigSuccess");
                 }
 
                 // Vuelvo a rellenar la lista de layouts
@@ -157,6 +157,11 @@ namespace IndignadoWeb.Controllers
             {
                 return RedirectToAction(HomeControllerConstants.viewAccessDenied);
             }
+        }
+
+        public ActionResult MovementConfigSuccess()
+        {
+            return View("MovementConfigSuccess");
         }
 
         // configures the rss sources.

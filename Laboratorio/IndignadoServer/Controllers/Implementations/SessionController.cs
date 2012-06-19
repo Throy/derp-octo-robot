@@ -95,7 +95,9 @@ namespace IndignadoServer.Controllers
 
             if (userDB.banned)
             {
-                throw new FaultException<LoginFault>(new LoginFault("The user is banned, please contact the movement administrator.", DTLoginFaultType.BANNED));
+                Usuario movAdmin = db.Usuarios.SingleOrDefault(u => (u.idMovimiento == idMovimiento) && ((u.privilegio & IndignadoServer.Roles.MovAdminMask) == IndignadoServer.Roles.MovAdminMask));
+
+                throw new FaultException("The user is banned, please contact the movement administrator at " + movAdmin.mail + ".");
             }
 
             String token = GenerateToken();
