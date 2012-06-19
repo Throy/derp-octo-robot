@@ -89,7 +89,8 @@
 
 <div id="map_canvas" style="width:400px; height:310px; float:left; margin-left:70px; border-style:outset; margin-top:2px; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA"></div>
 
-<form action="/Home/UserConfig" method="post" enctype="multipart/form-data">
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true, "Some fields have errors, please fix them.")
     <div style="width:250px; float:left; border-style:solid; border-radius:4px; -moz-border-radius:4px; margin-left:20px; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA ">
         <fieldset style="border-color:transparent">
@@ -123,11 +124,28 @@
             <div class="editor-field">
                 @Html.TextBoxFor(m => m.locationLong)
                 @Html.ValidationMessageFor(m => m.locationLong)
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.password)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(m => m.password)
+                @Html.ValidationMessageFor(m => m.password)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.confirmPassword)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(m => m.confirmPassword)
+                @Html.ValidationMessageFor(m => m.confirmPassword)
+            </div>
+
             <p>
                 <input class="boton-big-red" style="height:30px; margin-top:10px" type="submit" name="buttonUpdate" value="Update configuration" />
             </p>
         </fieldset>
     </div>
-</form>
+}
 
 <script type="text/javascript">googleMapsInitialize();</script>

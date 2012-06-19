@@ -518,6 +518,9 @@ namespace IndignadoServer.Services
         public String fullName { get; set; }
 
         [DataMember]
+        public String password { get; set; }
+
+        [DataMember]
         public String mail { get; set; }
 
         [DataMember]
@@ -1034,6 +1037,14 @@ namespace IndignadoServer.Services
             user.cantRecursosMarcadosInadecuados = dtUser.numberResourcesMarkedInappr;
             user.cantRecursosDeshabilitados = dtUser.numberResourcesDisabled;
             user.banned = dtUser.banned;
+
+            if (dtUser.password != null)
+            {
+                HashAlgorithm sha = new SHA1CryptoServiceProvider();
+                byte[] passwordHash = sha.ComputeHash(ASCIIEncoding.ASCII.GetBytes(dtUser.password));
+                user.contraseña = passwordHash;
+            }
+
             return user;
         }
 

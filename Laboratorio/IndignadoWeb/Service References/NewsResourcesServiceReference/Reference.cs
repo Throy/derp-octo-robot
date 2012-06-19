@@ -588,6 +588,9 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
         private int numberResourcesMarkedInapprField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string passwordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime registerDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -703,6 +706,19 @@ namespace IndignadoWeb.NewsResourcesServiceReference {
                 if ((this.numberResourcesMarkedInapprField.Equals(value) != true)) {
                     this.numberResourcesMarkedInapprField = value;
                     this.RaisePropertyChanged("numberResourcesMarkedInappr");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.passwordField, value) != true)) {
+                    this.passwordField = value;
+                    this.RaisePropertyChanged("password");
                 }
             }
         }

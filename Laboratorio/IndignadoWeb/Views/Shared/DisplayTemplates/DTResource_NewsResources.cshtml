@@ -81,7 +81,7 @@
                                 if (ViewBag.UserIsMovAdmin)
                                 {
                                     <text>
-                                    by @Html.ActionLink("" + @Model.username, "UserDetails", new { id = @Model.idUser })
+                                    by @Html.ActionLink("" + @Model.username, "UserDetails", "MovAdmin", new { id = @Model.idUser }, null)
                                     </text>
                                 }
                                 else
