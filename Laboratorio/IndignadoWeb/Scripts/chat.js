@@ -21,7 +21,7 @@ var windowFocus = true;
 var username;
 var chatHeartbeatCount = 0;
 var minChatHeartbeat = 1000;
-var maxChatHeartbeat = 23000;
+var maxChatHeartbeat = 3000;
 var chatHeartbeatTime = minChatHeartbeat;
 var originalTitle;
 var blinkOrder = 0;

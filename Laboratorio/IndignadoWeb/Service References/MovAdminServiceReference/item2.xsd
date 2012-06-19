@@ -98,6 +98,7 @@
       <xs:element minOccurs="0" name="mail" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="numberResourcesDisabled" type="xs:int" />
       <xs:element minOccurs="0" name="numberResourcesMarkedInappr" type="xs:int" />
+      <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="registerDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
     </xs:sequence>

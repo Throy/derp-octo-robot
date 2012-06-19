@@ -187,7 +187,7 @@ namespace IndignadoServer.Controllers
                 foreach (int key in keys)
                 {
                     usersActive.Value[key].activeCounter++;
-                    if (usersActive.Value[key].activeCounter > 40 && usersActive.Value[key].active)
+                    if (usersActive.Value[key].activeCounter > 20 && usersActive.Value[key].active)
                     {
                         usersActive.Value[key].SetActive(false);
                     }

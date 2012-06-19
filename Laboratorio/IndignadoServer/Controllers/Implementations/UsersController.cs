@@ -110,6 +110,10 @@ namespace IndignadoServer.Controllers
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             indignadoContext.ExecuteCommand("UPDATE Usuarios SET nombre = {0}, mail = {1}, latitud = {2}, longitud = {3} WHERE id = {4}", user.nombre, user.mail, user.latitud, user.longitud, UserInfo.Id);
+            if (user.contraseña != null)
+            {
+                indignadoContext.ExecuteCommand("UPDATE Usuarios SET contraseña = {0} WHERE id = {1}", user.contraseña, UserInfo.Id);
+            }
         }
     }
 }

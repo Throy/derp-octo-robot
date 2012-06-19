@@ -956,6 +956,7 @@ namespace IndignadoWeb.Controllers
                     dtUser.mail = model.mail;
                     dtUser.locationLati = model.locationLati;
                     dtUser.locationLong = model.locationLong;
+                    dtUser.password = model.password;
                     serv.setUser(dtUser);
 
                     // close service
