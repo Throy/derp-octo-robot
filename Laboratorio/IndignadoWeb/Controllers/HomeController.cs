@@ -64,6 +64,7 @@ namespace IndignadoWeb.Controllers
 
 
     [MultiTenanActionFilter]
+    [HandleError]
     public class HomeController : Controller
     {
         private T GetService<T>(String url)

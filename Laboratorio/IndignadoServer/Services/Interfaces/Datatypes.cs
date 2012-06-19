@@ -96,6 +96,9 @@ namespace IndignadoServer.Services
         public String name { get; set; }
 
         [DataMember]
+        public bool habilitado { get; set; }
+
+        [DataMember]
         public int idLayout { get; set; }
 
         [DataMember]
@@ -733,6 +736,8 @@ namespace IndignadoServer.Services
             dtMovement.maxRecursosInadecuadosUsuarioZ = movement.maxRecursosInadecuadosUsuarioZ;
             dtMovement.maxRecursosPopularesN = movement.maxRecursosPopularesN;
             dtMovement.maxUltimosRecursosM = movement.maxUltimosRecursosM;
+            dtMovement.habilitado = movement.habilitado;
+
             return dtMovement;
         }
 

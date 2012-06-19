@@ -16,9 +16,9 @@ namespace IndignadoServer.Services
         DTMovementsCol getMovementsList();
 
         [OperationContract]
-        void enableMovement();
+        void enableMovement(int id);
 
         [OperationContract]
-        void disableMovement();
+        void disableMovement(int id);
     }
 }

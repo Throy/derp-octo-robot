@@ -3,6 +3,7 @@
   <xs:complexType name="DTMovement">
     <xs:sequence>
       <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="idLayout" type="xs:int" />
       <xs:element minOccurs="0" name="imagePath" nillable="true" type="xs:string" />

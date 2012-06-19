@@ -13,4 +13,18 @@
      <br />
      Sub Domain: @Html.DisplayFor(m => m.subURL)
      <br />
+
+     <!-- enable / disable -->
+    @using (Html.BeginForm(new { id = @Model.id }))
+    {
+        if (Model.habilitado)
+        {
+            <input type="submit" class="reportbtn" name="buttonDisable" value="Disable movement" />
+        }
+
+        else
+        {
+            <input type="submit" class="reportbtn" name="buttonEnable" value="Enable movement" />
+        }
+    }
 </div>
