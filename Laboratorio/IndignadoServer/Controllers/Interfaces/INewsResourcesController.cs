@@ -1,29 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using IndignadoServer.LinqDataContext;
-using RssToolkit.Rss;
+using IndignadoServer.Services;
 
 namespace IndignadoServer.Controllers
 {
     interface INewsResourcesController
     {
         // returns all rss items.
-        Collection<RssItem> getNewsList();
+        Collection<DTRssItem> getNewsList();
 
         // returns all resources.
-        Collection<Recurso> getResourcesList();
+        DTResourcesCol_NewsResources getResourcesList(int pageNumber);
 
         // returns the top ranked resources.
-        Collection<Recurso> getResourcesListTopRanked();
+        DTResourcesCol_NewsResources getResourcesListTopRanked(int pageNumber);
+
+        // returns all resources published by the given user.
+        DTResourcesCol_NewsResources getResourcesListUser(Usuario user, int pageNumber);
+
+        // returns all the data of the user.
+        Usuario getUser(Usuario user);
 
         // creates a resource.
         void createResource(Recurso resource);
         
         // gets resource data from the link.
         Recurso getResourceData(string link);
+
+        // removes a resource by the user.
+        void removeResource(Recurso resource);
         
         // likes a resource.
         void likeResource(Recurso resource);

@@ -19,7 +19,7 @@
         // initialize map
         var myOptions = {
             center: new google.maps.LatLng(@Model.locationLati.ToString().Replace(",", "."), @Model.locationLong.ToString().Replace(",", ".")),
-            zoom: 10,
+            zoom: 8,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
@@ -67,7 +67,7 @@
 
 <h2 style="text-align:center">Meetings list on attendance</h2>
 
-<div id="map_canvas" style="width: 400px; height:300px ; margin-left:220px;border-style:outset; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA" ></div>
+<div id="map_canvas" style="width: 400px; height:300px ; margin-left:220px; margin-bottom:20px; border-style:outset; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA" ></div>
 
 <p>
     @Html.DisplayFor(m => m.meetings.items)

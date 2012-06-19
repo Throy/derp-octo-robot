@@ -39,6 +39,16 @@ namespace IndignadoWeb.Models
         [Required]
         [Display(Name = "Location - Longitude: ")]
         public float locationLong { get; set; }
+
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string confirmPassword { get; set; }
     }
 
     // model for User details

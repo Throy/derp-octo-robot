@@ -75,6 +75,7 @@
     <Compile Include="Common\MultiTenanActionFilter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\MovAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SysAdminController.cs" />
     <Compile Include="Global.asax.cs">
@@ -242,6 +243,9 @@
     <None Include="Service References\MeetingsServiceReference\IndignadoWeb.MeetingsServiceReference.DTMeetingsCol.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\MeetingsServiceReference\IndignadoWeb.MeetingsServiceReference.DTMeetingsNotificationsCol.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\MeetingsServiceReference\IndignadoWeb.MeetingsServiceReference.DTThemeCategoriesColMeetings.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -293,6 +297,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTResource_NewsResources.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\NewsResourcesServiceReference\IndignadoWeb.NewsResourcesServiceReference.DTUserDetails_NewsResources.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SessionServiceReference\IndignadoWeb.SessionServiceReference.DTLoginInfo.datasource">
@@ -441,7 +448,7 @@
     <Content Include="Views\SysAdmin\MovementCreate.cshtml" />
     <Content Include="Views\SysAdmin\MovementsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMovement.cshtml" />
-    <Content Include="Views\Home\MovementConfig.cshtml" />
+    <Content Include="Views\MovAdmin\MovementConfig.cshtml" />
     <Content Include="Views\Home\NewsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTRssItem.cshtml" />
     <Content Include="Views\Home\ResourcesList.cshtml" />
@@ -449,10 +456,10 @@
     <Content Include="Views\Home\ResourceShare.cshtml" />
     <Content Include="Views\Home\AccessDenied.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTRssSource.cshtml" />
-    <Content Include="Views\Home\RssSourcesConfig.cshtml" />
+    <Content Include="Views\MovAdmin\RssSourcesConfig.cshtml" />
     <Content Include="Views\Account\Confirm.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTThemeCategoryMovAdmin.cshtml" />
-    <Content Include="Views\Home\ThemeCategoriesConfig.cshtml" />
+    <Content Include="Views\MovAdmin\ThemeCategoriesConfig.cshtml" />
     <Content Include="Views\Home\ThemeCategoriesList.cshtml" />
     <None Include="Service References\UsersServiceReference\item.xsd">
       <SubType>Designer</SubType>
@@ -470,27 +477,30 @@
     <Content Include="Views\Shared\SysAdmin.cshtml" />
     <Content Include="Views\Shared\SysAdminLogOn.cshtml" />
     <Content Include="Views\SysAdmin\AccessDenied.cshtml" />
-    <Content Include="Views\Home\MovementConfigSuccess.cshtml" />
+    <Content Include="Views\MovAdmin\MovementConfigSuccess.cshtml" />
     <Content Include="Views\Home\MeetingsListOnAttend.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTThemeCategoryMeetings.cshtml" />
     <Content Include="Views\Home\MeetingsListOnInterest.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTUser.cshtml" />
-    <Content Include="Views\Home\UsersManage.cshtml" />
+    <Content Include="Views\MovAdmin\UsersManage.cshtml" />
     <Content Include="Views\Home\UserConfig.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTResource_MovAdmin.cshtml" />
-    <Content Include="Views\Home\ResourcesManage.cshtml" />
-    <Content Include="Views\Home\UserDetails.cshtml" />
+    <Content Include="Views\MovAdmin\ResourcesManage.cshtml" />
+    <Content Include="Views\MovAdmin\UserDetails.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTMeetingSmall.cshtml" />
     <Content Include="Views\Home\ResourcesListTopRanked.cshtml" />
-    <Content Include="Views\Home\UsersRegisterReport.cshtml" />
+    <Content Include="Views\MovAdmin\UsersRegisterReport.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTUsersRegisterReportItem.cshtml" />
-    <Content Include="Views\Home\UsersRegisterReport_ChartByMonth.cshtml" />
-    <Content Include="Views\Home\UsersRegisterReport_ChartByYear.cshtml" />
-    <Content Include="Views\Home\UsersRegisterReport_ChartByDay.cshtml" />
+    <Content Include="Views\MovAdmin\UsersRegisterReport_ChartByMonth.cshtml" />
+    <Content Include="Views\MovAdmin\UsersRegisterReport_ChartByYear.cshtml" />
+    <Content Include="Views\MovAdmin\UsersRegisterReport_ChartByDay.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DTRSSFeed.cshtml" />
     <Content Include="Views\Home\MeetingDetails.cshtml" />
     <Content Include="Views\Home\MeetingsMap.cshtml" />
     <Content Include="Views\Home\ResourcesConfig.cshtml" />
+    <Content Include="Views\Home\MeetingsNotificationsList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DTMeetingNotification.cshtml" />
+    <Content Include="Views\Home\ResourcesListUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

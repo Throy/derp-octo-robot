@@ -10,7 +10,7 @@
 
 <h2>Manage users</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(new { id = 0 }))
 {
         if (Model.listType == 0)
         {

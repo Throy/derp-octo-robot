@@ -55,6 +55,12 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public int myAttendance { get; set; }
+
+        [DataMember]
+        public bool isConfirmed { get; set; }
+
+        [DataMember]
+        public bool isActive { get; set; }
     }
 
     // Meeting Collection datatype
@@ -63,6 +69,20 @@ namespace IndignadoServer.Services
     {
         [DataMember]
         public Collection<DTMeeting> items { get; set; }
+    }
+
+    // Meeting Notification datatype
+    [DataContract]
+    public class DTMeetingNotification : DTMeeting
+    {
+    }
+
+    // Meeting Notification Collection datatype
+    [DataContract]
+    public class DTMeetingsNotificationsCol
+    {
+        [DataMember]
+        public Collection<DTMeetingNotification> items { get; set; }
     }
 
     // Movement datatype
@@ -92,6 +112,21 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public String subURL { get; set; }
+
+        [DataMember]
+        public int maxMarcasInadecuadasRecursoX { get; set; }
+
+        [DataMember]
+        public int maxRecursosInadecuadosUsuarioZ { get; set; }
+
+        [DataMember]
+        public int maxRecursosPopularesN { get; set; }
+
+        [DataMember]
+        public int maxUltimosRecursosM { get; set; }
+
+
+
     }
 
     [DataContract]
@@ -142,7 +177,13 @@ namespace IndignadoServer.Services
         public String description { get; set; }
 
         [DataMember]
-        public String link { get; set; }
+        public String itemUrl { get; set; }
+
+        [DataMember]
+        public String sourceUrl { get; set; }
+
+        [DataMember]
+        public String sourceTitle { get; set; }
 
         [DataMember]
         public String image { get; set; }
@@ -222,6 +263,13 @@ namespace IndignadoServer.Services
     {
         [DataMember]
         public Collection<DTResource_NewsResources> items { get; set; }
+
+        [DataMember]
+        public int currentPage { get; set; }
+
+        [DataMember]
+        public int maxPage { get; set; }
+
     }
 
     // Resource datatype - MovAdmin
@@ -470,6 +518,9 @@ namespace IndignadoServer.Services
         public String fullName { get; set; }
 
         [DataMember]
+        public String password { get; set; }
+
+        [DataMember]
         public String mail { get; set; }
 
         [DataMember]
@@ -489,6 +540,12 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public bool banned { get; set; }
+    }
+
+    // User datatype - NewsResourcesController
+    [DataContract]
+    public class DTUser_NewsResources : DTUser
+    {
     }
 
     // User datatype - MovAdminController
@@ -520,6 +577,17 @@ namespace IndignadoServer.Services
 
         [DataMember]
         public Collection<DTResource_MovAdmin> resources { get; set; }
+    }
+
+    // User Details datatype - NewsResourcesController
+    [DataContract]
+    public class DTUserDetails_NewsResources
+    {
+        [DataMember]
+        public DTUser_NewsResources user { get; set; }
+
+        [DataMember]
+        public DTResourcesCol_NewsResources resources { get; set; }
     }
 
     [DataContract]
@@ -619,12 +687,35 @@ namespace IndignadoServer.Services
             dtMeeting.locationLong = (float)meeting.longitud;
             dtMeeting.minQuorum = meeting.minQuorum == null? 0: meeting.minQuorum.Value;
             dtMeeting.imagePath = meeting.logo;
-            dtMeeting.dateBegin = (meeting.fechaInicio == null) ? new DateTime() : meeting.fechaInicio.Value;
-            dtMeeting.dateEnd = (meeting.fechaFin == null) ? new DateTime() : meeting.fechaFin.Value;
+            dtMeeting.dateBegin = meeting.fechaInicio;
+            dtMeeting.dateEnd = meeting.fechaFin;
             dtMeeting.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
             dtMeeting.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
+            dtMeeting.isConfirmed = meeting.estaConfirmada == null ? false : meeting.estaConfirmada.Value;
+            dtMeeting.isActive = meeting.estaActiva == null ? false : meeting.estaActiva.Value;
             dtMeeting.imagePath = meeting.logo == null ? "" : meeting.logo;
             return dtMeeting;
+        }
+
+        public static DTMeetingNotification MeetingNotificationToDT(Convocatoria meeting)
+        {
+            DTMeetingNotification dtMeetingNotification = new DTMeetingNotification();
+            dtMeetingNotification.id = meeting.id;
+            dtMeetingNotification.idMovement = meeting.idMovimiento;
+            dtMeetingNotification.name = meeting.titulo;
+            dtMeetingNotification.description = meeting.descripcion + " ";
+            dtMeetingNotification.locationLati = (float)meeting.latitud;
+            dtMeetingNotification.locationLong = (float)meeting.longitud;
+            dtMeetingNotification.minQuorum = meeting.minQuorum == null ? 0 : meeting.minQuorum.Value;
+            dtMeetingNotification.imagePath = meeting.logo;
+            dtMeetingNotification.dateBegin = meeting.fechaInicio;
+            dtMeetingNotification.dateEnd = meeting.fechaFin;
+            dtMeetingNotification.numberAttendants = meeting.cantAsistencias == null ? 0 : meeting.cantAsistencias.Value;
+            dtMeetingNotification.myAttendance = meeting.miAsistencia == null ? 0 : meeting.miAsistencia.Value;
+            dtMeetingNotification.isConfirmed = meeting.estaConfirmada == null ? false : meeting.estaConfirmada.Value;
+            dtMeetingNotification.isActive = meeting.estaActiva == null ? false : meeting.estaActiva.Value;
+            dtMeetingNotification.imagePath = meeting.logo == null ? "" : meeting.logo;
+            return dtMeetingNotification;
         }
 
         public static DTMovement MovementToDT(Movimiento movement)
@@ -638,6 +729,10 @@ namespace IndignadoServer.Services
             dtMovement.idLayout = movement.idLayout;
             dtMovement.imagePath = movement.logo;
             dtMovement.subURL = movement.url;
+            dtMovement.maxMarcasInadecuadasRecursoX = movement.maxMarcasInadecuadasRecursoX;
+            dtMovement.maxRecursosInadecuadosUsuarioZ = movement.maxRecursosInadecuadosUsuarioZ;
+            dtMovement.maxRecursosPopularesN = movement.maxRecursosPopularesN;
+            dtMovement.maxUltimosRecursosM = movement.maxUltimosRecursosM;
             return dtMovement;
         }
 
@@ -657,7 +752,9 @@ namespace IndignadoServer.Services
             //dtRssItem.description = Regex.Replace(rssItem.Description, @"</?(a|img|div|p|strong) ?[^>]*?>", string.Empty);
             // Le puse para que quite todas las tags, sino quedaba el br y me movia todo de lugar
             dtRssItem.description = Regex.Replace(rssItem.Description, "<(.|\\n)*?>", string.Empty);
-            dtRssItem.link = (rssItem.Link == null) ? "" : rssItem.Link;
+            dtRssItem.itemUrl = (rssItem.Link == null) ? "" : rssItem.Link;
+            dtRssItem.sourceUrl = "";
+            dtRssItem.sourceTitle = "";
             // Le agregue jpg para que no capture unos gifs transparentes que no mostraban nada
             dtRssItem.image = Regex.Match(rssItem.Description, @"<img[^>]*jpg.*?/>").Value;
             dtRssItem.image = (dtRssItem.image == null) ? null : Regex.Match(dtRssItem.image, @"src\=\"".*?\""").Value;
@@ -758,6 +855,22 @@ namespace IndignadoServer.Services
             return dtUser;
         }
 
+        public static DTUser_NewsResources UserToDT_NewsResources(Usuario user)
+        {
+            DTUser_NewsResources dtUser = new DTUser_NewsResources();
+            dtUser.id = user.id;
+            dtUser.username = user.apodo;
+            dtUser.fullName = user.nombre;
+            dtUser.mail = user.mail;
+            dtUser.registerDate = (user.fechaRegistro == null) ? new DateTime() : user.fechaRegistro.Value;
+            dtUser.locationLati = (float)user.latitud;
+            dtUser.locationLong = (float)user.longitud;
+            dtUser.numberResourcesMarkedInappr = (user.cantRecursosMarcadosInadecuados == null) ? 0 : user.cantRecursosMarcadosInadecuados.Value;
+            dtUser.numberResourcesDisabled = (user.cantRecursosDeshabilitados == null) ? 0 : user.cantRecursosDeshabilitados.Value;
+            dtUser.banned = user.banned;
+            return dtUser;
+        }
+
         public static DTUser_Users UserToDT_Users(Usuario user)
         {
             DTUser_Users dtUser = new DTUser_Users();
@@ -827,6 +940,8 @@ namespace IndignadoServer.Services
             meeting.fechaFin = dtMeeting.dateEnd;
             meeting.cantAsistencias = dtMeeting.numberAttendants;
             meeting.miAsistencia = dtMeeting.myAttendance;
+            meeting.estaConfirmada = dtMeeting.isConfirmed;
+            meeting.estaActiva = dtMeeting.isActive;
             return meeting;
         }
 
@@ -841,6 +956,10 @@ namespace IndignadoServer.Services
             movement.idLayout = dtMovement.idLayout;
             movement.logo = dtMovement.imagePath;
             movement.url = dtMovement.subURL;
+            movement.maxMarcasInadecuadasRecursoX = dtMovement.maxMarcasInadecuadasRecursoX;
+            movement.maxRecursosInadecuadosUsuarioZ = dtMovement.maxRecursosInadecuadosUsuarioZ;
+            movement.maxRecursosPopularesN = dtMovement.maxRecursosPopularesN;
+            movement.maxUltimosRecursosM = dtMovement.maxUltimosRecursosM;
             return movement;
         }
 
@@ -918,6 +1037,14 @@ namespace IndignadoServer.Services
             user.cantRecursosMarcadosInadecuados = dtUser.numberResourcesMarkedInappr;
             user.cantRecursosDeshabilitados = dtUser.numberResourcesDisabled;
             user.banned = dtUser.banned;
+
+            if (dtUser.password != null)
+            {
+                HashAlgorithm sha = new SHA1CryptoServiceProvider();
+                byte[] passwordHash = sha.ComputeHash(ASCIIEncoding.ASCII.GetBytes(dtUser.password));
+                user.contraseña = passwordHash;
+            }
+
             return user;
         }
 

@@ -41,10 +41,19 @@ namespace IndignadoServer.Controllers
             mov.latitud = movement.latitud;
             mov.longitud = movement.longitud;
             mov.idLayout = movement.idLayout;
-            mov.logo = movement.logo;
+            if ((movement.logo != null) && (movement.logo != ""))
+            {
+                mov.logo = movement.logo;
+            }
+            mov.maxMarcasInadecuadasRecursoX = movement.maxMarcasInadecuadasRecursoX;
+            mov.maxRecursosInadecuadosUsuarioZ = movement.maxRecursosInadecuadosUsuarioZ;
+            mov.maxRecursosPopularesN = movement.maxRecursosPopularesN;
+            mov.maxUltimosRecursosM = movement.maxUltimosRecursosM;
             indignadoContext.SubmitChanges();
             //indignadoContext.ExecuteCommand("UPDATE Movimiento SET nombre = {0}, descripcion = {1}, latitud = {2}, longitud = {3}, idLayout = {4}, logo={6} WHERE id = {5}", movement.nombre, movement.descripcion, movement.latitud, movement.longitud, movement.idLayout, IdMovement);
         }
+
+
 
         // returns a list of available layouts
         public List<DTLayout> getLayouts()

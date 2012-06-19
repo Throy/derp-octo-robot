@@ -93,6 +93,38 @@ namespace IndignadoServer.Services
             return dtMeetingsCol;
         }
 
+        // returns all meetings that the user has been notified.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public DTMeetingsNotificationsCol getMeetingsNotifications()
+        {
+            Collection<Convocatoria> meetingsCol = ControllersHub.Instance.getIMeetingsController().getMeetingsNotifications();
+
+            // create new meetings notifications datatype collection
+            DTMeetingsNotificationsCol dtMeetingsNotificationsCol = new DTMeetingsNotificationsCol();
+            dtMeetingsNotificationsCol.items = new Collection<DTMeetingNotification>();
+
+            // add meetings notifications to the datatype collection
+            foreach (Convocatoria meeting in meetingsCol)
+            {
+                // convert to datatype
+                DTMeetingNotification dtMeetingNotification = ClassToDT.MeetingNotificationToDT(meeting);
+
+                // add theme categories.
+                Collection<CategoriasTematica> themeCats = ControllersHub.Instance.getIMeetingsController().getThemeCategoriesMeeting(meeting);
+                dtMeetingNotification.themeCategories = new Collection<DTThemeCategoryMeetings>();
+                foreach (CategoriasTematica themeCat in themeCats)
+                {
+                    dtMeetingNotification.themeCategories.Add(ClassToDT.ThemeCategoryToDTMeetings(themeCat));
+                }
+
+                // add meeting notification to the datatype collection.
+                dtMeetingsNotificationsCol.items.Add(dtMeetingNotification);
+            }
+
+            // return the collection
+            return dtMeetingsNotificationsCol;
+        }
+
         // returns all theme categories.
         public DTThemeCategoriesColMeetings getThemeCategoriesList()
         {
@@ -132,6 +164,14 @@ namespace IndignadoServer.Services
         public void dontAttendMeeting(DTMeeting dtMeeting)
         {
             ControllersHub.Instance.getIMeetingsController().dontAttendMeeting(DTToClass.DTToMeeting(dtMeeting));
+        }
+        
+
+        // removes a meeting notification.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void deleteMeetingNotification(DTMeeting dtMeeting)
+        {
+            ControllersHub.Instance.getIMeetingsController().deleteMeetingNotification(DTToClass.DTToMeeting(dtMeeting));
         }
     }
 }

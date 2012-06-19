@@ -4,17 +4,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.ServiceModel;
-using IndignadoServer.LinqDataContext;
-using RssToolkit.Rss;
 using System.Threading;
+using IndignadoServer.LinqDataContext;
+using IndignadoServer.Services;
+using RssToolkit.Rss;
+using System.ServiceModel;
 
 namespace IndignadoServer.Controllers
 {
     class NewsResourcesController : IndignadoController, INewsResourcesController
     {
         private Timer _timer;
-        Dictionary<int, Collection<RssItem>> _rssItemsCol { get; set; }
+        Dictionary<int, Collection<DTRssItem>> _rssItemsCol { get; set; }
 
         // ******************
         // controller methods
@@ -22,7 +23,7 @@ namespace IndignadoServer.Controllers
 
         public NewsResourcesController()
         {
-            _rssItemsCol = new Dictionary<int, Collection<RssItem>>();
+            _rssItemsCol = new Dictionary<int, Collection<DTRssItem>>();
             _timer = new Timer(new TimerCallback(RefreshNewsList), this, 1000, 60000);
         }
 
@@ -43,20 +44,27 @@ namespace IndignadoServer.Controllers
 
                 foreach (Movimiento mov in movimientos)
                 {
-                    IEnumerable<RssFeed> fuentesEnum = indignadoContext.ExecuteQuery<RssFeed>("SELECT idMovimiento, url, tag FROM RssFeeds WHERE idMovimiento = {0}", mov.id);
+                    IEnumerable<RssFeed> fuentesEnum = indignadoContext.ExecuteQuery<RssFeed>
+                        ("SELECT * FROM RssFeeds WHERE idMovimiento = {0}", mov.id);
 
-                    Collection<RssItem> rssItemsCol = new Collection<RssItem>();
+                    // get items from the sources.
                     Collection<List<RssItem>> ColRssLists = new Collection<List<RssItem>>();
+                    Collection<String> colRssSourceTitle = new Collection<String>();
+                    Collection<String> colRssSourceUrl = new Collection<String>();
                     foreach (RssFeed source in fuentesEnum)
                     {
                         List<RssItem> rssItemsList = RssDocument.Load(new System.Uri(source.url)).Channel.Items;
                         ColRssLists.Add(rssItemsList);
+                        colRssSourceTitle.Add(source.titulo);
+                        colRssSourceUrl.Add(source.url);
                         if (ColRssLists.Count > 10)
                         {
                             break;
                         }
                     }
 
+                    // add items to the collection.
+                    Collection<DTRssItem> rssItemsCol = new Collection<DTRssItem>();
                     if (ColRssLists.Count > 0)
                     {
                         for (int j = 0; j < 10; j++)
@@ -64,7 +72,10 @@ namespace IndignadoServer.Controllers
                             List<RssItem> rssItemsList = ColRssLists[j % ColRssLists.Count];
                             if (rssItemsList.Count > (j / ColRssLists.Count))
                             {
-                                rssItemsCol.Add(rssItemsList[j / ColRssLists.Count]);
+                                DTRssItem dtRssItem = ClassToDT.RssItemToDT(rssItemsList[j / ColRssLists.Count]);
+                                dtRssItem.sourceTitle = colRssSourceTitle[j % colRssSourceTitle.Count];
+                                dtRssItem.sourceUrl = colRssSourceUrl[j % colRssSourceTitle.Count];
+                                rssItemsCol.Add(dtRssItem);
                             }
                         }
 
@@ -77,47 +88,86 @@ namespace IndignadoServer.Controllers
         }
 
         // returns all rss items.
-        public Collection<RssItem> getNewsList()
+        public Collection<DTRssItem> getNewsList()
         {
             if (!_rssItemsCol.ContainsKey(IdMovement))
-                _rssItemsCol.Add(IdMovement, new Collection<RssItem>());
+                _rssItemsCol.Add(IdMovement, new Collection<DTRssItem>());
 
             return _rssItemsCol[IdMovement];
         }
 
         // returns all resources.
-        public Collection<Recurso> getResourcesList()
+        public DTResourcesCol_NewsResources getResourcesList(int pageNumber)
         {
             // get all resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
                 ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) ORDER BY Recursos.id DESC", IdMovement, 0);
             Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
-            return toResourcesCol(recursosEnum, movement.maxUltimosRecursosM);
+            return toResourcesCol(recursosEnum, movement.maxUltimosRecursosM, pageNumber);
         }
 
         // returns the top ranked resources.
-        public Collection<Recurso> getResourcesListTopRanked()
+        public DTResourcesCol_NewsResources getResourcesListTopRanked(int pageNumber)
         {
             // get top ranked resources from this movement.
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             IEnumerable<Recurso> recursosEnum = indignadoContext.ExecuteQuery<Recurso>
-                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) ORDER BY CantAprobaciones.cantAprobaciones DESC, Recursos.id DESC", IdMovement, 0);
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Recursos.deshabilitado = {1}) AND (Recursos.fecha > {2}) ORDER BY CantAprobaciones.cantAprobaciones DESC, Recursos.id DESC", IdMovement, 0, DateTime.UtcNow.AddDays(-31));
             Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
-            return toResourcesCol(recursosEnum, movement.maxRecursosPopularesN);
+            return toResourcesCol(recursosEnum, movement.maxRecursosPopularesN, pageNumber);
+        }
+
+        // returns all resources published by the given user.
+        public DTResourcesCol_NewsResources getResourcesListUser(Usuario user, int pageNumber)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Usuarios.id = {1}) ORDER BY Recursos.id DESC", IdMovement, user.id);
+            Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
+            return toResourcesCol(resourcesEnum, movement.maxUltimosRecursosM,pageNumber);
         }
 
         // converts a resources enumerable to a collection.
-        private Collection<Recurso> toResourcesCol(IEnumerable<Recurso> recursosEnum, int numberItems)
+        private DTResourcesCol_NewsResources toResourcesCol(IEnumerable<Recurso> recursosEnum, int itemsNumber, int pageNumber)
         {
             IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
 
-            // create new resources collection.
-            Collection<Recurso> recursosCol = new Collection<Recurso>();
+            // create new resources datatypes collection.
+            DTResourcesCol_NewsResources dtResourcesCol = new DTResourcesCol_NewsResources();
+            dtResourcesCol.items = new Collection<DTResource_NewsResources>();
 
-            // for each resource, ...
+            Collection<Recurso> colecciontrucha = new Collection<Recurso>();
             foreach (Recurso resource in recursosEnum)
             {
+                colecciontrucha.Add(resource);
+            }
+
+            // get page number
+            int itemsCount = colecciontrucha.Count();
+            int maxpag = (itemsCount / itemsNumber);
+            if (itemsCount  %   itemsNumber != 0){
+                maxpag++;
+            }
+            if (pageNumber > maxpag) {
+                pageNumber = maxpag;
+            }
+            dtResourcesCol.currentPage = pageNumber;
+            dtResourcesCol.maxPage = maxpag;
+
+            //recursosEnum = recursosEnum.Skip((pageNumber-1)*itemsNumber);
+
+            // for each resource, ...
+            int counter = 0;
+            foreach (Recurso resource in colecciontrucha)
+            {
+                counter++;
+                if (counter <= (pageNumber - 1) * itemsNumber)
+                {
+                    continue;
+                }
+                
+
                 // get own like
                 if (UserInfo != null)
                 {
@@ -139,16 +189,30 @@ namespace IndignadoServer.Controllers
                 }
 
                 // add item to the collection
-                recursosCol.Add(resource);
+                dtResourcesCol.items.Add(ClassToDT.ResourceToDT_NewsResources(resource));
 
                 // stop at the desired number of items.
-                if (recursosCol.Count >= numberItems)
+                if (dtResourcesCol.items.Count >= itemsNumber)
                 {
                     break;
                 }
             }
 
-            return recursosCol;
+            return dtResourcesCol;
+        }
+
+        // returns all the data of the user.
+        public Usuario getUser(Usuario user)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            Usuario fullUser = indignadoContext.Usuarios.SingleOrDefault(u => (u.id == user.id));
+            if (fullUser.idMovimiento != IdMovement) 
+            {
+                throw new FaultException ("The user doesn't belong to the movement");
+            }
+            else {
+                return fullUser;
+            }
         }
 
         // creates a resource.
@@ -193,6 +257,28 @@ namespace IndignadoServer.Controllers
             }
 
             return resource;
+        }
+
+        // removes a resource by the user.
+        public void removeResource(Recurso resource)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            Recurso fullResource = indignadoContext.Recursos.SingleOrDefault(res => (res.id == resource.id));
+            if ((fullResource != null) && (fullResource.idUsuario == UserInfo.Id))
+            {
+                try
+                {
+                    indignadoContext.ExecuteCommand("DELETE FROM Aprobaciones WHERE idRecurso = {0}", resource.id);
+                    indignadoContext.ExecuteCommand("DELETE FROM MarcasInadecuados WHERE idRecurso = {0}", resource.id);
+                    indignadoContext.SubmitChanges();
+                    indignadoContext = new IndignadoDBDataContext();
+                    indignadoContext.ExecuteCommand("DELETE FROM Recursos WHERE (id = {0}) AND (idUsuario = {1})", resource.id, UserInfo.Id);
+                    indignadoContext.SubmitChanges();
+                }
+                catch (Exception error)
+                {
+                }
+            }
         }
 
         // likes a resource.

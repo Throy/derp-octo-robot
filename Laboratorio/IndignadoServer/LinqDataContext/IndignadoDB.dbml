@@ -1,35 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="IndignadoDB" Class="IndignadoDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=IndignadoDB;Integrated Security=True" SettingsObjectName="IndignadoServer.Properties.Settings" SettingsPropertyName="IndignadoDBConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Usuarios" Member="Usuarios">
-    <Type Name="Usuario">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="apodo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="mail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="contraseña" Type="System.Data.Linq.Binary" DbType="VarBinary(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="latitud" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="longitud" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="fechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="cantRecursosMarcadosInadecuados" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="cantRecursosDeshabilitados" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="banned" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="privilegio" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
-      <Association Name="Usuario_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idUsuario" Type="Aprobacione" />
-      <Association Name="Usuario_Asistencia" Member="Asistencias" ThisKey="id" OtherKey="idUsuario" Type="Asistencia" />
-      <Association Name="Usuario_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idAutor" Type="Convocatoria" />
-      <Association Name="Usuario_Interese" Member="Intereses" ThisKey="id" OtherKey="idUsuario" Type="Interese" />
-      <Association Name="Usuario_MarcasInadecuado" Member="MarcasInadecuados" ThisKey="id" OtherKey="idUsuario" Type="MarcasInadecuado" />
-      <Association Name="Usuario_Recurso" Member="Recurso" ThisKey="id" OtherKey="id" Type="Recurso" Cardinality="One" />
-      <Association Name="Usuario_UsuarioFacebook" Member="UsuarioFacebooks" ThisKey="id" OtherKey="idUsuario" Type="UsuarioFacebook" />
-    </Type>
-  </Table>
   <Table Name="dbo.Aprobaciones" Member="Aprobaciones">
     <Type Name="Aprobacione">
       <Column Name="idRecurso" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Usuario_Aprobacione" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
       <Association Name="Recurso_Aprobacione" Member="Recurso" ThisKey="idRecurso" OtherKey="id" Type="Recurso" IsForeignKey="true" />
+      <Association Name="Usuario_Aprobacione" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UsuarioFacebook" Member="UsuarioFacebooks">
+    <Type Name="UsuarioFacebook">
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idFacebook" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Usuario_UsuarioFacebook" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Asistencias" Member="Asistencias">
@@ -37,8 +21,8 @@
       <Column Name="idConvocatoria" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="hayAsistencia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Usuario_Asistencia" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
       <Association Name="Convocatoria_Asistencia" Member="Convocatoria" ThisKey="idConvocatoria" OtherKey="id" Type="Convocatoria" IsForeignKey="true" />
+      <Association Name="Usuario_Asistencia" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.CategoriasTematicas" Member="CategoriasTematicas">
@@ -71,15 +55,18 @@
       <Column Name="logo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="latitud" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="longitud" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="fechaInicio" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="fechaFin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="fechaInicio" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="fechaFin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="minQuorum" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="cantAsistencias" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="miAsistencia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="estaConfirmada" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="estaActiva" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Convocatoria_Asistencia" Member="Asistencias" ThisKey="id" OtherKey="idConvocatoria" Type="Asistencia" />
       <Association Name="Convocatoria_CatTemasConvocatoria" Member="CatTemasConvocatorias" ThisKey="id" OtherKey="idConvocatoria" Type="CatTemasConvocatoria" />
-      <Association Name="Usuario_Convocatoria" Member="Usuario" ThisKey="idAutor" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Convocatoria_Notificacione" Member="Notificaciones" ThisKey="id" OtherKey="idConvocatoria" Type="Notificacione" />
       <Association Name="Movimiento_Convocatoria" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
+      <Association Name="Usuario_Convocatoria" Member="Usuario" ThisKey="idAutor" OtherKey="id" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Intereses" Member="Intereses">
@@ -90,18 +77,27 @@
       <Association Name="Usuario_Interese" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Layouts" Member="Layouts">
+    <Type Name="Layout">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="layoutFile" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Layout_Movimiento" Member="Movimientos" ThisKey="id" OtherKey="idLayout" Type="Movimiento" />
+    </Type>
+  </Table>
   <Table Name="dbo.MarcasInadecuados" Member="MarcasInadecuados">
     <Type Name="MarcasInadecuado">
       <Column Name="idRecurso" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Usuario_MarcasInadecuado" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
       <Association Name="Recurso_MarcasInadecuado" Member="Recurso" ThisKey="idRecurso" OtherKey="id" Type="Recurso" IsForeignKey="true" />
+      <Association Name="Usuario_MarcasInadecuado" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Movimiento" Member="Movimientos">
     <Type Name="Movimiento">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="url" Type="System.String" DbType="NChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="habilitado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="logo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="idLayout" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -112,11 +108,18 @@
       <Column Name="maxRecursosInadecuadosUsuarioZ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="maxRecursosPopularesN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="maxUltimosRecursosM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Member="url" Type="System.String" CanBeNull="false" />
       <Association Name="Movimiento_CategoriasTematica" Member="CategoriasTematicas" ThisKey="id" OtherKey="idMovimiento" Type="CategoriasTematica" />
       <Association Name="Movimiento_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idMovimiento" Type="Convocatoria" />
       <Association Name="Movimiento_RssFeed" Member="RssFeeds" ThisKey="id" OtherKey="idMovimiento" Type="RssFeed" />
       <Association Name="Layout_Movimiento" Member="Layout" ThisKey="idLayout" OtherKey="id" Type="Layout" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Notificaciones" Member="Notificaciones">
+    <Type Name="Notificacione">
+      <Column Name="idConvocatoria" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Convocatoria_Notificacione" Member="Convocatoria" ThisKey="idConvocatoria" OtherKey="id" Type="Convocatoria" IsForeignKey="true" />
+      <Association Name="Usuario_Notificacione" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Recursos" Member="Recursos">
@@ -139,7 +142,7 @@
       <Column Name="deshabilitado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Recurso_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idRecurso" Type="Aprobacione" />
       <Association Name="Recurso_MarcasInadecuado" Member="MarcasInadecuados" ThisKey="id" OtherKey="idRecurso" Type="MarcasInadecuado" />
-      <Association Name="Usuario_Recurso" Member="Usuario" ThisKey="id" OtherKey="id" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Usuario_Recurso" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.RssFeeds" Member="RssFeeds">
@@ -151,20 +154,29 @@
       <Association Name="Movimiento_RssFeed" Member="Movimiento" ThisKey="idMovimiento" OtherKey="id" Type="Movimiento" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.UsuarioFacebook" Member="UsuarioFacebooks">
-    <Type Name="UsuarioFacebook">
-      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idFacebook" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Usuario_UsuarioFacebook" Member="Usuario" ThisKey="idUsuario" OtherKey="id" Type="Usuario" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Layouts" Member="Layouts">
-    <Type Name="Layout">
+  <Table Name="dbo.Usuarios" Member="Usuarios">
+    <Type Name="Usuario">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="layoutFile" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Layout_Movimiento" Member="Movimientos" ThisKey="id" OtherKey="idLayout" Type="Movimiento" />
+      <Column Name="idMovimiento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="apodo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="mail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="contraseña" Type="System.Data.Linq.Binary" DbType="VarBinary(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="latitud" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="longitud" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="fechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cantRecursosMarcadosInadecuados" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cantRecursosDeshabilitados" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="banned" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="privilegio" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Association Name="Usuario_Aprobacione" Member="Aprobaciones" ThisKey="id" OtherKey="idUsuario" Type="Aprobacione" />
+      <Association Name="Usuario_UsuarioFacebook" Member="UsuarioFacebooks" ThisKey="id" OtherKey="idUsuario" Type="UsuarioFacebook" />
+      <Association Name="Usuario_Asistencia" Member="Asistencias" ThisKey="id" OtherKey="idUsuario" Type="Asistencia" />
+      <Association Name="Usuario_Convocatoria" Member="Convocatorias" ThisKey="id" OtherKey="idAutor" Type="Convocatoria" />
+      <Association Name="Usuario_Interese" Member="Intereses" ThisKey="id" OtherKey="idUsuario" Type="Interese" />
+      <Association Name="Usuario_MarcasInadecuado" Member="MarcasInadecuados" ThisKey="id" OtherKey="idUsuario" Type="MarcasInadecuado" />
+      <Association Name="Usuario_Notificacione" Member="Notificaciones" ThisKey="id" OtherKey="idUsuario" Type="Notificacione" />
+      <Association Name="Usuario_Recurso" Member="Recursos" ThisKey="id" OtherKey="idUsuario" Type="Recurso" />
     </Type>
   </Table>
 </Database>

@@ -14,10 +14,10 @@
                         <img class="image" style="margin:0;" width="64px" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null && @Model.imagePath != "") ? @Model.imagePath.ToString() : "meeting_default.jpg"))" alt="Image" />
                     </div>
                     <div class="title" style="float:left; width:248px">
-                        <h3 style="margin-bottom:0;">@Html.DisplayFor(m => m.name)</h3>
+                        <h3 style="margin-bottom:0;">@Model.name</h3>
                     </div>
                     <div style="float:left;">
-                        @Html.DisplayFor(m => m.description)
+                        @Model.description
                     </div>
 
                     @*
@@ -82,9 +82,9 @@
                         
                     <div class="clear"></div>
                     <div class="footer">
-                        Beginning: @Html.DisplayFor(m => m.dateBegin)
+                        Beginning: @Model.dateBegin.ToString("yyyy-MM-dd HH:mm")
                         <br />
-                        End: @Html.DisplayFor(m => m.dateEnd)
+                        End: @Model.dateEnd.ToString("yyyy-MM-dd HH:mm")
                     </div>
                 </div>
             </div>

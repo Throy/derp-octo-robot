@@ -1,5 +1,5 @@
 ﻿<!-- model -->
-@model IndignadoWeb.MeetingsServiceReference.DTMeeting
+@model IndignadoWeb.MeetingsServiceReference.DTMeetingNotification
            
 <script src="/Scripts/jquery-ui-1.8.11.js" type="text/javascript"></script>
 <script  type="text/javascript">
@@ -34,7 +34,7 @@
             +
          </label> 
     </div>
-
+    
     <span class="BeginDateField">Beginning: @Model.dateBegin.ToString("yyyy-MM-dd HH:mm")<br />End: @Model.dateEnd.ToString("yyyy-MM-dd HH:mm")</span>
 
     <img class="image" src="@Url.Content("~/Content/Images/Thumb/" + ((@Model.imagePath != null && @Model.imagePath != "") ? @Model.imagePath.ToString().Replace(".jpg", "_90.jpg") : "meeting_default.jpg"))" alt="Image" />
@@ -43,16 +43,17 @@
         <table class="list" border="0" rules="none">
             <!-- fields -->
             <tr class="field"><td class="field"><span>Description: </span></td>
-            <td class="field"><div class="fieldvalue">@Model.description</div></td></tr>
+            <td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.description)</div></td></tr>
             
             <tr class="field"><td class="field"><span>Attendance: </span></td>
-            <td class="field"><div class="fieldvalue">@Model.numberAttendants</div></td></tr>
+            <td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.numberAttendants)</div></td></tr>
     
         </table>
         <div class="hide @Model.id.ToString().Insert(Model.id.ToString().Count(), "h")">
             <table class="list" border="0" rules="none">
+    
                 <tr class="field"><td class="field"><span>Min quorum: </span></td>
-                <td class="field"><div class="fieldvalue">@Model.minQuorum</div></td></tr>
+                <td class="field"><div class="fieldvalue">@Html.DisplayFor(m => m.minQuorum)</div></td></tr>
     
                 @{
                     if (! @Model.isActive)
@@ -73,8 +74,7 @@
             </table>
     
             @{
-                if (@Model.themeCategories != null && Model.themeCategories.Length >= 1)
-                {
+                if (@Model.themeCategories != null && Model.themeCategories.Length >= 1) {
                     <br />
                     <div class="tableCategories">
                         Categories:
@@ -108,7 +108,10 @@
             {
                 <input class="boton-big-red" type="submit" name="buttonUnconfirmAttendance" value="Unconfirm attendance" />
             }
-
+            
+            <br />
+            
+            <input class="boton-big-red" type="submit" name="buttonRemove" value="Delete notification" />
         }
         </div>
     }

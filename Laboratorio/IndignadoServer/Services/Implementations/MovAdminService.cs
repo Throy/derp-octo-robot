@@ -91,7 +91,7 @@ namespace IndignadoServer.Services
             return dtThemeCategoriesCol;
         }
 
-        // returns all users.
+        // returns all the data of the user.
         [PrincipalPermission(SecurityAction.Demand, Role = Roles.MovAdmin)]
         public DTUserDetails_MovAdmin getUserDetails(DTUser_MovAdmin dtUser)
         {

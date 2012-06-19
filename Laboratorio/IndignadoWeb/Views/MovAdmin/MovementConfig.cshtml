@@ -87,7 +87,7 @@
 </p>
 
 <p>
-<form action="/Home/MovementConfig" method="post" enctype="multipart/form-data">
+<form action="/MovAdmin/MovementConfig" method="post" enctype="multipart/form-data">
     @Html.ValidationSummary(true, "Some fields have errors, please fix them.")
     <div class="reg-box big-red">
         <fieldset>
@@ -132,6 +132,39 @@
             
             <label style="margin-top:15px">Logo:</label>
             <input name="ImageU" id="ImageU" type="file" />
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.maxMarcasInadecuadasRecursoX)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.maxMarcasInadecuadasRecursoX)
+                @Html.ValidationMessageFor(m => m.maxMarcasInadecuadasRecursoX)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.maxRecursosInadecuadosUsuarioZ)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.maxRecursosInadecuadosUsuarioZ)
+                @Html.ValidationMessageFor(m => m.maxRecursosInadecuadosUsuarioZ)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.maxRecursosPopularesN)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.maxRecursosPopularesN)
+                @Html.ValidationMessageFor(m => m.maxRecursosPopularesN)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.maxUltimosRecursosM)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.maxUltimosRecursosM)
+                @Html.ValidationMessageFor(m => m.maxUltimosRecursosM)
+            </div>
+
             <p>
                 <input type="submit" class="boton-big-red" value="Save configuration" />
             </p>

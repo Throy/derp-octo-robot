@@ -12,61 +12,35 @@ namespace IndignadoServer.Services
         // returns all rss items.
         public DTRssItemsCol getNewsList()
         {
-            // get rss items datatypes.
-            Collection<RssItem> rssItemsCol = ControllersHub.Instance.getINewsResourcesController().getNewsList();
-
-            // create new rss items datatypes collection.
             DTRssItemsCol dtRssItemsCol = new DTRssItemsCol();
-            dtRssItemsCol.items = new Collection<DTRssItem>();
-
-            // add rss items to the datatypes collection.
-            foreach (RssItem rssItem in rssItemsCol)
-            {
-                dtRssItemsCol.items.Add(ClassToDT.RssItemToDT(rssItem));
-            }
-
-            // return the collection.
+            dtRssItemsCol.items = ControllersHub.Instance.getINewsResourcesController().getNewsList();
             return dtRssItemsCol;
         }
 
         // returns all resources.
-        public DTResourcesCol_NewsResources getResourcesList()
+        public DTResourcesCol_NewsResources getResourcesList(int pageNumber)
         {
             // get resources datatypes.
-            Collection<Recurso> recursosCol = ControllersHub.Instance.getINewsResourcesController().getResourcesList();
-
-            // create new resources datatypes collection.
-            DTResourcesCol_NewsResources dtResourcesCol = new DTResourcesCol_NewsResources();
-            dtResourcesCol.items = new Collection<DTResource_NewsResources>();
-
-            // add meetings to the datatypes collection.
-            foreach (Recurso resource in recursosCol)
-            {
-                dtResourcesCol.items.Add(ClassToDT.ResourceToDT_NewsResources(resource));
-            }
-
-            // return the collection.
-            return dtResourcesCol;
+            return ControllersHub.Instance.getINewsResourcesController().getResourcesList(pageNumber);
         }
 
         // returns the top ranked resources.
-        public DTResourcesCol_NewsResources getResourcesListTopRanked()
+        public DTResourcesCol_NewsResources getResourcesListTopRanked(int pageNumber)
         {
             // get resources datatypes.
-            Collection<Recurso> recursosCol = ControllersHub.Instance.getINewsResourcesController().getResourcesListTopRanked();
+            return ControllersHub.Instance.getINewsResourcesController().getResourcesListTopRanked( pageNumber);
+        }
 
-            // create new resources datatypes collection.
-            DTResourcesCol_NewsResources dtResourcesCol = new DTResourcesCol_NewsResources();
-            dtResourcesCol.items = new Collection<DTResource_NewsResources>();
+        // returns all the data of the user.
+        public DTUserDetails_NewsResources getUserDetails(DTUser_NewsResources dtUser, int pageNumber)
+        {
+            // create user details
+            DTUserDetails_NewsResources userDetails = new DTUserDetails_NewsResources();
+            userDetails.user = ClassToDT.UserToDT_NewsResources(ControllersHub.Instance.getINewsResourcesController().getUser(DTToClass.DTToUser(dtUser)));
+            userDetails.resources  = ControllersHub.Instance.getINewsResourcesController().getResourcesListUser(DTToClass.DTToUser(dtUser), pageNumber);
 
-            // add meetings to the datatypes collection.
-            foreach (Recurso resource in recursosCol)
-            {
-                dtResourcesCol.items.Add(ClassToDT.ResourceToDT_NewsResources(resource));
-            }
-
-            // return the collection.
-            return dtResourcesCol;
+            // return the datatype.
+            return userDetails;
         }
 
         // creates a resource.
@@ -80,6 +54,13 @@ namespace IndignadoServer.Services
         public DTResource_NewsResources getResourceData(string link)
         {
             return ClassToDT.ResourceToDT_NewsResources(ControllersHub.Instance.getINewsResourcesController().getResourceData(link));
+        }
+
+        // removes a resource by the user.
+        [PrincipalPermission(SecurityAction.Demand, Role = Roles.RegUser)]
+        public void removeResource(DTResource_NewsResources dtResource)
+        {
+            ControllersHub.Instance.getINewsResourcesController().removeResource(DTToClass.DTToResource(dtResource));
         }
 
         // likes a resource.

@@ -12,11 +12,15 @@ namespace IndignadoServer.Services
 
         // returns all resources.
         [OperationContract]
-        DTResourcesCol_NewsResources getResourcesList();
+        DTResourcesCol_NewsResources getResourcesList(int pageNumber);
 
         // returns the top ranked resources.
         [OperationContract]
-        DTResourcesCol_NewsResources getResourcesListTopRanked();
+        DTResourcesCol_NewsResources getResourcesListTopRanked(int pageNumber);
+        
+        // returns all the data of the user.
+        [OperationContract]
+        DTUserDetails_NewsResources getUserDetails(DTUser_NewsResources dtUser, int pageNumber);
 
         // creates a resource.
         [OperationContract]
@@ -25,6 +29,10 @@ namespace IndignadoServer.Services
         // gets resource data from the link.
         [OperationContract]
         DTResource_NewsResources getResourceData(string link);
+
+        // removes a resource by the user.
+        [OperationContract]
+        void removeResource(DTResource_NewsResources dtResource);
 
         // likes a resource.
         [OperationContract]

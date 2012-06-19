@@ -1,5 +1,11 @@
-﻿<!-- model -->
+﻿
+<!-- model -->
 @model IndignadoWeb.Models.ListResourcesModel
+
+<!-- page title -->
+@{
+    ViewBag.Title = "Indignado Framework - Resources list by " + Model.username;
+}
 <script type="text/javascript">
     function like(like, id, numberOfLikes) {
         $.ajax({
@@ -27,20 +33,15 @@
         });
     }
 </script>
-<!-- page title -->
-@{
-    ViewBag.Title = "Indignado Framework - Top resources list";
-}
-
 <!-- page content -->
 
-<h2>Top resources list</h2>
+<h2>Resources list by @Model.username</h2>
 
 <p align="center">
 @{
     if (@Model.itemsList.currentPage > 1)
     {
-        @Html.ActionLink("Previous resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage - 1 })
+        @Html.ActionLink("Better resources", "ResourcesListUser", new { id = @Model.id, currentPage = @Model.itemsList.currentPage - 1 })
     }
     
     <text>
@@ -49,7 +50,7 @@
         
     if (@Model.itemsList.currentPage < @Model.itemsList.maxPage)
     {
-        @Html.ActionLink("Next resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage + 1 })
+        @Html.ActionLink("Worse resources", "ResourcesListUser", new { id = @Model.id, currentPage = @Model.itemsList.currentPage + 1 })
     }
 }
 </p>
@@ -62,7 +63,7 @@
 @{
     if (@Model.itemsList.currentPage > 1)
     {
-        @Html.ActionLink("Previous resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage - 1 })
+        @Html.ActionLink("Better resources", "ResourcesListUser", new { id = @Model.id, currentPage = @Model.itemsList.currentPage - 1 })
     }
     
     <text>
@@ -71,7 +72,7 @@
         
     if (@Model.itemsList.currentPage < @Model.itemsList.maxPage)
     {
-        @Html.ActionLink("Next resources", "ResourcesListTopRanked", new { id = @Model.itemsList.currentPage + 1 })
+        @Html.ActionLink("Worse resources", "ResourcesListUser", new { id = @Model.id, currentPage = @Model.itemsList.currentPage + 1 })
     }
 }
 </p>

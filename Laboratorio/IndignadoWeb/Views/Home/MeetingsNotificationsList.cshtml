@@ -1,9 +1,9 @@
 ﻿<!-- model -->
-@model IndignadoWeb.Models.MeetingsMapModel
+@model IndignadoWeb.Models.MeetingsNotificationsMapModel
 
 <!-- page title -->
 @{
-    ViewBag.Title = "Indignado Framework - Meetings map";
+    ViewBag.Title = "Indignado Framework - Meetings notifications list";
     
 }
 
@@ -19,14 +19,14 @@
         // initialize map
         var myOptions = {
             center: new google.maps.LatLng(@Model.locationLati.ToString().Replace(",", "."), @Model.locationLong.ToString().Replace(",", ".")),
-            zoom: 10,
+            zoom: 8,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
         var infoWindow = new google.maps.InfoWindow({ content : "cargando..."});
         @{int i = 0; }
         
-        @foreach (var item in Model.meetings.items)
+        @foreach (var item in Model.meetingsNotifications.items)
         {
             String latitud = item.locationLati.ToString().Replace(",", ".");
             String longitud = item.locationLong.ToString().Replace(",", ".");
@@ -36,9 +36,9 @@
             <text> markerContent =  "<div style=\"border-width:2px; padding-left:5px; border-color:Black; border-style:dashed; width:290px; height:130px; margin-top:6px;\" >"
                                         + "<h4 style =\"font-size:90%; text-align:center\"><u> Convocatoria</u></h4>" 
                                          + "<img alt=\"No Image\" style=\"float:left; margin-top:-3px; margin-right:6px; border-style:outset; border-width:2px; border-color:Gray;\" src=\"@Url.Content("~/Content/Images/Thumb/" + ((item.imagePath != null)?item.imagePath.ToString():""))\" />"
-                                        + "<h4 style =\" font-size:75%\"> Nombre: @((item.name == null)? "" :item.ToString())</h4>"  
-                                        + "<h4 style =\" font-size:75%\"> Descripción: @(item.description == null? "" : item.ToString())</h4>" 
-                                        + "<h4 style =\" font-size:75%\"> Comienzo: @((item.dateBegin==null)?"":item.dateBegin.ToString()) </h4>"
+                                        + "<h4 style =\" font-size:75%\"> Nombre: @item.name.ToString()</h4>"  
+                                        + "<h4 style =\" font-size:75%\"> Descripción: @item.description.ToString()</h4>" 
+                                        + "<h4 style =\" font-size:75%\"> Comienzo: @item.dateBegin </h4>"
                                         + "</div>" ;
             </text> 
             if (i == 0)
@@ -64,10 +64,13 @@
 </script>
 
 <!-- page content -->
-<h2 style="text-align:center">Meetings map</h2>
 
+<h2 style="text-align:center">Meetings notifications list</h2>
 
-<div id="map_canvas" style="width: 400px; height:300px ; margin-left:220px;border-style:outset; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA" ></div>
+<div id="map_canvas" style="width: 400px; height:300px ; margin-left:220px; margin-bottom:20px; border-style:outset; border-width:2px; border-color:Gray; box-shadow:0 1px 2px #aaa; -moz-box-shadow:0 2px 3px #AAAAAA" ></div>
+
+<p>
+    @Html.DisplayFor(m => m.meetingsNotifications.items)
+</p>
 
 <script type="text/javascript">googleMapsInitialize();</script>
-

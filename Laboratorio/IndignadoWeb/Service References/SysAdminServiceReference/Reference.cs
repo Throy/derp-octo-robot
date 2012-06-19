@@ -41,6 +41,18 @@ namespace IndignadoWeb.SysAdminServiceReference {
         private float locationLongField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int maxMarcasInadecuadasRecursoXField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int maxRecursosInadecuadosUsuarioZField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int maxRecursosPopularesNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int maxUltimosRecursosMField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -130,6 +142,58 @@ namespace IndignadoWeb.SysAdminServiceReference {
                 if ((this.locationLongField.Equals(value) != true)) {
                     this.locationLongField = value;
                     this.RaisePropertyChanged("locationLong");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int maxMarcasInadecuadasRecursoX {
+            get {
+                return this.maxMarcasInadecuadasRecursoXField;
+            }
+            set {
+                if ((this.maxMarcasInadecuadasRecursoXField.Equals(value) != true)) {
+                    this.maxMarcasInadecuadasRecursoXField = value;
+                    this.RaisePropertyChanged("maxMarcasInadecuadasRecursoX");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int maxRecursosInadecuadosUsuarioZ {
+            get {
+                return this.maxRecursosInadecuadosUsuarioZField;
+            }
+            set {
+                if ((this.maxRecursosInadecuadosUsuarioZField.Equals(value) != true)) {
+                    this.maxRecursosInadecuadosUsuarioZField = value;
+                    this.RaisePropertyChanged("maxRecursosInadecuadosUsuarioZ");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int maxRecursosPopularesN {
+            get {
+                return this.maxRecursosPopularesNField;
+            }
+            set {
+                if ((this.maxRecursosPopularesNField.Equals(value) != true)) {
+                    this.maxRecursosPopularesNField = value;
+                    this.RaisePropertyChanged("maxRecursosPopularesN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int maxUltimosRecursosM {
+            get {
+                return this.maxUltimosRecursosMField;
+            }
+            set {
+                if ((this.maxUltimosRecursosMField.Equals(value) != true)) {
+                    this.maxUltimosRecursosMField = value;
+                    this.RaisePropertyChanged("maxUltimosRecursosM");
                 }
             }
         }

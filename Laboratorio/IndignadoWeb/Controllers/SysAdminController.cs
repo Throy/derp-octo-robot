@@ -185,7 +185,11 @@ namespace IndignadoWeb.Controllers
                     dtMovement.name = model.name;
                     dtMovement.description = model.description;
                     dtMovement.locationLati = model.locationLati;
-                    dtMovement.locationLong = model.locationLong;               
+                    dtMovement.locationLong = model.locationLong;
+                    dtMovement.maxMarcasInadecuadasRecursoX = model.maxMarcasInadecuadasRecursoX;
+                    dtMovement.maxRecursosInadecuadosUsuarioZ = model.maxRecursosInadecuadosUsuarioZ;
+                    dtMovement.maxRecursosPopularesN = model.maxRecursosPopularesN;
+                    dtMovement.maxUltimosRecursosM = model.maxUltimosRecursosM;
 
                     dtMovement.subURL = model.url.Replace(' ','_');
                     serv.createMovement(dtMovement);

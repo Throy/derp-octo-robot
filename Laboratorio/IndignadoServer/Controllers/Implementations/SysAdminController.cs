@@ -20,6 +20,23 @@ namespace IndignadoServer.Controllers
 
             // creates the movement.
             movement.url.Replace(' ', '_');
+            if (movement.maxMarcasInadecuadasRecursoX < 1)
+            {
+                movement.maxMarcasInadecuadasRecursoX = 5;
+            }
+            if (movement.maxRecursosInadecuadosUsuarioZ < 1)
+            {
+                movement.maxRecursosInadecuadosUsuarioZ = 5;
+            }
+            if (movement.maxRecursosPopularesN < 1)
+            {
+                movement.maxRecursosPopularesN = 5;
+            }
+            if (movement.maxUltimosRecursosM < 1)
+            {
+                movement.maxUltimosRecursosM = 5;
+            }
+
             indignadoContext.Movimientos.InsertOnSubmit(movement);
             indignadoContext.SubmitChanges();
 

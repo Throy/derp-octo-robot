@@ -13,7 +13,7 @@ namespace IndignadoServer.Controllers
         // ********************
 
         // maximum distance from a user that makes a meeting interesting, measured in km.
-        const float maxDistanceInterest = 20.0F;
+        const float maxDistanceInterest = 50.0F;
 
         // ******************
         // controller methods
@@ -68,8 +68,46 @@ namespace IndignadoServer.Controllers
                     indignadoContext.CatTemasConvocatorias.InsertOnSubmit(themeCatMeeting);
                 }
             }
+            indignadoContext.SubmitChanges();
+            indignadoContext = new IndignadoDBDataContext();
 
-            // submit changes to the database.
+            // add notifications to interested users.
+
+            // notify users interested in the meeting's theme categories.
+            IEnumerable<CatTemasConvocatoria> cattemas = indignadoContext.ExecuteQuery<CatTemasConvocatoria>
+                ("SELECT idCategoriaTematica, idConvocatoria FROM CatTemasConvocatorias WHERE idConvocatoria = {0}", meeting.id);
+            IEnumerable<Usuario> usersEnumOnThemeCat = indignadoContext.ExecuteQuery<Usuario>
+                ("SELECT Intereses.idUsuario AS id FROM Intereses RIGHT JOIN (SELECT * FROM CatTemasConvocatorias WHERE idConvocatoria = {0}) CatTemas ON CatTemas.idCategoriaTematica = Intereses.idCategoriaTematica", meeting.id);
+
+            foreach (Usuario usuario in usersEnumOnThemeCat)
+            {
+                Notificacione notification = new Notificacione();
+                notification.idUsuario = usuario.id;
+                notification.idConvocatoria = meeting.id;
+                indignadoContext.Notificaciones.InsertOnSubmit(notification);
+            }
+
+            // notify users close to the meeting.
+            IEnumerable<Usuario> usersEnumFull = indignadoContext.ExecuteQuery<Usuario>
+                ("SELECT * FROM Usuarios WHERE idMovimiento = {0}", IdMovement);
+
+            float latiMeetingRadians = (float)(meeting.latitud * Math.PI / 180);
+            float longMeetingRadians = (float)(meeting.longitud * Math.PI / 180);
+            foreach (Usuario usuario in usersEnumFull)
+            {
+                // if the user is close to the meeting, add it.
+                float latiUserRadians = (float)(usuario.latitud * Math.PI / 180);
+                float longUserRadians = (float)(usuario.longitud * Math.PI / 180);
+                if (6378 * Math.Acos
+                    (Math.Sin(latiUserRadians) * Math.Sin(latiMeetingRadians)
+                    + Math.Cos(latiUserRadians) * Math.Cos(latiMeetingRadians) * Math.Cos(longUserRadians - longMeetingRadians)) < maxDistanceInterest)
+                {
+                    Notificacione notification = new Notificacione();
+                    notification.idUsuario = usuario.id;
+                    notification.idConvocatoria = meeting.id;
+                    indignadoContext.Notificaciones.InsertOnSubmit(notification);
+                }
+            }
             indignadoContext.SubmitChanges();
         }
 
@@ -147,6 +185,10 @@ namespace IndignadoServer.Controllers
                             }
                         }
 
+                        // get meeting status
+                        meeting.estaActiva = (DateTime.UtcNow < meeting.fechaFin);
+                        meeting.estaConfirmada = (meeting.fechaInicio.AddDays(-1) < DateTime.UtcNow) && (meeting.cantAsistencias >= meeting.minQuorum);
+
                         // add item to the collection
                         meetingsCol.Add(meeting);
                     }
@@ -156,7 +198,6 @@ namespace IndignadoServer.Controllers
             // return the collection.
             return meetingsCol;
         }
-
 
         // convert meetings enumerables to collections.
         private Collection<Convocatoria> toCollectionConvocatoria(IEnumerable<Convocatoria> meetingsEnum)
@@ -185,6 +226,10 @@ namespace IndignadoServer.Controllers
                     }
                 }
 
+                // get meeting status
+                meeting.estaActiva = (DateTime.UtcNow < meeting.fechaFin);
+                meeting.estaConfirmada = (meeting.fechaInicio.AddDays(-1) < DateTime.UtcNow) && (meeting.cantAsistencias >= meeting.minQuorum);
+
                 // add item to the collection
                 meetingsCol.Add(meeting);
             }
@@ -193,6 +238,14 @@ namespace IndignadoServer.Controllers
             return meetingsCol;
         }
 
+        // returns all meetings that the user has been notified.
+        public Collection<Convocatoria> getMeetingsNotifications()
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            IEnumerable<Convocatoria> meetingsEnum = indignadoContext.ExecuteQuery<Convocatoria>
+                ("SELECT Convocatorias.id, idMovimiento, titulo, descripcion, longitud, latitud, minQuorum, logo, fechaInicio, fechaFin FROM Convocatorias LEFT JOIN Notificaciones ON Notificaciones.idConvocatoria = Convocatorias.id WHERE Notificaciones.idUsuario = {0}", UserInfo.Id);
+            return toCollectionConvocatoria(meetingsEnum);
+        }
 
         // returns all theme categories.
         public Collection<CategoriasTematica> getThemeCategoriesList()
@@ -284,6 +337,21 @@ namespace IndignadoServer.Controllers
             {
                 IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
                 indignadoContext.ExecuteCommand("DELETE FROM Asistencias WHERE (idConvocatoria = {0}) AND (idUsuario = {1})", meeting.id, UserInfo.Id);
+                indignadoContext.SubmitChanges();
+            }
+            catch (Exception error)
+            {
+            }
+        }
+
+        // removes a meeting notification.
+        public void deleteMeetingNotification(Convocatoria meeting)
+        {
+            // remove notification from the database.
+            try
+            {
+                IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+                indignadoContext.ExecuteCommand("DELETE FROM Notificaciones WHERE (idConvocatoria = {0}) AND (idUsuario = {1})", meeting.id, UserInfo.Id);
                 indignadoContext.SubmitChanges();
             }
             catch (Exception error)
