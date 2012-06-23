@@ -125,7 +125,18 @@ namespace IndignadoServer.Controllers
             IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
                 ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Usuarios.id = {1}) ORDER BY Recursos.id DESC", IdMovement, user.id);
             Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
-            return toResourcesCol(resourcesEnum, movement.maxUltimosRecursosM,pageNumber);
+            return toResourcesCol(resourcesEnum, movement.maxUltimosRecursosM, pageNumber);
+        }
+
+        // returns all resources published by the movement admin.
+        public DTResourcesCol_NewsResources getResourcesListMovAdmin(int pageNumber)
+        {
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
+            Usuario movAdmin = indignadoContext.Usuarios.SingleOrDefault(u => (u.idMovimiento == IdMovement) && ((u.privilegio & IndignadoServer.Roles.MovAdminMask) == IndignadoServer.Roles.MovAdminMask));
+            IEnumerable<Recurso> resourcesEnum = indignadoContext.ExecuteQuery<Recurso>
+                ("SELECT Recursos.id, Recursos.idUsuario, Usuarios.apodo AS apodoUsuario, titulo, descripcion, fecha, tipo, urlLink, urlImage, urlVideo, urlThumb, CantAprobaciones.cantAprobaciones FROM Recursos LEFT JOIN Usuarios ON (Usuarios.id = Recursos.idUsuario) LEFT JOIN (SELECT idRecurso, COUNT (idUsuario) AS cantAprobaciones FROM Aprobaciones GROUP BY idRecurso) CantAprobaciones ON (CantAprobaciones.idRecurso = Recursos.id) WHERE (Usuarios.idMovimiento = {0}) AND (Usuarios.id = {1}) ORDER BY Recursos.id DESC", IdMovement, movAdmin.id);
+            Movimiento movement = indignadoContext.Movimientos.Single(x => x.id == IdMovement);
+            return toResourcesCol(resourcesEnum, movement.maxUltimosRecursosM, pageNumber);
         }
 
         // converts a resources enumerable to a collection.

@@ -17,6 +17,10 @@ namespace IndignadoServer.Services
         // returns the top ranked resources.
         [OperationContract]
         DTResourcesCol_NewsResources getResourcesListTopRanked(int pageNumber);
+
+        // returns all resources published by the movement admin.
+        [OperationContract]
+        DTResourcesCol_NewsResources getResourcesListMovAdmin(int pageNumber);
         
         // returns all the data of the user.
         [OperationContract]
