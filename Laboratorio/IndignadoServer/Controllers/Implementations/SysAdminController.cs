@@ -16,9 +16,8 @@ namespace IndignadoServer.Controllers
         // creates a movement.
         public void createMovement(Movimiento movement)
         {
-            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
-
-            // creates the movement.
+            // fixes the movement settings
+            movement.habilitado = true;
             movement.url.Replace(' ', '_');
             if (movement.maxMarcasInadecuadasRecursoX < 1)
             {
@@ -37,6 +36,8 @@ namespace IndignadoServer.Controllers
                 movement.maxUltimosRecursosM = 5;
             }
 
+            // creates the movement.
+            IndignadoDBDataContext indignadoContext = new IndignadoDBDataContext();
             indignadoContext.Movimientos.InsertOnSubmit(movement);
             indignadoContext.SubmitChanges();
 
