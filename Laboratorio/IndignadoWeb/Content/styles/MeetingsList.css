@@ -4,7 +4,7 @@
     margin-left:20px;
     margin-bottom:20px;
     width: 740px;
-    height:195px;
+    
     font-family:Verdana;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
@@ -15,6 +15,7 @@
     border-color:Gray;
     box-shadow:0 1px 2px #aaa; 
     -moz-box-shadow:0 1px 2px #AAAAAA;
+    float:left;
 }
 
 .MeetingButton
@@ -22,8 +23,9 @@
     position: absolute;
     bottom:0;
     right:0;
-    margin-right:70px;
+    margin-right:25px;
     margin-bottom:10px;
+    margin-top:10px;
 }
 
 .Header
@@ -38,6 +40,13 @@
     border-style:none;
     font-size:90%;
 }
+.field2
+{
+    margin-left:15px;
+    border-style:none;
+    width:50%;
+    font-size:90%;
+}
 
 .fieldvalue
 {
@@ -45,6 +54,18 @@
      margin-right:25px;
      height:10px;
      
+ }
+ .fieldvalue2
+{
+     text-align:right;
+     border-style:none;
+     
+     
+ }
+ 
+ .center
+ {
+    text-align:center;
  }
  .list
  {
@@ -61,7 +82,8 @@
  .tableCategories
  {
      text-align:center;
-     margin-right:140px;
+     float:left;
+     margin-left:250px;
  }
  .hide
  {
@@ -71,6 +93,7 @@
  {
     height:90px;
     margin-left:20px;
+    margin-bottom:10px;
     /* overflow:auto;    */
  }
  .BeginDateValue
@@ -95,12 +118,11 @@
  }
  .ampliar
  {
-    position: absolute;
-    bottom:0;
-    right:0;
+    float:right;
+    text-align:center;
     height:13px;
     width:28px;
-    margin-right:380px;
+    margin-right:340px;
     margin-bottom:10px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
@@ -110,11 +132,17 @@
 .ampliarText
 {
     position:relative;
+    text-align:center;
     font-size:80%;
     vertical-align:middle;
-    margin-left:9px;
     padding-bottom:18px;
     font-weight:bold;
     color:White;
     
+}
+.tablacentrada
+{
+    float:right;
+    margin-right:50px;
+    border-style:none;
 }

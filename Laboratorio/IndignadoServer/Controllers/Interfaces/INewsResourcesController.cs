@@ -18,6 +18,9 @@ namespace IndignadoServer.Controllers
         // returns all resources published by the given user.
         DTResourcesCol_NewsResources getResourcesListUser(Usuario user, int pageNumber);
 
+        // returns all resources published by the movement admin.
+        DTResourcesCol_NewsResources getResourcesListMovAdmin(int pageNumber);
+
         // returns all the data of the user.
         Usuario getUser(Usuario user);
 

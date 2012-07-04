@@ -55,12 +55,13 @@
             <!-- news resources -->
             <li class="outer"><span class="menubtn"><a>News and resources</a></span>
                 <ul style="width:180px">
-                    <li class="menuitm">@Html.ActionLink("List news", "NewsList", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("List recent resources", "ResourcesList/1", "Home")</li>
-                    <li class="menuitm">@Html.ActionLink("List top resources", "ResourcesListTopRanked/1", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("News list", "NewsList", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("Recent resources list", "ResourcesList/1", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("Movement resources list", "ResourcesListMovement/1", "Home")</li>
+                    <li class="menuitm">@Html.ActionLink("Top resources list", "ResourcesListTopRanked/1", "Home")</li>
                     @if (ViewBag.UserIsRegUser)
                     {
-                        <li class="menuitm">@Html.ActionLink("List own resources", "ResourcesListUser", new { id = @ViewBag.idUser, currentPage = 1 })</li>
+                        <li class="menuitm">@Html.ActionLink("Own resources list", "ResourcesListUser", new { id = @ViewBag.idUser, currentPage = 1 })</li>
                         <li class="menuitm">@Html.ActionLink("Share resource", "ResourceShare", "Home")</li>
                     }
                 </ul>

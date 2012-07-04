@@ -517,6 +517,7 @@
     <Content Include="Views\Shared\DisplayTemplates\DTMeetingNotification.cshtml" />
     <Content Include="Views\Home\ResourcesListUser.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\ResourcesListMovement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

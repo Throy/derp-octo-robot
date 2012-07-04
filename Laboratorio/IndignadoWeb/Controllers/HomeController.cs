@@ -48,6 +48,7 @@ namespace IndignadoWeb.Controllers
         public const string viewResourceShare = "ResourceShare";
         public const string viewResourcesList = "ResourcesList";
         public const string viewResourcesListTopRanked = "ResourcesListTopRanked";
+        public const string viewResourcesListMovement = "ResourcesListMovement";
         public const string viewResourcesListUser = "ResourcesListUser";
         public const string viewThemeCategoriesList = "ThemeCategoriesList";
         public const string viewUserConfig = "UserConfig";
@@ -577,6 +578,30 @@ namespace IndignadoWeb.Controllers
             }
         }
 
+        // shows movement resources in a list.
+        public ActionResult ResourcesListMovement(ListResourcesModel listResourcesModel)
+        {
+            try
+            {
+                // open service
+                INewsResourcesService serv = GetService<INewsResourcesService>(HomeControllerConstants.urlNewsResourcesService);
+
+                // get all news
+                int currentPage = listResourcesModel.id;
+                listResourcesModel = new ListResourcesModel();
+                listResourcesModel.itemsList = serv.getResourcesListMovAdmin(currentPage);
+
+                // close service
+                (serv as ICommunicationObject).Close();
+
+                return View(listResourcesModel);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction(HomeControllerConstants.viewLogOn, "Account");
+            }
+        }
+
         // shows the user's resources in a list.
         public ActionResult ResourcesListUser(int id, int currentPage)
         {
@@ -619,6 +644,14 @@ namespace IndignadoWeb.Controllers
             string buttonMarkInappr, string buttonUnmarkInappr, string buttonRemove, int id)
         {
             return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, buttonRemove, id, HomeControllerConstants.viewResourcesListTopRanked);
+        }
+
+        // shows movement resources in a list - respond to user action.
+        [HttpPost]
+        public ActionResult ResourcesListMovement(string buttonLike, string buttonUnlike,
+            string buttonMarkInappr, string buttonUnmarkInappr, string buttonRemove, int id)
+        {
+            return ResourcesListGeneric(buttonLike, buttonUnlike, buttonMarkInappr, buttonUnmarkInappr, buttonRemove, id, HomeControllerConstants.viewResourcesListMovement);
         }
 
         // shows the user's resources in a list - respond to user action.

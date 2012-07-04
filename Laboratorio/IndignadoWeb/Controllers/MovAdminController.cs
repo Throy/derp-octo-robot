@@ -228,7 +228,7 @@ namespace IndignadoWeb.Controllers
             }
             catch
             {
-                return Content("Se produjo un error al intentar borrar la fuente de RSS");
+                return Content("The RSS source cannot be removed.");
             }
         }
 
@@ -311,10 +311,10 @@ namespace IndignadoWeb.Controllers
                     if (serv.removeThemeCategory(dtThemeCategory))
                         retorno = "exito";
                     else
-                        retorno = "Se produjo un error al intentar eliminar. La Categoria tiene demasiadas dependencias.";
+                        retorno = "The theme category has dependences, so it cannot be removed.";
                 }
                 else
-                    retorno = "Se produjo un error al intentar eliminar.";
+                    retorno = "The theme category cannot be removed.";
 
                 // close service
                 (serv as ICommunicationObject).Close();
@@ -323,7 +323,7 @@ namespace IndignadoWeb.Controllers
             }
             catch
             {
-                return Content("Se produjo un error al intentar eliminar.");
+                return Content("The theme category cannot be removed.");
             }
         }
 

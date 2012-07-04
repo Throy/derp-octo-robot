@@ -28,7 +28,14 @@ namespace IndignadoServer.Services
         public DTResourcesCol_NewsResources getResourcesListTopRanked(int pageNumber)
         {
             // get resources datatypes.
-            return ControllersHub.Instance.getINewsResourcesController().getResourcesListTopRanked( pageNumber);
+            return ControllersHub.Instance.getINewsResourcesController().getResourcesListTopRanked(pageNumber);
+        }
+
+        // returns all resources published by the movement admin.
+        public DTResourcesCol_NewsResources getResourcesListMovAdmin(int pageNumber)
+        {
+            // get resources datatypes.
+            return ControllersHub.Instance.getINewsResourcesController().getResourcesListMovAdmin(pageNumber);
         }
 
         // returns all the data of the user.
