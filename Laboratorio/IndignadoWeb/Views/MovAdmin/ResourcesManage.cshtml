@@ -10,41 +10,48 @@
 
 <h2>Manage resources</h2>
 
+<div class="shadowH2" style="height:40px;">
 @using (Html.BeginForm(new { id = 0 }))
 {
-        if (Model.listType == 0)
+        <div class="tab">
+        @if (Model.listType == 0)
         {
             <text>
-                <b>All resources</b>
+                <div class="tabActive">All</div>
             </text>
         }
         else
         {
-            <input type="submit" name="buttonShowAll" value="Show all" />
+            <input type="submit" class="boton-big-red, tabBtn" name="buttonShowAll" value="Show all" />
         }
-        
-        if (Model.listType == 1)
+        </div>
+        <div class="tab">
+        @if (Model.listType == 1)
         {
             <text>
-                <b>Enabled resources</b>
+                <div class="tabActive">Enabled</div>
             </text>
         }
         else
         {
-            <input type="submit" name="buttonShowEnabled" value="Show enabled" />
+            <input type="submit" class="boton-big-red, tabBtn" name="buttonShowEnabled" value="Show enabled" />
         }
-        
-        if (Model.listType == 2)
+        </div>
+        <div class="tab">
+        @if (Model.listType == 2)
         {
             <text>
-                <b>Disabled resources</b>
+                <div class="tabActive">Disabled</div>
             </text>
         }
         else
         {
-            <input type="submit" name="buttonShowDisabled" value="Show disabled" />
+            <input type="submit" class="boton-big-red, tabBtn" name="buttonShowDisabled" value="Show disabled" />
         }
+        </div>
+        <div class="tab" style="width:3px;"></div>
 }
+</div>
 
 <ul class="list1" style="margin:0 80px;">
     @Html.DisplayFor(m => m.resources.items)

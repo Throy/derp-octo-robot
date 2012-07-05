@@ -1,37 +1,53 @@
 ﻿<!-- model -->
 @model IndignadoWeb.MovAdminServiceReference.DTUser
-           
-<div>
-    <!-- header -->
-    <h3>@Html.ActionLink(@Model.id + " - " + @Model.username, "UserDetails", new { id = @Model.id })</h3>
+      
+<li class="item">
+    <div class="shadowl">
+        <div class="shadowr">
+            <div class="int">
+                <div class="title">
+                    <h3>@Html.ActionLink(@Model.id + " - " + @Model.username, "UserDetails", new { id = @Model.id })</h3>
+                </div>
+                <!-- header -->
     
-    <!-- fields -->
-    Full name: @Model.fullName
-    <br />
-    Mail: @Model.mail
-    <br />
-    Register date: @Model.registerDate.ToString("yyyy-MM-dd HH:mm")
-    <br />
-    <br />
+                <div class="body">
+                    <div class="desc" style="margin-top:5px; margin-bottom:10px;">
+                        <div style="float:left;margin-left:20px;">
+                            Full name: @Model.fullName                            
+                            <br />
+                            Resources marked as inappropriate: @Model.numberResourcesMarkedInappr
+                        </div> 
+                            
+                        <div style="float:left;margin-left:40px;">
+                            Mail: @Model.mail
+                            <br />
+                            Resources disabled: @Model.numberResourcesDisabled
+                        </div>
 
-    Resources marked as inappropriate: @Model.numberResourcesMarkedInappr
-    <br />
-    Resources disabled: @Model.numberResourcesDisabled
-    <br />
-    <br />
+                              
+                    </div>
 
-    <!-- ban / reallow -->
-    @using (Html.BeginForm(new { id = @Model.id }))
-    {
-        if (!@Model.banned)
-        {
-            <input type="submit" name="buttonBan" value="Ban user" />
-        }
+                    <div class="footer">
+                        Register date: @Model.registerDate.ToString("yyyy-MM-dd HH:mm")
 
-        else
-        {
-            <text><b>User banned</b></text>
-            <input type="submit" name="buttonReallow" value="Reallow user" />
-        }
-    }
-</div>
+                        <div class="report">
+                            <!-- ban / reallow -->
+                            @using (Html.BeginForm(new { id = @Model.id }))
+                            {
+                                if (!@Model.banned)
+                                {
+                                    <input type="submit" class="boton-big-red" name="buttonBan" value="Ban user" />
+                                }
+
+                                else
+                                {
+                                    <text><b>User banned</b></text>
+                                    <input type="submit" class="boton-big-red" name="buttonReallow" value="Reallow user" />
+                                }
+                            }  
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</li>

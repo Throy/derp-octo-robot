@@ -10,41 +10,48 @@
 
 <h2>Users register report</h2>
 
+<div class="shadowH2" style="height:40px;">
 @using (Html.BeginForm())
 {
-    if ((int)Model.periodType == 0)
-    {
-        <text>
-            <b>By year</b>
-        </text>
-    }
-    else
-    {
-        <input type="submit" name="buttonShowByYear" value="By year" />
-    }
-
-    if ((int)Model.periodType == 1)
-    {
-        <text>
-            <b>By month</b>
-        </text>
-    }
-    else
-    {
-        <input type="submit" name="buttonShowByMonth" value="By month" />
-    }
-
-    if ((int)Model.periodType == 2)
-    {
-        <text>
-            <b>By day</b>
-        </text>
-    }
-    else
-    {
-        <input type="submit" name="buttonShowByDay" value="By day" />
-    }
+        <div class="tab">
+        @if ((int)Model.periodType == 0)
+        {
+            <text>
+                <div class="tabActive">By year</div>
+            </text>
+        }
+        else
+        {
+            <input type="submit" class="boton-big-red, tabBtn" name="buttonShowByYear" value="By year" />
+        }
+        </div>
+        <div class="tab">
+        @if ((int)Model.periodType == 1)
+        {
+            <text>
+                <div class="tabActive">By month</div>
+            </text>
+        }
+        else
+        {
+            <input type="submit" class="boton-big-red, tabBtn" name="buttonShowByMonth" value="By month" />
+        }
+        </div>
+        <div class="tab">
+        @if ((int)Model.periodType == 2)
+        {
+            <text>
+                <div class="tabActive">By day</div>
+            </text>
+        }
+        else
+        {
+            <input type="submit" class="boton-big-red, tabBtn" name="buttonShowByDay" value="By day" />
+        }
+        </div>
+        <div class="tab" style="width:3px;"></div>
 }
+</div>
 
 @{
     if ((int)Model.periodType == 0)

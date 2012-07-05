@@ -75,6 +75,34 @@
     background: url("../images/shadowlist.png") right top no-repeat;
 }
 
+.tab {
+    background: url("../images/shadowlist.png") left -10px no-repeat;
+    height: 37px;
+    float:left;
+    width: 110px;
+}
+
+.tabActive {
+    background: #EEE4F7;
+    text-align: center;
+    line-height: 37px;
+    padding: 0 8px;
+    margin-left:1px;
+}
+
+.tabBtn {
+    background: #fbfaf8;
+    border:none;
+    height:37px;
+    margin-left:3px;
+    width: 110px;
+}
+
+.tabBtn:hover {
+    cursor:pointer;
+    color: #7b12dd;
+}
+
 .list1 .report {
     float:right;
     margin-right:80px;
